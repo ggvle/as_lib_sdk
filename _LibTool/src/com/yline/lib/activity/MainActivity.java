@@ -15,16 +15,13 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        com.yline.sqlite.User user = new com.yline.sqlite.User(this);
-        user.testOrigin();
-        user.testEncapse();
-        
         findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener()
         {
             
             @Override
             public void onClick(View v)
             {
+                new com.yline.phone.messager.User().testSend();
             }
         });
     }

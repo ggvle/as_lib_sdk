@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yline.lib.tool"
     android:versionCode="1"
     android:versionName="1.0" >
@@ -14,6 +15,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:name="com.yline.lib.activity.MainApplication"
@@ -34,10 +36,17 @@
         <provider
             android:name="com.yline.sqlite.contentProvider.TestProvider"
             android:authorities="com.yline.sqlite.contentProvider"
-            android:exported="true" >
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" >
         </provider>
         <!-- name 为 ContentProvider的全称 -->
         <!-- authorities 为 ContentProvider 所在的包名 -->
+
+        <receiver android:name="com.yline.phone.messager.MsgBroadcastReceiver" >
+            <intent-filter android:priority="100" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
