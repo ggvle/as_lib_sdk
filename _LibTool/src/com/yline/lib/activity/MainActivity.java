@@ -15,8 +15,9 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        final com.yline.phone.messager.User user = new com.yline.phone.messager.User();
-        user.testObserver(this);
+        com.yline.sqlite.User user = new com.yline.sqlite.User(this);
+        user.testOrigin();
+        user.testEncapse();
         
         findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener()
         {
@@ -24,7 +25,6 @@ public class MainActivity extends Activity
             @Override
             public void onClick(View v)
             {
-                user.testSend();
             }
         });
     }
