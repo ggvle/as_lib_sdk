@@ -3,9 +3,13 @@ package com.yline.photo;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.v4.content.CursorLoader;
 
 import com.yline.lib.utils.LogUtil;
 
@@ -21,6 +25,7 @@ public class PhotoInfo
     
     /**
      * 获取相册信息
+     * 路径格式: /storage/emulated/0/Pictures/Screenshots/Screenshot_2016-05-02-07-15-22.jpeg
      * @param fileName  路径
      */
     public void getPhotoExifInfo(String fileName)
@@ -36,6 +41,14 @@ public class PhotoInfo
             // 相机模式
             String model = exifInterface.getAttribute(ExifInterface.TAG_MODEL);
             LogUtil.v(com.yline.photo.User.TAG_PHOTO, "model = " + model);
+            
+            // 相机模式
+            String imageWidth = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_WIDTH);
+            LogUtil.v(com.yline.photo.User.TAG_PHOTO, "imageWidth = " + imageWidth);
+            
+            // 相机模式
+            String imageLength = exifInterface.getAttribute(ExifInterface.TAG_IMAGE_LENGTH);
+            LogUtil.v(com.yline.photo.User.TAG_PHOTO, "imageLength = " + imageLength);
         }
         catch (IOException e)
         {
@@ -45,7 +58,8 @@ public class PhotoInfo
     }
     
     /**
-     * 跳转到系统相册
+     * 跳转到系统相册;
+     * 注:如果有多个,跳之前会让你选择
      * @param activity
      */
     public void intentToAlbum(Activity activity)
@@ -54,7 +68,7 @@ public class PhotoInfo
     }
     
     /**
-     * 系统相册返回路劲
+     * 系统相册返回路径,示例:content://media/external/images/media/143649
      * @param requestCode 请求码
      * @param data 数据
      * @return  URI or null
@@ -67,6 +81,41 @@ public class PhotoInfo
             if (REQUEST_CODE == requestCode)
             {
                 return data.getData();
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * such as
+     * from:    content://media/external/images/media/155645
+     * to:      /storage/emulated/0/Pictures/Screenshots/Screenshot_2016-05-02-07-15-22.jpeg
+     * @param uri
+     * @return path路径 or null
+     */
+    public String Uri2Path(Context context, Uri uri)
+    {
+        String path = null;
+        if (null != uri)
+        {
+            String[] projection = {MediaStore.Images.Media.DATA};
+            CursorLoader loader = new CursorLoader(context, uri, projection, null, null, null);
+            Cursor cursor = loader.loadInBackground();
+            
+            try
+            {
+                int column_index = cursor.getColumnIndex(projection[0]);
+                cursor.moveToFirst();
+                path = cursor.getString(column_index);
+                return path;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                if (null != cursor)
+                {
+                    cursor.close();
+                }
             }
         }
         return null;
