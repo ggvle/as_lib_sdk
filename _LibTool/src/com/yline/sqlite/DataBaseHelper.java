@@ -3,12 +3,12 @@ package com.yline.sqlite;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yline.lib.utils.LogUtil;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.yline.lib.utils.LogUtil;
 
 /**
  * simple introduction

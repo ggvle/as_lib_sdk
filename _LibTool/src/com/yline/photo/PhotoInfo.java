@@ -96,6 +96,7 @@ public class PhotoInfo
     public String Uri2Path(Context context, Uri uri)
     {
         String path = null;
+        LogUtil.v(com.yline.photo.User.TAG_PHOTO, "uri = " + uri);
         if (null != uri)
         {
             String[] projection = {MediaStore.Images.Media.DATA};
@@ -107,6 +108,7 @@ public class PhotoInfo
                 int column_index = cursor.getColumnIndex(projection[0]);
                 cursor.moveToFirst();
                 path = cursor.getString(column_index);
+                LogUtil.v(com.yline.photo.User.TAG_PHOTO, "path = " + path);
                 return path;
             }
             catch (Exception e)

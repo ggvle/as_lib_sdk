@@ -1,10 +1,10 @@
 package com.yline.sp;
 
-import com.yline.lib.utils.LogUtil;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.yline.lib.utils.LogUtil;
 
 /**
  * simple introduction

@@ -1,13 +1,13 @@
 package com.yline.phone.caller;
 
-import com.yline.lib.utils.LogUtil;
-
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+
+import com.yline.lib.utils.LogUtil;
 
 /**
  * simple introduction

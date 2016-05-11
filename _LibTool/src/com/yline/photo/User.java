@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.ImageView;
 
 import com.yline.lib.utils.LogUtil;
 
@@ -40,5 +41,10 @@ public class User
         
         // 拿到文件名之后
         mPhotoInfo.getPhotoExifInfo(fileName);
+    }
+    
+    public void testDraw(Context context, ImageView imageView)
+    {
+        new PhotoDrawInstance().draw(context, imageView);
     }
 }

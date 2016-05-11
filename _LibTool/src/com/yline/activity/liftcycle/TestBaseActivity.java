@@ -1,9 +1,9 @@
 package com.yline.activity.liftcycle;
 
-import com.yline.lib.utils.LogUtil;
-
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.yline.lib.utils.LogUtil;
 
 /**
  * simple introduction

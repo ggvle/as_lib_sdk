@@ -1,11 +1,11 @@
 package com.yline.phone.messager;
 
-import com.yline.lib.utils.LogUtil;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.SmsMessage;
+
+import com.yline.lib.utils.LogUtil;
 
 /**
  * simple introduction

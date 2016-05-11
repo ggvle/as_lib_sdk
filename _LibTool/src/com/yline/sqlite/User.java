@@ -2,9 +2,9 @@ package com.yline.sqlite;
 
 import java.util.List;
 
-import com.yline.lib.utils.LogUtil;
-
 import android.content.Context;
+
+import com.yline.lib.utils.LogUtil;
 
 /**
  * simple introduction
