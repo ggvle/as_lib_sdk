@@ -6,12 +6,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
+import android.widget.ImageView;
 
 import com.yline.lib.utils.LogUtil;
+import com.yline.lib.utils.ScreenUtils;
 
 /**
  * simple introduction
@@ -101,10 +106,11 @@ public class PhotoInfo
         {
             String[] projection = {MediaStore.Images.Media.DATA};
             CursorLoader loader = new CursorLoader(context, uri, projection, null, null, null);
-            Cursor cursor = loader.loadInBackground();
             
+            Cursor cursor = null;
             try
             {
+                cursor = loader.loadInBackground();
                 int column_index = cursor.getColumnIndex(projection[0]);
                 cursor.moveToFirst();
                 path = cursor.getString(column_index);
@@ -114,6 +120,9 @@ public class PhotoInfo
             catch (Exception e)
             {
                 e.printStackTrace();
+            }
+            finally
+            {
                 if (null != cursor)
                 {
                     cursor.close();
@@ -121,5 +130,64 @@ public class PhotoInfo
             }
         }
         return null;
+    }
+    
+    public void showPictureFromFileName(Context context, String filename, ImageView imageView)
+    {
+        LogUtil.v(com.yline.photo.User.TAG_PHOTO, "showPictureFromFileName start");
+        
+        // 图片解析的 配置 参数
+        BitmapFactory.Options opts = getPictureScaleFromFileName(context, filename);
+        
+        // 得到图片,显示缩放图片(这个耗费的资源挺多的)
+        Bitmap bitmap = BitmapFactory.decodeFile(filename, opts);
+        
+        imageView.setImageBitmap(bitmap);
+        
+        LogUtil.v(com.yline.photo.User.TAG_PHOTO, "showPictureFromFileName end");
+    }
+    
+    /**
+     * 设置   回显图片 缩略图
+     * @param context
+     * @param filename  文件路径
+     * @return
+     */
+    private Options getPictureScaleFromFileName(Context context, String filename)
+    {
+        // 图片解析的 配置 参数
+        BitmapFactory.Options opts = new Options();
+        
+        // 不去真的解析 图片，只是获取图片头部信息，宽高
+        opts.inJustDecodeBounds = true;
+        
+        // 得到图片,显示缩放图片
+        BitmapFactory.decodeFile(filename, opts);
+        
+        // 获取图片宽高
+        int imageHeight = opts.outHeight;
+        int imageWidth = opts.outWidth;
+        LogUtil.v(com.yline.photo.User.TAG_PHOTO, "imageWidth = " + imageWidth + ",imageHeight = " + imageHeight);
+        
+        // 计算缩放的比例
+        float scaleX = imageWidth * 1.0f / ScreenUtils.getScreenWidth(context);
+        float scaleY = imageHeight * 1.0f / ScreenUtils.getScreenHeight(context);
+        
+        int scale = 1;
+        LogUtil.v(com.yline.photo.User.TAG_PHOTO, "scaleX = " + scaleX + ",scaleY = " + scaleY);
+        if (scaleX > scaleY && scaleX > 1)
+        {
+            scale = (int)scaleX + 1;
+        }
+        else if (scaleY > scaleX && scaleY > 1)
+        {
+            scale = (int)scaleY + 1;
+        }
+        
+        // 设置 可以解析图片
+        opts.inJustDecodeBounds = false;
+        opts.inSampleSize = (int)scale; // 设置采样频率
+        
+        return opts;
     }
 }

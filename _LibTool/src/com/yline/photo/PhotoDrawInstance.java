@@ -23,6 +23,7 @@ import com.yline.lib.utils.UILayoutUtils;
 
 /**
  * simple introduction
+ * android.permission.WRITE_EXTERNAL_STORAGE
  *
  * @author YLine 2016-5-5 -> 上午7:27:48
  * @version 
@@ -101,13 +102,18 @@ public class PhotoDrawInstance
         LogUtil.v(com.yline.photo.User.TAG_PHOTO, "draw end");
     }
     
+    /**
+     * 保存文件到,目录下
+     */
     public void save()
     {
         LogUtil.v(com.yline.photo.User.TAG_PHOTO, "save start");
+        
         if (null != drawBitmap)
         {
-            File file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".png");
-            FileOutputStream stream;
+            File file =
+                new File(Environment.getExternalStorageDirectory(), "yline" + System.currentTimeMillis() + ".png");
+            FileOutputStream stream = null;
             try
             {
                 stream = new FileOutputStream(file);
@@ -121,8 +127,17 @@ public class PhotoDrawInstance
             catch (IOException e)
             {
                 LogUtil.e(com.yline.photo.User.TAG_PHOTO, "error", e);
+            }finally{
+                try
+                {
+                    stream.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            LogUtil.v(com.yline.photo.User.TAG_PHOTO, "save end");
+            LogUtil.v(com.yline.photo.User.TAG_PHOTO, "save success end");
         }
         else
         {

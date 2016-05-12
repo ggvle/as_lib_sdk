@@ -22,7 +22,11 @@ public class User
     
     private PhotoInfo          mPhotoInfo;
     
-    public void testBacBefore(Activity activity)
+    /**
+     * 跳转 到 选择界面
+     * @param activity
+     */
+    public void testBackBefore(Activity activity)
     {
         mPhotoInfo = new PhotoInfo();
         mPhotoInfo.intentToAlbum(activity);
@@ -31,7 +35,7 @@ public class User
     /**
      * 这个用于  onActivityResult
      */
-    public void testBack(Context context, int requestCode, int resultCode, Intent data)
+    public void testBack(Context context, ImageView imageView, int requestCode, int resultCode, Intent data)
     {
         Uri uri = mPhotoInfo.intentBackOfAlbum(requestCode, data);
         LogUtil.v(TAG_PHOTO, "uri = " + uri);
@@ -41,10 +45,21 @@ public class User
         
         // 拿到文件名之后
         mPhotoInfo.getPhotoExifInfo(fileName);
+        
+        // 拿到文件名之后,显示缩略图
+        mPhotoInfo.showPictureFromFileName(context, fileName, imageView);
     }
+    
+    private PhotoDrawInstance instance;
     
     public void testDraw(Context context, ImageView imageView)
     {
-        new PhotoDrawInstance().draw(context, imageView);
+        instance = new PhotoDrawInstance();
+        instance.draw(context, imageView);
+    }
+    
+    public void testSavePic()
+    {
+        instance.save();
     }
 }
