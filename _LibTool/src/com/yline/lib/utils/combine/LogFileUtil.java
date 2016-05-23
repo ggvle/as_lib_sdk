@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import android.text.TextUtils;
 
-import com.yline.lib.activity.MainApplication;
+import com.yline.lib.base.MainApplication;
 import com.yline.lib.utils.FileUtil;
 
 /**

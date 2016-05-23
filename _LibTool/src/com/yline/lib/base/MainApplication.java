@@ -1,9 +1,8 @@
-package com.yline.lib.activity;
+package com.yline.lib.base;
 
 import java.io.File;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.yline.lib.utils.combine.LogFileUtil;
 
@@ -19,8 +18,18 @@ public class MainApplication extends Application
     
     public static final String TAG_APPLICATION = "application";
     
-    private static Context context;
+    private static Application mApplication;
     
+    public static Application getApplication()
+    {
+        return mApplication;
+    }
+
+    public static void setApplication(Application application)
+    {
+        MainApplication.mApplication = application;
+    }
+
     /**
      * @see android.app.Application#onCreate()
      */
@@ -28,17 +37,12 @@ public class MainApplication extends Application
     public void onCreate()
     {
         super.onCreate();
-        context = getApplicationContext();
+        setApplication(this);
         
         // 打下日志文件
         for (int i = 0; i < 10; i++)
         {
             LogFileUtil.v(TAG_APPLICATION, "*** id = " + Thread.currentThread().getId());
         }
-    }
-    
-    public static Context getContext()
-    {
-        return context;
     }
 }

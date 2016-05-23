@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 
-import com.yline.lib.activity.MainApplication;
+import com.yline.lib.base.MainApplication;
 import com.yline.lib.utils.LogUtil;
 
 /**
@@ -39,7 +39,7 @@ public class MsgObserver extends ContentObserver
         super.onChange(selfChange);
         LogUtil.v(com.yline.phone.messager.User.TAG_MSG, "selfChange = " + selfChange);
         
-        ContentResolver resolver = MainApplication.getContext().getContentResolver();
+        ContentResolver resolver = MainApplication.getApplication().getContentResolver();
         Uri uri = Uri.parse(com.yline.phone.messager.User.URI);
         Cursor cursor = resolver.query(uri, new String[] {"address", "date", "body", "type"}, null, null, null);
         
