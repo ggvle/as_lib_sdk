@@ -14,7 +14,8 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        new com.yline.service.User().testServiceBinder(this);
+        // new com.yline.service.User().testServiceBinder(this);
+        new com.yline.gson.User().test();
     }
     
     @Override

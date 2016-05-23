@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,7 +13,6 @@ import android.graphics.BitmapFactory.Options;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
 import android.widget.ImageView;
 
 import com.yline.lib.utils.LogUtil;

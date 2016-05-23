@@ -15,7 +15,7 @@ import com.yline.lib.utils.combine.LogFileUtil;
  */
 public class MainApplication extends Application
 {
-    public static final String FILE_PARENT_PATH = "YlineLibTool" + File.separator;
+    public static final String FILE_PARENT_PATH = "_yline_lib" + File.separator;
     
     public static final String TAG_APPLICATION = "application";
     
