@@ -20,7 +20,7 @@ public class User
 {
     public static final String TAG_PHOTO = "photo";
     
-    private PhotoInfo          mPhotoInfo;
+    private PhotoInfo mPhotoInfo;
     
     /**
      * 跳转 到 选择界面
@@ -56,10 +56,5 @@ public class User
     {
         instance = new PhotoDrawInstance();
         instance.draw(context, imageView);
-    }
-    
-    public void testSavePic()
-    {
-        instance.save();
     }
 }

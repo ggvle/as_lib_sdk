@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.yline.lib.activity.MainApplication"
@@ -48,6 +48,18 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="com.yline.aidl.provider.ProviderService"
+            tools:ignore="ExportedService" >
+            <intent-filter>
+                <action android:name="com.yline.aidl.provider" />
+            </intent-filter>
+        </service>
+        <service android:name="com.yline.service.TestService" >
+        </service>
+        <service android:name="com.yline.service.binder.BinderService" >
+        </service>
     </application>
 
 </manifest>

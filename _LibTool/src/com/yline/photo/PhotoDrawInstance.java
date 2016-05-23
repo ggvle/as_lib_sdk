@@ -1,18 +1,11 @@
 package com.yline.photo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Environment;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,11 +25,11 @@ public class PhotoDrawInstance
 {
     private Bitmap drawBitmap;
     
-    private Paint  mPaint;
+    private Paint mPaint;
     
     private Canvas mCanvas;
     
-    private int    startX, startY;
+    private int startX, startY;
     
     public void draw(Context context, final ImageView imageView)
     {
@@ -100,48 +93,5 @@ public class PhotoDrawInstance
         });
         
         LogUtil.v(com.yline.photo.User.TAG_PHOTO, "draw end");
-    }
-    
-    /**
-     * 保存文件到,目录下
-     */
-    public void save()
-    {
-        LogUtil.v(com.yline.photo.User.TAG_PHOTO, "save start");
-        
-        if (null != drawBitmap)
-        {
-            File file =
-                new File(Environment.getExternalStorageDirectory(), "yline" + System.currentTimeMillis() + ".png");
-            FileOutputStream stream = null;
-            try
-            {
-                stream = new FileOutputStream(file);
-                drawBitmap.compress(CompressFormat.PNG, 100, stream);
-                stream.close();
-            }
-            catch (FileNotFoundException e)
-            {
-                LogUtil.e(com.yline.photo.User.TAG_PHOTO, "error", e);
-            }
-            catch (IOException e)
-            {
-                LogUtil.e(com.yline.photo.User.TAG_PHOTO, "error", e);
-            }finally{
-                try
-                {
-                    stream.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            LogUtil.v(com.yline.photo.User.TAG_PHOTO, "save success end");
-        }
-        else
-        {
-            LogUtil.v(com.yline.photo.User.TAG_PHOTO, "bitmap is null,end");
-        }
     }
 }
