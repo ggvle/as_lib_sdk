@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

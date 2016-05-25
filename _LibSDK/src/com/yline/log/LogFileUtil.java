@@ -1,4 +1,4 @@
-package com.yline.lib.utils.combine;
+package com.yline.log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -6,8 +6,8 @@ import java.util.Locale;
 
 import android.text.TextUtils;
 
-import com.yline.lib.base.MainApplication;
-import com.yline.lib.utils.FileUtil;
+import com.yline.application.BaseApplication;
+import com.yline.utils.FileUtil;
 
 /**
  * 想要区分应用时,可以采用区分目录或修改"x"的方式
@@ -20,7 +20,7 @@ public class LogFileUtil
 {
     private static final String ERROR_LOG_FILE_UTIL = "error_LogFileUtil : ";
     
-    private static final String LOG_FILE_PATH = MainApplication.FILE_PARENT_PATH + "LibToolLog" + File.separator;
+    private static final String LOG_FILE_PATH = BaseApplication.FILE_PARENT_PATH + BaseApplication.FILE_LOG_PATH;
     
     private static final int START_COUNT = 0; // 写入文件编号
     

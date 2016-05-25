@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.yline.lib.utils.combine.LogFileUtil;
+import com.yline.log.LogFileUtil;
 
 /**
  * 提供一个绑定的服务

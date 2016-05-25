@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.ImageView;
 
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

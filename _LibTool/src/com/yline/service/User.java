@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.yline.lib.utils.combine.LogFileUtil;
+import com.yline.log.LogFileUtil;
 import com.yline.service.binder.BinderService;
 import com.yline.service.binder.IBinderService;
 

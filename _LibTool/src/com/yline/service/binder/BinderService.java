@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
-import com.yline.lib.utils.combine.LogFileUtil;
+import com.yline.log.LogFileUtil;
 
 /**
  * 使用binder,开启长期在后台运行的Service

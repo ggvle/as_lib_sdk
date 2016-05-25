@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 
 import com.yline.lib.base.MainApplication;
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

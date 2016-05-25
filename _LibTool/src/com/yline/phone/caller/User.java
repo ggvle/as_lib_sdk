@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

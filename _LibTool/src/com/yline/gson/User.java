@@ -3,7 +3,7 @@ package com.yline.gson;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.yline.lib.utils.combine.LogFileUtil;
+import com.yline.log.LogFileUtil;
 
 /**
  * 在一些大工程里面,需要做 非混淆 处理(proguard-project中添加)

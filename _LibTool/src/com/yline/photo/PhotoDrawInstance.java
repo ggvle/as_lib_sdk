@@ -10,9 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.yline.lib.utils.LogUtil;
 import com.yline.lib.utils.ScreenUtils;
 import com.yline.lib.utils.UILayoutUtils;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

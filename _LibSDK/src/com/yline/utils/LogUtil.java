@@ -1,4 +1,4 @@
-package com.yline.lib.utils;
+package com.yline.utils;
 
 /**
  * simple introduction

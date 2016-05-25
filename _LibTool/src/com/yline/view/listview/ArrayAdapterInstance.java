@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.yline.lib.tool.R;
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

@@ -1,6 +1,6 @@
 package com.yline.phone.sdcard;
 
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

@@ -3,7 +3,7 @@ package com.yline.activity.liftcycle;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.yline.lib.utils.LogUtil;
+import com.yline.utils.LogUtil;
 
 /**
  * simple introduction

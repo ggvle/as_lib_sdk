@@ -5,7 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.net.wifi.ScanResult;
 
-import com.yline.lib.utils.combine.LogFileUtil;
+import com.yline.log.LogFileUtil;
 
 /**
  * simple introduction

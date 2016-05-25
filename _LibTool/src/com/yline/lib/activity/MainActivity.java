@@ -1,12 +1,12 @@
 package com.yline.lib.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.yline.base.BaseActivity;
 import com.yline.lib.tool.R;
 
-public class MainActivity extends Activity
+public class MainActivity extends BaseActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

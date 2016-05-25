@@ -1,10 +1,10 @@
 package com.yline.service;
 
-import com.yline.lib.utils.combine.LogFileUtil;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
+import com.yline.log.LogFileUtil;
 
 /**
  * simple introduction
