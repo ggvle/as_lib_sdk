@@ -22,6 +22,9 @@ public class BaseApplication extends Application
     
     private static Application mApplication;
     
+    /**
+     * @return  当前application,因为onCreate为应用入口,因此不用担心为null
+     */
     public static Application getApplication()
     {
         return mApplication;

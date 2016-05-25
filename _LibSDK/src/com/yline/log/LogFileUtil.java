@@ -18,17 +18,17 @@ import com.yline.utils.FileUtil;
  */
 public class LogFileUtil
 {
-    private static final String ERROR_LOG_FILE_UTIL = "error_LogFileUtil : ";
+    private static final String ERROR_LOG_FILE_UTIL = "error_LogFileUtil : "; // 错误日志tag
     
-    private static final String LOG_FILE_PATH = BaseApplication.FILE_PARENT_PATH + BaseApplication.FILE_LOG_PATH;
+    private static final String LOG_FILE_PATH = BaseApplication.FILE_PARENT_PATH + BaseApplication.FILE_LOG_PATH; // 子路径
     
     private static final int START_COUNT = 0; // 写入文件编号
     
     private static final int MAX_COUNT = 5; // 文件最大编号
     
-    private static final int MAX_SIZE_OF_TXT = 2 * 1024 * 1024;
+    private static final int MAX_SIZE_OF_TXT = 2 * 1024 * 1024; // 每个文件大小
     
-    private static final String LOG_FILE_TXT_NAME = "_yline_log.txt";
+    private static final String LOG_FILE_TXT_NAME = "_yline_log.txt"; // 路径下保存的文件名称
     
     // 三个开关
     private static final boolean isLog = true; // log 开关
@@ -196,6 +196,10 @@ public class LogFileUtil
         }
     }
     
+    /**
+     * 拼接日志tag,该tag专为打在eclipse,DDms上准备
+     * @return
+     */
     private static String generateTag()
     {
         if (isLogLocation)
@@ -216,6 +220,11 @@ public class LogFileUtil
         }
     }
     
+    /**
+     * 拼接 日志tag,该tag专为写入file中准备
+     * @param type
+     * @return
+     */
     private static String generateFileTag(String type)
     {
         // 日期 时间: 级别
@@ -246,6 +255,10 @@ public class LogFileUtil
         }
     }
     
+    /**
+     * 写日志入文件
+     * @param content   日志内容
+     */
     private synchronized static void writeLogToFile(String content)
     {
         String path = FileUtil.getPath();

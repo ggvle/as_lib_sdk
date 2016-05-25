@@ -9,6 +9,13 @@ import java.io.IOException;
 import android.os.Environment;
 import android.text.TextUtils;
 
+/**
+ * 目前提供给 LogFileUtil准备
+ * simple introduction
+ *
+ * @author YLine 2016-5-25 -> 上午8:06:08
+ * @version
+ */
 public class FileUtil
 {
     /**
