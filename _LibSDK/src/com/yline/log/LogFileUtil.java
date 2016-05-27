@@ -20,22 +20,23 @@ public class LogFileUtil
 {
     private static final String ERROR_LOG_FILE_UTIL = "error_LogFileUtil : "; // 错误日志tag
     
-    private static final String LOG_FILE_PATH = BaseApplication.FILE_PARENT_PATH + BaseApplication.FILE_LOG_PATH; // 子路径
+    private static final String LOG_FILE_PATH = BaseApplication.FILE_PARENT_PATH
+        + BaseApplication.getBaseConfig().getFileLogPath();
     
     private static final int START_COUNT = 0; // 写入文件编号
     
     private static final int MAX_COUNT = 5; // 文件最大编号
     
-    private static final int MAX_SIZE_OF_TXT = 2 * 1024 * 1024; // 每个文件大小
+    private static final int MAX_SIZE_OF_TXT = 512 * 1024; // 每个文件大小
     
     private static final String LOG_FILE_TXT_NAME = "_yline_log.txt"; // 路径下保存的文件名称
     
     // 三个开关
-    private static final boolean isLog = true; // log 开关
+    private static final boolean isLog = BaseApplication.getBaseConfig().isLog(); // log 开关
     
-    private static final boolean isToFile = true; // 是否写到文件
+    private static final boolean isToFile = BaseApplication.getBaseConfig().isLogToFile(); // 是否写到文件
     
-    private static final boolean isLogLocation = true; // 是否定位
+    private static final boolean isLogLocation = BaseApplication.getBaseConfig().isLogLocation(); // 是否定位
     
     // 信息格式
     private static final String TAG_DEFAULT = "x->";

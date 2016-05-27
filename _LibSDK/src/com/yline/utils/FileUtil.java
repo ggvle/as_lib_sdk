@@ -1,10 +1,15 @@
 package com.yline.utils;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import android.os.Environment;
 import android.text.TextUtils;
@@ -209,6 +214,7 @@ public class FileUtil
     }
     
     /**
+     * 之后统计乱码的情况(理论是不乱码的)
      * 写内容到文件中,尾随后面写
      * @param file  文件
      * @param content   内容
@@ -243,6 +249,94 @@ public class FileUtil
             }
         }
         
+        return true;
+    }
+    
+    /**
+     * 之后统计乱码的情况(理论是不乱码的)
+     * 写内容到文件中,尾随后面写
+     * @param file  文件
+     * @param content   内容
+     * @return  false(写入失败,写入工具关闭失败)
+     */
+    public static boolean writeToFileNew1(File file, String content)
+    {
+        PrintStream printStream = null;
+        
+        try
+        {
+            printStream = new PrintStream(new FileOutputStream(file, true), false, "utf-8");
+            printStream.println(content);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            printStream.close();
+        }
+        return true;
+    }
+    
+    /**
+     * 之后统计乱码的情况(理论是不乱码的)
+     * 写内容到文件中,尾随后面写
+     * @param file  文件
+     * @param content   内容
+     * @return  false(写入失败,写入工具关闭失败)
+     */
+    public static boolean writeToFileNew2(File file, String content)
+    {
+        OutputStreamWriter outputStreamWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try
+        {
+            outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file, true), "utf-8");
+            bufferedWriter = new BufferedWriter(outputStreamWriter);
+            bufferedWriter.append(content + "\n");
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try
+            {
+                if (null != bufferedWriter)
+                {
+                    bufferedWriter.close();
+                }
+                if (null != outputStreamWriter)
+                {
+                    outputStreamWriter.close();
+                    
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                return false;
+            }
+        }
         return true;
     }
     

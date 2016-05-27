@@ -43,12 +43,14 @@
         <!-- name 为 ContentProvider的全称 -->
         <!-- authorities 为 ContentProvider 所在的包名 -->
 
+        <!-- 短信接收器 -->
         <receiver android:name="com.yline.phone.messager.MsgBroadcastReceiver" >
             <intent-filter android:priority="100" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
+        <!-- ContentProvider Service -->
         <service
             android:name="com.yline.aidl.provider.ProviderService"
             tools:ignore="ExportedService" >
@@ -56,9 +58,17 @@
                 <action android:name="com.yline.aidl.provider" />
             </intent-filter>
         </service>
+
+        <!-- Service demo 测试 -->
         <service android:name="com.yline.service.TestService" >
         </service>
+
+        <!-- Service Binder demo 测试 -->
         <service android:name="com.yline.service.binder.BinderService" >
+        </service>
+
+        <!-- 定时服务 -->
+        <service android:name="com.space.timer.TimerService" >
         </service>
     </application>
 

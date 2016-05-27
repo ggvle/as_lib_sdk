@@ -1,5 +1,9 @@
 package com.yline.utils;
 
+import java.util.Locale;
+
+import com.yline.application.BaseApplication;
+
 /**
  * simple introduction
  * 格式:x->{[类名.方法名(L:行数)]: }功能tag -> 信息content
@@ -21,9 +25,9 @@ package com.yline.utils;
  */
 public class LogUtil
 {
-    private static final boolean isLog = true; // log 开关
+    private static final boolean isLog = BaseApplication.getBaseConfig().isLog(); // log 开关
     
-    private static final boolean isLogLocation = true; // 是否定位
+    private static final boolean isLogLocation = BaseApplication.getBaseConfig().isLogLocation(); // 是否定位
     
     private static final String TAG_DEFAULT = "x->"; // tag 默认格式
     
@@ -39,7 +43,11 @@ public class LogUtil
             String clazzName = caller.getClassName();
             clazzName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
             
-            return String.format(TAG_DEFAULT_LOCATION, clazzName, caller.getMethodName(), caller.getLineNumber());
+            return String.format(Locale.CHINA,
+                TAG_DEFAULT_LOCATION,
+                clazzName,
+                caller.getMethodName(),
+                caller.getLineNumber());
         }
         else
         {
