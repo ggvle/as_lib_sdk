@@ -14,8 +14,18 @@
 
     <application android:allowBackup="false" >
 
+        <!-- 网络状态接收器 -->
+        <receiver android:name="com.yline.application.netstate.NetStateReceiver" >
+            <intent-filter>
+
+                <!-- WifiManager -->
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+                <!-- ConnectivityManager -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
         <!-- 定时服务 -->
-        <service android:name="com.space.timer.TimerService" >
+        <service android:name="com.yline.application.AppService" >
         </service>
     </application>
 

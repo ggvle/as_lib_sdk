@@ -1,6 +1,9 @@
 package com.yline.base;
 
 import android.app.Activity;
+import android.os.Bundle;
+
+import com.yline.application.BaseApplication;
 
 /**
  * simple introduction
@@ -10,5 +13,16 @@ import android.app.Activity;
  */
 public class BaseActivity extends Activity
 {
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        BaseApplication.addAcitivity(this);
+        super.onCreate(savedInstanceState);
+    }
     
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
 }

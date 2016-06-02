@@ -1,8 +1,8 @@
-package com.yline.timer;
+package com.yline.application.timer;
 
-import com.yline.timer.TimerManager.ITimerListener;
+import com.yline.application.timer.TimerManager.ITimerListener;
 
-public class TimeValueHolder
+public class TimerValueHolder
 {
     // 每次放入时,确定重复的次数,默认永远
     private int mNumber = -1;
@@ -20,7 +20,7 @@ public class TimeValueHolder
      * 新建,设置默认
      * @param durateTime    间隔时间
      */
-    public TimeValueHolder setHolder(float time)
+    public TimerValueHolder setHolder(float time)
     {
         this.mTime = time;
         this.mCaculateTime = time;
@@ -32,7 +32,7 @@ public class TimeValueHolder
      * @param durateTime    间隔时间
      * @param number    计算的次数(小于0,永远)(大于等于0,次数)
      */
-    public TimeValueHolder setHolder(float time, int number)
+    public TimerValueHolder setHolder(float time, int number)
     {
         this.mTime = time;
         this.mCaculateTime = time;
@@ -45,7 +45,7 @@ public class TimeValueHolder
      * @param listener  监听器
      * @return
      */
-    public TimeValueHolder setListener(ITimerListener listener)
+    public TimerValueHolder setListener(ITimerListener listener)
     {
         this.mTimeListener = listener;
         return this;

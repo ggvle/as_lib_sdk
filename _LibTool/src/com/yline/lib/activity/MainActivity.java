@@ -20,7 +20,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                new com.yline.timer.User();
+                new com.yline.application.timer.User();
             }
         });
     }

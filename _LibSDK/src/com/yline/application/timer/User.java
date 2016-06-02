@@ -1,17 +1,15 @@
-package com.yline.timer;
+package com.yline.application.timer;
 
 import com.yline.application.BaseApplication;
+import com.yline.application.timer.TimerManager.ITimerListener;
 import com.yline.log.LogFileUtil;
-import com.yline.timer.TimerManager.ITimerListener;
 
 /**
- * 稍后再写,这个还没结束
+ * 计时器使用,案例
  * simple introduction
  *
- * <p>detailed comment
- * @author lWX353514 2016-5-3
- * @see
- * @since 1.0
+ * @author YLine 2016-5-29 -> 上午8:59:03
+ * @version
  */
 public class User implements ITimerListener
 {
@@ -24,21 +22,21 @@ public class User implements ITimerListener
         }
         else
         {
-            LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "timer server is closed");
+            LogFileUtil.v(TimerManager.TAG_TIMER, "timer function is closed");
         }
     }
     
     @Override
     public void onResult(String tag)
     {
-        LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "onResult User , tag = " + tag);
+        LogFileUtil.v(TimerManager.TAG_TIMER, "onResult User , tag = " + tag);
         if ("user1_1".equals(tag))
         {
-            LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "User , tag = " + tag);
+            LogFileUtil.v(TimerManager.TAG_TIMER, "User , tag = " + tag);
         }
         if ("user1_2".equals(tag))
         {
-            LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "User , tag = " + tag);
+            LogFileUtil.v(TimerManager.TAG_TIMER, "User , tag = " + tag);
         }
     }
     

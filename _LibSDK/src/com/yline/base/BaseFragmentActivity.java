@@ -1,6 +1,9 @@
 package com.yline.base;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.yline.application.BaseApplication;
 
 /**
  * simple introduction
@@ -10,5 +13,17 @@ import android.support.v4.app.FragmentActivity;
  */
 public class BaseFragmentActivity extends FragmentActivity
 {
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        BaseApplication.addAcitivity(this);
+        super.onCreate(savedInstanceState);
+    }
     
+    @Override
+    protected void onDestroy()
+    {
+        BaseApplication.removeActivity(this);
+        super.onDestroy();
+    }
 }

@@ -1,5 +1,6 @@
 #Config of WorkPlace
 .metadata/
+.recommenders/
 
 # Built application files
 *.apk

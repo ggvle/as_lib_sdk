@@ -1,20 +1,20 @@
-package com.yline.timer;
+package com.yline.application.timer;
 
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.yline.log.LogFileUtil;
 
-public class TimerManager
+public final class TimerManager
 {
+    public static final String TAG_TIMER = "timer";
+    
     // 储存数据
-    private HashMap<String, TimeValueHolder> mTimeMap;
+    private HashMap<String, TimerValueHolder> mTimeMap;
     
     private Lock lock = new ReentrantLock();
     
@@ -22,21 +22,12 @@ public class TimerManager
     
     private TimerManager()
     {
-        mTimeMap = new HashMap<String, TimeValueHolder>();
+        mTimeMap = new HashMap<String, TimerValueHolder>();
     }
     
     public static TimerManager getInstance()
     {
         return TimeManagerHolder.instance;
-    }
-    
-    /**
-     * 开启伴生服务---计时服务
-     * @param context
-     */
-    public void initTimer(Context context)
-    {
-        context.startService(new Intent(context, TimerService.class));
     }
     
     private static class TimeManagerHolder
@@ -57,12 +48,12 @@ public class TimerManager
         {
             if (!mTimeMap.containsKey(tag)) // 添加tag标签
             {
-                LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "register -> tag注册");
-                mTimeMap.put(tag, new TimeValueHolder().setHolder(Math.abs(time)).setListener(listener));
+                LogFileUtil.v(TAG_TIMER, "register -> tag注册");
+                mTimeMap.put(tag, new TimerValueHolder().setHolder(Math.abs(time)).setListener(listener));
             }
             else
             {
-                LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "register -> 该tag已经注册,更新数据");
+                LogFileUtil.v(TAG_TIMER, "register -> 该tag已经注册,更新数据");
                 mTimeMap.put(tag, mTimeMap.get(tag).setHolder(Math.abs(time)));
             }
         }
@@ -86,12 +77,12 @@ public class TimerManager
         {
             if (!mTimeMap.containsKey(tag)) // 添加tag标签
             {
-                LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "register number -> tag注册");
-                mTimeMap.put(tag, new TimeValueHolder().setHolder(Math.abs(time), number).setListener(listener));
+                LogFileUtil.v(TAG_TIMER, "register number -> tag注册");
+                mTimeMap.put(tag, new TimerValueHolder().setHolder(Math.abs(time), number).setListener(listener));
             }
             else
             {
-                LogFileUtil.v(TimerService.TAG_TIMER_SERVICE, "register number -> 该tag已经注册,更新数据");
+                LogFileUtil.v(TAG_TIMER, "register number -> 该tag已经注册,更新数据");
                 mTimeMap.put(tag, mTimeMap.get(tag).setHolder(Math.abs(time), number));
             }
         }
@@ -109,7 +100,7 @@ public class TimerManager
     {
         if (!mTimeMap.containsKey(tag))
         {
-            Log.e(TimerService.TAG_TIMER_SERVICE, "update -> 该tag还未注册,移除失败");
+            Log.e(TAG_TIMER, "update -> 该tag还未注册,移除失败");
         }
         else
         {
@@ -130,12 +121,12 @@ public class TimerManager
         return mTimeMap.keySet();
     }
     
-    public TimeValueHolder getTimeValueHolder(String tag)
+    public TimerValueHolder getTimeValueHolder(String tag)
     {
         return mTimeMap.get(tag);
     }
     
-    public void putTimeValueHolder(String key, TimeValueHolder value)
+    public void putTimeValueHolder(String key, TimerValueHolder value)
     {
         mTimeMap.put(key, value);
     }
@@ -165,6 +156,7 @@ public class TimerManager
     {
         /**
          * 仅通知添加对象中相对应的listener,其它对象中的通知,不会通知过来.
+         * 该函数,在Handler中执行,不要使用耗时操作
          * @param tag 标志tag
          */
         void onResult(String tag);

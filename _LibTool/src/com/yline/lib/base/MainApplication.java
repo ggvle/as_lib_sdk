@@ -4,8 +4,8 @@ import java.io.File;
 
 import android.os.Message;
 
+import com.yline.application.AppConfig;
 import com.yline.application.BaseApplication;
-import com.yline.application.BaseConfig;
 
 /**
  * simple introduction
@@ -29,12 +29,12 @@ public class MainApplication extends BaseApplication
     }
     
     @Override
-    protected BaseConfig initConfig()
+    protected AppConfig initConfig()
     {
-        BaseConfig baseConfig = new BaseConfig();
-        baseConfig.setFileLogPath("libTool" + File.separator);
-        baseConfig.setLogLocation(true);
-        baseConfig.setTimerServiceOpen(false);
-        return baseConfig;
+        AppConfig appConfig = new AppConfig();
+        appConfig.setFileLogPath("libTool" + File.separator);
+        appConfig.setLogLocation(true);
+        appConfig.setTimerServiceOpen(false);
+        return appConfig;
     }
 }

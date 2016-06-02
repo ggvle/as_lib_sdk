@@ -9,7 +9,7 @@ import java.io.File;
  * @author YLine 2016-5-27 -> 上午7:28:17
  * @version
  */
-public class BaseConfig
+public class AppConfig
 {
     private boolean isLog = true;
     
@@ -19,7 +19,9 @@ public class BaseConfig
     
     private String fileLogPath = "libsdk" + File.separator;
     
-    private boolean isTimerServiceOpen = true;
+    private boolean isTimerServiceOpen = false;
+    
+    private boolean isNetStateListenerOpen = false;
     
     public String getFileLogPath()
     {
@@ -27,7 +29,7 @@ public class BaseConfig
     }
     
     /**
-     * @param fileLogPath 日志目录,such as "libsdk" + File.separator
+     * @param fileLogPath 日志目录,default is "libsdk" + File.separator
      */
     public void setFileLogPath(String fileLogPath)
     {
@@ -39,8 +41,8 @@ public class BaseConfig
         return isLog;
     }
     
-    /**
-     * @param isLog 日志开关, such as true
+    /** 
+     * @param isLog 日志开关, default is true
      */
     public void setLog(boolean isLog)
     {
@@ -53,7 +55,7 @@ public class BaseConfig
     }
     
     /**
-     * @param isLogToFile 日志是否写到文件, such as true
+     * @param isLogToFile 日志是否写到文件, default is true
      */
     public void setLogToFile(boolean isLogToFile)
     {
@@ -66,7 +68,7 @@ public class BaseConfig
     }
     
     /**
-     * @param isLogLocation 日志是否包含定位信息,such as true
+     * @param isLogLocation 日志是否包含定位信息,default is true
      */
     public void setLogLocation(boolean isLogLocation)
     {
@@ -80,11 +82,32 @@ public class BaseConfig
     
     /**
      * 记得注册表MAinfest中注册
-     * @param isTimerServiceOpen 伴随服务是否开启,such as true
+     * @param isTimerServiceOpen 伴随服务是否开启,default is false
      */
     public void setTimerServiceOpen(boolean isTimerServiceOpen)
     {
         this.isTimerServiceOpen = isTimerServiceOpen;
     }
     
+    public boolean isNetStateListenerOpen()
+    {
+        return isNetStateListenerOpen;
+    }
+    
+    /**
+     * 记得注册表MAinfest中注册
+     * @param isNetStateListenerOpen  网络监听器是否打开,default is false
+     */
+    public void setNetStateListenerOpen(boolean isNetStateListenerOpen)
+    {
+        this.isNetStateListenerOpen = isNetStateListenerOpen;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return "AppConfig [isLog=" + isLog + ", isLogToFile=" + isLogToFile + ", isLogLocation=" + isLogLocation
+            + ", fileLogPath=" + fileLogPath + ", isTimerServiceOpen=" + isTimerServiceOpen
+            + ", isNetStateListenerOpen=" + isNetStateListenerOpen + "]";
+    }
 }
