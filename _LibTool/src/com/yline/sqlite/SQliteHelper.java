@@ -16,21 +16,22 @@ import com.yline.utils.LogUtil;
  */
 public class SQliteHelper extends SQLiteOpenHelper
 {
-    public static final String DB_NAME             = "yline_db";
+    public static final String DB_NAME = "yline_db";
     
-    public static final String TABLE_NAME          = "yline_table";
+    public static final String TABLE_NAME = "yline_table";
     
-    public static final String TABLE_COLUMN_ID     = "id";
+    public static final String TABLE_COLUMN_ID = "id";
     
-    public static final String TABLE_COLUMN_NAME   = "name";
+    public static final String TABLE_COLUMN_NAME = "name";
     
     public static final String TABLE_COLUMN_NUMBER = "number";
     
-    public static final int    VERSION             = 1;
+    public static final int VERSION = 1;
     
     private static SQliteHelper sInstance = null;
     
-    public static synchronized SQliteHelper getInstance(Context context){
+    public static synchronized SQliteHelper getInstance(Context context)
+    {
         if (null == sInstance)
         {
             sInstance = new SQliteHelper(context);

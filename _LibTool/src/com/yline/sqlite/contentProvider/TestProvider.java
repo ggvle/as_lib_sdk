@@ -20,27 +20,27 @@ import com.yline.utils.LogUtil;
  */
 public class TestProvider extends ContentProvider
 {
-    private SQliteHelper        mHelper;
+    private SQliteHelper mHelper;
     
     // 标识符
-    private static UriMatcher   matcher      = new UriMatcher(UriMatcher.NO_MATCH);
+    private static UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
     
-    private static final String AUTHORITY    = "com.yline.sqlite.contentProvider";
+    private static final String AUTHORITY = "com.yline.sqlite.contentProvider";
     
-    private static final String TYPEQUERY    = "vnd.android.cursor.dir";
+    private static final String TYPEQUERY = "vnd.android.cursor.dir";
     
     private static final String TYPEQUERYONE = "vnd.android.cursor.item";
     
     // 增删改查
-    private static final int    INSERT       = 1;
+    private static final int INSERT = 1;
     
-    private static final int    DELETE       = 2;
+    private static final int DELETE = 2;
     
-    private static final int    UPDATE       = 3;
+    private static final int UPDATE = 3;
     
-    private static final int    QUERY        = 4;
+    private static final int QUERY = 4;
     
-    private static final int    QUERYONE     = 5;
+    private static final int QUERYONE = 5;
     
     static
     {
@@ -117,14 +117,13 @@ public class TestProvider extends ContentProvider
         if (QUERY == matcher.match(uri))
         {
             SQLiteDatabase db = mHelper.getReadableDatabase();
-            Cursor cursor =
-                db.query(com.yline.sqlite.SQliteHelper.TABLE_NAME,
-                    projection,
-                    selection,
-                    selectionArgs,
-                    null,
-                    null,
-                    sortOrder);
+            Cursor cursor = db.query(com.yline.sqlite.SQliteHelper.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder);
             LogUtil.v(com.yline.sqlite.User.TAG_SQLITE, "provider queryAll end");
             return cursor;
         }
@@ -132,14 +131,13 @@ public class TestProvider extends ContentProvider
         {
             long id = ContentUris.parseId(uri);
             SQLiteDatabase db = mHelper.getReadableDatabase();
-            Cursor cursor =
-                db.query(com.yline.sqlite.SQliteHelper.TABLE_NAME,
-                    projection,
-                    "id=?",
-                    new String[] {id + ""},
-                    null,
-                    null,
-                    sortOrder);
+            Cursor cursor = db.query(com.yline.sqlite.SQliteHelper.TABLE_NAME,
+                projection,
+                "id=?",
+                new String[] {id + ""},
+                null,
+                null,
+                sortOrder);
             LogUtil.v(com.yline.sqlite.User.TAG_SQLITE, "provider queryOne end");
             return cursor;
         }
