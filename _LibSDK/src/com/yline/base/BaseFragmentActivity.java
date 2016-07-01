@@ -23,7 +23,7 @@ public class BaseFragmentActivity extends FragmentActivity
     @Override
     protected void onDestroy()
     {
-        BaseApplication.removeActivity(this);
         super.onDestroy();
+        BaseApplication.removeActivity(this);
     }
 }

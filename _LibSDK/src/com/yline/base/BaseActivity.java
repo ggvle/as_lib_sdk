@@ -24,5 +24,6 @@ public class BaseActivity extends Activity
     protected void onDestroy()
     {
         super.onDestroy();
+        BaseApplication.removeActivity(this);
     }
 }

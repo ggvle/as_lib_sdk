@@ -1,27 +1,23 @@
-package com.yline.utils;
+package com.demo.utils;
 
 import java.io.File;
 
-/**
- * FileUtils 工具类使用案例
- * simple introduction
- *
- * @author YLine 2016-5-29 -> 上午8:49:46
- * @version
- */
-public class User
+import com.yline.utils.FileUtil;
+import com.yline.utils.LogUtil;
+
+public class FileUtilUser
 {
-    private static final String tag = "flieUtilsUser";
+    private static final String TAG = "FileUtilUser";
     
-    public void testFileUtil()
+    public void test()
     {
-        LogUtil.v(tag, "FileUtil.getPath() = " + FileUtil.getPath());
+        LogUtil.v(TAG, "FileUtil.getPath() = " + FileUtil.getPath());
         
         File fileDir = FileUtil.createFileDir(FileUtil.getPath() + "YlineTest/Log/");
-        LogUtil.v(tag, "createFileDir success");
+        LogUtil.d(TAG, "createFileDir success");
         
         File file = FileUtil.createFile(fileDir, "log.txt");
-        LogUtil.i(tag, "createFile success");
+        LogUtil.i(TAG, "createFile success");
         
         // 太多了,就会黑屏,因为大量占用了文件资源
         for (int i = 0; i < 1024; i++)
@@ -30,12 +26,12 @@ public class User
         }
         
         int size = FileUtil.getFileSize(file);
-        LogUtil.v(tag, "getFileSize size = " + size);
+        LogUtil.w(TAG, "getFileSize size = " + size);
         
         boolean renameResult = FileUtil.renameFile(fileDir, "log.txt", "log1.txt");
-        LogUtil.v(tag, "renameFile renameResult = " + renameResult);
+        LogUtil.w(TAG, "renameFile renameResult = " + renameResult);
         
         boolean deleteResult = FileUtil.deleteFile(fileDir, "log.txt");
-        LogUtil.v(tag, "deleteFile deleteResult = " + deleteResult);
+        LogUtil.e(TAG, "deleteFile deleteResult = " + deleteResult);
     }
 }

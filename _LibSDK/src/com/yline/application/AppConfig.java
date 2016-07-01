@@ -19,21 +19,24 @@ public class AppConfig
     
     private String fileLogPath = "libsdk" + File.separator;
     
-    private boolean isTimerServiceOpen = false;
-    
-    private boolean isNetStateListenerOpen = false;
-    
     public String getFileLogPath()
     {
         return fileLogPath;
     }
     
     /**
-     * @param fileLogPath 日志目录,default is "libsdk" + File.separator
+     * @param fileLogPath 日志目录,default is "libsdk"
      */
     public void setFileLogPath(String fileLogPath)
     {
-        this.fileLogPath = fileLogPath;
+        if (!fileLogPath.endsWith(File.separator))
+        {
+            this.fileLogPath = fileLogPath;
+        }
+        else
+        {
+            this.fileLogPath = fileLogPath + File.separator;
+        }
     }
     
     public boolean isLog()
@@ -75,39 +78,11 @@ public class AppConfig
         this.isLogLocation = isLogLocation;
     }
     
-    public boolean isTimerServiceOpen()
-    {
-        return isTimerServiceOpen;
-    }
-    
-    /**
-     * 记得注册表MAinfest中注册
-     * @param isTimerServiceOpen 伴随服务是否开启,default is false
-     */
-    public void setTimerServiceOpen(boolean isTimerServiceOpen)
-    {
-        this.isTimerServiceOpen = isTimerServiceOpen;
-    }
-    
-    public boolean isNetStateListenerOpen()
-    {
-        return isNetStateListenerOpen;
-    }
-    
-    /**
-     * 记得注册表MAinfest中注册
-     * @param isNetStateListenerOpen  网络监听器是否打开,default is false
-     */
-    public void setNetStateListenerOpen(boolean isNetStateListenerOpen)
-    {
-        this.isNetStateListenerOpen = isNetStateListenerOpen;
-    }
-    
     @Override
     public String toString()
     {
         return "AppConfig [isLog=" + isLog + ", isLogToFile=" + isLogToFile + ", isLogLocation=" + isLogLocation
-            + ", fileLogPath=" + fileLogPath + ", isTimerServiceOpen=" + isTimerServiceOpen
-            + ", isNetStateListenerOpen=" + isNetStateListenerOpen + "]";
+            + ", fileLogPath=" + fileLogPath + "]";
     }
+    
 }

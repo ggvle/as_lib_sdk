@@ -1,11 +1,11 @@
 package com.yline.lib.activity;
 
+import com.yline.base.BaseActivity;
+import com.yline.lib.tool.R;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import com.yline.base.BaseActivity;
-import com.yline.lib.tool.R;
 
 public class MainActivity extends BaseActivity
 {
@@ -20,7 +20,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                new com.yline.application.timer.User();
+                
             }
         });
     }

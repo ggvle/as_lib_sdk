@@ -18,14 +18,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 
+import com.yline.application.AppConstant;
 import com.yline.application.BaseApplication;
 import com.yline.utils.FileUtil;
 
+/**
+ * 这个TAG,单独出去
+ */
 public class CrashHandler implements UncaughtExceptionHandler
 {
     private static final String TAG = "CrashHandler";
     
-    private static final String CRASH_FILE_PATH = BaseApplication.FILE_PARENT_PATH
+    private static final String CRASH_FILE_PATH = AppConstant.FILE_PARENT_PATH
         + BaseApplication.getBaseConfig().getFileLogPath();
     
     private static final String CRASH_TXT_FILE = "CrashHandler.txt";
@@ -54,7 +58,7 @@ public class CrashHandler implements UncaughtExceptionHandler
     
     public void init(Application application)
     {
-        LogFileUtil.v(BaseApplication.TAG_BASE_APPLICATION, "CrashHandler -> init start");
+        LogFileUtil.v(AppConstant.TAG_BASE, "CrashHandler -> init start");
         
         mApplication = application;
         // 获取系统默认的UncaughtExceptionHandler
@@ -62,7 +66,7 @@ public class CrashHandler implements UncaughtExceptionHandler
         // 将该CrashHandler实例设置为默认异常处理器
         Thread.setDefaultUncaughtExceptionHandler(this);
         
-        LogFileUtil.v(BaseApplication.TAG_BASE_APPLICATION, "CrashHandler -> init end");
+        LogFileUtil.v(AppConstant.TAG_BASE, "CrashHandler -> init end");
     }
     
     @Override
