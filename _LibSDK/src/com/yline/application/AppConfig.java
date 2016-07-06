@@ -11,6 +11,9 @@ import java.io.File;
  */
 public class AppConfig
 {
+    /** 文件保存父路径 */
+    public static final String FILE_PARENT_PATH = "_yline_lib" + File.separator;
+    
     private boolean isLog = true;
     
     private boolean isLogToFile = true;

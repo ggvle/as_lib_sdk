@@ -11,16 +11,17 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import com.yline.application.AppConfig;
+import com.yline.application.AppConstant;
+import com.yline.application.BaseApplication;
+import com.yline.utils.FileUtil;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
-
-import com.yline.application.AppConstant;
-import com.yline.application.BaseApplication;
-import com.yline.utils.FileUtil;
 
 /**
  * 这个TAG,单独出去
@@ -29,8 +30,8 @@ public class CrashHandler implements UncaughtExceptionHandler
 {
     private static final String TAG = "CrashHandler";
     
-    private static final String CRASH_FILE_PATH = AppConstant.FILE_PARENT_PATH
-        + BaseApplication.getBaseConfig().getFileLogPath();
+    private static final String CRASH_FILE_PATH =
+        AppConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getFileLogPath();
     
     private static final String CRASH_TXT_FILE = "CrashHandler.txt";
     
@@ -115,8 +116,8 @@ public class CrashHandler implements UncaughtExceptionHandler
      */
     private void collectDeviceInfo(Context context)
     {
-        String crashTime =
-            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
+        String crashTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA)
+            .format(Long.valueOf(System.currentTimeMillis()));
         infoMap.put("CrashTime", crashTime);
         
         // 记录版本信息

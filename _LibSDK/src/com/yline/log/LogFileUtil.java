@@ -4,11 +4,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import android.text.TextUtils;
-
-import com.yline.application.AppConstant;
+import com.yline.application.AppConfig;
 import com.yline.application.BaseApplication;
 import com.yline.utils.FileUtil;
+
+import android.text.TextUtils;
 
 /**
  * 想要区分应用时,可以采用区分目录或修改"x"的方式
@@ -21,8 +21,8 @@ public final class LogFileUtil
 {
     private static final String ERROR_LOG_FILE_UTIL = "error_LogFileUtil : "; // 错误日志tag
     
-    private static final String LOG_FILE_PATH = AppConstant.FILE_PARENT_PATH
-        + BaseApplication.getBaseConfig().getFileLogPath();
+    private static final String LOG_FILE_PATH =
+        AppConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getFileLogPath();
     
     private static final int START_COUNT = 0; // 写入文件编号
     
@@ -268,8 +268,8 @@ public final class LogFileUtil
     private static String generateFileTag(String type, int location)
     {
         // 日期 时间: 级别
-        String time =
-            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
+        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA)
+            .format(Long.valueOf(System.currentTimeMillis()));
         if (TextUtils.isEmpty(type))
         {
             type = E;
@@ -345,8 +345,8 @@ public final class LogFileUtil
                     if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME)
                         && !FileUtil.deleteFile(dirFile, MAX_COUNT + LOG_FILE_TXT_NAME))
                     {
-                        android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL
-                            + "FileUtil deleteFile failed");
+                        android.util.Log.e(generateFileTag(E, LOCATION_USER),
+                            ERROR_LOG_FILE_UTIL + "FileUtil deleteFile failed");
                         return;
                     }
                 }
@@ -355,8 +355,8 @@ public final class LogFileUtil
                     if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME)
                         && !FileUtil.renameFile(dirFile, count + LOG_FILE_TXT_NAME, (count + 1) + LOG_FILE_TXT_NAME))
                     {
-                        android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL
-                            + "FileUtil renameFile failed");
+                        android.util.Log.e(generateFileTag(E, LOCATION_USER),
+                            ERROR_LOG_FILE_UTIL + "FileUtil renameFile failed");
                         return;
                     }
                 }
