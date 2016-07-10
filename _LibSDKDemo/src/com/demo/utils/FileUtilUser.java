@@ -11,13 +11,13 @@ public class FileUtilUser
     
     public void test()
     {
-        LogUtil.v(TAG, "FileUtil.getPath() = " + FileUtil.getPath());
+        LogUtil.v("FileUtilUser -> FileUtil.getPath() = " + FileUtil.getPath());
         
         File fileDir = FileUtil.createFileDir(FileUtil.getPath() + "YlineTest/Log/");
-        LogUtil.d(TAG, "createFileDir success");
+        LogUtil.d("FileUtilUser -> createFileDir success");
         
         File file = FileUtil.createFile(fileDir, "log.txt");
-        LogUtil.i(TAG, "createFile success");
+        LogUtil.i("FileUtilUser -> createFile success");
         
         // 太多了,就会黑屏,因为大量占用了文件资源
         for (int i = 0; i < 1024; i++)
@@ -26,12 +26,12 @@ public class FileUtilUser
         }
         
         int size = FileUtil.getFileSize(file);
-        LogUtil.w(TAG, "getFileSize size = " + size);
+        LogUtil.w("FileUtilUser -> getFileSize size = " + size);
         
         boolean renameResult = FileUtil.renameFile(fileDir, "log.txt", "log1.txt");
-        LogUtil.w(TAG, "renameFile renameResult = " + renameResult);
+        LogUtil.w("FileUtilUser -> renameFile renameResult = " + renameResult);
         
         boolean deleteResult = FileUtil.deleteFile(fileDir, "log.txt");
-        LogUtil.e(TAG, "deleteFile deleteResult = " + deleteResult);
+        LogUtil.e("FileUtilUser -> deleteFile deleteResult = " + deleteResult);
     }
 }

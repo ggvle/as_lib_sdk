@@ -2,9 +2,8 @@ package com.yline.utils;
 
 import java.util.Locale;
 
-import com.yline.application.BaseApplication;
-
 /**
+ * 该工具,默认给_LibSDK使用,因此tag,全免
  * simple introduction
  * 格式:x->{[类名.方法名(L:行数)]: }功能tag -> 信息content
  * 
@@ -25,21 +24,35 @@ import com.yline.application.BaseApplication;
  */
 public class LogUtil
 {
-    private static final boolean isLog = BaseApplication.getBaseConfig().isLog(); // log 开关
+    /** log 开关 */
+    private static final boolean isLog = true;
     
-    private static final boolean isLogLocation = BaseApplication.getBaseConfig().isLogLocation(); // 是否定位
+    /** log 是否定位 */
+    private static final boolean isLogLocation = true;
     
-    private static final String TAG_DEFAULT = "x->"; // tag 默认格式
+    /** 默认 tag, 为_libsdk准备 */
+    private static final String TAG_USER_FOR_LIBSDK = "libsdk";
     
-    private static final String TAG_DEFAULT_LOCATION = "x->%s.%s(L:%d): "; // tag 定位  默认格式
+    /** tag 默认格式 */
+    private static final String TAG_DEFAULT = "x->";
     
-    private static final String MSG_DEFAULT = "%s -> %s"; // msg 默认格式
+    /** tag 定位  默认格式 */
+    private static final String TAG_DEFAULT_LOCATION = "x->%s.%s(L:%d): ";
     
-    private static String generateTag()
+    /** msg 默认格式 */
+    private static final String MSG_DEFAULT = TAG_USER_FOR_LIBSDK + " -> %s";
+    
+    /** log trace 抛出的位置,两层,即:使用该工具的当前位置,作为默认 */
+    private static final int LOG_LOCATION_NOW = 2;
+    
+    /** log trace 抛出的位置,两层,即:使用该工具的子类的位置 */
+    public static final int LOG_LOCATION_PARENT = 3;
+    
+    private static String generateTag(int location)
     {
         if (isLogLocation)
         {
-            StackTraceElement caller = new Throwable().getStackTrace()[2];
+            StackTraceElement caller = new Throwable().getStackTrace()[location];
             String clazzName = caller.getClassName();
             clazzName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
             
@@ -55,83 +68,169 @@ public class LogUtil
         }
     }
     
-    public static void v(String tag, String content)
+    /**
+     * @param content   内容
+     */
+    public static void v(String content)
     {
         if (isLog)
         {
-            android.util.Log.v(generateTag(), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void v(String tag, String content, Throwable tr)
+    /** 
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void v(String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.v(generateTag(), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.v(generateTag(location), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void d(String tag, String content)
+    /**
+     * @param content   内容
+     */
+    public static void d(String content)
     {
         if (isLog)
         {
-            android.util.Log.d(generateTag(), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.d(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void d(String tag, String content, Throwable tr)
+    /** 
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void d(String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.d(generateTag(), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.d(generateTag(location), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void i(String tag, String content)
+    /**
+     * @param content   内容
+     */
+    public static void i(String content)
     {
         if (isLog)
         {
-            android.util.Log.i(generateTag(), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void i(String tag, String content, Throwable tr)
+    /** 
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void i(String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.i(generateTag(), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.i(generateTag(location), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void w(String tag, String content)
+    /**
+     * @param content   内容
+     * @param tr        错误信息
+     */
+    public static void i(String content, Throwable tr)
     {
         if (isLog)
         {
-            android.util.Log.w(generateTag(), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content), tr);
         }
     }
     
-    public static void w(String tag, String content, Throwable tr)
+    /**
+     * @param content   内容
+     * @param location  定位位置
+     * @param tr        错误信息
+     */
+    public static void i(String content, int location, Throwable tr)
     {
         if (isLog)
         {
-            android.util.Log.w(generateTag(), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.i(generateTag(location), String.format(MSG_DEFAULT, content), tr);
         }
     }
     
-    public static void e(String tag, String content)
+    /**
+     * @param content   内容
+     */
+    public static void w(String content)
     {
         if (isLog)
         {
-            android.util.Log.e(generateTag(), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.w(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
         }
     }
     
-    public static void e(String tag, String content, Throwable tr)
+    /** 
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void w(String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.e(generateTag(), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.w(generateTag(location), String.format(MSG_DEFAULT, content));
         }
     }
+    
+    /**
+     * @param content   内容
+     */
+    public static void e(String content)
+    {
+        if (isLog)
+        {
+            android.util.Log.e(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
+        }
+    }
+    
+    /** 
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void e(String content, int location)
+    {
+        if (isLog)
+        {
+            android.util.Log.e(generateTag(location), String.format(MSG_DEFAULT, content));
+        }
+    }
+    
+    /**
+     * @param content   内容
+     * @param tr        错误信息
+     */
+    public static void e(String content, Throwable tr)
+    {
+        if (isLog)
+        {
+            android.util.Log.e(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content), tr);
+        }
+    }
+    
+    /**
+     * @param content   内容
+     * @param location  定位位置
+     * @param tr        错误信息
+     */
+    public static void e(String content, int location, Throwable tr)
+    {
+        if (isLog)
+        {
+            android.util.Log.e(generateTag(location), String.format(MSG_DEFAULT, content), tr);
+        }
+    }
+    
 }

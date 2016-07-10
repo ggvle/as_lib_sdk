@@ -1,9 +1,9 @@
 package com.yline.base;
 
+import com.yline.application.BaseApplication;
+
 import android.app.Activity;
 import android.os.Bundle;
-
-import com.yline.application.BaseApplication;
 
 /**
  * simple introduction
@@ -16,8 +16,8 @@ public class BaseActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        BaseApplication.addAcitivity(this);
         super.onCreate(savedInstanceState);
+        BaseApplication.addAcitivity(this);
     }
     
     @Override

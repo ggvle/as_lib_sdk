@@ -1,30 +1,39 @@
 package com.demo.activity;
 
+import com.demo.utils.FileUtilUser;
+import com.demo.utils.LogUtilUser;
+import com.lib.sdk.demo.R;
+
 import android.app.Activity;
 import android.os.Bundle;
-
-import com.demo.utils.FileUtilUser;
-import com.lib.sdk.demo.R;
+import android.view.View;
 
 public class MainActivity extends Activity
 {
-    private static final boolean isOldTestOpen = false;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        if (isOldTestOpen)
+        findViewById(R.id.btn_logutil).setOnClickListener(new View.OnClickListener()
         {
-            testOld();
-        }
-    }
-    
-    private void testOld()
-    {
-        // 写文件工具类
-        new FileUtilUser().test();
+            
+            @Override
+            public void onClick(View v)
+            {
+                new LogUtilUser().test();
+            }
+        });
+        
+        findViewById(R.id.btn_fileUtil).setOnClickListener(new View.OnClickListener()
+        {
+            
+            @Override
+            public void onClick(View v)
+            {
+                new FileUtilUser().test();
+            }
+        });
     }
 }
