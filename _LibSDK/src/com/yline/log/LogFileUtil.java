@@ -19,37 +19,52 @@ import android.text.TextUtils;
  */
 public final class LogFileUtil
 {
-    private static final String ERROR_LOG_FILE_UTIL = "error_LogFileUtil : "; // 错误日志tag
+    /** LogFileUtil 错误日志tag */
+    private static final String TAG_ERROR = "LogFileUtil error -> ";
     
+    /** 写入文件编号,默认 */
+    private static final int START_COUNT = 0;
+    
+    /** 写入文件最大编号 */
+    private static final int MAX_COUNT = 20;
+    
+    /** 写入文件,每个文件大小 */
+    private static final int MAX_SIZE_OF_TXT = 128 * 1024;
+    
+    /** 写入文件,文件路径 */
     private static final String LOG_FILE_PATH =
         AppConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getFileLogPath();
     
-    private static final int START_COUNT = 0; // 写入文件编号
-    
-    private static final int MAX_COUNT = 5; // 文件最大编号
-    
-    private static final int MAX_SIZE_OF_TXT = 512 * 1024; // 每个文件大小
-    
-    private static final String LOG_FILE_TXT_NAME = "_yline_log.txt"; // 路径下保存的文件名称
+    /** 写入文件,路径下保存的文件名称 */
+    private static final String LOG_FILE_TXT_NAME = "_log.txt";
     
     // 三个开关
-    private static final boolean isLog = BaseApplication.getBaseConfig().isLog(); // log 开关
+    /** log 开关 */
+    private static final boolean isLog = BaseApplication.getBaseConfig().isLog();
     
-    private static final boolean isToFile = BaseApplication.getBaseConfig().isLogToFile(); // 是否写到文件
+    /** 是否写到文件 */
+    private static final boolean isToFile = BaseApplication.getBaseConfig().isLogToFile();
     
-    private static final boolean isLogLocation = BaseApplication.getBaseConfig().isLogLocation(); // 是否定位
+    /** 是否定位 */
+    private static final boolean isLogLocation = BaseApplication.getBaseConfig().isLogLocation();
     
     // 信息格式
+    /** 默认自带前缀 */
     private static final String TAG_DEFAULT = "x->";
     
-    private static final String TAG_DEFAULT_LOCATION = "x->%s.%s(L:%d): "; // tag 定位  默认格式
+    /** tag 定位  默认格式 */
+    private static final String TAG_DEFAULT_LOCATION = TAG_DEFAULT + "%s.%s(L:%d): ";
     
-    private static final String MSG_DEFAULT = "%s -> %s"; // msg 默认格式
+    /** msg 默认格式 */
+    private static final String MSG_DEFAULT = "%s -> %s";
     
-    private static final String TAG_FILE_DEFAULT = "x->%s: %s/"; // tag 文件默认格式<日期,级别>
+    /** tag 文件默认格式<日期,级别> */
+    private static final String TAG_FILE_DEFAULT = "x->%s: %s/";
     
-    private static final String TAG_FILE_DEFAULT_LOCATION = "x->%s: %s/%s.%s(L:%d): "; // tag 文件定位默认格式
+    /** tag 文件定位默认格式 */
+    private static final String TAG_FILE_DEFAULT_LOCATION = "x->%s: %s/%s.%s(L:%d): ";
     
+    /** msg 文件定位默认格式 */
     private static final String MSG_FILE_DEFAULT = "%s %s -> %s";
     
     // 安全级别
@@ -64,174 +79,296 @@ public final class LogFileUtil
     private static final String E = "E";
     
     // 找到位置
-    private static final int LOCATION_USER = 2;
+    /** log trace 抛出的位置,两层,即:使用该工具的当前位置,作为默认 */
+    private static final int LOG_LOCATION_NOW = 2;
     
-    private static final int LOCATION_USER_PARENT1 = 3;
+    /** log trace 抛出的位置,两层,即:使用该工具的子类的位置 */
+    public static final int LOG_LOCATION_PARENT = 3;
     
+    private static final String TAG_LIBSDK = "libsdk";
+    
+    /**
+     * @param content   内容
+     */
+    public static void m(String content)
+    {
+        if (isLog)
+        {
+            android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, TAG_LIBSDK, content));
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOG_LOCATION_NOW), TAG_LIBSDK, content));
+        }
+    }
+    
+    /**
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void m(String content, int location)
+    {
+        if (isLog)
+        {
+            android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, TAG_LIBSDK, content));
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, location), TAG_LIBSDK, content));
+        }
+    }
+    
+    /**
+     * @param tag       标签
+     * @param content   内容
+     */
     public static void v(String tag, String content)
     {
         if (isLog)
         {
-            android.util.Log.v(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOCATION_USER), tag, content));
-        }
-    }
-    
-    public static void v(String tag, String content, Throwable tr)
-    {
-        if (isLog)
-        {
-            android.util.Log.v(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content), tr);
-        }
-        
-        if (isToFile)
-        {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOCATION_USER), tag, content) + '\n'
-                + android.util.Log.getStackTraceString(tr));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOG_LOCATION_NOW), tag, content));
         }
     }
     
     /**
-     * 作为上一层父类,打印该父类的子类内容
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
      */
-    public static void vp(String tag, String content)
+    public static void v(String tag, String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.v(generateTag(LOCATION_USER_PARENT1), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOCATION_USER_PARENT1), tag, content));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, location), tag, content));
         }
     }
     
     /**
-     * 作为上一层父类,打印该父类的子类内容
+     * @param tag       标签
+     * @param content   内容
      */
-    public static void vp(String tag, String content, Throwable tr)
-    {
-        if (isLog)
-        {
-            android.util.Log.v(generateTag(LOCATION_USER_PARENT1), String.format(MSG_DEFAULT, tag, content), tr);
-        }
-        
-        if (isToFile)
-        {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOCATION_USER_PARENT1), tag, content)
-                + '\n' + android.util.Log.getStackTraceString(tr));
-        }
-    }
-    
     public static void d(String tag, String content)
     {
         if (isLog)
         {
-            android.util.Log.d(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.d(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(D, LOCATION_USER), tag, content));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(D, LOG_LOCATION_NOW), tag, content));
         }
     }
     
-    public static void d(String tag, String content, Throwable tr)
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void d(String tag, String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.d(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.d(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(D, LOCATION_USER), tag, content) + '\n'
-                + android.util.Log.getStackTraceString(tr));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(D, location), tag, content));
         }
     }
     
+    /**
+     * @param tag       标签
+     * @param content   内容
+     */
     public static void i(String tag, String content)
     {
         if (isLog)
         {
-            android.util.Log.i(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(I, LOCATION_USER), tag, content));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(I, LOG_LOCATION_NOW), tag, content));
         }
     }
     
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void i(String tag, String content, int location)
+    {
+        if (isLog)
+        {
+            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(I, location), tag, content));
+        }
+    }
+    
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param tr        错误信息
+     */
     public static void i(String tag, String content, Throwable tr)
     {
         if (isLog)
         {
-            android.util.Log.i(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content), tr);
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(I, LOCATION_USER), tag, content) + '\n'
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(I, LOG_LOCATION_NOW), tag, content) + '\n'
                 + android.util.Log.getStackTraceString(tr));
         }
     }
     
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
+     * @param tr        错误信息
+     */
+    public static void i(String tag, String content, int location, Throwable tr)
+    {
+        if (isLog)
+        {
+            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content), tr);
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(I, location), tag, content) + '\n'
+                + android.util.Log.getStackTraceString(tr));
+        }
+    }
+    
+    /**
+     * @param tag       标签
+     * @param content   内容
+     */
     public static void w(String tag, String content)
     {
         if (isLog)
         {
-            android.util.Log.w(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.w(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(W, LOCATION_USER), tag, content));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(W, LOG_LOCATION_NOW), tag, content));
         }
     }
     
-    public static void w(String tag, String content, Throwable tr)
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void w(String tag, String content, int location)
     {
         if (isLog)
         {
-            android.util.Log.w(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.w(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(W, LOCATION_USER), tag, content) + '\n'
-                + android.util.Log.getStackTraceString(tr));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(W, location), tag, content));
         }
     }
     
+    /**
+     * @param tag       标签
+     * @param content   内容
+     */
     public static void e(String tag, String content)
     {
         if (isLog)
         {
-            android.util.Log.e(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content));
+            android.util.Log.e(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(E, LOCATION_USER), tag, content));
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(E, LOG_LOCATION_NOW), tag, content));
         }
     }
     
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
+     */
+    public static void e(String tag, String content, int location)
+    {
+        if (isLog)
+        {
+            android.util.Log.e(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content));
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(E, location), tag, content));
+        }
+    }
+    
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param tr        错误信息
+     */
     public static void e(String tag, String content, Throwable tr)
     {
         if (isLog)
         {
-            android.util.Log.e(generateTag(LOCATION_USER), String.format(MSG_DEFAULT, tag, content), tr);
+            android.util.Log.e(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content), tr);
         }
         
         if (isToFile)
         {
-            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(E, LOCATION_USER), tag, content) + '\n'
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(E, LOG_LOCATION_NOW), tag, content) + '\n'
+                + android.util.Log.getStackTraceString(tr));
+        }
+    }
+    
+    /**
+     * @param tag       标签
+     * @param content   内容
+     * @param location  定位位置
+     * @param tr        错误信息
+     */
+    public static void e(String tag, String content, int location, Throwable tr)
+    {
+        if (isLog)
+        {
+            android.util.Log.e(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, tag, content), tr);
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(E, location), tag, content) + '\n'
                 + android.util.Log.getStackTraceString(tr));
         }
     }
@@ -304,34 +441,34 @@ public final class LogFileUtil
         String path = FileUtil.getPath();
         if (null == path)
         {
-            android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL + "sdcard path is null");
+            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard path is null");
             return;
         }
         
         File dirFile = FileUtil.createFileDir(path + LOG_FILE_PATH);
         if (null == dirFile)
         {
-            android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL + "sdcard dirFile create failed");
+            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard dirFile create failed");
             return;
         }
         
         File file = FileUtil.createFile(dirFile, START_COUNT + LOG_FILE_TXT_NAME);
         if (null == file)
         {
-            android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL + "sdcard file create failed");
+            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard file create failed");
             return;
         }
         
         int size = FileUtil.getFileSize(file);
         if (-1 == size)
         {
-            android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL + "sdcard getFileSize failed");
+            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard getFileSize failed");
             return;
         }
         
         if (!FileUtil.writeToFile(file, content))
         {
-            android.util.Log.e(generateFileTag(E, LOCATION_USER), ERROR_LOG_FILE_UTIL + "FileUtil write failed");
+            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "FileUtil write failed");
             return;
         }
         
@@ -345,8 +482,8 @@ public final class LogFileUtil
                     if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME)
                         && !FileUtil.deleteFile(dirFile, MAX_COUNT + LOG_FILE_TXT_NAME))
                     {
-                        android.util.Log.e(generateFileTag(E, LOCATION_USER),
-                            ERROR_LOG_FILE_UTIL + "FileUtil deleteFile failed");
+                        android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW),
+                            TAG_ERROR + "FileUtil deleteFile failed");
                         return;
                     }
                 }
@@ -355,8 +492,8 @@ public final class LogFileUtil
                     if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME)
                         && !FileUtil.renameFile(dirFile, count + LOG_FILE_TXT_NAME, (count + 1) + LOG_FILE_TXT_NAME))
                     {
-                        android.util.Log.e(generateFileTag(E, LOCATION_USER),
-                            ERROR_LOG_FILE_UTIL + "FileUtil renameFile failed");
+                        android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW),
+                            TAG_ERROR + "FileUtil renameFile failed");
                         return;
                     }
                 }

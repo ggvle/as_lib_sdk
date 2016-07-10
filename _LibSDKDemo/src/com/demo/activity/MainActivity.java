@@ -1,6 +1,7 @@
 package com.demo.activity;
 
 import com.demo.utils.FileUtilUser;
+import com.demo.utils.LogFileUtilUser;
 import com.demo.utils.LogUtilUser;
 import com.lib.sdk.demo.R;
 
@@ -33,6 +34,16 @@ public class MainActivity extends Activity
             public void onClick(View v)
             {
                 new FileUtilUser().test();
+            }
+        });
+        
+        findViewById(R.id.btn_logFileUtil).setOnClickListener(new View.OnClickListener()
+        {
+            
+            @Override
+            public void onClick(View v)
+            {
+                new LogFileUtilUser().test();
             }
         });
     }

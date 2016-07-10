@@ -20,6 +20,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="text fileUtil" />
+        
+        <Button
+            android:id="@+id/btn_logFileUtil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="text logFileUtil" />
     </LinearLayout>
 
 </ScrollView>
