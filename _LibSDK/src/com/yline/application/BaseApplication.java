@@ -3,15 +3,15 @@ package com.yline.application;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yline.log.CrashHandler;
+import com.yline.log.LogFileUtil;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
-
-import com.yline.log.CrashHandler;
-import com.yline.log.LogFileUtil;
 
 /**
  * 后期所有的方法调用,可以采取xUtils一样,集成到x里面
@@ -26,9 +26,11 @@ import com.yline.log.LogFileUtil;
  */
 public abstract class BaseApplication extends Application
 {
-    private static AppConfig mBaseConfig = new AppConfig(); // 先选用默认配置
+    /** 先选用默认配置 */
+    private static AppConfig mBaseConfig = new AppConfig();
     
-    private static List<Activity> mActivityList = new ArrayList<Activity>(); // Activity管理
+    /** Activity管理 */
+    private static List<Activity> mActivityList = new ArrayList<Activity>();
     
     private static Application mApplication;
     
@@ -50,11 +52,13 @@ public abstract class BaseApplication extends Application
     
     public static void addAcitivity(Activity activity)
     {
+        LogFileUtil.m("addAcitivity:" + activity.getClass().getSimpleName());
         mActivityList.add(activity);
     }
     
     public static void removeActivity(Activity activity)
     {
+        LogFileUtil.m("removeActivity:" + activity.getClass().getSimpleName());
         mActivityList.remove(activity);
     }
     
@@ -62,6 +66,7 @@ public abstract class BaseApplication extends Application
     {
         for (Activity activity : mActivityList)
         {
+            LogFileUtil.m("finishActivity:" + activity.getClass().getSimpleName());
             activity.finish();
         }
     }
@@ -108,10 +113,10 @@ public abstract class BaseApplication extends Application
         setBaseConfig(initConfig());
         
         // 设立一个程序入口的log
-        LogFileUtil.v(AppConstant.TAG_BASE, mBaseConfig.toString());
+        LogFileUtil.m(mBaseConfig.toString());
         for (int i = 0; i < 3; i++)
         {
-            LogFileUtil.v(AppConstant.TAG_BASE, "应用启动 *** application start id = " + Thread.currentThread().getId());
+            LogFileUtil.m("应用启动 *** application start id = " + Thread.currentThread().getId());
         }
         
         // 异常崩溃日志

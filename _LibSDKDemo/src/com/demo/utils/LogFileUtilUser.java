@@ -8,6 +8,9 @@ public class LogFileUtilUser
     
     public void test()
     {
+        LogFileUtil.m("m");
+        LogFileUtil.m("m", LogFileUtil.LOG_LOCATION_PARENT);
+        
         LogFileUtil.v(TAG, "v");
         LogFileUtil.v(TAG, "v", LogFileUtil.LOG_LOCATION_PARENT);
         

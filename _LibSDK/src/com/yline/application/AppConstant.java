@@ -13,9 +13,5 @@ public final class AppConstant
     // 其他
     
     // tag
-    /** sdk jar 包主线程tag */
-    public static final String TAG_BASE = "LibSDK";
-    
     /** sdk jar 包伴生服务 */
-    public static final String TAG_APP_SERVICE = "LibSDKAppService";
 }

@@ -22,7 +22,7 @@ import java.util.Locale;
  * @author YLine 2016-5-1
  * @version
  */
-public class LogUtil
+public final class LogUtil
 {
     /** log 开关 */
     private static final boolean isLog = true;

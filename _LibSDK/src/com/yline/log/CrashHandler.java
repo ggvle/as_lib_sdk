@@ -12,7 +12,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import com.yline.application.AppConfig;
-import com.yline.application.AppConstant;
 import com.yline.application.BaseApplication;
 import com.yline.utils.FileUtil;
 
@@ -26,7 +25,7 @@ import android.os.Build;
 /**
  * 这个TAG,单独出去
  */
-public class CrashHandler implements UncaughtExceptionHandler
+public final class CrashHandler implements UncaughtExceptionHandler
 {
     private static final String TAG = "CrashHandler";
     
@@ -59,7 +58,7 @@ public class CrashHandler implements UncaughtExceptionHandler
     
     public void init(Application application)
     {
-        LogFileUtil.v(AppConstant.TAG_BASE, "CrashHandler -> init start");
+        LogFileUtil.m("CrashHandler -> init start");
         
         mApplication = application;
         // 获取系统默认的UncaughtExceptionHandler
@@ -67,7 +66,7 @@ public class CrashHandler implements UncaughtExceptionHandler
         // 将该CrashHandler实例设置为默认异常处理器
         Thread.setDefaultUncaughtExceptionHandler(this);
         
-        LogFileUtil.v(AppConstant.TAG_BASE, "CrashHandler -> init end");
+        LogFileUtil.m("CrashHandler -> init end");
     }
     
     @Override
@@ -199,6 +198,10 @@ public class CrashHandler implements UncaughtExceptionHandler
         writeLogToFile(sb.toString());
     }
     
+    /**
+     * 写日志入文件
+     * @param content   日志内容
+     */
     private synchronized static void writeLogToFile(String content)
     {
         String path = FileUtil.getPath();
@@ -222,16 +225,9 @@ public class CrashHandler implements UncaughtExceptionHandler
             return;
         }
         
-        int size = FileUtil.getFileSize(file);
-        if (-1 == size)
-        {
-            LogFileUtil.e(TAG, "sdcard getFileSize failed");
-            return;
-        }
-        
         if (!FileUtil.writeToFile(file, content))
         {
-            LogFileUtil.e(TAG, "CrashHandler write failed");
+            LogFileUtil.e(TAG, "write failed");
             return;
         }
     }

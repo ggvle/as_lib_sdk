@@ -8,6 +8,7 @@ import com.lib.sdk.demo.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity
 {
@@ -44,6 +45,17 @@ public class MainActivity extends Activity
             public void onClick(View v)
             {
                 new LogFileUtilUser().test();
+            }
+        });
+        
+        findViewById(R.id.btn_crashHandler).setOnClickListener(new View.OnClickListener()
+        {
+            
+            @Override
+            public void onClick(View v)
+            {
+                Button btn = null;
+                btn.setText(100);
             }
         });
     }

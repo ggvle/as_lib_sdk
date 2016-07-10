@@ -55,8 +55,8 @@ public final class AppRunnable implements Runnable
         if (tempLength >= LOG_TIME)
         {
             tempLength = 0;
-            LogFileUtil.i(AppConstant.TAG_APP_SERVICE, "this time = " + tempStartTime + ",experienced time = "
-                + (tempStartTime - tempLastStartTime) + ",sleep time = " + SLEEP_TIME * LOG_TIME);
+            LogFileUtil.m("this time = " + tempStartTime + ",experienced time = " + (tempStartTime - tempLastStartTime)
+                + ",sleep time = " + SLEEP_TIME * LOG_TIME);
             
             tempLastStartTime = tempStartTime;
         }

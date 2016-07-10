@@ -7,6 +7,7 @@ import java.util.Locale;
 import com.yline.application.AppConfig;
 import com.yline.application.BaseApplication;
 import com.yline.utils.FileUtil;
+import com.yline.utils.LogUtil;
 
 import android.text.TextUtils;
 
@@ -441,34 +442,34 @@ public final class LogFileUtil
         String path = FileUtil.getPath();
         if (null == path)
         {
-            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard path is null");
+            LogUtil.e(TAG_ERROR + "sdcard path is null");
             return;
         }
         
         File dirFile = FileUtil.createFileDir(path + LOG_FILE_PATH);
         if (null == dirFile)
         {
-            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard dirFile create failed");
+            LogUtil.e(TAG_ERROR + "sdcard dirFile create failed");
             return;
         }
         
         File file = FileUtil.createFile(dirFile, START_COUNT + LOG_FILE_TXT_NAME);
         if (null == file)
         {
-            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard file create failed");
+            LogUtil.e(TAG_ERROR + "sdcard file create failed");
+            return;
+        }
+        
+        if (!FileUtil.writeToFile(file, content))
+        {
+            LogUtil.e(TAG_ERROR + "FileUtil write failed");
             return;
         }
         
         int size = FileUtil.getFileSize(file);
         if (-1 == size)
         {
-            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "sdcard getFileSize failed");
-            return;
-        }
-        
-        if (!FileUtil.writeToFile(file, content))
-        {
-            android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW), TAG_ERROR + "FileUtil write failed");
+            LogUtil.e(TAG_ERROR + "sdcard getFileSize failed");
             return;
         }
         
@@ -482,8 +483,7 @@ public final class LogFileUtil
                     if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME)
                         && !FileUtil.deleteFile(dirFile, MAX_COUNT + LOG_FILE_TXT_NAME))
                     {
-                        android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW),
-                            TAG_ERROR + "FileUtil deleteFile failed");
+                        LogUtil.e(TAG_ERROR + "FileUtil deleteFile failed");
                         return;
                     }
                 }
@@ -492,8 +492,7 @@ public final class LogFileUtil
                     if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME)
                         && !FileUtil.renameFile(dirFile, count + LOG_FILE_TXT_NAME, (count + 1) + LOG_FILE_TXT_NAME))
                     {
-                        android.util.Log.e(generateFileTag(E, LOG_LOCATION_NOW),
-                            TAG_ERROR + "FileUtil renameFile failed");
+                        LogUtil.e(TAG_ERROR + "FileUtil renameFile failed");
                         return;
                     }
                 }

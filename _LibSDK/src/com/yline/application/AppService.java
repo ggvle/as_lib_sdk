@@ -1,11 +1,11 @@
 package com.yline.application;
 
+import com.yline.log.LogFileUtil;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-
-import com.yline.log.LogFileUtil;
 
 /**
  * 伴生Application的服务---计时服务
@@ -24,14 +24,14 @@ public final class AppService extends Service
     public void onCreate()
     {
         super.onCreate();
-        LogFileUtil.v(AppConstant.TAG_APP_SERVICE, "AppService running in onCreate");
+        LogFileUtil.m("AppService running in onCreate");
         mThread = new Thread(new AppRunnable());
     }
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        LogFileUtil.v(AppConstant.TAG_APP_SERVICE, "AppService running in onStartCommand");
+        LogFileUtil.m("AppService running in onStartCommand");
         if (null == intent)
         {
             intent = new Intent();
@@ -39,13 +39,13 @@ public final class AppService extends Service
         
         if (null == mThread)
         {
-            LogFileUtil.v(AppConstant.TAG_APP_SERVICE, "AppService new thread in onStartCommand");
+            LogFileUtil.m("AppService new thread in onStartCommand");
             mThread = new Thread(new AppRunnable());
         }
         
         if (!mThread.isAlive())
         {
-            LogFileUtil.v(AppConstant.TAG_APP_SERVICE, "AppService thread start in onStartCommand");
+            LogFileUtil.m("AppService thread start in onStartCommand");
             mThread.start();
         }
         
