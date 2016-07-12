@@ -51,6 +51,7 @@ public class MainActivity extends Activity
         findViewById(R.id.btn_crashHandler).setOnClickListener(new View.OnClickListener()
         {
             
+            @SuppressWarnings("null")
             @Override
             public void onClick(View v)
             {
