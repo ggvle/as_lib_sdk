@@ -29,8 +29,8 @@ public final class LogFileUtil
     /** 写入文件最大编号 */
     private static final int MAX_COUNT = 20;
     
-    /** 写入文件,每个文件大小 */
-    private static final int MAX_SIZE_OF_TXT = 128 * 1024;
+    /** 写入文件,每个文件大小512kb */
+    private static final int MAX_SIZE_OF_TXT = 512 * 1024;
     
     /** 写入文件,文件路径 */
     private static final String LOG_FILE_PATH =
