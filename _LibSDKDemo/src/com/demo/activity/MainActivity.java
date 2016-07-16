@@ -3,6 +3,7 @@ package com.demo.activity;
 import com.demo.utils.FileUtilUser;
 import com.demo.utils.LogFileUtilUser;
 import com.demo.utils.LogUtilUser;
+import com.demo.utils.SPUtilUser;
 import com.lib.sdk.demo.R;
 
 import android.app.Activity;
@@ -45,6 +46,16 @@ public class MainActivity extends Activity
             public void onClick(View v)
             {
                 new LogFileUtilUser().test();
+            }
+        });
+        
+        findViewById(R.id.btn_spUtil).setOnClickListener(new View.OnClickListener()
+        {
+            
+            @Override
+            public void onClick(View v)
+            {
+                new SPUtilUser().test(MainActivity.this);
             }
         });
         
