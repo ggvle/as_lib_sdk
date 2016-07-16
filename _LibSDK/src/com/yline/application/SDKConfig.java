@@ -9,7 +9,7 @@ import java.io.File;
  * @author YLine 2016-5-27 -> 上午7:28:17
  * @version
  */
-public class AppConfig
+public class SDKConfig
 {
     /** 文件保存父路径 */
     public static final String FILE_PARENT_PATH = "_yline_lib" + File.separator;

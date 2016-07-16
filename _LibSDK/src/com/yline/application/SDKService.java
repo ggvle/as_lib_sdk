@@ -10,7 +10,7 @@ import android.os.IBinder;
 /**
  * 伴生Application的服务---计时服务
  */
-public final class AppService extends Service
+public final class SDKService extends Service
 {
     private Thread mThread;
     
@@ -25,7 +25,7 @@ public final class AppService extends Service
     {
         super.onCreate();
         LogFileUtil.m("AppService running in onCreate");
-        mThread = new Thread(new AppRunnable());
+        mThread = new Thread(new SDKRunnable());
     }
     
     @Override
@@ -40,7 +40,7 @@ public final class AppService extends Service
         if (null == mThread)
         {
             LogFileUtil.m("AppService new thread in onStartCommand");
-            mThread = new Thread(new AppRunnable());
+            mThread = new Thread(new SDKRunnable());
         }
         
         if (!mThread.isAlive())
@@ -68,6 +68,6 @@ public final class AppService extends Service
      */
     public static void initAppService(Context context)
     {
-        context.startService(new Intent(context, AppService.class));
+        context.startService(new Intent(context, SDKService.class));
     }
 }

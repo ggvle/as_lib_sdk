@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import com.yline.application.AppConfig;
+import com.yline.application.SDKConfig;
 import com.yline.application.BaseApplication;
 import com.yline.utils.FileUtil;
 
@@ -30,7 +30,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
     private static final String TAG = "CrashHandler";
     
     private static final String CRASH_FILE_PATH =
-        AppConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getFileLogPath();
+        SDKConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getFileLogPath();
     
     private static final String CRASH_TXT_FILE = "CrashHandler.txt";
     

@@ -5,7 +5,7 @@ import com.yline.log.LogFileUtil;
 /**
  * 默认设置,间隔一段时间,打印AppRunnable日志
  */
-public final class AppRunnable implements Runnable
+public final class SDKRunnable implements Runnable
 {
     private static final int LOG_TIME = 1000; // Ms,日志间隔频率
     
@@ -19,7 +19,7 @@ public final class AppRunnable implements Runnable
     
     private int tempLength = LOG_TIME; // 每间隔 1000 * 30 Ms 下打印一下日志
     
-    public AppRunnable()
+    public SDKRunnable()
     {
         tempStartTime = System.currentTimeMillis();
         tempLastStartTime = tempStartTime;

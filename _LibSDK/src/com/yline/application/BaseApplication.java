@@ -27,7 +27,7 @@ import android.widget.Toast;
 public abstract class BaseApplication extends Application
 {
     /** 先选用默认配置 */
-    private static AppConfig mBaseConfig = new AppConfig();
+    private static SDKConfig mBaseConfig = new SDKConfig();
     
     /** Activity管理 */
     private static List<Activity> mActivityList = new ArrayList<Activity>();
@@ -74,7 +74,7 @@ public abstract class BaseApplication extends Application
     /**
      * @return 当前Application的配置信息
      */
-    public static AppConfig getBaseConfig()
+    public static SDKConfig getBaseConfig()
     {
         return mBaseConfig;
     }
@@ -84,7 +84,7 @@ public abstract class BaseApplication extends Application
      * 返回null,则按默认配置
      * @param mBaseConfig 配置对象
      */
-    private void setBaseConfig(AppConfig mBaseConfig)
+    private void setBaseConfig(SDKConfig mBaseConfig)
     {
         if (null != mBaseConfig)
         {
@@ -122,7 +122,7 @@ public abstract class BaseApplication extends Application
         // 异常崩溃日志
         CrashHandler.getInstance().init(this);
         
-        AppService.initAppService(this); // 伴生服务
+        SDKService.initAppService(this); // 伴生服务
         
         handler = new Handler()
         {
@@ -132,7 +132,7 @@ public abstract class BaseApplication extends Application
                 super.handleMessage(msg);
                 switch (msg.what)
                 {
-                    case AppConstant.HANDLER_TOAST:
+                    case SDKConstant.HANDLER_TOAST:
                         Toast.makeText(BaseApplication.this, (String)msg.obj, Toast.LENGTH_SHORT).show();
                         break;
                     default:
@@ -149,7 +149,7 @@ public abstract class BaseApplication extends Application
      */
     public static void toast(String content)
     {
-        handler.obtainMessage(AppConstant.HANDLER_TOAST, content).sendToTarget();
+        handler.obtainMessage(SDKConstant.HANDLER_TOAST, content).sendToTarget();
     }
     
     /**
@@ -161,6 +161,6 @@ public abstract class BaseApplication extends Application
      * 进行一些基础配置,要求上级必须配置的信息
      * @return
      */
-    protected abstract AppConfig initConfig();
+    protected abstract SDKConfig initConfig();
     
 }

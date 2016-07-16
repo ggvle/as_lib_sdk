@@ -15,7 +15,7 @@
     <application android:allowBackup="false" >
 
         <!-- 定时服务 -->
-        <service android:name="com.yline.application.AppService" >
+        <service android:name="com.yline.application.SDKService" >
         </service>
     </application>
 

@@ -1,9 +1,9 @@
 package com.demo.application;
 
-import android.os.Message;
-
-import com.yline.application.AppConfig;
 import com.yline.application.BaseApplication;
+import com.yline.application.SDKConfig;
+
+import android.os.Message;
 
 public class MainApplication extends BaseApplication
 {
@@ -15,9 +15,9 @@ public class MainApplication extends BaseApplication
     }
     
     @Override
-    protected AppConfig initConfig()
+    protected SDKConfig initConfig()
     {
-        AppConfig appConfig = new AppConfig();
+        SDKConfig appConfig = new SDKConfig();
         appConfig.setFileLogPath("libSDKDemo"); // 默认开启日志,并写到文件中
         return appConfig;
     }
