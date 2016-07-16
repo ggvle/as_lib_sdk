@@ -18,7 +18,7 @@ public class MainApplication extends BaseApplication
     protected SDKConfig initConfig()
     {
         SDKConfig appConfig = new SDKConfig();
-        appConfig.setFileLogPath("libSDKDemo"); // 默认开启日志,并写到文件中
+        appConfig.setLogFilePath("libSDKDemo"); // 默认开启日志,并写到文件中
         return appConfig;
     }
 }

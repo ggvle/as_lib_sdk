@@ -4,8 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import com.yline.application.SDKConfig;
 import com.yline.application.BaseApplication;
+import com.yline.application.SDKConfig;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
 
@@ -34,7 +34,7 @@ public final class LogFileUtil
     
     /** 写入文件,文件路径 */
     private static final String LOG_FILE_PATH =
-        SDKConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getFileLogPath();
+        SDKConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getLogFilePath();
     
     /** 写入文件,路径下保存的文件名称 */
     private static final String LOG_FILE_TXT_NAME = "_log.txt";

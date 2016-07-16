@@ -20,25 +20,25 @@ public class SDKConfig
     
     private boolean isLogLocation = true;
     
-    private String fileLogPath = "libsdk" + File.separator;
+    private String logFilePath = "libsdk" + File.separator;
     
-    public String getFileLogPath()
+    public String getLogFilePath()
     {
-        return fileLogPath;
+        return logFilePath;
     }
     
     /**
-     * @param fileLogPath 日志目录,default is "libsdk"
+     * @param logFilePath 日志目录,default is "libsdk"
      */
-    public void setFileLogPath(String fileLogPath)
+    public void setLogFilePath(String logFilePath)
     {
-        if (!fileLogPath.endsWith(File.separator))
+        if (!logFilePath.endsWith(File.separator))
         {
-            this.fileLogPath = fileLogPath;
+            this.logFilePath = logFilePath;
         }
         else
         {
-            this.fileLogPath = fileLogPath + File.separator;
+            this.logFilePath = logFilePath + File.separator;
         }
     }
     
@@ -85,7 +85,7 @@ public class SDKConfig
     public String toString()
     {
         return "AppConfig [isLog=" + isLog + ", isLogToFile=" + isLogToFile + ", isLogLocation=" + isLogLocation
-            + ", fileLogPath=" + fileLogPath + "]";
+            + ", logFilePath=" + logFilePath + "]";
     }
     
 }
