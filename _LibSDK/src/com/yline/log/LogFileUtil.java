@@ -12,6 +12,8 @@ import com.yline.utils.LogUtil;
 import android.text.TextUtils;
 
 /**
+ * 缺陷:在初始化第一次调用的时候,会确立目录以及配置参数
+ * 因此,不能再initConig之前,调用一次该日志文件,否则:配置失效
  * 想要区分应用时,可以采用区分目录或修改"x"的方式
  * simple introduction
  *
