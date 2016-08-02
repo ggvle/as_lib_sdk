@@ -9,8 +9,11 @@ import com.yline.log.LogFileUtil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.app.Service;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.view.View;
 import android.widget.Toast;
 
 /**
@@ -31,6 +34,15 @@ public abstract class BaseApplication extends Application
     
     /** Activity管理 */
     private static List<Activity> mActivityList = new ArrayList<Activity>();
+    
+    /** Fragment记录 */
+    private static List<String> mFragmentList = new ArrayList<String>();
+    
+    /** View记录 */
+    private static List<String> mViewList = new ArrayList<String>();
+    
+    /** Service记录 */
+    private static List<String> mServiceList = new ArrayList<String>();
     
     private static Application mApplication;
     
@@ -69,6 +81,42 @@ public abstract class BaseApplication extends Application
             LogFileUtil.m("finishActivity:" + activity.getClass().getSimpleName());
             activity.finish();
         }
+    }
+    
+    public static void addFragmentForRecord(Fragment fragment)
+    {
+        LogFileUtil.m("addFragmentForRecord:" + fragment.getClass().getSimpleName());
+        mFragmentList.add(fragment.getClass().getSimpleName());
+    }
+    
+    public static void removeFragmentForRecord(Fragment fragment)
+    {
+        LogFileUtil.m("removeFragmentForRecord:" + fragment.getClass().getSimpleName());
+        mFragmentList.remove(fragment.getClass().getSimpleName());
+    }
+    
+    public static void addViewForRecord(View view)
+    {
+        LogFileUtil.m("addViewForRecord:" + view.getClass().getSimpleName());
+        mViewList.add(view.getClass().getSimpleName());
+    }
+    
+    public static void removeViewForRecord(View view)
+    {
+        LogFileUtil.m("removeViewForRecord:" + view.getClass().getSimpleName());
+        mViewList.remove(view.getClass().getSimpleName());
+    }
+    
+    public static void addServiceForRecord(Service service)
+    {
+        LogFileUtil.m("addServiceForRecord:" + service.getClass().getSimpleName());
+        mServiceList.add(service.getClass().getSimpleName());
+    }
+    
+    public static void removeServiceForRecord(Service service)
+    {
+        LogFileUtil.m("removeServiceForRecord:" + service.getClass().getSimpleName());
+        mServiceList.remove(service.getClass().getSimpleName());
     }
     
     /**

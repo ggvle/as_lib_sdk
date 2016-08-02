@@ -1,5 +1,7 @@
 package com.yline.base;
 
+import com.yline.application.BaseApplication;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
@@ -8,23 +10,32 @@ public class BaseViewGroup extends ViewGroup
 {
     public BaseViewGroup(Context context)
     {
-        super(context);
+        this(context, null);
     }
     
     public BaseViewGroup(Context context, AttributeSet attrs)
     {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
     
     public BaseViewGroup(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
+        BaseApplication.addViewForRecord(this);
     }
     
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b)
     {
-        
+        // TODO Auto-generated method stub
+        super.layout(l, t, r, b);
+    }
+    
+    @Override
+    protected void onDetachedFromWindow()
+    {
+        super.onDetachedFromWindow();
+        BaseApplication.removeViewForRecord(this);
     }
     
 }

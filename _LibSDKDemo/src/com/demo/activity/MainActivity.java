@@ -5,13 +5,13 @@ import com.demo.utils.LogFileUtilUser;
 import com.demo.utils.LogUtilUser;
 import com.demo.utils.SPUtilUser;
 import com.lib.sdk.demo.R;
+import com.yline.base.BaseActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends Activity
+public class MainActivity extends BaseActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
