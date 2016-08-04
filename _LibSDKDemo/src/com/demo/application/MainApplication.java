@@ -7,6 +7,7 @@ import android.os.Message;
 
 public class MainApplication extends BaseApplication
 {
+    public static final String TAG = "libSDKDemo";
     
     @Override
     protected void handlerDefault(Message msg)

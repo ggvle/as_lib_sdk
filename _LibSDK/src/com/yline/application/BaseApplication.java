@@ -3,6 +3,7 @@ package com.yline.application;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yline.lib.sdk.R;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
 
@@ -10,10 +11,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -48,6 +51,11 @@ public abstract class BaseApplication extends Application
     
     // handler相关
     private static Handler handler;
+    
+    /** Toast 工具 */
+    private Toast mToast;
+    
+    private TextView mTvToast;
     
     /**
      * @return  当前application,因为onCreate为应用入口,因此不用担心为null
@@ -181,7 +189,7 @@ public abstract class BaseApplication extends Application
                 switch (msg.what)
                 {
                     case SDKConstant.HANDLER_TOAST:
-                        Toast.makeText(BaseApplication.this, (String)msg.obj, Toast.LENGTH_SHORT).show();
+                        showToast(BaseApplication.this, (String)msg.obj);
                         break;
                     default:
                         handlerDefault(msg);
@@ -189,6 +197,31 @@ public abstract class BaseApplication extends Application
                 }
             }
         };
+    }
+    
+    /**
+     * 打印toast
+     * @param context
+     * @param msg 内容
+     */
+    private void showToast(Context context, String msg)
+    {
+        if (null == mToast)
+        {
+            mToast = new Toast(context);
+            mToast.setDuration(Toast.LENGTH_SHORT);
+        }
+        
+        if (null == mTvToast)
+        {
+            mTvToast = new TextView(context);
+            mTvToast.setBackgroundResource(R.drawable.bg_toast);
+            mTvToast.setTextColor(0xffffffff);
+        }
+        
+        mTvToast.setText(msg);
+        mToast.setView(mTvToast);
+        mToast.show();
     }
     
     /**
