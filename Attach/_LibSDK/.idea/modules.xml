@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LibSDK/LibSDK.iml" filepath="$PROJECT_DIR$/LibSDK/LibSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LibSDKDemo/LibSDKDemo.iml" filepath="$PROJECT_DIR$/LibSDKDemo/LibSDKDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_LibSDK.iml" filepath="$PROJECT_DIR$/_LibSDK.iml" />
+    </modules>
+  </component>
+</project>
