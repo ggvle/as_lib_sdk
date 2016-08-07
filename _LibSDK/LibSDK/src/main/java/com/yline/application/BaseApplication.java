@@ -217,7 +217,7 @@ public abstract class BaseApplication extends Application
 		if (null == mTvToast)
 		{
 			mTvToast = new TextView(context);
-			mTvToast.setBackgroundResource(R.drawable.bg_toast);
+			mTvToast.setBackgroundResource(R.drawable.lib_bg_toast);
 			mTvToast.setTextColor(0xffffffff);
 		}
 
