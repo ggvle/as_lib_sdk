@@ -33,7 +33,7 @@ public abstract class BaseApplication extends Application
 {
 	/** 先选用默认配置 */
 	private static SDKConfig mBaseConfig = new SDKConfig();
-
+	
 	/** Activity管理 */
 	private static List<Activity> mActivityList = new ArrayList<Activity>();
 
@@ -45,6 +45,7 @@ public abstract class BaseApplication extends Application
 
 	/** Service记录 */
 	private static List<String> mServiceList = new ArrayList<String>();
+
 
 	private static Application mApplication;
 
