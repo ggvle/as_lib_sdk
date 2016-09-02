@@ -194,7 +194,6 @@ public abstract class BaseApplication extends Application
 						showToast(BaseApplication.this, (String) msg.obj);
 						break;
 					default:
-						handlerDefault(msg);
 						break;
 				}
 			}
@@ -237,16 +236,15 @@ public abstract class BaseApplication extends Application
 		handler.obtainMessage(SDKConstant.HANDLER_TOAST, content).sendToTarget();
 	}
 
-	/**
-	 * 被上一级重写,使用Application中的handler封装方法(在该SDK之外的标签)
-	 */
-	protected abstract void handlerDefault(Message msg);
 
 	/**
 	 * 进行一些基础配置,要求上级必须配置的信息
 	 *
 	 * @return
 	 */
-	protected abstract SDKConfig initConfig();
+	protected SDKConfig initConfig()
+	{
+		return new SDKConfig();
+	}
 
 }
