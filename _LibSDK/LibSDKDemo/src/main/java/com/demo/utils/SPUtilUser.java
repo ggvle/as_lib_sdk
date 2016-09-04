@@ -11,6 +11,10 @@ public class SPUtilUser
 
 	public void test(Context context)
 	{
+		SPUtil.put(context, "null", null);
+		String result = (String) SPUtil.get(context, "null", null);
+		LogFileUtil.v(TAG, "put -> value = " + result);
+		
 		// 增加两条数据
 		SPUtil.put(context, "username", "utilUsername");
 		SPUtil.put(context, "password", "utilPassword");
