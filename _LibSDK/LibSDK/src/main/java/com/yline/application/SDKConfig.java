@@ -11,7 +11,7 @@ import java.io.File;
 public class SDKConfig
 {
 	/** 文件保存父路径 */
-	public static final String FILE_PARENT_PATH = "_yline_lib" + File.separator;
+	private String fileParentPath = "_yline" + File.separator;
 
 	private boolean isLog = true;
 
@@ -21,21 +21,24 @@ public class SDKConfig
 
 	private String logFilePath = "libsdk" + File.separator;
 
-	private Class<?> cls = SDKService.class;
-
-	public void setCls(Class<?> cls)
+	public String getFileParentPath()
 	{
-		// 如果是继承关系，才进行赋值
-		if (SDKService.class.isAssignableFrom(cls))
+		return fileParentPath;
+	}
+
+	/** 文件保存父路径 */
+	public void setFileParentPath(String fileParentPath)
+	{
+		if (fileParentPath.endsWith(File.separator))
 		{
-			this.cls = cls;
+			this.fileParentPath = fileParentPath;
+		}
+		else
+		{
+			this.fileParentPath = fileParentPath + File.separator;
 		}
 	}
 
-	public Class<?> getCls()
-	{
-		return cls;
-	}
 
 	public String getLogFilePath()
 	{
@@ -47,7 +50,7 @@ public class SDKConfig
 	 */
 	public void setLogFilePath(String logFilePath)
 	{
-		if (!logFilePath.endsWith(File.separator))
+		if (logFilePath.endsWith(File.separator))
 		{
 			this.logFilePath = logFilePath;
 		}
@@ -100,7 +103,6 @@ public class SDKConfig
 	public String toString()
 	{
 		return "SDKConfig{" +
-				"cls=" + cls +
 				", isLog=" + isLog +
 				", isLogToFile=" + isLogToFile +
 				", isLogLocation=" + isLogLocation +

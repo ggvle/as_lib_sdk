@@ -17,10 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <!-- 定时服务 -->
-        <service android:name="com.demo.application.AppService">
-        </service>
     </application>
 
 </manifest>

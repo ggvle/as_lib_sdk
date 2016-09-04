@@ -31,6 +31,9 @@ import java.util.List;
  */
 public abstract class BaseApplication extends Application
 {
+	/** TAG */
+	public static final String TAG = "LibSDK";
+
 	/** 先选用默认配置 */
 	private static SDKConfig mBaseConfig = new SDKConfig();
 	
@@ -45,7 +48,6 @@ public abstract class BaseApplication extends Application
 
 	/** Service记录 */
 	private static List<String> mServiceList = new ArrayList<String>();
-
 
 	private static Application mApplication;
 
@@ -180,8 +182,6 @@ public abstract class BaseApplication extends Application
 		// 异常崩溃日志
 		CrashHandler.getInstance().init(this);
 
-		SDKService.initAppService(this, mBaseConfig.getCls()); // 伴生服务
-
 		handler = new Handler()
 		{
 			@Override
@@ -190,6 +190,10 @@ public abstract class BaseApplication extends Application
 				super.handleMessage(msg);
 				switch (msg.what)
 				{
+					case SDKConstant.HANDLER_PALPITATION:
+						LogFileUtil.v(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
+						handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.PALLITATION_TIME);
+						break;
 					case SDKConstant.HANDLER_TOAST:
 						showToast(BaseApplication.this, (String) msg.obj);
 						break;
@@ -198,6 +202,7 @@ public abstract class BaseApplication extends Application
 				}
 			}
 		};
+		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.PALLITATION_TIME);
 	}
 
 	/**

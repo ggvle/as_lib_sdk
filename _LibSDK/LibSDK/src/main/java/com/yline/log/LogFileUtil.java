@@ -3,7 +3,6 @@ package com.yline.log;
 import android.text.TextUtils;
 
 import com.yline.application.BaseApplication;
-import com.yline.application.SDKConfig;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
 
@@ -44,7 +43,7 @@ public final class LogFileUtil
 	/**
 	 * 写入文件,文件路径
 	 */
-	private static final String LOG_FILE_PATH = SDKConfig.FILE_PARENT_PATH + BaseApplication.getBaseConfig().getLogFilePath();
+	private static final String LOG_FILE_PATH = BaseApplication.getBaseConfig().getFileParentPath() + BaseApplication.getBaseConfig().getLogFilePath();
 
 	/**
 	 * 写入文件,路径下保存的文件名称

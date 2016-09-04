@@ -10,10 +10,6 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        
-        <!-- 定时服务,as中子工程定义的文件,父工程依旧有效,因此下面代码需要注释掉 -->
-        <!--<service android:name="com.yline.application.SDKService">-->
-        <!--</service>-->
     </application>
 
 </manifest>
