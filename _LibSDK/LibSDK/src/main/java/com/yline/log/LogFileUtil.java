@@ -1,5 +1,6 @@
 package com.yline.log;
 
+import android.os.Process;
 import android.text.TextUtils;
 
 import com.yline.application.BaseApplication;
@@ -72,7 +73,7 @@ public final class LogFileUtil
 	/**
 	 * 默认自带前缀
 	 */
-	private static final String TAG_DEFAULT = "x->";
+	private static final String TAG_DEFAULT = "x->[%s-%s]/";
 
 	/**
 	 * tag 定位  默认格式
@@ -85,14 +86,14 @@ public final class LogFileUtil
 	private static final String MSG_DEFAULT = "%s -> %s";
 
 	/**
-	 * tag 文件默认格式<日期,级别>
+	 * tag 文件默认格式<日期,级别,进程号,线程号>
 	 */
-	private static final String TAG_FILE_DEFAULT = "x->%s: %s/";
+	private static final String TAG_FILE_DEFAULT = "x->%s: %s[%s-%s]/";
 
 	/**
 	 * tag 文件定位默认格式
 	 */
-	private static final String TAG_FILE_DEFAULT_LOCATION = "x->%s: %s/%s.%s(L:%d): ";
+	private static final String TAG_FILE_DEFAULT_LOCATION = TAG_FILE_DEFAULT + "%s.%s(L:%d): ";
 
 	/**
 	 * msg 文件定位默认格式
@@ -419,11 +420,11 @@ public final class LogFileUtil
 			String clazzName = caller.getClassName();
 			clazzName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
 
-			return String.format(Locale.CHINA, TAG_DEFAULT_LOCATION, clazzName, caller.getMethodName(), caller.getLineNumber());
+			return String.format(Locale.CHINA, TAG_DEFAULT_LOCATION, Process.myPid(), Thread.currentThread().getId(), clazzName, caller.getMethodName(), caller.getLineNumber());
 		}
 		else
 		{
-			return TAG_DEFAULT;
+			return String.format(Locale.CHINA, TAG_DEFAULT, Process.myPid(), Thread.currentThread().getId());
 		}
 	}
 
@@ -448,11 +449,11 @@ public final class LogFileUtil
 			String clazzName = caller.getClassName();
 			clazzName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
 
-			return String.format(Locale.CHINA, TAG_FILE_DEFAULT_LOCATION, time, type, clazzName, caller.getMethodName(), caller.getLineNumber());
+			return String.format(Locale.CHINA, TAG_FILE_DEFAULT_LOCATION, time, type, Process.myPid(), Thread.currentThread().getId(), clazzName, caller.getMethodName(), caller.getLineNumber());
 		}
 		else
 		{
-			return String.format(TAG_FILE_DEFAULT, time, type);
+			return String.format(TAG_FILE_DEFAULT, time, type, Process.myPid(), Thread.currentThread().getId());
 		}
 	}
 
