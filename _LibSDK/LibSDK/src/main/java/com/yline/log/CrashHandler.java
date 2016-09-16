@@ -9,6 +9,7 @@ import android.os.Build;
 
 import com.yline.application.BaseApplication;
 import com.yline.utils.FileUtil;
+import com.yline.utils.LogUtil;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -30,7 +31,10 @@ public final class CrashHandler implements UncaughtExceptionHandler
 
 	private static final String CRASH_FILE_PATH = BaseApplication.getBaseConfig().getFileParentPath() + BaseApplication.getBaseConfig().getLogFilePath();
 
-	private static final String CRASH_TXT_FILE = "CrashHandler.txt";
+	private static final String CRASH_TXT_FILE = "-CrashHandler.txt";
+
+	/** 时间 */
+	private static String crash_txt_time = "1994-08-25 12:00:00:000";
 
 	private Application mApplication;
 
@@ -70,7 +74,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex)
 	{
-		LogFileUtil.v(TAG, "uncaughtException dealing");
+		LogUtil.v(TAG + " uncaughtException dealing");
 
 		// 收集错误信息
 		if (null != FileUtil.getPath())
@@ -86,6 +90,12 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		mDefaultHandler.uncaughtException(thread, ex);
 	}
 
+	/**
+	 * 处理此时的异常
+	 *
+	 * @param ex 异常信息
+	 * @return 是否处理成功
+	 */
 	private boolean handleException(Throwable ex)
 	{
 		if (null == ex)
@@ -99,7 +109,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		// 保存日志文件
 		saveCrashInfo2File(ex);
 
-		// 日志打点      TrackerSendUtil.getInstance()  <SDK>
+		// 日志打点  TrackerSendUtil.getInstance()  <SDK>
 
 		// 发送一条退出时广播
 		// mApplication.sendBroadcast(intent, receiverPermission);  <SDK>
@@ -108,7 +118,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	}
 
 	/**
-	 * 收集设备参数信息
+	 * 收集设备参数信息，并没有打印任何信息
 	 *
 	 * @param context
 	 */
@@ -135,7 +145,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 		catch (NameNotFoundException e)
 		{
-			LogFileUtil.e(TAG, "collectDeviceInfo -> NameNotFoundException error happened");
+			LogUtil.e(TAG + " collectDeviceInfo -> NameNotFoundException error happened");
 		}
 
 		// 记录设备信息
@@ -146,15 +156,15 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			{
 				field.setAccessible(true);
 				infoMap.put(field.getName(), field.get("").toString());
-				LogFileUtil.v(TAG, field.getName() + ":" + field.get(""));
+				LogUtil.v(TAG + " " + field.getName() + ":" + field.get(""));
 			}
 			catch (IllegalArgumentException e)
 			{
-				LogFileUtil.e(TAG, "getDeclaredFields -> IllegalArgumentException  error happened");
+				LogUtil.e(TAG + " getDeclaredFields -> IllegalArgumentException  error happened");
 			}
 			catch (IllegalAccessException e)
 			{
-				LogFileUtil.e(TAG, "getDeclaredFields -> IllegalAccessException  error happened");
+				LogUtil.e(TAG + " getDeclaredFields -> IllegalAccessException  error happened");
 			}
 		}
 	}
@@ -198,7 +208,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	}
 
 	/**
-	 * 写日志入文件
+	 * 写日志入文件，打印日志
 	 *
 	 * @param content 日志内容
 	 */
@@ -207,27 +217,31 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		String path = FileUtil.getPath();
 		if (null == path)
 		{
-			LogFileUtil.e(TAG, "sdcard path is null");
+			LogUtil.e(TAG + " sdcard path is null");
 			return;
 		}
-
+		
+		// 路径名
 		File dirFile = FileUtil.createFileDir(path + CRASH_FILE_PATH);
 		if (null == dirFile)
 		{
-			LogFileUtil.e(TAG, "sdcard dirFile create failed");
+			LogUtil.e(TAG + " sdcard dirFile create failed");
 			return;
 		}
 
-		File file = FileUtil.createFile(dirFile, CRASH_TXT_FILE);
+		// 文件名
+		crash_txt_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
+		File file = FileUtil.createFile(dirFile, crash_txt_time + CRASH_TXT_FILE);
 		if (null == file)
 		{
-			LogFileUtil.e(TAG, "sdcard file create failed");
+			LogUtil.e(TAG + " sdcard file create failed");
 			return;
 		}
 
+		// 写入日志
 		if (!FileUtil.writeToFile(file, content))
 		{
-			LogFileUtil.e(TAG, "write failed");
+			LogUtil.e(TAG + " write failed");
 			return;
 		}
 	}
