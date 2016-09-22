@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -15,16 +17,16 @@ import java.util.List;
  * @author YLine
  *         2016年8月1日 下午11:16:12
  */
-public abstract class CommonListAdapter<T> extends BaseAdapter
+public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommonAdapterCallback<T>
 {
 	protected Context sContext;
 
 	protected List<T> sList;
 
-	public CommonListAdapter(Context context, List<T> list)
+	public CommonListAdapter(Context context)
 	{
 		this.sContext = context;
-		this.sList = list;
+		this.sList = new ArrayList<>();
 	}
 
 	@Override
@@ -78,6 +80,7 @@ public abstract class CommonListAdapter<T> extends BaseAdapter
 	 */
 	protected abstract void setViewContent(int position, ViewGroup parent, ViewHolder item);
 
+
 	protected class ViewHolder
 	{
 		private SparseArray<View> sArray;
@@ -117,5 +120,65 @@ public abstract class CommonListAdapter<T> extends BaseAdapter
 			textView.setText(content);
 			return this;
 		}
+	}
+
+	@Override
+	public boolean add(T object)
+	{
+		boolean result = sList.add(object);
+		this.notifyDataSetChanged();
+		return result;
+	}
+
+	@Override
+	public boolean addAll(Collection collection)
+	{
+		boolean result = sList.addAll(collection);
+		this.notifyDataSetChanged();
+		return result;
+	}
+
+	@Override
+	public void clear()
+	{
+		sList.clear();
+		this.notifyDataSetChanged();
+	}
+
+	@Override
+	public boolean contains(Object object)
+	{
+		boolean result = sList.contains(object);
+		return result;
+	}
+
+	@Override
+	public boolean remove(Object object)
+	{
+		boolean result = sList.remove(object);
+		this.notifyDataSetChanged();
+		return result;
+	}
+
+	@Override
+	public int size()
+	{
+		int size = sList.size();
+		return size;
+	}
+
+	@Override
+	public boolean removeAll(Collection collection)
+	{
+		boolean result = sList.removeAll(collection);
+		this.notifyDataSetChanged();
+		return result;
+	}
+
+	@Override
+	public boolean containsAll(Collection collection)
+	{
+		boolean result = sList.containsAll(collection);
+		return result;
 	}
 }

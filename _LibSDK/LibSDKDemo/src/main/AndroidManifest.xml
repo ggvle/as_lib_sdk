@@ -1,6 +1,6 @@
 <manifest
-    package="com.lib.sdk.demo"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lib.sdk.demo">
 
     <application
         android:name="com.demo.application.MainApplication"
@@ -16,6 +16,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name="com.demo.common.CommonListActivity">
         </activity>
     </application>
 
