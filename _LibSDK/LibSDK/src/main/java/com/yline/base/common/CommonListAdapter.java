@@ -53,7 +53,7 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		ViewHolder holder = null;
 		if (convertView == null)
 		{
-			convertView = LayoutInflater.from(sContext).inflate(getItemRes(), parent, false);
+			convertView = LayoutInflater.from(sContext).inflate(getItemRes(position), parent, false);
 			holder = new ViewHolder(convertView);
 			convertView.setTag(holder);
 		}
@@ -68,9 +68,10 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	}
 
 	/**
+	 * @param position 当前的位置
 	 * @return item 资源文件
 	 */
-	protected abstract int getItemRes();
+	protected abstract int getItemRes(int position);
 
 	/**
 	 * 对内容设置
