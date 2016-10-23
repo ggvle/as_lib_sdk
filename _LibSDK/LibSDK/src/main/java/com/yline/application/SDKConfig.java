@@ -5,7 +5,6 @@ import java.io.File;
 /**
  * 在Application中配置父类所需要的配置选项
  * simple introduction
- *
  * @author YLine 2016-5-27 -> 上午7:28:17
  */
 public class SDKConfig
@@ -13,13 +12,30 @@ public class SDKConfig
 	/** 文件保存父路径 */
 	private String fileParentPath = "_yline" + File.separator;
 
+	/** 是否打印日志 */
 	private boolean isLog = true;
 
+	/** 日志是否打印到文件中 */
 	private boolean isLogToFile = true;
 
+	/** 日志文件是否定位 */
 	private boolean isLogLocation = true;
 
+	/** 文件保存具体路径 */
 	private String logFilePath = "libsdk" + File.separator;
+
+	/** 正常的LogCat失效时，使用sysOut */
+	private boolean isLogSystem = false;
+
+	public boolean isLogSystem()
+	{
+		return isLogSystem;
+	}
+
+	public void setLogSystem(boolean logSystem)
+	{
+		isLogSystem = logSystem;
+	}
 
 	public String getFileParentPath()
 	{
