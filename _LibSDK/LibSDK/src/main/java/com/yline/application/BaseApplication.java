@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -26,7 +27,6 @@ import java.util.List;
  * 3, 异常错误抛出记录
  * 4, Activity管理
  * 5, Application标配Handler、Application
- *
  * @author YLine 2016-5-25 -> 上午7:32:23
  */
 public abstract class BaseApplication extends Application
@@ -129,6 +129,12 @@ public abstract class BaseApplication extends Application
 		mServiceList.remove(service.getClass().getSimpleName());
 	}
 
+	@Override
+	public Context getApplicationContext()
+	{
+		return super.getApplicationContext();
+	}
+
 	/**
 	 * @return 当前Application的配置信息
 	 */
@@ -137,10 +143,15 @@ public abstract class BaseApplication extends Application
 		return mBaseConfig;
 	}
 
+	@Override
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+	}
+
 	/**
 	 * 配置当前Application的配置信息
 	 * 返回null,则按默认配置
-	 *
 	 * @param mBaseConfig 配置对象
 	 */
 	private void setBaseConfig(SDKConfig mBaseConfig)
@@ -154,7 +165,6 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 更改资源的时候,才需要做一步操作,引用不需要
 	 * 原子操作
-	 *
 	 * @return
 	 */
 	public static Handler getHandler()
@@ -173,7 +183,7 @@ public abstract class BaseApplication extends Application
 		setBaseConfig(initConfig());
 
 		// 设立一个程序入口的log
-		LogFileUtil.m(mBaseConfig.toString());
+		LogFileUtil.v(mBaseConfig.toString());
 		for (int i = 0; i < 3; i++)
 		{
 			LogFileUtil.m("应用启动 *** application start id = " + Thread.currentThread().getId());
@@ -207,7 +217,6 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 打印toast
-	 *
 	 * @param context
 	 * @param msg     内容
 	 */
@@ -233,7 +242,6 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 吐司
-	 *
 	 * @param content
 	 */
 	public static void toast(String content)
@@ -244,7 +252,6 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 进行一些基础配置,要求上级必须配置的信息
-	 *
 	 * @return
 	 */
 	protected SDKConfig initConfig()

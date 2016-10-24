@@ -14,6 +14,7 @@ public class MainApplication extends BaseApplication
 		sdkConfig.setFileParentPath("_ylines");
 		sdkConfig.setLogFilePath("libSDKDemo"); // 默认开启日志,并写到文件中
 		sdkConfig.setLogSystem(false);
+		sdkConfig.setLogLib(true);
 		return sdkConfig;
 	}
 }

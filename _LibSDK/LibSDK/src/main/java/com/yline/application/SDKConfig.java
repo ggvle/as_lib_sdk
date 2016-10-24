@@ -27,6 +27,19 @@ public class SDKConfig
 	/** 正常的LogCat失效时，使用sysOut */
 	private boolean isLogSystem = false;
 
+	/** LogFileUtil.m后缀的是否输出 */
+	private boolean isLogLib = true;
+
+	public boolean isLogLib()
+	{
+		return isLogLib;
+	}
+
+	public void setLogLib(boolean logLib)
+	{
+		isLogLib = logLib;
+	}
+
 	public boolean isLogSystem()
 	{
 		return isLogSystem;

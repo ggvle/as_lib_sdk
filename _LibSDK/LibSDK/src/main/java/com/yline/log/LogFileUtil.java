@@ -51,6 +51,9 @@ public final class LogFileUtil
 	/** 正常的LogCat失效时，使用sysOut */
 	private static final boolean isLogSystem = BaseApplication.getBaseConfig().isLogSystem();
 
+	/** LogFileUtil.m后缀的是否输出 */
+	private static final boolean isLogLib = BaseApplication.getBaseConfig().isLogLib();
+
 	// 信息格式
 
 	/** 默认自带前缀 */
@@ -97,19 +100,22 @@ public final class LogFileUtil
 	 */
 	public static void m(String content)
 	{
-		if (isLog)
+		if (isLogLib)
 		{
-			android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, TAG_LIBSDK, content));
-		}
+			if (isLog)
+			{
+				android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, TAG_LIBSDK, content));
+			}
 
-		if (isLogSystem)
-		{
-			System.out.println(generateTag(LOG_LOCATION_NOW) + String.format(MSG_DEFAULT, TAG_LIBSDK, content));
-		}
+			if (isLogSystem)
+			{
+				System.out.println(generateTag(LOG_LOCATION_NOW) + String.format(MSG_DEFAULT, TAG_LIBSDK, content));
+			}
 
-		if (isToFile)
-		{
-			writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOG_LOCATION_NOW), TAG_LIBSDK, content));
+			if (isToFile)
+			{
+				writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOG_LOCATION_NOW), TAG_LIBSDK, content));
+			}
 		}
 	}
 
@@ -119,19 +125,22 @@ public final class LogFileUtil
 	 */
 	public static void m(String content, int location)
 	{
-		if (isLog)
+		if (isLogLib)
 		{
-			android.util.Log.v(generateTag(location), String.format(MSG_DEFAULT, TAG_LIBSDK, content));
-		}
+			if (isLog)
+			{
+				android.util.Log.v(generateTag(location), String.format(MSG_DEFAULT, TAG_LIBSDK, content));
+			}
 
-		if (isLogSystem)
-		{
-			System.out.println(generateTag(location) + String.format(MSG_DEFAULT, TAG_LIBSDK, content));
-		}
+			if (isLogSystem)
+			{
+				System.out.println(generateTag(location) + String.format(MSG_DEFAULT, TAG_LIBSDK, content));
+			}
 
-		if (isToFile)
-		{
-			writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, location), TAG_LIBSDK, content));
+			if (isToFile)
+			{
+				writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, location), TAG_LIBSDK, content));
+			}
 		}
 	}
 
