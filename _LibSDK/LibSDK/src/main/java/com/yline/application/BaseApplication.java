@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.lib.sdk.R;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
+import com.yline.utils.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +143,24 @@ public abstract class BaseApplication extends Application
 	public static SDKConfig getBaseConfig()
 	{
 		return mBaseConfig;
+	}
+
+	/**
+	 * 要求在BaseApplication的super.onCreate()方法执行完成后,调用
+	 * 获取本工程文件目录; such as "/sdcard/_yline/LibSdk/"
+	 * @return null if failed
+	 */
+	public static String getProjectFilePath()
+	{
+		String path = FileUtil.getPath();
+		if (TextUtils.isEmpty(path))
+		{
+			LogFileUtil.e(TAG, "SDCard not support, getProjectFilePath failed");
+			return null;
+		}
+
+		path += (mBaseConfig.getFileParentPath() + mBaseConfig.getLogFilePath());
+		return path;
 	}
 
 	@Override
