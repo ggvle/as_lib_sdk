@@ -115,11 +115,11 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		 * @param content 内容
 		 * @return 为了连缀写法, 返回自身
 		 */
-		public ViewHolder setText(int viewId, String content)
+		public TextView setText(int viewId, String content)
 		{
 			TextView textView = this.get(viewId);
 			textView.setText(content);
-			return this;
+			return textView;
 		}
 	}
 
