@@ -19,7 +19,7 @@ public class SDKExecutor implements Executor
 
 	private static final int MAXIMUM_POOL_SIZE = 256;
 
-	private static final int KEEP_ALIVE = 1;
+	private static final int KEEP_ALIVE = 5;
 
 	private final ThreadPoolExecutor mThreadPoolExecutor;
 
