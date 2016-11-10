@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v(MainApplication.TAG, "btn_baseapplication");
+				LogFileUtil.v(MainApplication.TAG, "btn_baseApplication");
 				MainApplication.toast("测试，toast");
 			}
 		});
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity
 			public void onClick(View v)
 			{
 				Button btn = null;
-				btn.setText(100);
+				btn.setText("100");
 			}
 		});
 
@@ -94,6 +94,34 @@ public class MainActivity extends BaseActivity
 			{
 				LogFileUtil.v(MainApplication.TAG, "btn_common_list_activity");
 				CommonListActivity.actionStart(MainActivity.this);
+			}
+		});
+
+		final Runnable runnable = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				for (int i = 0; i < 100000000; i++)
+				{
+					if (i % 10000000 == 0)
+					{
+						LogFileUtil.v("TestThread i = " + i);
+					}
+				}
+			}
+		};
+
+		// 测试,线程池+getProjectFilePath
+		findViewById(R.id.btn_execute).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				LogFileUtil.v(MainApplication.TAG, "ProjectFilePath = " + MainApplication.getProjectFilePath() + ",btn_execute");
+				// 调用两次就会执行两次,然后,点击Button两次,就会出现线程池的排队效果
+				MainApplication.start(runnable, null);
+				MainApplication.start(runnable, null);
 			}
 		});
 	}

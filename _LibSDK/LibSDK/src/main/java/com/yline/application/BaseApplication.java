@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lib.sdk.R;
+import com.yline.application.task.Executor;
+import com.yline.application.task.PriorityRunnable;
+import com.yline.application.task.SDKExecutor;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.FileUtil;
@@ -38,6 +41,9 @@ public abstract class BaseApplication extends Application
 
 	/** 先选用默认配置 */
 	private static SDKConfig mBaseConfig = new SDKConfig();
+
+	/** 线程池 */
+	private static final Executor executor = new SDKExecutor();
 	
 	/** Activity管理 */
 	private static List<Activity> mActivityList = new ArrayList<Activity>();
@@ -145,24 +151,6 @@ public abstract class BaseApplication extends Application
 		return mBaseConfig;
 	}
 
-	/**
-	 * 要求在BaseApplication的super.onCreate()方法执行完成后,调用
-	 * 获取本工程文件目录; such as "/sdcard/_yline/LibSdk/"
-	 * @return null if failed
-	 */
-	public static String getProjectFilePath()
-	{
-		String path = FileUtil.getPath();
-		if (TextUtils.isEmpty(path))
-		{
-			LogFileUtil.e(TAG, "SDCard not support, getProjectFilePath failed");
-			return null;
-		}
-
-		path += (mBaseConfig.getFileParentPath() + mBaseConfig.getLogFilePath());
-		return path;
-	}
-
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
@@ -180,6 +168,15 @@ public abstract class BaseApplication extends Application
 		{
 			BaseApplication.mBaseConfig = mBaseConfig;
 		}
+	}
+
+	/**
+	 * 进行一些基础配置,要求上级必须配置的信息
+	 * @return
+	 */
+	protected SDKConfig initConfig()
+	{
+		return new SDKConfig();
 	}
 
 	/**
@@ -269,14 +266,31 @@ public abstract class BaseApplication extends Application
 		handler.obtainMessage(SDKConstant.HANDLER_TOAST, content).sendToTarget();
 	}
 
-
 	/**
-	 * 进行一些基础配置,要求上级必须配置的信息
-	 * @return
+	 * 要求在BaseApplication的super.onCreate()方法执行完成后,调用
+	 * 获取本工程文件目录; such as "/sdcard/_yline/LibSdk/"
+	 * @return null if failed
 	 */
-	protected SDKConfig initConfig()
+	public static String getProjectFilePath()
 	{
-		return new SDKConfig();
+		String path = FileUtil.getPath();
+		if (TextUtils.isEmpty(path))
+		{
+			LogFileUtil.e(TAG, "SDCard not support, getProjectFilePath failed");
+			return null;
+		}
+
+		path += (mBaseConfig.getFileParentPath() + mBaseConfig.getLogFilePath());
+		return path;
 	}
 
+	/**
+	 * 运行一个线程,并且放入线程池中
+	 * @param runnable
+	 * @param priority 优先级
+	 */
+	public static void start(Runnable runnable, PriorityRunnable.Priority priority)
+	{
+		executor.execute(new PriorityRunnable(runnable, priority));
+	}
 }
