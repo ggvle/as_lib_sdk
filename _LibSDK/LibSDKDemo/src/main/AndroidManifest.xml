@@ -19,6 +19,7 @@
         </activity>
         <activity android:name="com.demo.common.CommonListActivity">
         </activity>
+        <activity android:name="com.demo.activity.LeakCanaryActivity"></activity>
     </application>
 
 </manifest>

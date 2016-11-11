@@ -87,13 +87,14 @@ public class MainActivity extends BaseActivity
 			}
 		});
 
-		findViewById(R.id.btn_common_list_activity).setOnClickListener(new View.OnClickListener()
+		// 测试 LeakCanaryActivity(不能放入LibSDK中,否则失效)
+		findViewById(R.id.btn_leak_canary_activity).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v(MainApplication.TAG, "btn_common_list_activity");
-				CommonListActivity.actionStart(MainActivity.this);
+				LogFileUtil.v(MainApplication.TAG, "btn_leak_canary_activity");
+				LeakCanaryActivity.actionStart(MainActivity.this);
 			}
 		});
 
@@ -122,6 +123,16 @@ public class MainActivity extends BaseActivity
 				// 调用两次就会执行两次,然后,点击Button两次,就会出现线程池的排队效果
 				MainApplication.start(runnable, null);
 				MainApplication.start(runnable, null);
+			}
+		});
+
+		findViewById(R.id.btn_common_list_activity).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				LogFileUtil.v(MainApplication.TAG, "btn_common_list_activity");
+				CommonListActivity.actionStart(MainActivity.this);
 			}
 		});
 	}

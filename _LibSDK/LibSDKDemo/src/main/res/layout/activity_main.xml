@@ -83,6 +83,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="SDKExecutor"/>
+
+            <Button
+                android:id="@+id/btn_leak_canary_activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="LeakCanary"/>
         </LinearLayout>
 
         <LinearLayout
