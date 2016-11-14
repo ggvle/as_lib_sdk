@@ -17,9 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.demo.common.CommonListActivity">
-        </activity>
+        <activity android:name="com.demo.common.CommonListActivity"></activity>
         <activity android:name="com.demo.activity.LeakCanaryActivity"></activity>
+        <activity android:name="com.demo.common.CommonRecyclerActivity"></activity>
     </application>
 
 </manifest>

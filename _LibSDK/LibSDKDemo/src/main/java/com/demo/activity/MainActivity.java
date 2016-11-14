@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.demo.application.MainApplication;
 import com.demo.common.CommonListActivity;
+import com.demo.common.CommonRecyclerActivity;
 import com.demo.utils.FileUtilUser;
 import com.demo.utils.LogFileUtilUser;
 import com.demo.utils.LogUtilUser;
@@ -126,6 +127,7 @@ public class MainActivity extends BaseActivity
 			}
 		});
 
+		// CommonListActivity
 		findViewById(R.id.btn_common_list_activity).setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -133,6 +135,17 @@ public class MainActivity extends BaseActivity
 			{
 				LogFileUtil.v(MainApplication.TAG, "btn_common_list_activity");
 				CommonListActivity.actionStart(MainActivity.this);
+			}
+		});
+
+		findViewById(R.id.btn_common_recycler_activity).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				LogFileUtil.v(MainApplication.TAG, "btn_common_recycler_activity");
+
+				CommonRecyclerActivity.actionStart(MainActivity.this);
 			}
 		});
 	}

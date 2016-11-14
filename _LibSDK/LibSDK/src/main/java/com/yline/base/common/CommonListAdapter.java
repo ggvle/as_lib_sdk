@@ -115,12 +115,22 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		 * @param content 内容
 		 * @return 为了连缀写法, 返回自身
 		 */
-		public TextView setText(int viewId, String content)
+		public ViewHolder setText(int viewId, String content)
 		{
 			TextView textView = this.get(viewId);
 			textView.setText(content);
-			return textView;
+			return this;
 		}
+	}
+
+	@Override
+	public T getItemData(int position)
+	{
+		if (position >= sList.size())
+		{
+			throw new IllegalArgumentException("invalid position");
+		}
+		return sList.get(position);
 	}
 
 	@Override
@@ -129,6 +139,13 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		boolean result = sList.add(object);
 		this.notifyDataSetChanged();
 		return result;
+	}
+
+	@Override
+	public void add(int index, T element)
+	{
+		sList.add(index, element);
+		this.notifyDataSetChanged();
 	}
 
 	@Override
@@ -151,6 +168,14 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	{
 		boolean result = sList.contains(object);
 		return result;
+	}
+
+	@Override
+	public T remove(int index)
+	{
+		T t = sList.remove(index);
+		this.notifyDataSetChanged();
+		return t;
 	}
 
 	@Override

@@ -119,7 +119,7 @@ public class CommonListActivity extends BaseActivity
 		@Override
 		protected int getItemRes(int position)
 		{
-			return R.layout.item_common;
+			return R.layout.item_common_list;
 		}
 		
 		@Override

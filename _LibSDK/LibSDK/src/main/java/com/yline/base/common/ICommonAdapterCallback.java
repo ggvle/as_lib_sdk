@@ -7,6 +7,8 @@ import java.util.Collection;
  */
 public interface ICommonAdapterCallback<E>
 {
+	public E getItemData(int position);
+
 	/**
 	 * Attempts to add {@code object} to the contents of this
 	 * {@code Collection} (optional).
@@ -37,6 +39,26 @@ public interface ICommonAdapterCallback<E>
 	 * @throws NullPointerException          if null elements cannot be added to the {@code Collection}.
 	 */
 	public boolean add(E object);
+
+	/**
+	 * Inserts the specified element at the specified position in this list
+	 * (optional operation).  Shifts the element currently at that position
+	 * (if any) and any subsequent elements to the right (adds one to their
+	 * indices).
+	 * @param index   index at which the specified element is to be inserted
+	 * @param element element to be inserted
+	 * @throws UnsupportedOperationException if the <tt>add</tt> operation
+	 *                                       is not supported by this list
+	 * @throws ClassCastException            if the class of the specified element
+	 *                                       prevents it from being added to this list
+	 * @throws NullPointerException          if the specified element is null and
+	 *                                       this list does not permit null elements
+	 * @throws IllegalArgumentException      if some property of the specified
+	 *                                       element prevents it from being added to this list
+	 * @throws IndexOutOfBoundsException     if the index is out of range
+	 *                                       (<tt>index &lt; 0 || index &gt; size()</tt>)
+	 */
+	public void add(int index, E element);
 
 	/**
 	 * Attempts to add all of the objects contained in {@code Collection}
@@ -103,6 +125,20 @@ public interface ICommonAdapterCallback<E>
 	 * @see #size
 	 */
 	public boolean isEmpty();
+
+	/**
+	 * Removes the element at the specified position in this list (optional
+	 * operation).  Shifts any subsequent elements to the left (subtracts one
+	 * from their indices).  Returns the element that was removed from the
+	 * list.
+	 * @param index the index of the element to be removed
+	 * @return the element previously at the specified position
+	 * @throws UnsupportedOperationException if the <tt>remove</tt> operation
+	 *                                       is not supported by this list
+	 * @throws IndexOutOfBoundsException     if the index is out of range
+	 *                                       (<tt>index &lt; 0 || index &gt;= size()</tt>)
+	 */
+	E remove(int index);
 
 	/**
 	 * Removes one instance of the specified object from this {@code Collection} if one
