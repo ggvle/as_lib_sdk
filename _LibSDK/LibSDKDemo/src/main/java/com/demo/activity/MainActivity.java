@@ -17,6 +17,10 @@ import com.yline.log.LogFileUtil;
 
 public class MainActivity extends BaseActivity
 {
+	/** 用于请求权限 */
+	public static final int REQUEST_CODE_PERMISSION = 1025;
+
+	public static final String TAG_HANDLE_PERMISSION = "Deny permissions : ";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
