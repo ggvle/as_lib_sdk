@@ -92,7 +92,6 @@ public final class CrashHandler implements UncaughtExceptionHandler
 
 	/**
 	 * 处理此时的异常
-	 *
 	 * @param ex 异常信息
 	 * @return 是否处理成功
 	 */
@@ -119,7 +118,6 @@ public final class CrashHandler implements UncaughtExceptionHandler
 
 	/**
 	 * 收集设备参数信息，并没有打印任何信息
-	 *
 	 * @param context
 	 */
 	private void collectDeviceInfo(Context context)
@@ -171,7 +169,6 @@ public final class CrashHandler implements UncaughtExceptionHandler
 
 	/**
 	 * 保存信息到文件中
-	 *
 	 * @param ex
 	 * @return
 	 */
@@ -209,7 +206,6 @@ public final class CrashHandler implements UncaughtExceptionHandler
 
 	/**
 	 * 写日志入文件，打印日志
-	 *
 	 * @param content 日志内容
 	 */
 	private synchronized static void writeLogToFile(String content)
@@ -230,7 +226,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 
 		// 文件名
-		crash_txt_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
+		crash_txt_time = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
 		File file = FileUtil.createFile(dirFile, crash_txt_time + CRASH_TXT_FILE);
 		if (null == file)
 		{
