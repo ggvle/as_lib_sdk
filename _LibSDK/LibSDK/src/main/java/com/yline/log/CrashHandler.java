@@ -23,73 +23,89 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * 这个TAG,单独出去
+ * @author yline 2016/12/6 --> 21:54
+ * @version 1.0.0
  */
 public final class CrashHandler implements UncaughtExceptionHandler
 {
 	private static final String TAG = "CrashHandler";
 
+	private static final boolean DEBUG = true;
+
 	private static final String CRASH_FILE_PATH = BaseApplication.getBaseConfig().getFileParentPath() + BaseApplication.getBaseConfig().getLogFilePath();
-
+	
 	private static final String CRASH_TXT_FILE = "-CrashHandler.txt";
-
+	
 	/** 时间 */
-	private static String crash_txt_time = "1994-08-25 12:00:00:000";
-
+	private static String crash_txt_time = "1994-08-25 12-00-00-000";
+	
 	private Application mApplication;
-
+	
 	// 用来存储设备信息和异常信息
 	private Map<String, String> infoMap = new HashMap<String, String>();
-
+	
 	// 系统默认的UncaughtException处理类
 	private UncaughtExceptionHandler mDefaultHandler;
-
+	
 	private CrashHandler()
 	{
 	}
-
+	
 	public static CrashHandler getInstance()
 	{
 		return CrashHolder.instance;
 	}
-
+	
 	private static class CrashHolder
 	{
 		private static CrashHandler instance = new CrashHandler();
 	}
-
+	
 	public void init(Application application)
 	{
-		LogFileUtil.m("CrashHandler -> init start");
-
+		if (DEBUG)
+		{
+			LogFileUtil.m("CrashHandler -> init start");
+		}
+		
 		mApplication = application;
 		// 获取系统默认的UncaughtExceptionHandler
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		// 将该CrashHandler实例设置为默认异常处理器
 		Thread.setDefaultUncaughtExceptionHandler(this);
 
-		LogFileUtil.m("CrashHandler -> init end");
+		if (DEBUG)
+		{
+			LogFileUtil.m("CrashHandler -> init end");
+		}
 	}
-
+	
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex)
 	{
-		LogUtil.v(TAG + " uncaughtException dealing");
-
+		if (DEBUG)
+		{
+			LogUtil.v(TAG + " uncaughtException dealing");
+		}
+		
 		// 收集错误信息
 		if (null != FileUtil.getPath())
 		{
 			handleException(ex);
 		}
-
+		else
+		{
+			LogUtil.v(TAG + "uncaughtException file getPath is null");
+		}
+		
 		if (ex instanceof UnsatisfiedLinkError)
 		{
 			BaseApplication.finishActivity();
 		}
-
+		
 		mDefaultHandler.uncaughtException(thread, ex);
 	}
-
+	
 	/**
 	 * 处理此时的异常
 	 * @param ex 异常信息
@@ -101,21 +117,29 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		{
 			return false;
 		}
-
+		
 		// 收集设备参数信息
 		collectDeviceInfo(mApplication);
-
+		
 		// 保存日志文件
 		saveCrashInfo2File(ex);
 
-		// 日志打点  TrackerSendUtil.getInstance()  <SDK>
+		uploadException();
 
 		// 发送一条退出时广播
 		// mApplication.sendBroadcast(intent, receiverPermission);  <SDK>
-
+		
 		return true;
 	}
 
+	/**
+	 * 上传文件到服务器
+	 */
+	private void uploadException()
+	{
+		// TODO
+	}
+	
 	/**
 	 * 收集设备参数信息，并没有打印任何信息
 	 * @param context
@@ -124,13 +148,13 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	{
 		String crashTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
 		infoMap.put("CrashTime", crashTime);
-
+		
 		// 记录版本信息
 		try
 		{
 			// 获得包管理器
 			PackageManager pm = context.getPackageManager();
-
+			
 			// 得到该应用的信息，即主Activity
 			PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), PackageManager.GET_ACTIVITIES);
 			if (null != packageInfo)
@@ -145,7 +169,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		{
 			LogUtil.e(TAG + " collectDeviceInfo -> NameNotFoundException error happened");
 		}
-
+		
 		// 记录设备信息
 		Field[] fields = Build.class.getDeclaredFields();// 反射机制
 		for (Field field : fields)
@@ -166,7 +190,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			}
 		}
 	}
-
+	
 	/**
 	 * 保存信息到文件中
 	 * @param ex
@@ -182,7 +206,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			String value = entry.getValue();
 			sb.append("key = " + key + ",value = " + value + "\r\n");
 		}
-
+		
 		// 写入异常信息       定位错误的信息
 		Writer writer = new StringWriter();
 		PrintWriter pw = new PrintWriter(writer);
@@ -194,16 +218,16 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			cause.printStackTrace(pw);
 			cause = cause.getCause();
 		}
-
+		
 		// 记得关闭
 		pw.close();
 		String result = writer.toString();
 		sb.append(result);
-
+		
 		// 保存文件
 		writeLogToFile(sb.toString());
 	}
-
+	
 	/**
 	 * 写日志入文件，打印日志
 	 * @param content 日志内容
@@ -224,7 +248,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			LogUtil.e(TAG + " sdcard dirFile create failed");
 			return;
 		}
-
+		
 		// 文件名
 		crash_txt_time = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
 		File file = FileUtil.createFile(dirFile, crash_txt_time + CRASH_TXT_FILE);
@@ -233,7 +257,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 			LogUtil.e(TAG + " sdcard file create failed");
 			return;
 		}
-
+		
 		// 写入日志
 		if (!FileUtil.writeToFile(file, content))
 		{

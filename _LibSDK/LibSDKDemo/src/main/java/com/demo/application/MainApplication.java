@@ -3,6 +3,7 @@ package com.demo.application;
 import android.app.Application;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.yline.application.BaseApplication;
@@ -12,11 +13,13 @@ public class MainApplication extends BaseApplication
 {
 	public static final String TAG = "libSDKDemo";
 
+
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
 
+		MultiDex.install(this);
 		initLeakCanary(this);
 	}
 	

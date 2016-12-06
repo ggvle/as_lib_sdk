@@ -10,6 +10,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -24,12 +26,31 @@ android {
     }
 }
 
+afterEvaluate {
+    println "afterEvaluate"
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        def listFile = project.rootDir.absolutePath + '/app/maindexlist.txt'
+        println "root dir:" + project.rootDir.absolutePath
+        println "dex task found:" + dx.name
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex'
+        dx.additionalParameters += '--main-dex-list=' + listFile
+        dx.additionalParameters += '--minimal-main-dex'
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile project(':LibSDK')
-    
+
+    compile 'com.android.support:multidex:1.0.0'
+
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
