@@ -124,8 +124,12 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 		return sList.size();
 	}
 
-	@Override
-	public T getItemData(int position)
+	/**
+	 * 返回某项数据
+	 * @param position
+	 * @return
+	 */
+	public T getItem(int position)
 	{
 		if (position >= sList.size())
 		{

@@ -36,8 +36,12 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	}
 
 	@Override
-	public Object getItem(int position)
+	public T getItem(int position)
 	{
+		if (position >= sList.size())
+		{
+			throw new IllegalArgumentException("invalid position");
+		}
 		return sList.get(position);
 	}
 
@@ -121,16 +125,6 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 			textView.setText(content);
 			return this;
 		}
-	}
-
-	@Override
-	public T getItemData(int position)
-	{
-		if (position >= sList.size())
-		{
-			throw new IllegalArgumentException("invalid position");
-		}
-		return sList.get(position);
 	}
 
 	@Override

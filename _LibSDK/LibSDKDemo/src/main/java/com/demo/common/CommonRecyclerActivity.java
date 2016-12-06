@@ -56,7 +56,7 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 			@Override
 			public void onClick(View v, int position)
 			{
-				MainApplication.toast(homeAdapter.getItemData(position).getContent());
+				MainApplication.toast(homeAdapter.getItem(position).getContent());
 			}
 		});
 	}

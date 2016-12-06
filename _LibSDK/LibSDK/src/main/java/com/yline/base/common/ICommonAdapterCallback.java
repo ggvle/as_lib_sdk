@@ -7,8 +7,6 @@ import java.util.Collection;
  */
 public interface ICommonAdapterCallback<E>
 {
-	public E getItemData(int position);
-
 	/**
 	 * Attempts to add {@code object} to the contents of this
 	 * {@code Collection} (optional).
