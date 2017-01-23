@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -123,6 +124,19 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		{
 			TextView textView = this.get(viewId);
 			textView.setText(content);
+			return this;
+		}
+
+		/**
+		 * 要求是ImageView;
+		 * @param viewId 资源id
+		 * @param resId  图片背景id
+		 * @return
+		 */
+		public ViewHolder setImage(int viewId, int resId)
+		{
+			ImageView imageView = this.get(viewId);
+			imageView.setBackgroundResource(resId);
 			return this;
 		}
 	}
