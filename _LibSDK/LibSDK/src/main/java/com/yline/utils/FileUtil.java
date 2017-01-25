@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Comparator;
 
 /**
  * 目前提供给 LogFileUtil准备
@@ -21,6 +23,8 @@ import java.io.UnsupportedEncodingException;
  */
 public class FileUtil
 {
+	private static final String HIDDEN_PREFIX = ".";
+
 	/**
 	 * 获取内置sd卡最上层路径
 	 * @return /storage/emulated/0/ or null
@@ -338,4 +342,68 @@ public class FileUtil
 		return true;
 	}
 
+	/**
+	 * File and folder comparator. TODO Expose sorting option method
+	 * @author paulburke
+	 */
+	private static Comparator<File> sComparator = new Comparator<File>()
+	{
+		@Override
+		public int compare(File f1, File f2)
+		{
+			// Sort alphabetically by lower case, which is much cleaner
+			return f1.getName().toLowerCase().compareTo(
+					f2.getName().toLowerCase());
+		}
+	};
+
+	/**
+	 * File (not directories) filter.
+	 * @author paulburke
+	 */
+	private static FileFilter sFileFilter = new FileFilter()
+	{
+		@Override
+		public boolean accept(File file)
+		{
+			final String fileName = file.getName();
+			// Return files only (not directories) and skip hidden files
+			return file.isFile() && !fileName.startsWith(HIDDEN_PREFIX);
+		}
+	};
+
+	/**
+	 * Folder (directories) filter.
+	 * @author paulburke
+	 */
+	private static FileFilter sDirFilter = new FileFilter()
+	{
+		@Override
+		public boolean accept(File file)
+		{
+			final String fileName = file.getName();
+			// Return directories only and skip hidden directories
+			return file.isDirectory() && !fileName.startsWith(HIDDEN_PREFIX);
+		}
+	};
+
+	public static Comparator<File> getsComparator()
+	{
+		return sComparator;
+	}
+
+	public static FileFilter getsFileFilter()
+	{
+		return sFileFilter;
+	}
+
+	public static FileFilter getsDirFilter()
+	{
+		return sDirFilter;
+	}
+
+	public static String getHiddenPrefix()
+	{
+		return HIDDEN_PREFIX;
+	}
 }
