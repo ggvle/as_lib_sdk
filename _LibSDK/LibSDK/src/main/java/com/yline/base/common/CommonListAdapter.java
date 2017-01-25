@@ -141,6 +141,12 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		}
 	}
 
+	public void set(List<T> tList)
+	{
+		this.sList = tList;
+		this.notifyDataSetChanged();
+	}
+
 	@Override
 	public boolean add(T object)
 	{
