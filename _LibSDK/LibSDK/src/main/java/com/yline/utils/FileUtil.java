@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -39,54 +38,6 @@ public class FileUtil
 		{
 			return null;
 		}
-	}
-
-	/**
-	 * 获取文件大小
-	 * @param file 文件(such as /yline/log.txt)
-	 * @return size or -1(文件为空、获取错误、关闭流失败、文件不存在)
-	 */
-	public static int getFileSize(File file)
-	{
-		int size = 0;
-		if (null == file || !file.exists())
-		{
-			return -1;
-		}
-
-		FileInputStream fileInputStream = null;
-		try
-		{
-			fileInputStream = new FileInputStream(file);
-			size = fileInputStream.available();
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-			return -1;
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			return -1;
-		}
-		finally
-		{
-			if (null != fileInputStream)
-			{
-				try
-				{
-					fileInputStream.close();
-				}
-				catch (IOException e)
-				{
-					e.printStackTrace();
-					return -1;
-				}
-			}
-		}
-
-		return size;
 	}
 
 	/**
@@ -357,11 +308,27 @@ public class FileUtil
 		}
 	};
 
+	private static FileFilter sFileFilter = new FileFilter()
+	{
+		public boolean accept(File file)
+		{
+			return file.isFile();
+		}
+	};
+
+	private static FileFilter sDirFilter = new FileFilter()
+	{
+		public boolean accept(File file)
+		{
+			return file.isDirectory();
+		}
+	};
+
 	/**
 	 * File (not directories) filter.
 	 * @author paulburke
 	 */
-	private static FileFilter sFileFilter = new FileFilter()
+	private static FileFilter sFilePointFilter = new FileFilter()
 	{
 		@Override
 		public boolean accept(File file)
@@ -376,7 +343,7 @@ public class FileUtil
 	 * Folder (directories) filter.
 	 * @author paulburke
 	 */
-	private static FileFilter sDirFilter = new FileFilter()
+	private static FileFilter sDirPointFilter = new FileFilter()
 	{
 		@Override
 		public boolean accept(File file)
@@ -392,6 +359,21 @@ public class FileUtil
 		return sComparator;
 	}
 
+	public static String getHiddenPrefix()
+	{
+		return HIDDEN_PREFIX;
+	}
+
+	public static FileFilter getsFilePointFilter()
+	{
+		return sFilePointFilter;
+	}
+
+	public static FileFilter getsDirPointFilter()
+	{
+		return sDirPointFilter;
+	}
+
 	public static FileFilter getsFileFilter()
 	{
 		return sFileFilter;
@@ -400,10 +382,5 @@ public class FileUtil
 	public static FileFilter getsDirFilter()
 	{
 		return sDirFilter;
-	}
-
-	public static String getHiddenPrefix()
-	{
-		return HIDDEN_PREFIX;
 	}
 }

@@ -3,6 +3,7 @@ package com.yline.log;
 import android.text.TextUtils;
 
 import com.yline.application.BaseApplication;
+import com.yline.utils.FileSizeUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
 
@@ -566,7 +567,7 @@ public final class LogFileUtil
 			return;
 		}
 
-		int size = FileUtil.getFileSize(file);
+		long size = FileSizeUtil.getFileSize(file);
 		if (-1 == size)
 		{
 			LogUtil.e(TAG_ERROR + "sdcard getFileSize failed");

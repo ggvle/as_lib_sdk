@@ -215,10 +215,11 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		// 循环着把所有的异常信息写入writer中
 		while (cause != null)
 		{
+			LogUtil.v(TAG + " " + cause.getMessage());
 			cause.printStackTrace(pw);
 			cause = cause.getCause();
 		}
-		
+
 		// 记得关闭
 		pw.close();
 		String result = writer.toString();
