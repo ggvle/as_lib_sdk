@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 /**
  * SharedPreferences封装类
- * <p>
+ * <p/>
  * 所有的commit操作使用了SharedPreferencesCompat.apply进行了替代;尽可能异步操作
  */
 public class SPUtil
@@ -38,7 +38,6 @@ public class SPUtil
 	/**
 	 * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
 	 * if object == null, 默认作为String
-	 *
 	 * @param context  上下文
 	 * @param key      关键字
 	 * @param object   数据
@@ -55,9 +54,9 @@ public class SPUtil
 		SharedPreferences.Editor editor = sp.edit();
 
 		// instanceof 用来 指出对象是否是特定类的一个实例
-		if (object == null)
+		if (null == object)
 		{
-			editor.putString(key, (String) object);
+			editor.putString(key, "null");
 		}
 		else if (object instanceof String)
 		{
@@ -100,7 +99,6 @@ public class SPUtil
 
 	/**
 	 * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
-	 *
 	 * @param context       上下文
 	 * @param key           关键字
 	 * @param defaultObject 默认值
@@ -140,7 +138,6 @@ public class SPUtil
 
 	/**
 	 * 移除某个key值已经对应的值
-	 *
 	 * @param context 上下文
 	 * @param key     关键字
 	 */
@@ -151,7 +148,6 @@ public class SPUtil
 
 	/**
 	 * 移除某个key值已经对应的值
-	 *
 	 * @param context  上下文
 	 * @param key      关键字
 	 * @param fileName 文件名
@@ -171,7 +167,6 @@ public class SPUtil
 
 	/**
 	 * 清除所有数据
-	 *
 	 * @param context 上下文
 	 */
 	public static void clear(Context context)
@@ -181,7 +176,6 @@ public class SPUtil
 
 	/**
 	 * 清除所有数据
-	 *
 	 * @param context  上下文
 	 * @param fileName 文件名
 	 */
@@ -200,7 +194,7 @@ public class SPUtil
 
 	/**
 	 * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
-	 * <p>
+	 * <p/>
 	 * apply相当于commit来说是new API呢，为了更好的兼容，我们做了适配
 	 */
 	private static class SharedPreferencesCompat
@@ -209,7 +203,6 @@ public class SPUtil
 
 		/**
 		 * 反射查找apply的方法
-		 *
 		 * @return
 		 */
 		@SuppressWarnings({"unchecked", "rawtypes"})
@@ -229,7 +222,6 @@ public class SPUtil
 
 		/**
 		 * 如果找到则使用apply执行，否则使用commit
-		 *
 		 * @param editor
 		 */
 		public static void apply(SharedPreferences.Editor editor)
