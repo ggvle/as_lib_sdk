@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 /**
  * SharedPreferences封装类
- * <p/>
+ * <p>
  * 所有的commit操作使用了SharedPreferencesCompat.apply进行了替代;尽可能异步操作
  */
 public class SPUtil
@@ -194,7 +194,7 @@ public class SPUtil
 
 	/**
 	 * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
-	 * <p/>
+	 * <p>
 	 * apply相当于commit来说是new API呢，为了更好的兼容，我们做了适配
 	 */
 	private static class SharedPreferencesCompat
