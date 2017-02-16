@@ -13,21 +13,42 @@ import java.util.List;
 /**
  * Created by yline on 2016/11/14.
  */
-public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecyclerViewHolder> implements ICommonAdapterCallback<T>
+public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecycleViewHolder> implements ICommonAdapterCallback<T>
 {
 	protected List<T> sList;
+
+	private OnClickListener onClickListener;
+
+	private OnTouchListener onTouchListener;
+
+	private OnLongClickListener onLongClickListener;
 
 	public CommonRecyclerAdapter()
 	{
 		this.sList = new ArrayList<>();
 	}
 
-	@Override
-	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public void setOnClickListener(OnClickListener listener)
 	{
-		return new CommonRecyclerViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
+		this.onClickListener = listener;
 	}
 
+	public void setOnTouchListener(OnTouchListener listener)
+	{
+		this.onTouchListener = listener;
+	}
+
+	public void setOnLongClickListener(OnLongClickListener listener)
+	{
+		this.onLongClickListener = listener;
+	}
+
+	@Override
+	public CommonRecycleViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	{
+		return new CommonRecycleViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
+	}
+	
 	/**
 	 * @return item 资源文件
 	 */
@@ -38,10 +59,10 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	 * @param holder
 	 * @param position 当前item位置
 	 */
-	protected abstract void setViewContent(final CommonRecyclerViewHolder holder, final int position);
+	protected abstract void setViewContent(final CommonRecycleViewHolder holder, final int position);
 
 	@Override
-	public void onBindViewHolder(final CommonRecyclerViewHolder holder, final int position)
+	public void onBindViewHolder(final CommonRecycleViewHolder holder, final int position)
 	{
 		if (null != onClickListener)
 		{
@@ -82,35 +103,14 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 		setViewContent(holder, position);
 	}
 
-	private OnClickListener onClickListener;
-
-	public void setOnClickListener(OnClickListener listener)
-	{
-		this.onClickListener = listener;
-	}
-
 	public interface OnClickListener
 	{
 		void onClick(View v, int position);
 	}
 
-	private OnLongClickListener onLongClickListener;
-
-	public void setOnLongClickListener(OnLongClickListener listener)
-	{
-		this.onLongClickListener = listener;
-	}
-
 	public interface OnLongClickListener
 	{
 		boolean onClick(View v, int position);
-	}
-
-	private OnTouchListener onTouchListener;
-
-	public void setOnTouchListener(OnTouchListener listener)
-	{
-		this.onTouchListener = listener;
 	}
 
 	public interface OnTouchListener

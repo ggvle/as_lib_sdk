@@ -1,7 +1,7 @@
 package com.yline.base.common;
 
 import android.content.Context;
-import android.util.SparseArray;
+import android.support.v4.util.SparseArrayCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,14 +89,14 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 
 	protected class ViewHolder
 	{
-		private SparseArray<View> sArray;
+		private SparseArrayCompat<View> sArray;
 
 		private View sView;
 
 		public ViewHolder(View view)
 		{
 			this.sView = view;
-			sArray = new SparseArray<View>();
+			sArray = new SparseArrayCompat<View>();
 		}
 
 		/**
