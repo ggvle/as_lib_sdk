@@ -59,7 +59,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	 * @param holder
 	 * @param position 当前item位置
 	 */
-	protected abstract void setViewContent(final CommonRecycleViewHolder holder, final int position);
+	public abstract void setViewContent(final CommonRecycleViewHolder holder, final int position);
 
 	@Override
 	public void onBindViewHolder(final CommonRecycleViewHolder holder, final int position)
