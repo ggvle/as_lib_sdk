@@ -48,7 +48,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	{
 		return new CommonRecycleViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
 	}
-	
+
 	/**
 	 * @return item 资源文件
 	 */
@@ -136,6 +136,25 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 			throw new IllegalArgumentException("invalid position");
 		}
 		return sList.get(position);
+	}
+
+	/**
+	 * 获取全部数据
+	 * @return
+	 */
+	public List<T> getDataList()
+	{
+		return this.sList;
+	}
+
+	/**
+	 * 完全更新数据
+	 * @param list
+	 */
+	public void setDataList(List<T> list)
+	{
+		this.sList = list;
+		this.notifyDataSetChanged();
 	}
 
 	@Override
