@@ -12,11 +12,12 @@ import com.yline.application.BaseApplication;
 import com.yline.log.LogFileUtil;
 
 /**
- * 调整 UI 视图大小, 选择那个方法依据的是 其对应的上一层框体
+ * 功能一、build() 调整 UI 视图大小, 选择那个方法依据的是 其对应的上一层框体
  * 1,采用连缀的写法
  * 2,默认自动适配传入的View的父布局
  * 3,使用Apply作为结束方法
  * 4,默认适配宽度,不适配高度【都是按照设计比例适配】
+ * <p/>
  * @author yline 2017/2/9 --> 18:39
  * @version 1.0.0
  */
@@ -374,7 +375,7 @@ public class UIResizeUtil
 	{
 		if (appWidth == 0)
 		{
-			appWidth = ScreenUtil.getAbsoluteScreenWidth(BaseApplication.getApplication());
+			appWidth = UIScreenUtil.getAbsoluteScreenWidth(BaseApplication.getApplication());
 			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppWidth width = " + appWidth);
 		}
 		return appWidth;
@@ -384,7 +385,7 @@ public class UIResizeUtil
 	{
 		if (0 == appHeight)
 		{
-			appHeight = ScreenUtil.getAbsoluteScreenHeight(BaseApplication.getApplication());
+			appHeight = UIScreenUtil.getAbsoluteScreenHeight(BaseApplication.getApplication());
 			LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppHeight height = " + appHeight);
 		}
 		return appHeight;
