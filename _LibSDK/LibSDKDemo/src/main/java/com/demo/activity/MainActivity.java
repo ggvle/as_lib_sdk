@@ -12,12 +12,14 @@ import com.demo.utils.LogFileUtilUser;
 import com.demo.utils.LogUtilUser;
 import com.demo.utils.SPUtilUser;
 import com.lib.sdk.demo.R;
-import com.yline.base.BaseActivity;
+import com.yline.base.BaseAppCompatActivity;
 import com.yline.log.LogFileUtil;
 
-public class MainActivity extends BaseActivity
+public class MainActivity extends BaseAppCompatActivity
 {
-	/** 用于请求权限 */
+	/**
+	 * 用于请求权限
+	 */
 	public static final int REQUEST_CODE_PERMISSION = 1025;
 
 	public static final String TAG_HANDLE_PERMISSION = "Deny permissions : ";
