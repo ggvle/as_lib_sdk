@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -32,29 +31,44 @@ import java.util.List;
  * 3, 异常错误抛出记录
  * 4, Activity管理
  * 5, Application标配Handler、Application
+ *
  * @author YLine 2016-5-25 -> 上午7:32:23
  */
 public abstract class BaseApplication extends Application
 {
-	/** TAG */
+	/**
+	 * TAG
+	 */
 	public static final String TAG = "LibSDK";
 
-	/** 先选用默认配置 */
+	/**
+	 * 先选用默认配置
+	 */
 	private static SDKConfig mBaseConfig = new SDKConfig();
 
-	/** 线程池 */
+	/**
+	 * 线程池
+	 */
 	private static final Executor executor = new SDKExecutor();
 	
-	/** Activity管理 */
+	/**
+	 * Activity管理
+	 */
 	private static List<Activity> mActivityList = new ArrayList<Activity>();
 
-	/** Fragment记录 */
+	/**
+	 * Fragment记录(记录的只有String)
+	 */
 	private static List<String> mFragmentList = new ArrayList<String>();
 
-	/** View记录 */
+	/**
+	 * View记录
+	 */
 	private static List<String> mViewList = new ArrayList<String>();
 
-	/** Service记录 */
+	/**
+	 * Service记录
+	 */
 	private static List<String> mServiceList = new ArrayList<String>();
 
 	private static Application mApplication;
@@ -81,7 +95,9 @@ public abstract class BaseApplication extends Application
 		}
 	};
 
-	/** Toast 工具 */
+	/**
+	 * Toast 工具
+	 */
 	private static Toast mToast;
 
 	private static TextView mTvToast;
@@ -120,15 +136,27 @@ public abstract class BaseApplication extends Application
 		}
 	}
 
-	public static void addFragmentForRecord(Fragment fragment)
+	public static void addFragmentForRecord(android.support.v4.app.Fragment fragment)
 	{
-		LogFileUtil.m("addFragmentForRecord:" + fragment.getClass().getSimpleName());
+		LogFileUtil.m("addFragmentForRecord V4:" + fragment.getClass().getSimpleName());
 		mFragmentList.add(fragment.getClass().getSimpleName());
 	}
 
-	public static void removeFragmentForRecord(Fragment fragment)
+	public static void removeFragmentForRecord(android.support.v4.app.Fragment fragment)
 	{
-		LogFileUtil.m("removeFragmentForRecord:" + fragment.getClass().getSimpleName());
+		LogFileUtil.m("removeFragmentForRecord V4:" + fragment.getClass().getSimpleName());
+		mFragmentList.remove(fragment.getClass().getSimpleName());
+	}
+
+	public static void addFragmentForRecordFew(android.app.Fragment fragment)
+	{
+		LogFileUtil.m("addFragmentForRecord Few:" + fragment.getClass().getSimpleName());
+		mFragmentList.add(fragment.getClass().getSimpleName());
+	}
+
+	public static void removeFragmentForRecordFew(android.app.Fragment fragment)
+	{
+		LogFileUtil.m("removeFragmentForRecord Few:" + fragment.getClass().getSimpleName());
 		mFragmentList.remove(fragment.getClass().getSimpleName());
 	}
 
@@ -179,6 +207,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 配置当前Application的配置信息
 	 * 返回null,则按默认配置
+	 *
 	 * @param mBaseConfig 配置对象
 	 */
 	private void setBaseConfig(SDKConfig mBaseConfig)
@@ -191,6 +220,7 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 进行一些基础配置,要求上级必须配置的信息
+	 *
 	 * @return
 	 */
 	protected SDKConfig initConfig()
@@ -201,6 +231,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 更改资源的时候,才需要做一步操作,引用不需要
 	 * 原子操作
+	 *
 	 * @return
 	 */
 	public static Handler getHandler()
@@ -233,6 +264,7 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 打印toast
+	 *
 	 * @param context
 	 * @param msg     内容
 	 */
@@ -258,6 +290,7 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 吐司
+	 *
 	 * @param content
 	 */
 	public static void toast(String content)
@@ -268,6 +301,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 要求在BaseApplication的super.onCreate()方法执行完成后,调用
 	 * 获取本工程文件目录; such as "/sdcard/_yline/LibSdk/"
+	 *
 	 * @return null if failed
 	 */
 	public static String getProjectFilePath()
@@ -285,6 +319,7 @@ public abstract class BaseApplication extends Application
 
 	/**
 	 * 运行一个线程,并且放入线程池中
+	 *
 	 * @param runnable
 	 * @param priority 优先级
 	 */
