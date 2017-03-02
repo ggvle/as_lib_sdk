@@ -13,6 +13,7 @@ import com.demo.application.MainApplication;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseActivity;
 import com.yline.base.common.CommonListAdapter;
+import com.yline.base.common.ViewHolder;
 import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
@@ -76,10 +77,14 @@ public class CommonListActivity extends BaseActivity
 
 	private class DemoBean
 	{
-		/** id */
+		/**
+		 * id
+		 */
 		private int id;
 
-		/** name */
+		/**
+		 * name
+		 */
 		private String name;
 
 		public DemoBean(int id, String name)
@@ -132,6 +137,7 @@ public class CommonListActivity extends BaseActivity
 
 	/**
 	 * 开启该CommonListActivity
+	 *
 	 * @param context
 	 */
 	public static void actionStart(Context context)
