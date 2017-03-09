@@ -12,8 +12,6 @@ import com.yline.test.BaseTestFragment;
 
 public class FileFragment extends BaseTestFragment
 {
-
-
 	@Override
 	protected void testStart()
 	{
@@ -69,6 +67,15 @@ public class FileFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				new SPUtilUser().test(getContext());
+			}
+		});
+
+		addButton("测试每一个路径 + 权限", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				
 			}
 		});
 	}

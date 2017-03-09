@@ -1,5 +1,6 @@
 package com.demo.utils;
 
+import com.demo.application.MainApplication;
 import com.yline.utils.FileSizeUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
@@ -14,8 +15,9 @@ public class FileUtilUser
 	{
 		LogUtil.v(TAG + " -> FileUtil.getPath() = " + FileUtil.getPath());
 
-		File fileDir = FileUtil.createFileDir(FileUtil.getPath() + "YlineTest/Log/");
-		LogUtil.d(TAG + " -> createFileDir success");
+		String path = String.format("%s%s%s%s", FileUtil.getPath(), MainApplication.getBaseConfig().getFileParentPath(), MainApplication.getBaseConfig().getLogFilePath(), "Utils/");
+		File fileDir = FileUtil.createFileDir(path);
+		LogUtil.d(TAG + " -> createFileDir success, path = " + path);
 
 		File file = FileUtil.createFile(fileDir, "log.txt");
 		LogUtil.i(TAG + " -> createFile success");

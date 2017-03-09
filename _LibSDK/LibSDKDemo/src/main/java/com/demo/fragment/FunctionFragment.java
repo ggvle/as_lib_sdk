@@ -9,7 +9,6 @@ import com.demo.common.CommonRecyclerActivity;
 import com.yline.log.LogFileUtil;
 import com.yline.test.BaseTestFragment;
 
-
 public class FunctionFragment extends BaseTestFragment
 {
 	@Override
@@ -71,7 +70,6 @@ public class FunctionFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				LogFileUtil.v(MainApplication.TAG, "btn_common_recycler_activity");
-
 				CommonRecyclerActivity.actionStart(getContext());
 			}
 		});
