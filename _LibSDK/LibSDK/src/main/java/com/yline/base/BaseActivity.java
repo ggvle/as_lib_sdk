@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * simple introduction
+ *
  * @author YLine 2016-5-25 -> 上午7:32:33
  */
 public class BaseActivity extends Activity
@@ -21,7 +22,7 @@ public class BaseActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		BaseApplication.addAcitivity(this);
+		BaseApplication.addActivity(this);
 		PermissionUtil.request(this, SDKConstant.REQUEST_CODE_PERMISSION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 	}
 

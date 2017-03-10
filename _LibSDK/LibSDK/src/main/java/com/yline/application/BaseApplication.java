@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ import com.yline.application.task.PriorityRunnable;
 import com.yline.application.task.SDKExecutor;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
-import com.yline.utils.FileUtil;
+import com.yline.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +41,6 @@ public abstract class BaseApplication extends Application
 	public static final String TAG = "LibSDK";
 
 	/**
-	 * 先选用默认配置
-	 */
-	private static SDKConfig mBaseConfig = new SDKConfig();
-
-	/**
 	 * 线程池
 	 */
 	private static final Executor executor = new SDKExecutor();
@@ -54,22 +48,22 @@ public abstract class BaseApplication extends Application
 	/**
 	 * Activity管理
 	 */
-	private static List<Activity> mActivityList = new ArrayList<Activity>();
+	private static List<Activity> mActivityList = new ArrayList<>();
 
 	/**
 	 * Fragment记录(记录的只有String)
 	 */
-	private static List<String> mFragmentList = new ArrayList<String>();
+	private static List<String> mFragmentList = new ArrayList<>();
 
 	/**
 	 * View记录
 	 */
-	private static List<String> mViewList = new ArrayList<String>();
+	private static List<String> mViewList = new ArrayList<>();
 
 	/**
 	 * Service记录
 	 */
-	private static List<String> mServiceList = new ArrayList<String>();
+	private static List<String> mServiceList = new ArrayList<>();
 
 	private static Application mApplication;
 
@@ -83,7 +77,7 @@ public abstract class BaseApplication extends Application
 			switch (msg.what)
 			{
 				case SDKConstant.HANDLER_PALPITATION:
-					LogFileUtil.v(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
+					LogFileUtil.m(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
 					handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.PALLITATION_TIME);
 					break;
 				case SDKConstant.HANDLER_TOAST:
@@ -115,9 +109,9 @@ public abstract class BaseApplication extends Application
 		BaseApplication.mApplication = application;
 	}
 
-	public static void addAcitivity(Activity activity)
+	public static void addActivity(Activity activity)
 	{
-		LogFileUtil.m("addAcitivity:" + activity.getClass().getSimpleName());
+		LogFileUtil.m("addActivity:" + activity.getClass().getSimpleName());
 		mActivityList.add(activity);
 	}
 
@@ -190,14 +184,6 @@ public abstract class BaseApplication extends Application
 		return super.getApplicationContext();
 	}
 
-	/**
-	 * @return 当前Application的配置信息
-	 */
-	public static SDKConfig getBaseConfig()
-	{
-		return mBaseConfig;
-	}
-
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
@@ -205,25 +191,11 @@ public abstract class BaseApplication extends Application
 	}
 
 	/**
-	 * 配置当前Application的配置信息
-	 * 返回null,则按默认配置
-	 *
-	 * @param mBaseConfig 配置对象
-	 */
-	private void setBaseConfig(SDKConfig mBaseConfig)
-	{
-		if (null != mBaseConfig)
-		{
-			BaseApplication.mBaseConfig = mBaseConfig;
-		}
-	}
-
-	/**
 	 * 进行一些基础配置,要求上级必须配置的信息
 	 *
 	 * @return
 	 */
-	protected SDKConfig initConfig()
+	public SDKConfig initConfig()
 	{
 		return new SDKConfig();
 	}
@@ -246,18 +218,18 @@ public abstract class BaseApplication extends Application
 		super.onCreate();
 		setApplication(this); // 初始化全局变量
 
-		// 配置,定制基础信息
-		setBaseConfig(initConfig());
+		// 异常崩溃日志
+		CrashHandler.getInstance().init(this);
+		// 打印日志工具
+		LogUtil.init(initConfig());
+		LogFileUtil.init(this, initConfig());
 
 		// 设立一个程序入口的log
-		LogFileUtil.v(mBaseConfig.toString());
+		LogFileUtil.m(initConfig().toString());
 		for (int i = 0; i < 3; i++)
 		{
 			LogFileUtil.m("应用启动 *** application start id = " + Thread.currentThread().getId());
 		}
-
-		// 异常崩溃日志
-		CrashHandler.getInstance().init(this);
 
 		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.PALLITATION_TIME);
 	}
@@ -296,25 +268,6 @@ public abstract class BaseApplication extends Application
 	public static void toast(String content)
 	{
 		handler.obtainMessage(SDKConstant.HANDLER_TOAST, content).sendToTarget();
-	}
-
-	/**
-	 * 要求在BaseApplication的super.onCreate()方法执行完成后,调用
-	 * 获取本工程文件目录; such as "/sdcard/_yline/LibSdk/"
-	 *
-	 * @return null if failed
-	 */
-	public static String getProjectFilePath()
-	{
-		String path = FileUtil.getPath();
-		if (TextUtils.isEmpty(path))
-		{
-			LogFileUtil.e(TAG, "SDCard not support, getProjectFilePath failed");
-			return null;
-		}
-
-		path += (mBaseConfig.getFileParentPath() + mBaseConfig.getLogFilePath());
-		return path;
 	}
 
 	/**

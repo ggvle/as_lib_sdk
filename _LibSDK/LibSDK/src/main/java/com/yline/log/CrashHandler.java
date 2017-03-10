@@ -23,26 +23,37 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * @author yline 2016/12/6 --> 21:54
+ * @author yline 2017/3/10 --> 13:34
  * @version 1.0.0
  */
 public final class CrashHandler implements UncaughtExceptionHandler
 {
 	private static final String TAG = "CrashHandler";
 
-	private static final boolean DEBUG = true;
-
-	private static final String CRASH_FILE_PATH = BaseApplication.getBaseConfig().getFileParentPath() + BaseApplication.getBaseConfig().getLogFilePath();
-	
+	/**
+	 * 文件后缀
+	 */
 	private static final String CRASH_TXT_FILE = "-CrashHandler.txt";
-	
-	/** 时间 */
-	private static String crash_txt_time = "1994-08-25 12-00-00-000";
-	
+
+	/**
+	 * 该文件初始化等是否debug
+	 */
+	private boolean isDebug = true;
+
+	/**
+	 * 文件夹,路径
+	 */
+	private String crashDirPath;
+
+	/**
+	 * 时间
+	 */
+	private String crash_txt_time = "1994-08-25 12-00-00-000";
+
 	private Application mApplication;
 	
 	// 用来存储设备信息和异常信息
-	private Map<String, String> infoMap = new HashMap<String, String>();
+	private Map<String, String> infoMap = new HashMap<>();
 	
 	// 系统默认的UncaughtException处理类
 	private UncaughtExceptionHandler mDefaultHandler;
@@ -61,29 +72,37 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		private static CrashHandler instance = new CrashHandler();
 	}
 	
-	public void init(Application application)
+	public void init(BaseApplication application)
 	{
-		if (DEBUG)
+		isDebug = application.initConfig().isSDKLog();
+		crashDirPath = application.getExternalFilesDir(TAG).getAbsolutePath();
+
+		if (isDebug)
 		{
-			LogFileUtil.m("CrashHandler -> init start");
+			LogFileUtil.m("CrashHandler -> init start, crashDirPath -> " + crashDirPath);
 		}
-		
+
 		mApplication = application;
 		// 获取系统默认的UncaughtExceptionHandler
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		// 将该CrashHandler实例设置为默认异常处理器
 		Thread.setDefaultUncaughtExceptionHandler(this);
 
-		if (DEBUG)
+		if (isDebug)
 		{
 			LogFileUtil.m("CrashHandler -> init end");
 		}
 	}
 	
+	public String getCrashDirPath()
+	{
+		return crashDirPath;
+	}
+	
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex)
 	{
-		if (DEBUG)
+		if (isDebug)
 		{
 			LogUtil.v(TAG + " uncaughtException dealing");
 		}
@@ -108,6 +127,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 处理此时的异常
+	 *
 	 * @param ex 异常信息
 	 * @return 是否处理成功
 	 */
@@ -142,6 +162,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 收集设备参数信息，并没有打印任何信息
+	 *
 	 * @param context
 	 */
 	private void collectDeviceInfo(Context context)
@@ -164,8 +185,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 				infoMap.put("versionName", versionName);
 				infoMap.put("versionCode", versionCode);
 			}
-		}
-		catch (NameNotFoundException e)
+		} catch (NameNotFoundException e)
 		{
 			LogUtil.e(TAG + " collectDeviceInfo -> NameNotFoundException error happened", e);
 		}
@@ -179,12 +199,10 @@ public final class CrashHandler implements UncaughtExceptionHandler
 				field.setAccessible(true);
 				infoMap.put(field.getName(), field.get("").toString());
 				LogUtil.v(TAG + " " + field.getName() + ":" + field.get(""));
-			}
-			catch (IllegalArgumentException e)
+			} catch (IllegalArgumentException e)
 			{
 				LogUtil.e(TAG + " getDeclaredFields -> IllegalArgumentException  error happened", e);
-			}
-			catch (IllegalAccessException e)
+			} catch (IllegalAccessException e)
 			{
 				LogUtil.e(TAG + " getDeclaredFields -> IllegalAccessException  error happened", e);
 			}
@@ -193,6 +211,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 保存信息到文件中
+	 *
 	 * @param ex
 	 * @return
 	 */
@@ -231,11 +250,12 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	
 	/**
 	 * 写日志入文件，打印日志
+	 *
 	 * @param content 日志内容
 	 */
-	private synchronized static void writeLogToFile(String content)
+	private synchronized void writeLogToFile(String content)
 	{
-		String path = FileUtil.getPath();
+		String path = crashDirPath;
 		if (null == path)
 		{
 			LogUtil.e(TAG + " sdcard path is null");
@@ -243,7 +263,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 		
 		// 路径名
-		File dirFile = FileUtil.createFileDir(path + CRASH_FILE_PATH);
+		File dirFile = FileUtil.createFileDir(path + File.separator);
 		if (null == dirFile)
 		{
 			LogUtil.e(TAG + " sdcard dirFile create failed");

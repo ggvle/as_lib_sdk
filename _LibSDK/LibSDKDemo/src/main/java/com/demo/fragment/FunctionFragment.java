@@ -46,7 +46,7 @@ public class FunctionFragment extends BaseTestFragment
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v(MainApplication.TAG, "ProjectFilePath = " + MainApplication.getProjectFilePath() + ",btn_execute");
+				LogFileUtil.v(MainApplication.TAG, "ProjectFilePath = " + LogFileUtil.getLogDirPath() + ",btn_execute");
 				// 调用两次就会执行两次,然后,点击Button两次,就会出现线程池的排队效果
 				MainApplication.start(runnable, null);
 				MainApplication.start(runnable, null);

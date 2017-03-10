@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * simple introduction
+ *
  * @author YLine 2016-5-25 -> 上午7:32:58
  */
 public class BaseFragmentActivity extends FragmentActivity
@@ -20,7 +21,7 @@ public class BaseFragmentActivity extends FragmentActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		BaseApplication.addAcitivity(this);
+		BaseApplication.addActivity(this);
 		super.onCreate(savedInstanceState);
 		PermissionUtil.request(this, SDKConstant.REQUEST_CODE_PERMISSION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 	}

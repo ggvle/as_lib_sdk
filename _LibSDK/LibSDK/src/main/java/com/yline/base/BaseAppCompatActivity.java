@@ -21,7 +21,7 @@ public class BaseAppCompatActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		BaseApplication.addAcitivity(this);
+		BaseApplication.addActivity(this);
 		PermissionUtil.request(this, SDKConstant.REQUEST_CODE_PERMISSION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 	}
 

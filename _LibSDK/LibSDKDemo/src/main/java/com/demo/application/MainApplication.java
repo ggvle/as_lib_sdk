@@ -11,8 +11,6 @@ import com.yline.application.SDKConfig;
 
 public class MainApplication extends BaseApplication
 {
-	public static final String TAG = "libSDKDemo";
-
 	@Override
 	public void onCreate()
 	{
@@ -42,13 +40,11 @@ public class MainApplication extends BaseApplication
 	}
 
 	@Override
-	protected SDKConfig initConfig()
+	public SDKConfig initConfig()
 	{
 		SDKConfig sdkConfig = new SDKConfig();
-		sdkConfig.setFileParentPath("_yline");
-		sdkConfig.setLogFilePath("libSDKDemo"); // 默认开启日志,并写到文件中
-		sdkConfig.setLogSystem(false);
-		sdkConfig.setLogLib(true);
+		sdkConfig.setSDKLog(true);
+		sdkConfig.setUtilLogBySystem(true);
 		return sdkConfig;
 	}
 }

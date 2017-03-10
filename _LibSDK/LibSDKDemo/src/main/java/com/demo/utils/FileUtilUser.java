@@ -1,6 +1,6 @@
 package com.demo.utils;
 
-import com.demo.application.MainApplication;
+import com.yline.log.LogFileUtil;
 import com.yline.utils.FileSizeUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
@@ -15,7 +15,7 @@ public class FileUtilUser
 	{
 		LogUtil.v(TAG + " -> FileUtil.getPath() = " + FileUtil.getPath());
 
-		String path = String.format("%s%s%s%s", FileUtil.getPath(), MainApplication.getBaseConfig().getFileParentPath(), MainApplication.getBaseConfig().getLogFilePath(), "Utils/");
+		String path = String.format("%s%s", LogFileUtil.getLogDirPath(), "/Utils/");
 		File fileDir = FileUtil.createFileDir(path);
 		LogUtil.d(TAG + " -> createFileDir success, path = " + path);
 
