@@ -78,7 +78,7 @@ public abstract class BaseApplication extends Application
 			{
 				case SDKConstant.HANDLER_PALPITATION:
 					LogFileUtil.m(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
-					handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.PALLITATION_TIME);
+					handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLITATION_TIME);
 					break;
 				case SDKConstant.HANDLER_TOAST:
 					showToast(getApplication(), (String) msg.obj);
@@ -231,7 +231,7 @@ public abstract class BaseApplication extends Application
 			LogFileUtil.m("应用启动 *** application start id = " + Thread.currentThread().getId());
 		}
 
-		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.PALLITATION_TIME);
+		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLITATION_TIME);
 	}
 
 	/**

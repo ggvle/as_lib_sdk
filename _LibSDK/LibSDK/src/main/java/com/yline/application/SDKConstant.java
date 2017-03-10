@@ -8,18 +8,26 @@ public class SDKConstant
 {
 	// application 功能
 
-	/** 应用心跳 */
+	/**
+	 * 应用心跳
+	 */
 	public static final int HANDLER_PALPITATION = -2;
 
-	/** 应用心跳频率 */
-	public static final int PALLITATION_TIME = 30 * 1000;
+	/**
+	 * 应用心跳频率
+	 */
+	public static final int APPLITATION_TIME = 30 * 1000;
 
-	/** handler 吐丝 */
+	/**
+	 * handler 吐丝
+	 */
 	public static final int HANDLER_TOAST = -1;
 
 	// 其他
 
-	/** 用于请求权限 */
+	/**
+	 * 用于请求权限
+	 */
 	public static final int REQUEST_CODE_PERMISSION = 1025;
 
 	public static final String TAG_HANDLE_PERMISSION = "Deny permissions : ";
