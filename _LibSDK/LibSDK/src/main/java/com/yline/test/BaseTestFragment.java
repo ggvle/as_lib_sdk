@@ -7,21 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.lib.sdk.R;
 import com.yline.base.BaseFragment;
 import com.yline.utils.third.UIResizeUtil;
+import com.yline.utils.third.UIScreenUtil;
 
 public abstract class BaseTestFragment extends BaseFragment
 {
-	private LinearLayout linearLayout;
+	protected LinearLayout linearLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		initContentView();
-
-		return linearLayout;
+		return inflater.inflate(R.layout.fragment_test_base, container, false);
 	}
 
 	@Override
@@ -33,14 +35,7 @@ public abstract class BaseTestFragment extends BaseFragment
 
 	protected abstract void testStart();
 
-	private void initContentView()
-	{
-		linearLayout = new LinearLayout(getContext());
-		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-	}
-
-	protected void addButton(String content, View.OnClickListener listener)
+	protected Button addButton(String content, View.OnClickListener listener)
 	{
 		Button button = new Button(getContext());
 		button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -48,6 +43,7 @@ public abstract class BaseTestFragment extends BaseFragment
 		button.setText(content);
 		button.setOnClickListener(listener);
 		linearLayout.addView(button);
+		return button;
 	}
 
 	protected EditText addEditText(String hintContent)
@@ -57,5 +53,22 @@ public abstract class BaseTestFragment extends BaseFragment
 		editText.setHint(hintContent);
 		linearLayout.addView(editText);
 		return editText;
+	}
+
+	protected ImageView addImageView(int width, int height)
+	{
+		ImageView imageView = new ImageView(this.getContext());
+		imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(UIScreenUtil.dp2px(getContext(), width), UIScreenUtil.dp2px(getContext(), height)));
+		this.linearLayout.addView(imageView);
+		return imageView;
+	}
+
+	protected TextView addTextView(String initContent)
+	{
+		TextView textView = new TextView(this.getContext());
+		textView.setLayoutParams(new android.view.ViewGroup.LayoutParams(-1, -2));
+		textView.setHint(initContent);
+		this.linearLayout.addView(textView);
+		return textView;
 	}
 }

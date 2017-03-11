@@ -15,7 +15,7 @@ public class FileUtilUser
 	{
 		LogUtil.v(TAG + " -> FileUtil.getPath() = " + FileUtil.getPath());
 
-		String path = String.format("%s%s", LogFileUtil.getLogDirPath(), "/Utils/");
+		String path = String.format("%s/%s", LogFileUtil.getLogDirPath(), "Utils");
 		File fileDir = FileUtil.createFileDir(path);
 		LogUtil.d(TAG + " -> createFileDir success, path = " + path);
 
