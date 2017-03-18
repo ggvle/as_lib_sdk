@@ -18,7 +18,8 @@ import java.util.Comparator;
 /**
  * 目前提供给 LogFileUtil准备
  * simple introduction
- * @author YLine 2016-5-25 -> 上午8:06:08
+ *
+ * @author YLine 2016-5-25 - 上午8:06:08
  */
 public class FileUtil
 {
@@ -26,6 +27,7 @@ public class FileUtil
 
 	/**
 	 * 获取内置sd卡最上层路径
+	 *
 	 * @return /storage/emulated/0/ or null
 	 */
 	public static String getPath()
@@ -43,6 +45,7 @@ public class FileUtil
 	/**
 	 * android.permission.WRITE_EXTERNAL_STORAGE
 	 * 创建一个文件夹
+	 *
 	 * @param path such as /storage/emulated/0/Yline/Log/
 	 * @return file or null
 	 */
@@ -63,6 +66,7 @@ public class FileUtil
 	/**
 	 * android.permission.WRITE_EXTERNAL_STORAGE
 	 * 构建一个文件,真实的创建
+	 *
 	 * @param dir  文件的目录
 	 * @param name 文件名     such as log.txt
 	 * @return file or null
@@ -83,8 +87,7 @@ public class FileUtil
 				{
 					return file;
 				}
-			}
-			catch (IOException e)
+			} catch (IOException e)
 			{
 				e.printStackTrace();
 				return null;
@@ -100,6 +103,7 @@ public class FileUtil
 
 	/**
 	 * 是否存在该文件
+	 *
 	 * @param dir  文件目录
 	 * @param name 文件名称
 	 * @return false(参数错误、文件不存在)
@@ -117,6 +121,7 @@ public class FileUtil
 	/**
 	 * android.permission.WRITE_EXTERNAL_STORAGE
 	 * 删除一个文件
+	 *
 	 * @param dir  文件的目录
 	 * @param name 文件名  such as log.txt
 	 * @return false(参数错误、不存在该文件、删除失败)
@@ -139,6 +144,7 @@ public class FileUtil
 
 	/**
 	 * 重命名一个文件
+	 *
 	 * @param dir     文件的目录
 	 * @param oldName 文件名  such as log0.txt
 	 * @param newName 文件名  such as log1.txt
@@ -169,6 +175,7 @@ public class FileUtil
 	/**
 	 * 之后统计乱码的情况(理论是不乱码的)
 	 * 写内容到文件中,尾随后面写
+	 *
 	 * @param file    文件
 	 * @param content 内容
 	 * @return false(写入失败, 写入工具关闭失败)
@@ -180,21 +187,18 @@ public class FileUtil
 		{
 			fileWriter = new FileWriter(file, true);
 			fileWriter.append(content + "\n");
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			e.printStackTrace();
 			return false;
-		}
-		finally
+		} finally
 		{
 			if (null != fileWriter)
 			{
 				try
 				{
 					fileWriter.close();
-				}
-				catch (IOException e)
+				} catch (IOException e)
 				{
 					e.printStackTrace();
 					return false;
@@ -208,6 +212,7 @@ public class FileUtil
 	/**
 	 * 之后统计乱码的情况(理论是不乱码的)
 	 * 写内容到文件中,尾随后面写
+	 *
 	 * @param file    文件
 	 * @param content 内容
 	 * @return false(写入失败, 写入工具关闭失败)
@@ -220,18 +225,15 @@ public class FileUtil
 		{
 			printStream = new PrintStream(new FileOutputStream(file, true), false, "utf-8");
 			printStream.println(content);
-		}
-		catch (UnsupportedEncodingException e)
+		} catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();
 			return false;
-		}
-		catch (FileNotFoundException e)
+		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 			return false;
-		}
-		finally
+		} finally
 		{
 			if (null != printStream)
 			{
@@ -244,6 +246,7 @@ public class FileUtil
 	/**
 	 * 之后统计乱码的情况(理论是不乱码的)
 	 * 写内容到文件中,尾随后面写
+	 *
 	 * @param file    文件
 	 * @param content 内容
 	 * @return false(写入失败, 写入工具关闭失败)
@@ -257,23 +260,19 @@ public class FileUtil
 			outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file, true), "utf-8");
 			bufferedWriter = new BufferedWriter(outputStreamWriter);
 			bufferedWriter.append(content + "\n");
-		}
-		catch (UnsupportedEncodingException e)
+		} catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();
 			return false;
-		}
-		catch (FileNotFoundException e)
+		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 			return false;
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			e.printStackTrace();
 			return false;
-		}
-		finally
+		} finally
 		{
 			try
 			{
@@ -286,8 +285,7 @@ public class FileUtil
 					outputStreamWriter.close();
 
 				}
-			}
-			catch (IOException e)
+			} catch (IOException e)
 			{
 				e.printStackTrace();
 				return false;
@@ -298,6 +296,7 @@ public class FileUtil
 
 	/**
 	 * File and folder comparator. TODO Expose sorting option method
+	 *
 	 * @author paulburke
 	 */
 	private static Comparator<File> sComparator = new Comparator<File>()
@@ -329,6 +328,7 @@ public class FileUtil
 
 	/**
 	 * File (not directories) filter.
+	 *
 	 * @author paulburke
 	 */
 	private static FileFilter sFilePointFilter = new FileFilter()
@@ -344,6 +344,7 @@ public class FileUtil
 
 	/**
 	 * Folder (directories) filter.
+	 *
 	 * @author paulburke
 	 */
 	private static FileFilter sDirPointFilter = new FileFilter()

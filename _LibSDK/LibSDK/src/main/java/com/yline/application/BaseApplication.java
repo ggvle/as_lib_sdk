@@ -31,7 +31,7 @@ import java.util.List;
  * 4, Activity管理
  * 5, Application标配Handler、Application
  *
- * @author YLine 2016-5-25 -> 上午7:32:23
+ * @author YLine 2016-5-25 - 上午7:32:23
  */
 public abstract class BaseApplication extends Application
 {
@@ -193,7 +193,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 进行一些基础配置,要求上级必须配置的信息
 	 *
-	 * @return
+	 * @return 配置数据
 	 */
 	public SDKConfig initConfig()
 	{
@@ -204,7 +204,7 @@ public abstract class BaseApplication extends Application
 	 * 更改资源的时候,才需要做一步操作,引用不需要
 	 * 原子操作
 	 *
-	 * @return
+	 * @return 全局handler
 	 */
 	public static Handler getHandler()
 	{
@@ -237,7 +237,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 打印toast
 	 *
-	 * @param context
+	 * @param context 上下文
 	 * @param msg     内容
 	 */
 	private static void showToast(Context context, String msg)
@@ -263,7 +263,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 吐司
 	 *
-	 * @param content
+	 * @param content 显示数据
 	 */
 	public static void toast(String content)
 	{
@@ -273,7 +273,7 @@ public abstract class BaseApplication extends Application
 	/**
 	 * 运行一个线程,并且放入线程池中
 	 *
-	 * @param runnable
+	 * @param runnable 运行现场
 	 * @param priority 优先级
 	 */
 	public static void start(Runnable runnable, PriorityRunnable.Priority priority)

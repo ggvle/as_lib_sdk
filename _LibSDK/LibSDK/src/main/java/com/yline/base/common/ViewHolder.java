@@ -6,9 +6,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by yline on 2017/3/2.
+ * @author yline 2017/3/19 -->3:03
+ * @version 1.0.0
  */
-
 public class ViewHolder
 {
 	private SparseArrayCompat<View> sArray;
@@ -18,14 +18,14 @@ public class ViewHolder
 	public ViewHolder(View view)
 	{
 		this.sView = view;
-		sArray = new SparseArrayCompat<View>();
+		sArray = new SparseArrayCompat<>();
 	}
 
 	/**
 	 * 获取到相应的资源
 	 *
-	 * @param viewId
-	 * @return
+	 * @param viewId 子布局id
+	 * @return 子布局
 	 */
 	public <T extends View> T get(int viewId)
 	{
@@ -42,7 +42,7 @@ public class ViewHolder
 	 *
 	 * @param viewId  资源
 	 * @param content 内容
-	 * @return 为了连缀写法, 返回自身
+	 * @return 当前ViewHolder
 	 */
 	public ViewHolder setText(int viewId, String content)
 	{
@@ -56,7 +56,7 @@ public class ViewHolder
 	 *
 	 * @param viewId 资源id
 	 * @param resId  图片背景id
-	 * @return
+	 * @return 当前ViewHolder
 	 */
 	public ViewHolder setImageBackgroundResource(int viewId, int resId)
 	{

@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+/*apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+[compileJavaDoc, compileTestJavaDoc]*.options*.encoding = 'utf-8'*/
 
 android {
     compileSdkVersion 25
@@ -18,3 +22,64 @@ android {
     }
 }
 
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+}
+
+/*tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.compilerArgs << "-Xlint:unchecked"
+    *//*javadoc {
+        options {
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            author true
+            version true
+            title PROJ_ARTIFACTID
+        }
+    }*//*
+}*/
+
+/*task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}*/
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'libsdk'
+
+    publishedGroupId = 'com.yline.lib'
+    libraryName = 'libsdk'
+    artifact = 'libsdk'
+
+    libraryDescription = 'provider log,util,base,common and ect'
+
+    siteUrl = 'https://github.com/yline/as_lib_place '
+    gitUrl = 'https://github.com/yline/as_lib_place.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'yline'
+    developerName = 'yline'
+    developerEmail = 'yline95739173@outlook.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        //author true
+        version true
+    }
+}

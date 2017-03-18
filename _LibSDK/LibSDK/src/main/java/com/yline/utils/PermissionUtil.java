@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author yline 2016/11/19 --> 15:07
+ * @author yline 2016/11/19 -- 15:07
  * @version 1.0.0
  */
 public class PermissionUtil
 {
 	/**
 	 * 检查某一项权限,是否需要动态申请
-	 * @param context
-	 * @param permission
-	 * @return
+	 *
+	 * @param context    上下文
+	 * @param permission 请求的权限
+	 * @return 是否需要动态申请权限
 	 */
 	public static boolean check(Context context, String permission)
 	{
@@ -38,8 +39,9 @@ public class PermissionUtil
 
 	/**
 	 * 动态请求权限
-	 * @param activity
-	 * @param permissions
+	 *
+	 * @param activity    请求的上下文
+	 * @param permissions 请求的权限
 	 */
 	public static void request(Activity activity, int requestCode, String... permissions)
 	{
@@ -60,7 +62,8 @@ public class PermissionUtil
 
 	/**
 	 * 是否发送用户请求
-	 * @return
+	 *
+	 * @return 如果用户首次看见，或者版本小于6.0则发送请求
 	 */
 	private static boolean isRequest(Context context, String permission)
 	{
@@ -81,10 +84,11 @@ public class PermissionUtil
 
 	/**
 	 * 处理响应请求,返回被拒绝的权限
-	 * @param requestCode
-	 * @param requestBackCode
-	 * @param permissions
-	 * @param grantResults
+	 *
+	 * @param requestCode     请求码
+	 * @param requestBackCode 请求参数返回码
+	 * @param permissions     请求的权限
+	 * @param grantResults    默认成功的结果值
 	 * @return 被拒绝的权限
 	 */
 	public static List<String> requestHandle(int requestCode, int requestBackCode, String[] permissions, int[] grantResults)

@@ -7,7 +7,7 @@ import java.util.Locale;
 /**
  * 该工具,默认给_LibSDK使用,因此tag,全免
  * simple introduction
- * 格式:x->{[类名.方法名(L:行数)]: }功能tag -> 信息content
+ * 格式:x-{[类名.方法名(L:行数)]: }功能tag - 信息content
  * <p>
  * tag 功能 目的: 某一个功能模块的tag
  * content 具体信息 目的: "start"、"end"、"number" = number 等类似信息

@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
- * @author yline 2017/3/10 --> 13:34
+ * @author yline 2017/3/10 -- 13:34
  * @version 1.0.0
  */
 public final class LogFileUtil
@@ -145,7 +145,7 @@ public final class LogFileUtil
 	/**
 	 * 获取本地 打印日志地址
 	 *
-	 * @return
+	 * @return 日志地址
 	 */
 	public static String getLogDirPath()
 	{
@@ -601,7 +601,8 @@ public final class LogFileUtil
 	/**
 	 * 拼接日志tag,该tag专为打在eclipse,DDms上准备
 	 *
-	 * @return
+	 * @param location 定位的级别
+	 * @return 拼接而成的头部
 	 */
 	private static String generateTag(int location)
 	{
@@ -622,8 +623,8 @@ public final class LogFileUtil
 	/**
 	 * 拼接 日志tag,该tag专为写入file中准备
 	 *
-	 * @param type
-	 * @return
+	 * @param type 数据类型
+	 * @return 拼接而成的头部
 	 */
 	private static String generateFileTag(String type, int location)
 	{

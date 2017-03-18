@@ -3,30 +3,28 @@ package com.yline.base.common;
 import java.util.Collection;
 
 /**
- * Created by yline on 2016/9/22.
+ * @author yline 2017/3/19 -- 3:06
+ * @version 1.0.0
  */
 public interface ICommonAdapterCallback<E>
 {
 	/**
 	 * Attempts to add {@code object} to the contents of this
 	 * {@code Collection} (optional).
-	 * <p/>
 	 * After this method finishes successfully it is guaranteed that the object
 	 * is contained in the collection.
-	 * <p/>
 	 * If the collection was modified it returns {@code true}, {@code false} if
 	 * no changes were made.
-	 * <p/>
 	 * An implementation of {@code Collection} may narrow the set of accepted
 	 * objects, but it has to specify this in the documentation. If the object
 	 * to be added does not meet this restriction, then an
 	 * {@code IllegalArgumentException} is thrown.
-	 * <p/>
 	 * If a collection does not yet contain an object that is to be added and
 	 * adding the object fails, this method <i>must</i> throw an appropriate
 	 * unchecked Exception. Returning false is not permitted in this case
 	 * because it would violate the postcondition that the element will be part
 	 * of the collection after this method finishes.
+	 *
 	 * @param object the object to add.
 	 * @return {@code true} if this {@code Collection} is
 	 * modified, {@code false} otherwise.
@@ -43,6 +41,7 @@ public interface ICommonAdapterCallback<E>
 	 * (optional operation).  Shifts the element currently at that position
 	 * (if any) and any subsequent elements to the right (adds one to their
 	 * indices).
+	 *
 	 * @param index   index at which the specified element is to be inserted
 	 * @param element element to be inserted
 	 * @throws UnsupportedOperationException if the <tt>add</tt> operation
@@ -63,6 +62,7 @@ public interface ICommonAdapterCallback<E>
 	 * to the contents of this {@code Collection} (optional). If the passed {@code Collection}
 	 * is changed during the process of adding elements to this {@code Collection}, the
 	 * behavior is not defined.
+	 *
 	 * @param collection the {@code Collection} of objects.
 	 * @return {@code true} if this {@code Collection} is modified, {@code false}
 	 * otherwise.
@@ -78,6 +78,7 @@ public interface ICommonAdapterCallback<E>
 
 	/**
 	 * Removes all elements from this {@code Collection}, leaving it empty (optional).
+	 *
 	 * @throws UnsupportedOperationException if removing from this {@code Collection} is not supported.
 	 * @see #isEmpty
 	 * @see #size
@@ -89,6 +90,7 @@ public interface ICommonAdapterCallback<E>
 	 * {@code true} if and only if at least one element {@code elem} in this
 	 * {@code Collection} meets following requirement:
 	 * {@code (object==null ? elem==null : object.equals(elem))}.
+	 *
 	 * @param object the object to search for.
 	 * @return {@code true} if object is an element of this {@code Collection},
 	 * {@code false} otherwise.
@@ -104,6 +106,7 @@ public interface ICommonAdapterCallback<E>
 	 * specified {@code Collection}. If an element {@code elem} is contained several
 	 * times in the specified {@code Collection}, the method returns {@code true} even
 	 * if {@code elem} is contained only once in this {@code Collection}.
+	 *
 	 * @param collection the collection of objects.
 	 * @return {@code true} if all objects in the specified {@code Collection} are
 	 * elements of this {@code Collection}, {@code false} otherwise.
@@ -118,6 +121,7 @@ public interface ICommonAdapterCallback<E>
 
 	/**
 	 * Returns if this {@code Collection} contains no elements.
+	 *
 	 * @return {@code true} if this {@code Collection} has no elements, {@code false}
 	 * otherwise.
 	 * @see #size
@@ -129,6 +133,7 @@ public interface ICommonAdapterCallback<E>
 	 * operation).  Shifts any subsequent elements to the left (subtracts one
 	 * from their indices).  Returns the element that was removed from the
 	 * list.
+	 *
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified position
 	 * @throws UnsupportedOperationException if the <tt>remove</tt> operation
@@ -142,6 +147,7 @@ public interface ICommonAdapterCallback<E>
 	 * Removes one instance of the specified object from this {@code Collection} if one
 	 * is contained (optional). The element {@code elem} that is removed
 	 * complies with {@code (object==null ? elem==null : object.equals(elem)}.
+	 *
 	 * @param object the object to remove.
 	 * @return {@code true} if this {@code Collection} is modified, {@code false}
 	 * otherwise.
@@ -157,6 +163,7 @@ public interface ICommonAdapterCallback<E>
 	 * specified {@code Collection} (optional). After this method returns none of the
 	 * elements in the passed {@code Collection} can be found in this {@code Collection}
 	 * anymore.
+	 *
 	 * @param collection the collection of objects to remove.
 	 * @return {@code true} if this {@code Collection} is modified, {@code false}
 	 * otherwise.
@@ -172,6 +179,7 @@ public interface ICommonAdapterCallback<E>
 
 	/**
 	 * Returns a count of how many objects this {@code Collection} contains.
+	 *
 	 * @return how many objects this {@code Collection} contains, or Integer.MAX_VALUE
 	 * if there are more than Integer.MAX_VALUE elements in this
 	 * {@code Collection}.

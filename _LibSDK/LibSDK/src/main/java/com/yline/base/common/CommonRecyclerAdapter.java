@@ -11,7 +11,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by yline on 2016/11/14.
+ * @author yline 2017/3/19 -- 3:05
+ * @version 1.0.0
  */
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecycleViewHolder> implements ICommonAdapterCallback<T>
 {
@@ -56,7 +57,8 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 
 	/**
 	 * 对内容设置
-	 * @param holder
+	 *
+	 * @param holder   子控件容器
 	 * @param position 当前item位置
 	 */
 	public abstract void setViewContent(final CommonRecycleViewHolder holder, final int position);
@@ -126,8 +128,9 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 
 	/**
 	 * 返回某项数据
-	 * @param position
-	 * @return
+	 *
+	 * @param position 位置
+	 * @return 某项数据
 	 */
 	public T getItem(int position)
 	{
@@ -140,7 +143,8 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 
 	/**
 	 * 获取全部数据
-	 * @return
+	 *
+	 * @return 所有数据
 	 */
 	public List<T> getDataList()
 	{
@@ -149,7 +153,8 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 
 	/**
 	 * 完全更新数据
-	 * @param list
+	 *
+	 * @param list 所有数据
 	 */
 	public void setDataList(List<T> list)
 	{

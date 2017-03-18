@@ -4,7 +4,7 @@ package com.yline.application;
  * 在Application中配置父类所需要的配置选项
  * simple introduction
  *
- * @author YLine 2016-5-27 -> 上午7:28:17
+ * @author YLine 2016-5-27 - 上午7:28:17
  */
 public class SDKConfig
 {
@@ -95,4 +95,6 @@ public class SDKConfig
 				", isSDKLog=" + isSDKLog +
 				'}';
 	}
+
+
 }

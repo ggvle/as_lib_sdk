@@ -18,6 +18,12 @@ public class FileSizeUtil
 
 	private static final int SUFFIX_TYPE_GB = 4;// 获取文件大小单位为GB的double值
 
+	/**
+	 * 格式化大小
+	 *
+	 * @param size 大小
+	 * @return 字符串形式的大小，即：带单位
+	 */
 	public static String formatFileAutoSize(long size)
 	{
 		DecimalFormat df = new DecimalFormat("0.00");
@@ -54,9 +60,10 @@ public class FileSizeUtil
 
 	/**
 	 * 转换文件大小,指定转换的类型
-	 * @param fileS
-	 * @param sizeType
-	 * @return
+	 *
+	 * @param fileS    文件大小
+	 * @param sizeType 单位类型
+	 * @return 转换后的大小
 	 */
 	public static double formatFileSize(long fileS, int sizeType)
 	{
@@ -82,7 +89,12 @@ public class FileSizeUtil
 		return fileSizeLong;
 	}
 
-	/** 获取文件夹或文件的大小 */
+	/**
+	 * 获取文件夹或文件的大小
+	 *
+	 * @param file 文件或文件夹
+	 * @return 大小
+	 */
 	public static long getFileOrDirAutoSize(File file)
 	{
 		long blockSize = 0;
@@ -98,7 +110,12 @@ public class FileSizeUtil
 		return blockSize;
 	}
 
-	/** 读取文件的大小 */
+	/**
+	 * 读取文件的大小
+	 *
+	 * @param file 目标文件夹
+	 * @return 大小
+	 */
 	public static long getFileSize(File file)
 	{
 		if (null != file && file.exists())
@@ -109,26 +126,22 @@ public class FileSizeUtil
 			{
 				fis = new FileInputStream(file);
 				return fis.available();
-			}
-			catch (FileNotFoundException e)
+			} catch (FileNotFoundException e)
 			{
 				e.printStackTrace();
 				return ERROR_SIZE;
-			}
-			catch (IOException e)
+			} catch (IOException e)
 			{
 				e.printStackTrace();
 				return ERROR_SIZE;
-			}
-			finally
+			} finally
 			{
 				if (null != fis)
 				{
 					try
 					{
 						fis.close();
-					}
-					catch (IOException e)
+					} catch (IOException e)
 					{
 						e.printStackTrace();
 					}
@@ -141,9 +154,9 @@ public class FileSizeUtil
 
 	/**
 	 * 获取指定文件夹
-	 * @param file
-	 * @return
-	 * @throws Exception
+	 *
+	 * @param file 目标文件夹
+	 * @return 磁盘大小
 	 */
 	public static long getDirSize(File file)
 	{

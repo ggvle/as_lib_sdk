@@ -24,9 +24,10 @@ public class CommonRecycleViewHolder extends RecyclerView.ViewHolder
 
 	/**
 	 * 要求是ImageView;
+	 *
 	 * @param viewId 资源id
 	 * @param resId  图片背景id
-	 * @return
+	 * @return 返回当前类
 	 */
 	public CommonRecycleViewHolder setImage(int viewId, int resId)
 	{
@@ -37,8 +38,9 @@ public class CommonRecycleViewHolder extends RecyclerView.ViewHolder
 
 	/**
 	 * 获取到相应的资源
-	 * @param viewId
-	 * @return
+	 *
+	 * @param viewId 子布局id
+	 * @return 子布局
 	 */
 	public <T extends View> T get(int viewId)
 	{

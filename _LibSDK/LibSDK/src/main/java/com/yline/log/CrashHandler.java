@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * @author yline 2017/3/10 --> 13:34
+ * @author yline 2017/3/10 -- 13:34
  * @version 1.0.0
  */
 public final class CrashHandler implements UncaughtExceptionHandler
@@ -163,7 +163,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	/**
 	 * 收集设备参数信息，并没有打印任何信息
 	 *
-	 * @param context
+	 * @param context 上下文
 	 */
 	private void collectDeviceInfo(Context context)
 	{
@@ -212,8 +212,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 	/**
 	 * 保存信息到文件中
 	 *
-	 * @param ex
-	 * @return
+	 * @param ex 错误信息
 	 */
 	private void saveCrashInfo2File(Throwable ex)
 	{
