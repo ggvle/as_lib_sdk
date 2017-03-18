@@ -1,8 +1,13 @@
 apply plugin: 'com.android.library'
+// add plugin
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = '1.0.0'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 11
@@ -21,6 +26,97 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+group = 'com.yline.lib.sdk'// 组名
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId 'com.yline.lib.sdk' //自己定义的组名
+            artifactId 'library'
+
+            name 'libsdk'
+            description 'tool for base,util,common,log and etc'
+            url 'https://github.com/yline/as_lib_place'
+            inceptionYear '2016'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection 'https://github.com/yline/as_lib_place.git' // 工程的git地址
+                url 'https://github.com/yline/as_lib_place'
+
+            }
+            developers {
+                developer {
+                    name 'yline'
+                    email 'yline957339173@outlook.com'
+                }
+            }
+        }
+    }
+}
+
+// Bintray
+
+//获取local.propertes的信息
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    publish = true
+    configurations = ['archives']
+    pkg {
+        //填入 bintray 上对应的 package 信息
+        repo = 'maven'
+        name = 'libsdk'
+        vcsUrl = 'https://github.com/yline/as_lib_place.git'
+        websiteUrl = 'https://github.com/yline/as_lib_place'
+        licenses = ['Apache-2.0']
+        issueTrackerUrl = 'https://github.com/yline/as_lib_place/issues'
+        publicDownloadNumbers = true
+        version {
+            name = '1.0.0'
+            desc = 'com.yline.lib.sdk release'
+            vcsTag = '1.0.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task findConventions << {
+    println project.getConvention()
 }
