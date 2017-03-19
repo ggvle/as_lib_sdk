@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * @author yline 2017/3/19 -->3:03
+ * @author yline 2017/3/19 -- 3:03
  * @version 1.0.0
  */
 public class ViewHolder
@@ -25,7 +25,8 @@ public class ViewHolder
 	 * 获取到相应的资源
 	 *
 	 * @param viewId 子布局id
-	 * @return 子布局
+	 * @param <T>    View的子类
+	 * @return View的子类
 	 */
 	public <T extends View> T get(int viewId)
 	{

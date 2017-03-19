@@ -10,7 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 不支持插队(优先级)功能
- * @author yline 2016/11/10 --> 13:48
+ *
+ * @author yline 2016/11/10 -- 13:48
  * @version 1.0.0
  */
 public class SDKExecutor implements Executor
@@ -82,6 +83,7 @@ public class SDKExecutor implements Executor
 
 	/**
 	 * 默认工作线程数3
+	 *
 	 * @param fifo 优先级相同时, 等待队列的是否优先执行先加入的任务.
 	 */
 	public SDKExecutor(boolean fifo)

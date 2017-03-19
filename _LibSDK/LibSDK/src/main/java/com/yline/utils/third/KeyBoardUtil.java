@@ -20,7 +20,8 @@ public class KeyBoardUtil
 
 	/**
 	 * 进入时,隐藏软键盘
-	 * @param activity
+	 *
+	 * @param activity 上下文
 	 */
 	public static void hideKeybord(Activity activity)
 	{
@@ -29,6 +30,7 @@ public class KeyBoardUtil
 
 	/**
 	 * 打开 软键盘
+	 *
 	 * @param context   上下文
 	 * @param mEditText 输入框
 	 */
@@ -41,6 +43,7 @@ public class KeyBoardUtil
 
 	/**
 	 * 关闭软键盘
+	 *
 	 * @param context   上下文
 	 * @param mEditText 输入框
 	 */

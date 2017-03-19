@@ -25,7 +25,8 @@ public class PriorityRunnable implements Runnable
 
 	/**
 	 * 任务的优先级
-	 * @author yline 2016/11/10 --> 15:13
+	 *
+	 * @author yline 2016/11/10 -- 15:13
 	 * @version 1.0.0
 	 */
 	public enum Priority

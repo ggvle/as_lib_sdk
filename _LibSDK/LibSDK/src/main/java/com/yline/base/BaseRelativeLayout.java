@@ -8,7 +8,7 @@ import com.yline.application.BaseApplication;
 import com.yline.log.LogFileUtil;
 
 /**
- * @author yline 2016/11/9 --> 21:12
+ * @author yline 2016/11/9 -- 21:12
  * @version 1.0.0
  */
 public class BaseRelativeLayout extends RelativeLayout

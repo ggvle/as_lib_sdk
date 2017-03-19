@@ -1,7 +1,6 @@
 package com.yline.test;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public abstract class BaseTestFragment extends BaseFragment
 	protected LinearLayout linearLayout;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_test_base, container, false);
 		this.linearLayout = (LinearLayout) view.findViewById(R.id.ll_base_content);
@@ -29,7 +28,7 @@ public abstract class BaseTestFragment extends BaseFragment
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+	public void onViewCreated(View view, Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
 		testStart();

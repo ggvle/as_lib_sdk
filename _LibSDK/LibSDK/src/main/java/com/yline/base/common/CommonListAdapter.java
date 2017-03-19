@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * T -> 数据类型
+ * T - 数据类型
  *
  * @author YLine
  *         2016年8月1日 下午11:16:12

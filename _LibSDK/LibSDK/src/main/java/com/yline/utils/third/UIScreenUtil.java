@@ -32,9 +32,10 @@ public class UIScreenUtil
 
 	/**
 	 * dp to px
-	 * @param context
-	 * @param dpValue
-	 * @return
+	 *
+	 * @param context 上下文
+	 * @param dpValue dp
+	 * @return px
 	 */
 	public static int dp2px(Context context, float dpValue)
 	{
@@ -45,9 +46,10 @@ public class UIScreenUtil
 
 	/**
 	 * sp to px
-	 * @param context
-	 * @param spValue
-	 * @return
+	 *
+	 * @param context 上下文
+	 * @param spValue sp
+	 * @return px
 	 */
 	public static int sp2px(Context context, float spValue)
 	{
@@ -58,9 +60,10 @@ public class UIScreenUtil
 
 	/**
 	 * px to dp
-	 * @param context
-	 * @param pxValue
-	 * @return
+	 *
+	 * @param context 上下文
+	 * @param pxValue px
+	 * @return dp
 	 */
 	public static float px2dp(Context context, float pxValue)
 	{
@@ -70,9 +73,10 @@ public class UIScreenUtil
 
 	/**
 	 * px to sp
-	 * @param context
-	 * @param pxValue
-	 * @return
+	 *
+	 * @param context 上下文
+	 * @param pxValue px
+	 * @return sp
 	 */
 	public static float px2sp(Context context, float pxValue)
 	{
@@ -81,7 +85,8 @@ public class UIScreenUtil
 
 	/**
 	 * 获得屏幕宽度
-	 * @param context
+	 *
+	 * @param context 上下文
 	 * @return such as 720 if success
 	 */
 	public static int getScreenWidth(Context context)
@@ -94,7 +99,9 @@ public class UIScreenUtil
 
 	/**
 	 * 获取当前屏幕的绝对宽度,(排除状态栏、底部栏、横竖屏等因素)
-	 * @return
+	 *
+	 * @param context 上下文
+	 * @return such as 720 if success
 	 */
 	public static int getAbsoluteScreenWidth(Context context)
 	{
@@ -111,20 +118,16 @@ public class UIScreenUtil
 			{
 				widthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
 				heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-			}
-			catch (IllegalAccessException e)
+			} catch (IllegalAccessException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenWidth<17 IllegalAccessException", e);
-			}
-			catch (IllegalArgumentException e)
+			} catch (IllegalArgumentException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenWidth<17 IllegalArgumentException", e);
-			}
-			catch (InvocationTargetException e)
+			} catch (InvocationTargetException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenWidth<17 InvocationTargetException", e);
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenWidth<17 NoSuchMethodException", e);
 			}
@@ -139,16 +142,13 @@ public class UIScreenUtil
 				Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
 				widthPixels = realSize.x;
 				heightPixels = realSize.y;
-			}
-			catch (IllegalAccessException e)
+			} catch (IllegalAccessException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight<17 IllegalAccessException", e);
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight<17 NoSuchMethodException", e);
-			}
-			catch (InvocationTargetException e)
+			} catch (InvocationTargetException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight<17 InvocationTargetException", e);
 			}
@@ -159,7 +159,9 @@ public class UIScreenUtil
 
 	/**
 	 * 获取当前屏幕的绝对高度,(排除状态栏、底部栏、横竖屏等因素)
-	 * @return
+	 *
+	 * @param context 上下文
+	 * @return such as 1280 if success
 	 */
 	public static int getAbsoluteScreenHeight(Context context)
 	{
@@ -176,16 +178,13 @@ public class UIScreenUtil
 			{
 				widthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
 				heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
-			}
-			catch (IllegalAccessException e)
+			} catch (IllegalAccessException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight<17 IllegalAccessException", e);
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight<17 NoSuchMethodException", e);
-			}
-			catch (InvocationTargetException e)
+			} catch (InvocationTargetException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight<17 InvocationTargetException", e);
 			}
@@ -200,24 +199,20 @@ public class UIScreenUtil
 				Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
 				widthPixels = realSize.x;
 				heightPixels = realSize.y;
-			}
-			catch (IllegalAccessException e)
+			} catch (IllegalAccessException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight>=17 IllegalAccessException", e);
-			}
-			catch (IllegalArgumentException e)
+			} catch (IllegalArgumentException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG,
 						"ScreenUtil getAbsoluteScreenHeight>=17 IllegalArgumentException",
 						e);
-			}
-			catch (InvocationTargetException e)
+			} catch (InvocationTargetException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG,
 						"ScreenUtil getAbsoluteScreenHeight>=17 InvocationTargetException",
 						e);
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
 				LogFileUtil.e(BaseApplication.TAG, "ScreenUtil getAbsoluteScreenHeight>=17 NoSuchMethodException", e);
 			}
@@ -228,7 +223,8 @@ public class UIScreenUtil
 
 	/**
 	 * 获得屏幕高度
-	 * @param context
+	 *
+	 * @param context 上下文
 	 * @return such as 1184 if success
 	 */
 	public static int getScreenHeight(Context context)
@@ -241,7 +237,8 @@ public class UIScreenUtil
 
 	/**
 	 * 获得状态栏高度
-	 * @param context
+	 *
+	 * @param context 上下文
 	 * @return such as 50 if success
 	 */
 	public static int getStatusHeight(Context context)
@@ -253,8 +250,7 @@ public class UIScreenUtil
 			Object object = clazz.newInstance();
 			int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
 			statusHeight = context.getResources().getDimensionPixelSize(height);
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			LogFileUtil.e(BaseApplication.TAG, "ScreenUtil -> getStatusHeight Exception", e);
 		}
@@ -263,8 +259,9 @@ public class UIScreenUtil
 
 	/**
 	 * 获取当前屏幕截图，包含状态栏
-	 * @param activity
-	 * @return
+	 *
+	 * @param activity 上下文
+	 * @return bitmap of screen
 	 */
 	public static Bitmap snapShotWithStatusBar(Activity activity)
 	{
@@ -282,8 +279,9 @@ public class UIScreenUtil
 
 	/**
 	 * 获取当前屏幕截图，不包含状态栏
-	 * @param activity
-	 * @return
+	 *
+	 * @param activity 上下文
+	 * @return bitmap of screen without status bar
 	 */
 	public static Bitmap snapShotWithoutStatusBar(Activity activity)
 	{

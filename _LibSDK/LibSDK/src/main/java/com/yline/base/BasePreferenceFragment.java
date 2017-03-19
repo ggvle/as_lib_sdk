@@ -9,7 +9,7 @@ import com.yline.application.BaseApplication;
  * 添加进入Application管理
  * 注意:这是一个 非V4包 的Fragment
  *
- * @author yline 2017/2/25 --> 11:49
+ * @author yline 2017/2/25 -- 11:49
  * @version 1.0.0
  */
 public class BasePreferenceFragment extends PreferenceFragment

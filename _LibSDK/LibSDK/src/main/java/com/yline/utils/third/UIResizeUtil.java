@@ -17,8 +17,8 @@ import com.yline.log.LogFileUtil;
  * 2,默认自动适配传入的View的父布局
  * 3,使用Apply作为结束方法
  * 4,默认适配宽度,不适配高度【都是按照设计比例适配】
- * <p/>
- * @author yline 2017/2/9 --> 18:39
+ *
+ * @author yline 2017/2/9 -- 18:39
  * @version 1.0.0
  */
 public class UIResizeUtil
@@ -155,7 +155,8 @@ public class UIResizeUtil
 
 	/**
 	 * 实现 view 控制
-	 * @param view
+	 *
+	 * @param view 被控制的view
 	 */
 	public void commit(View view)
 	{
@@ -369,7 +370,8 @@ public class UIResizeUtil
 
 	/**
 	 * 获取屏幕宽度,策略为先从缓存中获取
-	 * @return
+	 *
+	 * @return 屏幕宽度
 	 */
 	public int getAppWidth()
 	{

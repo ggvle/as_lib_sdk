@@ -6,9 +6,8 @@ import java.util.Calendar;
 
 /**
  * 通过时间戳的类
- * @author YLine
- *         <p/>
- *         2016年7月17日 上午12:43:06
+ *
+ * @author YLine 2016年7月17日 上午12:43:06
  */
 public class TimeStampUtil
 {
@@ -21,6 +20,7 @@ public class TimeStampUtil
 
 	/**
 	 * 获取当前时间戳
+	 *
 	 * @return 1451823266000
 	 */
 	public static long getCurrentStamp()
@@ -30,6 +30,7 @@ public class TimeStampUtil
 
 	/**
 	 * 获取前时间戳与当前时间戳的差
+	 *
 	 * @param oldTime 前时间戳
 	 * @return 差(s)
 	 */
@@ -40,6 +41,7 @@ public class TimeStampUtil
 
 	/**
 	 * 是否超时
+	 *
 	 * @param oldTime   旧的时间戳
 	 * @param limitTime 限制的时间(单位ms)
 	 * @return true(超时)
@@ -51,6 +53,7 @@ public class TimeStampUtil
 
 	/**
 	 * 获取一个标准的时间
+	 *
 	 * @param time 1451828457000
 	 * @return 2016-01-03 21:40:57
 	 */
@@ -65,6 +68,7 @@ public class TimeStampUtil
 
 	/**
 	 * 年份
+	 *
 	 * @param time 1451825885000
 	 * @return 2016    (2016/1/3 20:58:5)
 	 */
@@ -77,6 +81,7 @@ public class TimeStampUtil
 
 	/**
 	 * 月份
+	 *
 	 * @param time 1451825885000
 	 * @return 1    (2016/1/3 20:58:5)
 	 */
@@ -89,6 +94,7 @@ public class TimeStampUtil
 
 	/**
 	 * 日期
+	 *
 	 * @param time 1451825885000
 	 * @return 3    (2016/1/3 20:58:5)
 	 */
@@ -101,6 +107,7 @@ public class TimeStampUtil
 
 	/**
 	 * 小时
+	 *
 	 * @param time 1451825885000
 	 * @return 20    (2016/1/3 20:58:5)
 	 */
@@ -113,6 +120,7 @@ public class TimeStampUtil
 
 	/**
 	 * 分钟
+	 *
 	 * @param time 1451825885000
 	 * @return 58    (2016/1/3 20:58:5)
 	 */
@@ -125,7 +133,8 @@ public class TimeStampUtil
 
 	/**
 	 * 秒钟
-	 * @param time 1451825885000
+	 *
+	 * @param time such as 1451825885000
 	 * @return 5    (2016/1/3 20:58:5)
 	 */
 	public static int getSecond(long time)
@@ -137,8 +146,9 @@ public class TimeStampUtil
 
 	/**
 	 * 礼拜几,英式计算,即Sunday算作 1
-	 * @param time
-	 * @return
+	 *
+	 * @param time such as 1451825885000
+	 * @return 6
 	 */
 	public static int getDayOfWeekEnglish(long time)
 	{
@@ -148,9 +158,10 @@ public class TimeStampUtil
 	}
 
 	/**
-	 * 中午礼拜几
+	 * 中文的礼拜几
+	 *
 	 * @param time 时间戳
-	 * @return
+	 * @return 1 or 7
 	 */
 	public static int getDayOfWeek(long time)
 	{

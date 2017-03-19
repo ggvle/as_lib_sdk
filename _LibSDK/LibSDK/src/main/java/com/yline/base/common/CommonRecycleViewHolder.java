@@ -40,6 +40,7 @@ public class CommonRecycleViewHolder extends RecyclerView.ViewHolder
 	 * 获取到相应的资源
 	 *
 	 * @param viewId 子布局id
+	 * @param <T>    View的子类
 	 * @return 子布局
 	 */
 	public <T extends View> T get(int viewId)

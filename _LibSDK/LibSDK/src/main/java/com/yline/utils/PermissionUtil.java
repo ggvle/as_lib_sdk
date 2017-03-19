@@ -41,6 +41,7 @@ public class PermissionUtil
 	 * 动态请求权限
 	 *
 	 * @param activity    请求的上下文
+	 * @param requestCode 请求码
 	 * @param permissions 请求的权限
 	 */
 	public static void request(Activity activity, int requestCode, String... permissions)

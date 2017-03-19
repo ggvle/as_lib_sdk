@@ -12,7 +12,7 @@ import com.yline.utils.PermissionUtil;
 import java.util.List;
 
 /**
- * @author yline 2016/9/4 --> 17:57
+ * @author yline 2016/9/4 -- 17:57
  * @version 1.0.0
  */
 public class BaseAppCompatActivity extends AppCompatActivity
