@@ -1,8 +1,4 @@
 apply plugin: 'com.android.library'
-/*apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-[compileJavaDoc, compileTestJavaDoc]*.options*.encoding = 'utf-8'*/
 
 android {
     compileSdkVersion 25
@@ -38,18 +34,18 @@ ext {
     bintrayName = 'libsdk'
 
     publishedGroupId = 'com.yline.lib'
-    libraryName = 'libsdk'
-    artifact = 'libsdk'
+    libraryName = 'LibSDK'
+    artifact = 'LibSDK'
 
     libraryDescription = 'provider log,util,base,common and ect'
 
     siteUrl = 'https://github.com/yline/as_lib_place '
     gitUrl = 'https://github.com/yline/as_lib_place.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
-    developerId = 'yline95739173'
-    developerName = 'yline95739173'
+    developerId = 'yline'
+    developerName = 'yline'
     developerEmail = 'yline95739173@outlook.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
