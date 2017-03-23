@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author YLine 2016-5-25 - 上午7:32:23
  */
-public abstract class BaseApplication extends Application
+public class BaseApplication extends Application
 {
 	/**
 	 * TAG
