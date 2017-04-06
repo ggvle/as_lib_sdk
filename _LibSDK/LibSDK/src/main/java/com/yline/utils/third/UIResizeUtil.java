@@ -200,7 +200,6 @@ public class UIResizeUtil
 			}
 			else // ViewGroup, Gallery
 			{
-				LogFileUtil.e(BaseApplication.TAG, "UILayoutUtils -> setLayoutAll parent window error");
 				type = OTHERS_LAYOUT;
 				if (null == param)
 				{

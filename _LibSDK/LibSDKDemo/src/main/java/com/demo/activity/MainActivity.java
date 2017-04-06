@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.demo.fragment.FileFragment;
 import com.demo.fragment.FunctionFragment;
+import com.demo.fragment.UtilFragment;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
@@ -24,8 +25,7 @@ public class MainActivity extends BaseAppCompatActivity
 
 	public static final String TAG_HANDLE_PERMISSION = "Deny permissions : ";
 
-
-	private static final String[] PAGER_TITLE = {"基础", "拓展功能"};
+	private static final String[] PAGER_TITLE = {"储存功能", "拓展功能", "工具类"};
 
 	private List<BaseFragment> fragmentList = new ArrayList<>();
 
@@ -37,6 +37,7 @@ public class MainActivity extends BaseAppCompatActivity
 
 		fragmentList.add(new FileFragment());
 		fragmentList.add(new FunctionFragment());
+		fragmentList.add(new UtilFragment());
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
