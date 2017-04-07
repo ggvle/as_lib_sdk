@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -168,18 +167,6 @@ public class BaseApplication extends Application
 	{
 		LogFileUtil.m("removeServiceForRecord:" + service.getClass().getSimpleName());
 		mServiceList.remove(service.getClass().getSimpleName());
-	}
-
-	@Override
-	public Context getApplicationContext()
-	{
-		return super.getApplicationContext();
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		super.onConfigurationChanged(newConfig);
 	}
 
 	/**
