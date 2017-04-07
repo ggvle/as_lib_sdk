@@ -1,4 +1,4 @@
-package com.yline.base.common;
+package com.yline.common;
 
 import java.util.Collection;
 

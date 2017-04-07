@@ -17,6 +17,7 @@ public final class SDCardUtil
 
 	/**
 	 * 获取SD卡路径,内置
+	 *
 	 * @return /storage/emulated/0/
 	 */
 	public static String getSDCardPath()
@@ -26,6 +27,7 @@ public final class SDCardUtil
 
 	/**
 	 * 获取SD卡的已使用容量 单位byte
+	 *
 	 * @return 0 if SDcard cannot be use
 	 */
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -55,6 +57,7 @@ public final class SDCardUtil
 
 	/**
 	 * 获取SD卡的剩余容量 单位byte
+	 *
 	 * @return 0 if SDCard cannot be use
 	 */
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -85,6 +88,7 @@ public final class SDCardUtil
 
 	/**
 	 * 获取系统存储路径
+	 *
 	 * @return /System/
 	 */
 	public static String getRootDirectoryPath()
@@ -94,6 +98,7 @@ public final class SDCardUtil
 
 	/**
 	 * 判断SDCard是否可用
+	 *
 	 * @return true if can be use
 	 */
 	public static boolean isSDCardEnable()

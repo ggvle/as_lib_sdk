@@ -1,4 +1,4 @@
-package com.yline.base.common;
+package com.yline.common;
 
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;

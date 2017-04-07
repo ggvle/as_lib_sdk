@@ -1,5 +1,6 @@
 package com.demo.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.demo.application.MainApplication;
@@ -13,7 +14,7 @@ import com.yline.test.BaseTestFragment;
 public class FileFragment extends BaseTestFragment
 {
 	@Override
-	protected void testStart()
+	protected void testStart(View view, Bundle savedInstanceState)
 	{
 		addButton("baseApplication", new View.OnClickListener()
 		{

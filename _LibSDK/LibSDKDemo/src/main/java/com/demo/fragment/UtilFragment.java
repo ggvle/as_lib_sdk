@@ -1,15 +1,16 @@
 package com.demo.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.yline.log.LogFileUtil;
 import com.yline.test.BaseTestFragment;
-import com.yline.utils.third.TimeConvertUtil;
+import com.yline.utils.TimeConvertUtil;
 
 public class UtilFragment extends BaseTestFragment
 {
 	@Override
-	protected void testStart()
+	protected void testStart(View view, Bundle savedInstanceState)
 	{
 		addButton("时间转换", new View.OnClickListener()
 		{

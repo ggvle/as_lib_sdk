@@ -1,6 +1,7 @@
 package com.yline.test;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,8 @@ import android.widget.TextView;
 
 import com.lib.sdk.R;
 import com.yline.base.BaseFragment;
-import com.yline.utils.third.UIResizeUtil;
-import com.yline.utils.third.UIScreenUtil;
+import com.yline.utils.UIResizeUtil;
+import com.yline.utils.UIScreenUtil;
 
 public abstract class BaseTestFragment extends BaseFragment
 {
@@ -31,10 +32,10 @@ public abstract class BaseTestFragment extends BaseFragment
 	public void onViewCreated(View view, Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
-		testStart();
+		testStart(view, savedInstanceState);
 	}
 
-	protected abstract void testStart();
+	protected abstract void testStart(View view, Bundle savedInstanceState);
 
 	protected Button addButton(String content, View.OnClickListener listener)
 	{
@@ -52,6 +53,37 @@ public abstract class BaseTestFragment extends BaseFragment
 		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
+		linearLayout.addView(editText);
+		return editText;
+	}
+
+	protected EditText addEditText(String hintContent, String content)
+	{
+		EditText editText = new EditText(getContext());
+		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		editText.setHint(hintContent);
+		editText.setText(content);
+		linearLayout.addView(editText);
+		return editText;
+	}
+
+	protected EditText addEditNumber(String hintContent)
+	{
+		EditText editText = new EditText(getContext());
+		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		editText.setHint(hintContent);
+		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+		linearLayout.addView(editText);
+		return editText;
+	}
+
+	protected EditText addEditNumber(String hintContent, String content)
+	{
+		EditText editText = new EditText(getContext());
+		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		editText.setHint(hintContent);
+		editText.setText(content);
+		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
 		linearLayout.addView(editText);
 		return editText;
 	}

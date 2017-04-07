@@ -1,1 +1,1 @@
-include ':LibSDK', ':LibSDKDemo', ':AttachAppTimer', ':AttachAppNetState'
+include ':LibSDK', ':LibSDKDemo'

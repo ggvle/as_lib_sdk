@@ -1,5 +1,6 @@
 package com.demo.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.demo.activity.LeakCanaryActivity;
@@ -12,7 +13,7 @@ import com.yline.test.BaseTestFragment;
 public class FunctionFragment extends BaseTestFragment
 {
 	@Override
-	protected void testStart()
+	protected void testStart(View view, Bundle savedInstanceState)
 	{
 		// 测试 LeakCanaryActivity(不能放入LibSDK中,否则失效)
 		addButton("leakCanary Activity", new View.OnClickListener()

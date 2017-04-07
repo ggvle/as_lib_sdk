@@ -11,15 +11,12 @@ import android.view.View;
 import com.demo.application.MainApplication;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.base.common.CommonRecycleViewHolder;
-import com.yline.base.common.CommonRecyclerAdapter;
+import com.yline.common.CommonRecycleViewHolder;
+import com.yline.common.CommonRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by yline on 2016/11/14.
- */
 public class CommonRecyclerActivity extends BaseAppCompatActivity
 {
 	private Random random;
@@ -123,6 +120,7 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 
 	/**
 	 * 开启该CommonListActivity
+	 *
 	 * @param context
 	 */
 	public static void actionStart(Context context)

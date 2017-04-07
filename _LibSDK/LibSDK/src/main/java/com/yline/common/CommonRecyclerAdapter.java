@@ -1,4 +1,4 @@
-package com.yline.base.common;
+package com.yline.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
