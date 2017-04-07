@@ -1,4 +1,4 @@
-package com.yline.utils.third;
+package com.yline.utils;
 
 import android.app.Activity;
 import android.content.Context;

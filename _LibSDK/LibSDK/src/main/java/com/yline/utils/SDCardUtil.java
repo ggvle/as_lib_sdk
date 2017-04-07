@@ -1,4 +1,4 @@
-package com.yline.utils.third;
+package com.yline.utils;
 
 import android.annotation.TargetApi;
 import android.os.Build;

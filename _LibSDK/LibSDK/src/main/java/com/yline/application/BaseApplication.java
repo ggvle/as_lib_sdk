@@ -13,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lib.sdk.R;
-import com.yline.application.task.Executor;
-import com.yline.application.task.PriorityRunnable;
-import com.yline.application.task.SDKExecutor;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
 import com.yline.utils.LogUtil;
@@ -40,11 +37,6 @@ public class BaseApplication extends Application
 	 */
 	public static final String TAG = "LibSDK";
 
-	/**
-	 * 线程池
-	 */
-	private static final Executor executor = new SDKExecutor();
-	
 	/**
 	 * Activity管理
 	 */
@@ -78,7 +70,7 @@ public class BaseApplication extends Application
 			{
 				case SDKConstant.HANDLER_PALPITATION:
 					LogFileUtil.m(TAG, "this time = " + System.currentTimeMillis() + ",this thread = " + Thread.currentThread().getId());
-					handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLITATION_TIME);
+					handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLICATION_TIME);
 					break;
 				case SDKConstant.HANDLER_TOAST:
 					showToast(getApplication(), (String) msg.obj);
@@ -231,7 +223,7 @@ public class BaseApplication extends Application
 			LogFileUtil.m("应用启动 *** application start id = " + Thread.currentThread().getId());
 		}
 
-		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLITATION_TIME);
+		handler.sendEmptyMessageDelayed(SDKConstant.HANDLER_PALPITATION, SDKConstant.APPLICATION_TIME);
 	}
 
 	/**
@@ -268,16 +260,5 @@ public class BaseApplication extends Application
 	public static void toast(String content)
 	{
 		handler.obtainMessage(SDKConstant.HANDLER_TOAST, content).sendToTarget();
-	}
-
-	/**
-	 * 运行一个线程,并且放入线程池中
-	 *
-	 * @param runnable 运行现场
-	 * @param priority 优先级
-	 */
-	public static void start(Runnable runnable, PriorityRunnable.Priority priority)
-	{
-		executor.execute(new PriorityRunnable(runnable, priority));
 	}
 }
