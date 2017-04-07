@@ -11,8 +11,8 @@ import android.view.View;
 import com.demo.application.MainApplication;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.CommonRecycleViewHolder;
 import com.yline.common.CommonRecyclerAdapter;
+import com.yline.common.CommonRecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -112,7 +112,7 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void setViewContent(CommonRecycleViewHolder holder, int position)
+		public void setViewContent(CommonRecyclerViewHolder holder, int position)
 		{
 			holder.setText(R.id.tv_num, sList.get(position).getContent());
 		}

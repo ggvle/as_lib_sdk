@@ -14,7 +14,7 @@ import java.util.List;
  * @author yline 2017/3/19 -- 3:05
  * @version 1.0.0
  */
-public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecycleViewHolder> implements ICommonAdapterCallback<T>
+public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecyclerViewHolder> implements ICommonAdapterCallback<T>
 {
 	protected List<T> sList;
 
@@ -45,9 +45,9 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	}
 
 	@Override
-	public CommonRecycleViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
 	{
-		return new CommonRecycleViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
+		return new CommonRecyclerViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
 	}
 
 	/**
@@ -61,10 +61,10 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	 * @param holder   子控件容器
 	 * @param position 当前item位置
 	 */
-	public abstract void setViewContent(final CommonRecycleViewHolder holder, final int position);
+	public abstract void setViewContent(final CommonRecyclerViewHolder holder, final int position);
 
 	@Override
-	public void onBindViewHolder(final CommonRecycleViewHolder holder, final int position)
+	public void onBindViewHolder(final CommonRecyclerViewHolder holder, final int position)
 	{
 		if (null != onClickListener)
 		{

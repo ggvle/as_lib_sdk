@@ -6,16 +6,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CommonRecycleViewHolder extends RecyclerView.ViewHolder
+public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 {
 	private SparseArrayCompat<View> sArray = new SparseArrayCompat<>();
 
-	public CommonRecycleViewHolder(View itemView)
+	public CommonRecyclerViewHolder(View itemView)
 	{
 		super(itemView);
 	}
 
-	public CommonRecycleViewHolder setText(int viewId, String content)
+	public CommonRecyclerViewHolder setText(int viewId, String content)
 	{
 		TextView textView = this.get(viewId);
 		textView.setText(content);
@@ -29,7 +29,7 @@ public class CommonRecycleViewHolder extends RecyclerView.ViewHolder
 	 * @param resId  图片背景id
 	 * @return 返回当前类
 	 */
-	public CommonRecycleViewHolder setImage(int viewId, int resId)
+	public CommonRecyclerViewHolder setImage(int viewId, int resId)
 	{
 		ImageView imageView = this.get(viewId);
 		imageView.setBackgroundResource(resId);
