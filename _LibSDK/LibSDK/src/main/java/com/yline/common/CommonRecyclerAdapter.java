@@ -21,12 +21,13 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 		return new CommonRecyclerViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
 	}
 
+	@Override
+	public abstract void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position);
+
 	/**
 	 * @return item 资源文件
 	 */
 	public abstract int getItemRes();
-
-	public abstract void onBindViewHolder(final CommonRecyclerViewHolder viewHolder, final int position);
 
 	@Override
 	public int getItemCount()
