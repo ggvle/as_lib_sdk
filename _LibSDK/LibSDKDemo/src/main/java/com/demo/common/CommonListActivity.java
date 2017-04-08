@@ -126,12 +126,12 @@ public class CommonListActivity extends BaseActivity
 		{
 			return R.layout.item_common_list;
 		}
-		
+
 		@Override
-		protected void setViewContent(int position, ViewGroup parent, ViewHolder item)
+		protected void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, int position)
 		{
-			item.setText(R.id.tv_id, sList.get(position).getId() + "");
-			item.setText(R.id.tv_name, sList.get(position).getName());
+			viewHolder.setText(R.id.tv_id, sList.get(position).getId() + "");
+			viewHolder.setText(R.id.tv_name, sList.get(position).getName());
 		}
 	}
 

@@ -1,13 +1,31 @@
 package com.yline.common;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
- * @author yline 2017/3/19 -- 3:06
+ * 数据操作
+ *
+ * @author yline 2017/4/8 -- 13:21
  * @version 1.0.0
  */
 public interface ICommonAdapterCallback<E>
 {
+	/**
+	 * 获取到对应的view
+	 *
+	 * @param position
+	 * @return
+	 */
+	public E getItem(int position);
+
+	/**
+	 * 设置全部的数据
+	 *
+	 * @param list
+	 */
+	public void setDataList(List<E> list);
+
 	/**
 	 * Attempts to add {@code object} to the contents of this
 	 * {@code Collection} (optional).

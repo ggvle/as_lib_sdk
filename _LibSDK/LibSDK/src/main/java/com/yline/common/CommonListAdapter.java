@@ -65,7 +65,7 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		setViewContent(position, parent, holder);
+		onBindViewHolder(parent, holder, position);
 
 		return convertView;
 	}
@@ -79,13 +79,14 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	/**
 	 * 对内容设置
 	 *
-	 * @param position 当前item位置
-	 * @param parent   副控件(一般不用)
-	 * @param item     ViewHolder
+	 * @param parent     副控件(一般不用)
+	 * @param viewHolder ViewHolder
+	 * @param position   当前item位置
 	 */
-	protected abstract void setViewContent(int position, ViewGroup parent, ViewHolder item);
+	protected abstract void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, int position);
 
-	public void set(List<T> tList)
+	@Override
+	public void setDataList(List<T> tList)
 	{
 		this.sList = tList;
 		this.notifyDataSetChanged();

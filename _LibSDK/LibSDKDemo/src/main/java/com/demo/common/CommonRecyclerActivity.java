@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.demo.application.MainApplication;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.common.CommonRecyclerAdapter;
@@ -47,15 +45,6 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 		recyclerView.setLayoutManager(new GridLayoutManager(CommonRecyclerActivity.this, 4));
 		decor = new DividerGridItemDecoration(CommonRecyclerActivity.this);
 		recyclerView.addItemDecoration(decor, 0);
-
-		homeAdapter.setOnClickListener(new CommonRecyclerAdapter.OnClickListener()
-		{
-			@Override
-			public void onClick(View v, int position)
-			{
-				MainApplication.toast(homeAdapter.getItem(position).getContent());
-			}
-		});
 	}
 
 	private void initData()
@@ -112,9 +101,9 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void setViewContent(CommonRecyclerViewHolder holder, int position)
+		public void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position)
 		{
-			holder.setText(R.id.tv_num, sList.get(position).getContent());
+			viewHolder.setText(R.id.tv_num, sList.get(position).getContent());
 		}
 	}
 

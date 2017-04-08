@@ -39,17 +39,27 @@ public class ViewHolder
 	}
 
 	/**
+	 * 获取当前的View
+	 *
+	 * @return
+	 */
+	public View getItemView()
+	{
+		return this.sView;
+	}
+
+	/**
 	 * 要求是TextView;   这样的方法就可以多写几个,然后就可以作死的连缀了
 	 *
 	 * @param viewId  资源
 	 * @param content 内容
 	 * @return 当前ViewHolder
 	 */
-	public ViewHolder setText(int viewId, String content)
+	public TextView setText(int viewId, String content)
 	{
 		TextView textView = this.get(viewId);
 		textView.setText(content);
-		return this;
+		return textView;
 	}
 	
 	/**
@@ -59,10 +69,10 @@ public class ViewHolder
 	 * @param resId  图片背景id
 	 * @return 当前ViewHolder
 	 */
-	public ViewHolder setImageBackgroundResource(int viewId, int resId)
+	public ImageView setImageBackgroundResource(int viewId, int resId)
 	{
 		ImageView imageView = this.get(viewId);
 		imageView.setBackgroundResource(resId);
-		return this;
+		return imageView;
 	}
 }

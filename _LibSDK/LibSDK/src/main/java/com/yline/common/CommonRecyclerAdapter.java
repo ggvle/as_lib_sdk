@@ -2,11 +2,8 @@ package com.yline.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,32 +14,6 @@ import java.util.List;
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecyclerViewHolder> implements ICommonAdapterCallback<T>
 {
 	protected List<T> sList;
-
-	private OnClickListener onClickListener;
-
-	private OnTouchListener onTouchListener;
-
-	private OnLongClickListener onLongClickListener;
-
-	public CommonRecyclerAdapter()
-	{
-		this.sList = new ArrayList<>();
-	}
-
-	public void setOnClickListener(OnClickListener listener)
-	{
-		this.onClickListener = listener;
-	}
-
-	public void setOnTouchListener(OnTouchListener listener)
-	{
-		this.onTouchListener = listener;
-	}
-
-	public void setOnLongClickListener(OnLongClickListener listener)
-	{
-		this.onLongClickListener = listener;
-	}
 
 	@Override
 	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -55,70 +26,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	 */
 	public abstract int getItemRes();
 
-	/**
-	 * 对内容设置
-	 *
-	 * @param holder   子控件容器
-	 * @param position 当前item位置
-	 */
-	public abstract void setViewContent(final CommonRecyclerViewHolder holder, final int position);
-
-	@Override
-	public void onBindViewHolder(final CommonRecyclerViewHolder holder, final int position)
-	{
-		if (null != onClickListener)
-		{
-			holder.itemView.setOnClickListener(new View.OnClickListener()
-			{
-				@Override
-				public void onClick(View v)
-				{
-					onClickListener.onClick(v, position);
-				}
-			});
-		}
-
-		if (null != onLongClickListener)
-		{
-			holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
-			{
-				@Override
-				public boolean onLongClick(View v)
-				{
-					return onLongClickListener.onClick(v, position);
-				}
-			});
-		}
-
-		if (null != onTouchListener)
-		{
-			holder.itemView.setOnTouchListener(new View.OnTouchListener()
-			{
-				@Override
-				public boolean onTouch(View v, MotionEvent event)
-				{
-					return onTouchListener.onClick(v, position);
-				}
-			});
-		}
-
-		setViewContent(holder, position);
-	}
-
-	public interface OnClickListener
-	{
-		void onClick(View v, int position);
-	}
-
-	public interface OnLongClickListener
-	{
-		boolean onClick(View v, int position);
-	}
-
-	public interface OnTouchListener
-	{
-		boolean onClick(View v, int position);
-	}
+	public abstract void onBindViewHolder(final CommonRecyclerViewHolder viewHolder, final int position);
 
 	@Override
 	public int getItemCount()
@@ -132,6 +40,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Comm
 	 * @param position 位置
 	 * @return 某项数据
 	 */
+	@Override
 	public T getItem(int position)
 	{
 		if (position >= sList.size())

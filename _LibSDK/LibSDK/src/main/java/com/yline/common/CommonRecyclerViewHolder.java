@@ -15,27 +15,6 @@ public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 		super(itemView);
 	}
 
-	public CommonRecyclerViewHolder setText(int viewId, String content)
-	{
-		TextView textView = this.get(viewId);
-		textView.setText(content);
-		return this;
-	}
-
-	/**
-	 * 要求是ImageView;
-	 *
-	 * @param viewId 资源id
-	 * @param resId  图片背景id
-	 * @return 返回当前类
-	 */
-	public CommonRecyclerViewHolder setImage(int viewId, int resId)
-	{
-		ImageView imageView = this.get(viewId);
-		imageView.setBackgroundResource(resId);
-		return this;
-	}
-
 	/**
 	 * 获取到相应的资源
 	 *
@@ -51,5 +30,36 @@ public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 			sArray.put(viewId, view);
 		}
 		return (T) sArray.get(viewId);
+	}
+
+	/**
+	 * 获取当前ViewHolder的View
+	 *
+	 * @return
+	 */
+	public View getItemView()
+	{
+		return this.itemView;
+	}
+
+	public TextView setText(int viewId, String content)
+	{
+		TextView textView = this.get(viewId);
+		textView.setText(content);
+		return textView;
+	}
+
+	/**
+	 * 要求是ImageView;
+	 *
+	 * @param viewId 资源id
+	 * @param resId  图片背景id
+	 * @return 返回当前类
+	 */
+	public ImageView setImageViewBackground(int viewId, int resId)
+	{
+		ImageView imageView = this.get(viewId);
+		imageView.setBackgroundResource(resId);
+		return imageView;
 	}
 }
