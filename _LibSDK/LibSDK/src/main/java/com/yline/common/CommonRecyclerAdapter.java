@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +15,11 @@ import java.util.List;
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<CommonRecyclerViewHolder> implements ICommonAdapterCallback<T>
 {
 	protected List<T> sList;
+
+	public CommonRecyclerAdapter()
+	{
+		this.sList = new ArrayList<>();
+	}
 
 	@Override
 	public CommonRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
