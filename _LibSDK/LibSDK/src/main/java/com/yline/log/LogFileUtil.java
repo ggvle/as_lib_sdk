@@ -663,21 +663,21 @@ public final class LogFileUtil
 			return;
 		}
 		
-		File dirFile = FileUtil.createFileDir(path + File.separator);
+		File dirFile = FileUtil.createDir(path + File.separator);
 		if (null == dirFile)
 		{
 			LogUtil.e(TAG_ERROR + "sdcard dirFile create failed path = " + path + logDirPath);
 			return;
 		}
 		
-		File file = FileUtil.createFile(dirFile, START_COUNT + LOG_FILE_TXT_NAME);
+		File file = FileUtil.create(dirFile, START_COUNT + LOG_FILE_TXT_NAME);
 		if (null == file)
 		{
 			LogUtil.e(TAG_ERROR + "sdcard file create failed");
 			return;
 		}
 		
-		if (!FileUtil.writeToFile(file, content))
+		if (!FileUtil.write(file, content))
 		{
 			LogUtil.e(TAG_ERROR + "FileUtil write failed");
 			return;
@@ -697,7 +697,7 @@ public final class LogFileUtil
 			{
 				if (count == MAX_COUNT)
 				{
-					if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME) && !FileUtil.deleteFile(dirFile, MAX_COUNT + LOG_FILE_TXT_NAME))
+					if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME) && !FileUtil.delete(dirFile, MAX_COUNT + LOG_FILE_TXT_NAME))
 					{
 						LogUtil.e(TAG_ERROR + "FileUtil deleteFile failed");
 						return;
@@ -705,7 +705,7 @@ public final class LogFileUtil
 				}
 				else
 				{
-					if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME) && !FileUtil.renameFile(dirFile, count + LOG_FILE_TXT_NAME, (count + 1) + LOG_FILE_TXT_NAME))
+					if (FileUtil.isExist(dirFile, count + LOG_FILE_TXT_NAME) && !FileUtil.rename(dirFile, count + LOG_FILE_TXT_NAME, (count + 1) + LOG_FILE_TXT_NAME))
 					{
 						LogUtil.e(TAG_ERROR + "FileUtil renameFile failed");
 						return;

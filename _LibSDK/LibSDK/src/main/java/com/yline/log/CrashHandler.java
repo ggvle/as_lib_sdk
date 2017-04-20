@@ -108,7 +108,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 		
 		// 收集错误信息
-		if (null != FileUtil.getPath())
+		if (null != FileUtil.getPathTop())
 		{
 			handleException(ex);
 		}
@@ -263,7 +263,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 		
 		// 路径名
-		File dirFile = FileUtil.createFileDir(path + File.separator);
+		File dirFile = FileUtil.createDir(path + File.separator);
 		if (null == dirFile)
 		{
 			LogUtil.e(TAG + " sdcard dirFile create failed");
@@ -272,7 +272,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		
 		// 文件名
 		crash_txt_time = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", Locale.CHINA).format(Long.valueOf(System.currentTimeMillis()));
-		File file = FileUtil.createFile(dirFile, crash_txt_time + CRASH_TXT_FILE);
+		File file = FileUtil.create(dirFile, crash_txt_time + CRASH_TXT_FILE);
 		if (null == file)
 		{
 			LogUtil.e(TAG + " sdcard file create failed");
@@ -280,7 +280,7 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		}
 		
 		// 写入日志
-		if (!FileUtil.writeToFile(file, content))
+		if (!FileUtil.write(file, content))
 		{
 			LogUtil.e(TAG + " write failed");
 			return;

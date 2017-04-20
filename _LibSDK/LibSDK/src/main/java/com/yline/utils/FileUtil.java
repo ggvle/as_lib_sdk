@@ -1,18 +1,14 @@
 package com.yline.utils;
 
+import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
 import java.util.Comparator;
 
 /**
@@ -30,7 +26,7 @@ public class FileUtil
 	 *
 	 * @return /storage/emulated/0/ or null
 	 */
-	public static String getPath()
+	public static String getPathTop()
 	{
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
 		{
@@ -43,24 +39,120 @@ public class FileUtil
 	}
 
 	/**
-	 * android.permission.WRITE_EXTERNAL_STORAGE
-	 * 创建一个文件夹
+	 * 获取内置sd卡, 最上层路径
 	 *
-	 * @param path such as /storage/emulated/0/Yline/Log/
-	 * @return file or null
+	 * @return /storage/emulated/0/ or null
 	 */
-	public static File createFileDir(String path)
+	public static File getFileTop()
 	{
-		File pathFile = new File(path);
-
-		if (!pathFile.exists())
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
 		{
-			if (!pathFile.mkdirs())
-			{
-				return null;
-			}
+			return Environment.getExternalStorageDirectory();
 		}
-		return pathFile;
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * 获取内置sd卡, 最上层路径
+	 *
+	 * @param fileName
+	 * @return /storage/emulated/0/ or null
+	 */
+	public static File getFileTop(String fileName)
+	{
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+		{
+			return Environment.getExternalStoragePublicDirectory(fileName);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * 获取内置sd卡, 最上层路径
+	 *
+	 * @param dirName
+	 * @param fileName
+	 * @return /storage/emulated/0/ or null
+	 */
+	public static File getFileTop(String dirName, String fileName)
+	{
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+		{
+			File dir = Environment.getExternalStoragePublicDirectory(dirName);
+			return FileUtil.create(dir, fileName);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * @param context
+	 * @param dirName
+	 * @return /storage/emulated/0/Android/data/包名/files/ + dirName
+	 */
+	public static File getFileExternalDir(Context context, String dirName)
+	{
+		return context.getExternalFilesDir(dirName);
+	}
+
+	/**
+	 * @param context
+	 * @param dirName
+	 * @param fileName
+	 * @return /storage/emulated/0/Android/data/包名/files/ + dirName/ + fileName
+	 */
+	public static File getFileExternal(Context context, String dirName, String fileName)
+	{
+		File dir = context.getExternalFilesDir(dirName);
+		return FileUtil.create(dir, fileName);
+	}
+
+	/**
+	 * @param context
+	 * @return /storage/emulated/0/Android/data/包名/cache
+	 */
+	public static File getFileExternalCacheDir(Context context)
+	{
+		return context.getExternalCacheDir();
+	}
+
+	/**
+	 * @param context
+	 * @return /data/data/包名/files
+	 */
+	public static File getFileInner(Context context)
+	{
+		return context.getFilesDir();
+	}
+
+	/**
+	 * @param context
+	 * @return /data/data/包名/cache
+	 */
+	public static File getFileInnerCache(Context context)
+	{
+		return context.getCacheDir();
+	}
+
+	/**
+	 * 读取 Assets 中的 Stream文件
+	 *
+	 * @param context
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
+	public static InputStream getStreamAssets(Context context, String fileName) throws IOException
+	{
+		return context.getAssets().open(fileName);
 	}
 
 	/**
@@ -71,7 +163,7 @@ public class FileUtil
 	 * @param name 文件名     such as log.txt
 	 * @return file or null
 	 */
-	public static File createFile(File dir, String name)
+	public static File create(File dir, String name)
 	{
 		if (null == dir || TextUtils.isEmpty(name))
 		{
@@ -102,6 +194,27 @@ public class FileUtil
 	}
 
 	/**
+	 * android.permission.WRITE_EXTERNAL_STORAGE
+	 * 创建一个文件夹
+	 *
+	 * @param path such as /storage/emulated/0/Yline/Log/
+	 * @return file or null
+	 */
+	public static File createDir(String path)
+	{
+		File pathFile = new File(path);
+
+		if (!pathFile.exists())
+		{
+			if (!pathFile.mkdirs())
+			{
+				return null;
+			}
+		}
+		return pathFile;
+	}
+
+	/**
 	 * 是否存在该文件
 	 *
 	 * @param dir  文件目录
@@ -126,7 +239,7 @@ public class FileUtil
 	 * @param name 文件名  such as log.txt
 	 * @return false(参数错误、不存在该文件、删除失败)
 	 */
-	public static boolean deleteFile(File dir, String name)
+	public static boolean delete(File dir, String name)
 	{
 		if (null == dir || TextUtils.isEmpty(name))
 		{
@@ -150,7 +263,7 @@ public class FileUtil
 	 * @param newName 文件名  such as log1.txt
 	 * @return false(参数错误、不存在该文件、重命名失败)
 	 */
-	public static boolean renameFile(File dir, String oldName, String newName)
+	public static boolean rename(File dir, String oldName, String newName)
 	{
 		if (null == dir || TextUtils.isEmpty(oldName))
 		{
@@ -173,123 +286,21 @@ public class FileUtil
 	}
 
 	/**
-	 * 之后统计乱码的情况(理论是不乱码的)
-	 * 写内容到文件中,尾随后面写
-	 *
 	 * @param file    文件
 	 * @param content 内容
 	 * @return false(写入失败, 写入工具关闭失败)
 	 */
-	public static boolean writeToFile(File file, String content)
+	public static boolean write(File file, String content)
 	{
-		FileWriter fileWriter = null;
 		try
 		{
-			fileWriter = new FileWriter(file, true);
-			fileWriter.append(content + "\n");
+			FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+			IOUtil.write(content + "\n", fileOutputStream);
+			IOUtil.close(fileOutputStream);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 			return false;
-		} finally
-		{
-			if (null != fileWriter)
-			{
-				try
-				{
-					fileWriter.close();
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * 之后统计乱码的情况(理论是不乱码的)
-	 * 写内容到文件中,尾随后面写
-	 *
-	 * @param file    文件
-	 * @param content 内容
-	 * @return false(写入失败, 写入工具关闭失败)
-	 */
-	public static boolean writeToFileNew1(File file, String content)
-	{
-		PrintStream printStream = null;
-
-		try
-		{
-			printStream = new PrintStream(new FileOutputStream(file, true), false, "utf-8");
-			printStream.println(content);
-		} catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-			return false;
-		} finally
-		{
-			if (null != printStream)
-			{
-				printStream.close();
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * 之后统计乱码的情况(理论是不乱码的)
-	 * 写内容到文件中,尾随后面写
-	 *
-	 * @param file    文件
-	 * @param content 内容
-	 * @return false(写入失败, 写入工具关闭失败)
-	 */
-	public static boolean writeToFileNew2(File file, String content)
-	{
-		OutputStreamWriter outputStreamWriter = null;
-		BufferedWriter bufferedWriter = null;
-		try
-		{
-			outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file, true), "utf-8");
-			bufferedWriter = new BufferedWriter(outputStreamWriter);
-			bufferedWriter.append(content + "\n");
-		} catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-			return false;
-		} finally
-		{
-			try
-			{
-				if (null != bufferedWriter)
-				{
-					bufferedWriter.close();
-				}
-				if (null != outputStreamWriter)
-				{
-					outputStreamWriter.close();
-
-				}
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-				return false;
-			}
 		}
 		return true;
 	}
