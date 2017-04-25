@@ -3,7 +3,7 @@ package com.lib.http.helper;
 /**
  * Http请求回调
  *
- * @author yline 2017/2/22 --> 17:07
+ * @author yline 2017/2/22 -- 17:07
  * @version 1.0.0
  */
 public interface IHttpResponse<T>

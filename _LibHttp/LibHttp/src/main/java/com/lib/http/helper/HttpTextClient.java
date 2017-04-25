@@ -10,7 +10,7 @@ import okhttp3.OkHttpClient;
  * 提供,统一处理Http的Client;
  * 这个用来处理文字和不被清除的内存(排除图片+视频)
  *
- * @author yline 2017/2/28 --> 17:29
+ * @author yline 2017/2/28 -- 17:29
  * @version 1.0.0
  */
 public class HttpTextClient extends OkHttpClient

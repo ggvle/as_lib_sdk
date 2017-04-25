@@ -24,7 +24,7 @@ import okhttp3.Response;
 /**
  * 实现Http请求管理,并进行Http请求
  *
- * @author yline 2017/3/9 --> 13:14
+ * @author yline 2017/3/9 -- 13:14
  * @version 1.0.0
  */
 public class XTextHttp<Result>
