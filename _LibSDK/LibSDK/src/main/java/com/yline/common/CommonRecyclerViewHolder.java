@@ -8,11 +8,12 @@ import android.widget.TextView;
 
 public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 {
-	private SparseArrayCompat<View> sArray = new SparseArrayCompat<>();
+	private SparseArrayCompat<View> sArray;
 
 	public CommonRecyclerViewHolder(View itemView)
 	{
 		super(itemView);
+		sArray = new SparseArrayCompat<>();
 	}
 
 	/**

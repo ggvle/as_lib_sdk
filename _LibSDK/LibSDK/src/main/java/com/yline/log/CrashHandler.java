@@ -8,6 +8,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 
 import com.yline.application.BaseApplication;
+import com.yline.application.SDKManager;
 import com.yline.utils.FileUtil;
 import com.yline.utils.LogUtil;
 
@@ -72,9 +73,9 @@ public final class CrashHandler implements UncaughtExceptionHandler
 		private static CrashHandler instance = new CrashHandler();
 	}
 	
-	public void init(BaseApplication application)
+	public void init(Application application)
 	{
-		isDebug = application.initConfig().isSDKLog();
+		isDebug = SDKManager.getSdkConfig().isSDKLog();
 		crashDirPath = application.getExternalFilesDir(TAG).getAbsolutePath();
 
 		if (isDebug)

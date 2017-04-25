@@ -53,6 +53,8 @@ public class SDKManager
 
 	private static Application mApplication;
 
+	private static SDKConfig mSdkConfig;
+
 	// handler相关
 	private static Handler handler = new Handler()
 	{
@@ -82,9 +84,10 @@ public class SDKManager
 		throw new UnsupportedOperationException("cannot be instantiated");
 	}
 
-	public static void init(BaseApplication application, SDKConfig sdkConfig)
+	public static void init(Application application, SDKConfig sdkConfig)
 	{
 		SDKManager.mApplication = application;  // 初始化全局变量
+		SDKManager.mSdkConfig = sdkConfig;
 
 		// 异常崩溃日志
 		CrashHandler.getInstance().init(application);
@@ -161,6 +164,14 @@ public class SDKManager
 	public static Application getApplication()
 	{
 		return mApplication;
+	}
+
+	/**
+	 * @return 配置的SDKConfig，因为onCreate为应用入口, 因此不用担心为null
+	 */
+	public static SDKConfig getSdkConfig()
+	{
+		return mSdkConfig;
 	}
 
 	public static void addActivity(Activity activity)

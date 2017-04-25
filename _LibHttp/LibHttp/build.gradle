@@ -9,6 +9,9 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -25,17 +28,17 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:recyclerview-v7:25.1.1'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.google.code.gson:gson:2.8.0'
 }
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'libsdk'
+    bintrayName = 'libhttp'
 
     publishedGroupId = 'com.yline.lib'
-    libraryName = 'LibSDK'
-    artifact = 'LibSDK'
+    libraryName = 'LibHttp'
+    artifact = 'LibHttp'
 
     libraryDescription = 'provider log,util,base,common and ect'
 

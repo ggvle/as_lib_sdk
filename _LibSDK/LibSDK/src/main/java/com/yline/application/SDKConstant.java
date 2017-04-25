@@ -16,7 +16,7 @@ public class SDKConstant
 	/**
 	 * 应用心跳频率
 	 */
-	public static final int APPLICATION_TIME = 30 * 1000;
+	public static final int APPLICATION_TIME = 2 * 60 * 1000;
 
 	/**
 	 * handler 吐丝

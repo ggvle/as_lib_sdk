@@ -1,7 +1,11 @@
 package com.yline.utils;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -9,6 +13,7 @@ import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Comparator;
 
 /**
@@ -397,5 +402,54 @@ public class FileUtil
 	public static FileFilter getsDirFilter()
 	{
 		return sDirFilter;
+	}
+
+	/**
+	 * uri 路径 转成 文件路径
+	 * 测试结果: 跳转图片ok; 跳转文件管理es ok; 跳转系统缩略图 failed
+	 *
+	 * @param context
+	 * @param uri
+	 * @return
+	 */
+	public static String uri2File(final Context context, final Uri uri)
+	{
+		if (null == uri)
+		{
+			return null;
+		}
+
+		final String scheme = uri.getScheme();
+		String data = null;
+		if (scheme == null)
+		{
+			data = uri.getPath();
+		}
+		else if (ContentResolver.SCHEME_FILE.equals(scheme))
+		{
+			data = uri.getPath();
+		}
+		else if (ContentResolver.SCHEME_CONTENT.equals(scheme))
+		{
+			Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+			if (null != cursor)
+			{
+				if (cursor.moveToFirst())
+				{
+					int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+					if (index > -1)
+					{
+						data = cursor.getString(index);
+					}
+				}
+				cursor.close();
+			}
+		}
+		return data;
+	}
+
+	public static URI file2Uri(File file)
+	{
+		return file.toURI();
 	}
 }

@@ -1,5 +1,6 @@
 package com.yline.common;
 
+import android.app.Activity;
 import android.support.v4.util.SparseArrayCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,12 @@ public class ViewHolder
 	{
 		this.sView = view;
 		sArray = new SparseArrayCompat<>();
+	}
+
+	public ViewHolder(Activity activity)
+	{
+		this.sView = activity.getWindow().getDecorView();
+		this.sArray = new SparseArrayCompat<>();
 	}
 
 	/**
@@ -49,6 +56,18 @@ public class ViewHolder
 	}
 
 	/**
+	 * 获取 文本内容
+	 *
+	 * @param viewId
+	 * @return
+	 */
+	public String getText(int viewId)
+	{
+		TextView textView = this.get(viewId);
+		return textView.getText().toString();
+	}
+
+	/**
 	 * 要求是TextView;   这样的方法就可以多写几个,然后就可以作死的连缀了
 	 *
 	 * @param viewId  资源
@@ -74,5 +93,16 @@ public class ViewHolder
 		ImageView imageView = this.get(viewId);
 		imageView.setBackgroundResource(resId);
 		return imageView;
+	}
+
+	/**
+	 * 设置监听事件
+	 *
+	 * @param viewId
+	 * @param listener
+	 */
+	public void setOnClickListener(int viewId, View.OnClickListener listener)
+	{
+		this.get(viewId).setOnClickListener(listener);
 	}
 }
