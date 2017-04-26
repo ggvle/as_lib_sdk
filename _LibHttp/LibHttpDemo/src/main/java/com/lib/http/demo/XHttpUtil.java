@@ -4,7 +4,11 @@ import com.lib.http.XHttpAdapter;
 import com.lib.http.demo.bean.VNewsMultiplexBean;
 import com.lib.http.demo.bean.VNewsSingleBean;
 import com.lib.http.demo.bean.WNewsMultiplexBean;
+import com.lib.http.helper.HttpCacheAndNetClient;
+import com.lib.http.helper.HttpOnlyNetClient;
 import com.lib.http.helper.XTextHttp;
+import com.lib.http.interceptor.CacheAndNetInterceptor;
+import com.lib.http.interceptor.OnCacheResponseCallback;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -17,7 +21,7 @@ public class XHttpUtil
 		new XTextHttp<VNewsSingleBean>(adapter).doGet(httpUrl, null, VNewsSingleBean.class);
 	}
 
-	public static void doGet(XHttpAdapter<VNewsSingleBean> adapter, final Interceptor interceptor)
+	public static void doGetOnlyNet(XHttpAdapter<VNewsSingleBean> adapter)
 	{
 		String httpUrl = "http://120.92.35.211/wanghong/wh/index.php/Api/ApiNews/new_tui";
 		new XTextHttp<VNewsSingleBean>(adapter)
@@ -25,14 +29,32 @@ public class XHttpUtil
 			@Override
 			protected OkHttpClient getClient()
 			{
-				OkHttpClient defaultClient = super.getClient();
-
-				OkHttpClient.Builder builder = defaultClient.newBuilder();
-				builder.interceptors().clear();
-				builder.addInterceptor(interceptor);
-
-				return builder.build();
+				return HttpOnlyNetClient.getInstance();
 			}
+		}.doGet(httpUrl, null, VNewsSingleBean.class);
+	}
+
+	public static void doGet(XHttpAdapter<VNewsSingleBean> adapter, final OnCacheResponseCallback cacheResponseCallback)
+	{
+		String httpUrl = "http://120.92.35.211/wanghong/wh/index.php/Api/ApiNews/new_tui";
+		new XTextHttp<VNewsSingleBean>(adapter)
+		{
+			@Override
+			protected OkHttpClient getClient()
+			{
+				OkHttpClient okHttpClient = HttpCacheAndNetClient.getInstance();
+
+				for (Interceptor inter : okHttpClient.interceptors())
+				{
+					if (inter instanceof CacheAndNetInterceptor)
+					{
+						((CacheAndNetInterceptor) inter).setOnCacheResponseCallback(cacheResponseCallback);
+					}
+				}
+
+				return okHttpClient;
+			}
+
 		}.doGet(httpUrl, null, VNewsSingleBean.class);
 	}
 

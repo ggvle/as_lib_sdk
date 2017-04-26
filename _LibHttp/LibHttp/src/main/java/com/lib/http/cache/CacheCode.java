@@ -21,7 +21,7 @@ import okio.Buffer;
 import okio.BufferedSink;
 import okio.ByteString;
 
-class TextCache
+class CacheCode
 {
 	private static final int VERSION = 201105;
 
@@ -33,12 +33,12 @@ class TextCache
 
 	final DiskLruCache diskLruCache;
 
-	public TextCache(File dir, long maxSize)
+	public CacheCode(File dir, long maxSize)
 	{
 		this(dir, maxSize, FileSystem.SYSTEM);
 	}
 
-	public TextCache(File dir, long maxSize, FileSystem fileSystem)
+	public CacheCode(File dir, long maxSize, FileSystem fileSystem)
 	{
 		this.diskLruCache = DiskLruCache.create(fileSystem, dir, VERSION, ENTRY_COUNT, maxSize);
 	}
@@ -46,7 +46,7 @@ class TextCache
 	public Response get(Request request)
 	{
 		DiskLruCache.Snapshot snapshot = null;
-		TextCacheEntry textCacheEntry = null;
+		CacheEntry textCacheEntry = null;
 		try
 		{
 			String key = key(request);
@@ -67,7 +67,7 @@ class TextCache
 
 		try
 		{
-			textCacheEntry = new TextCacheEntry(snapshot.getSource(ENTRY_METADATA));
+			textCacheEntry = new CacheEntry(snapshot.getSource(ENTRY_METADATA));
 		} catch (IOException e)
 		{
 			Util.closeQuietly(snapshot);
@@ -91,7 +91,7 @@ class TextCache
 		// 过滤头部，不符合vary的字符“*”
 		if (HttpHeaders.hasVaryAll(response))
 		{
-			LogUtil.e("TextCache hasVaryAll is false");
+			LogUtil.e("CacheCode hasVaryAll is false");
 			return;
 		}
 
@@ -106,7 +106,7 @@ class TextCache
 		try
 		{
 			editor = diskLruCache.edit(key);
-			TextCacheEntry textCacheEntry = new TextCacheEntry(response);
+			CacheEntry textCacheEntry = new CacheEntry(response);
 			if (null == editor)
 			{
 				return;

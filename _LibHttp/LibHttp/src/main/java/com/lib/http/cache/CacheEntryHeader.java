@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class TextCacheHeader
+public class CacheEntryHeader
 {
 	private final Map<String, String> namesAndValues = new HashMap<>();
 

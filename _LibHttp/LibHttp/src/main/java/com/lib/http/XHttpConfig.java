@@ -33,6 +33,7 @@ public class XHttpConfig
 
 	private boolean isUtilLogLocation = true;
 
+	/* 这个类，必须被初始化；否则程序出错 */
 	public XHttpConfig init(Context context)
 	{
 		this.context = context;

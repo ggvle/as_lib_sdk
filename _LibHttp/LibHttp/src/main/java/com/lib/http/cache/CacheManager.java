@@ -1,6 +1,5 @@
 package com.lib.http.cache;
 
-import com.lib.http.XHttpConfig;
 import com.lib.http.util.LogUtil;
 
 import java.io.File;
@@ -28,11 +27,11 @@ public class CacheManager
 		private static CacheManager sInstance = new CacheManager();
 	}
 
-	private TextCache textCache = new TextCache(XHttpConfig.getInstance().getContext().getExternalCacheDir(), 128 * 1024 * 1024);
+	private CacheCode textCache;
 
 	public void init(File dir, int maxSize)
 	{
-		this.textCache = new TextCache(dir, maxSize);
+		this.textCache = new CacheCode(dir, maxSize);
 	}
 	
 	/**
@@ -47,7 +46,7 @@ public class CacheManager
 			textCache.put(response);
 		} catch (IOException e)
 		{
-			LogUtil.e("write Cache Failed", e);
+			LogUtil.e("write CacheCode Failed", e);
 		}
 	}
 

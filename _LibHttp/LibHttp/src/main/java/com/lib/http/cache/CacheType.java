@@ -33,5 +33,5 @@ public enum CacheType
 	 * 先读取缓存；有缓存，则返回缓存，无缓存，则返回空
 	 * 再读取网络；有网络，则返回网络，无网络，则返回空
 	 */
-	CACHE_AND_NETWORK;
+	CACHE_AND_NET;
 }

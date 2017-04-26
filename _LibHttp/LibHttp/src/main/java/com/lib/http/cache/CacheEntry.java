@@ -31,7 +31,7 @@ import okio.ForwardingSource;
 import okio.Okio;
 import okio.Source;
 
-public class TextCacheEntry
+public class CacheEntry
 {
 	private static final String SENT_MILLIS = "OKHttp3-Sent-Millis";
 
@@ -41,7 +41,7 @@ public class TextCacheEntry
 
 	private final String requestMethod; // 请求方法, GET、POST
 
-	private final TextCacheHeader varyCacheMap;
+	private final CacheEntryHeader varyCacheMap;
 
 	private final Protocol protocol; // http/1.1
 
@@ -49,7 +49,7 @@ public class TextCacheEntry
 
 	private final String protocolMessage; // ...
 
-	private final TextCacheHeader textCacheMap;
+	private final CacheEntryHeader textCacheMap;
 
 	private final long sentRequestMillis; // send time, 149,277,174.7232
 
@@ -57,18 +57,18 @@ public class TextCacheEntry
 
 	private final Handshake handshake;
 
-	public TextCacheEntry(Response response)
+	public CacheEntry(Response response)
 	{
 		this.url = response.request().url().toString();
 		this.requestMethod = response.request().method();
 		if (null == response.headers())
 		{
-			this.varyCacheMap = new TextCacheHeader();
-			this.textCacheMap = new TextCacheHeader();
+			this.varyCacheMap = new CacheEntryHeader();
+			this.textCacheMap = new CacheEntryHeader();
 		}
 		else if (null == response.networkResponse())
 		{
-			this.varyCacheMap = new TextCacheHeader();
+			this.varyCacheMap = new CacheEntryHeader();
 			this.textCacheMap = header2Map(response.headers());
 		}
 		else
@@ -85,7 +85,7 @@ public class TextCacheEntry
 	}
 
 	// 这个构造方法，读取文件内容
-	public TextCacheEntry(Source in) throws IOException
+	public CacheEntry(Source in) throws IOException
 	{
 		try
 		{
@@ -94,7 +94,7 @@ public class TextCacheEntry
 			this.url = bufferedSource.readUtf8LineStrict(); // 读取一行, url
 			this.requestMethod = bufferedSource.readUtf8LineStrict(); // 读取一行, method
 			int varyLineCount = readInt(bufferedSource); // 读取接下来连续的行数(指示接下来行数)
-			this.varyCacheMap = new TextCacheHeader();
+			this.varyCacheMap = new CacheEntryHeader();
 			for (int i = 0; i < varyLineCount; i++)
 			{
 				varyCacheMap.add(bufferedSource.readUtf8LineStrict());
@@ -107,7 +107,7 @@ public class TextCacheEntry
 			this.protocolMessage = statusLine.message;
 
 			int headerLineCount = readInt(bufferedSource);
-			this.textCacheMap = new TextCacheHeader();
+			this.textCacheMap = new CacheEntryHeader();
 			for (int i = 0; i < headerLineCount; i++)
 			{
 				textCacheMap.add(bufferedSource.readUtf8LineStrict());
@@ -199,7 +199,7 @@ public class TextCacheEntry
 		BufferedSink bufferedSink = null;
 		try
 		{
-			bufferedSink = Okio.buffer(editor.newSink(TextCache.ENTRY_METADATA));
+			bufferedSink = Okio.buffer(editor.newSink(CacheCode.ENTRY_METADATA));
 
 			bufferedSink.writeUtf8(url).writeByte('\n');
 			bufferedSink.writeUtf8(requestMethod).writeByte('\n');
@@ -249,7 +249,7 @@ public class TextCacheEntry
 		BufferedSink bufferedSink = null;
 		try
 		{
-			bufferedSink = Okio.buffer(editor.newSink(TextCache.ENTRY_BODY));
+			bufferedSink = Okio.buffer(editor.newSink(CacheCode.ENTRY_BODY));
 			InputStream inputStream = response.body().byteStream();
 			int len;
 			byte[] buffer = new byte[4096];
@@ -283,9 +283,9 @@ public class TextCacheEntry
 		}
 	}
 
-	private TextCacheHeader header2Map(Headers headers)
+	private CacheEntryHeader header2Map(Headers headers)
 	{
-		TextCacheHeader cacheMap = new TextCacheHeader();
+		CacheEntryHeader cacheMap = new CacheEntryHeader();
 		for (String name : headers.names())
 		{
 			cacheMap.add(name, headers.get(name));
@@ -293,7 +293,7 @@ public class TextCacheEntry
 		return cacheMap;
 	}
 
-	private Headers map2Header(TextCacheHeader textCacheMap)
+	private Headers map2Header(CacheEntryHeader textCacheMap)
 	{
 		Headers.Builder responseHeaderBuilder = new Headers.Builder();
 		for (String key : textCacheMap.getMap().keySet())
@@ -368,7 +368,7 @@ public class TextCacheEntry
 			this.contentType = contentType;
 			this.contentLength = contentLength;
 
-			Source source = snapshot.getSource(TextCache.ENTRY_BODY);
+			Source source = snapshot.getSource(CacheCode.ENTRY_BODY);
 			bodySource = Okio.buffer(new ForwardingSource(source)
 			{
 				@Override

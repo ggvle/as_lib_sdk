@@ -6,7 +6,7 @@ public class XHttpConstant
 	public static final int REQUEST_SUCCESS_CODE = 0;
 
 	// 拦截器是否输出日志
-	private static boolean isInterceptorDebug = false;
+	private static boolean isInterceptorDebug = true;
 
 	// 缓存是否输出日志
 	private static boolean isCacheDebug = true;

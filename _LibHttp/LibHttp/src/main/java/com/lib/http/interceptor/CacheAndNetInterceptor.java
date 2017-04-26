@@ -10,11 +10,15 @@ import okhttp3.Response;
 
 public class CacheAndNetInterceptor extends BaseInterceptor
 {
-	private final OnCacheResponseCallback onCacheResponseCallback;
+	private OnCacheResponseCallback onCacheResponseCallback;
 
-	public CacheAndNetInterceptor(OnCacheResponseCallback callback)
+	public CacheAndNetInterceptor()
 	{
-		this.onCacheResponseCallback = callback;
+	}
+
+	public void setOnCacheResponseCallback(OnCacheResponseCallback onCacheResponseCallback)
+	{
+		this.onCacheResponseCallback = onCacheResponseCallback;
 	}
 
 	@Override

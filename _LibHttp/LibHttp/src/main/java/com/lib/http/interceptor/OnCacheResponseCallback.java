@@ -1,5 +1,7 @@
 package com.lib.http.interceptor;
 
+import java.io.IOException;
+
 import okhttp3.Response;
 
 public interface OnCacheResponseCallback
@@ -9,5 +11,5 @@ public interface OnCacheResponseCallback
 	 *
 	 * @param cacheResponse
 	 */
-	void onCacheResponse(Response cacheResponse);
+	void onCacheResponse(Response cacheResponse) throws IOException;
 }

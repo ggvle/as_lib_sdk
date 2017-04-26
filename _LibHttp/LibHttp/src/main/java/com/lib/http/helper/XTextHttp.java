@@ -10,9 +10,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -126,8 +124,7 @@ public class XTextHttp<Result>
 	{
 		Request.Builder builder = new Request.Builder();
 
-		// 1,cache
-		builder.cacheControl(getCacheControl());
+		// 1,cache; 采用拦截器的方式实现
 
 		// 2,get、post区分
 		if (REQUEST_POST == requestType)
@@ -312,15 +309,18 @@ public class XTextHttp<Result>
 	}
 
 	/**
-	 * 默认 单例方式获取 HttpTextClient
+	 * 默认 单例方式获取 HttpNetThanCacheClient
 	 *
 	 * @return
 	 */
 	protected OkHttpClient getClient()
 	{
-		return HttpTextClient.getInstance();
+		// return HttpDefaultClient.getInstance();
+		// return HttpOnlyNetClient.getInstance();
+		return HttpNetThanCacheClient.getInstance();
+		// return HttpCacheAndNetClient.getInstance();
 	}
-	
+
 	/**
 	 * 添加 Request信息
 	 *
@@ -386,23 +386,5 @@ public class XTextHttp<Result>
 	protected int getResponseDefaultCode()
 	{
 		return REQUEST_SUCCESS_CODE;
-	}
-
-	/**
-	 * 配置缓存选项
-	 *
-	 * @return
-	 */
-	protected CacheControl getCacheControl()
-	{
-		final CacheControl.Builder cacheBuilder = new CacheControl.Builder();
-		// cacheBuilder.noCache(); // 不使用缓存，用网络请求
-		// cacheBuilder.noStore(); // 不使用缓存，也不存储缓存
-		// cacheBuilder.onlyIfCached(); // 只使用缓存
-		// cacheBuilder.noTransform(); // 禁止转码
-		cacheBuilder.maxAge(1000, TimeUnit.SECONDS); // 本地能够使用这个数据多久
-		cacheBuilder.maxStale(300, TimeUnit.SECONDS); // 如果超过这个时间,则认为数据过时，从新请求；如果没超过这个时间，则不会发送请求
-		cacheBuilder.minFresh(100, TimeUnit.SECONDS); // 超时时间为当前时间加上10秒钟。
-		return cacheBuilder.build();
 	}
 }

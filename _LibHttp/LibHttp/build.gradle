@@ -40,12 +40,12 @@ ext {
     libraryName = 'LibHttp'
     artifact = 'LibHttp'
 
-    libraryDescription = 'provider log,util,base,common and ect'
+    libraryDescription = '基于OKHttp3进行封装，添加拦截器实现缓存以及封装Gson'
 
     siteUrl = 'https://github.com/yline/as_lib_place '
     gitUrl = 'https://github.com/yline/as_lib_place.git'
 
-    libraryVersion = '1.3.0'
+    libraryVersion = '1.3.1'
 
     developerId = 'yline'
     developerName = 'yline'
@@ -65,6 +65,6 @@ javadoc {
         charSet 'UTF-8'
         //author true
         version true
-        title 'A LibSDK Support For Android'   // 文档标题
+        title 'A LibHttp Support For Android'   // 文档标题
     }
 }
