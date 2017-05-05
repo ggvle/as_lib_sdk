@@ -34,7 +34,7 @@ public class XHttpConfig
 	private boolean isUtilLogLocation = true;
 
 	/* 这个类，必须被初始化；否则程序出错 */
-	public XHttpConfig init(Context context)
+	public void init(Context context)
 	{
 		this.context = context;
 		if (null == cacheDir)
@@ -43,7 +43,6 @@ public class XHttpConfig
 		}
 		LogUtil.init(isUtilLog, isUtilLogLocation);
 		CacheManager.getInstance().init(cacheDir, cacheMaxSize);
-		return this;
 	}
 
 	public XHttpConfig setCacheDir(File cacheDir)
@@ -58,14 +57,16 @@ public class XHttpConfig
 		return this;
 	}
 
-	public void setUtilLog(boolean utilLog)
+	public XHttpConfig setUtilLog(boolean utilLog)
 	{
 		isUtilLog = utilLog;
+		return this;
 	}
 
-	public void setUtilLogLocation(boolean utilLogLocation)
+	public XHttpConfig setUtilLogLocation(boolean utilLogLocation)
 	{
 		isUtilLogLocation = utilLogLocation;
+		return this;
 	}
 
 	public Context getContext()

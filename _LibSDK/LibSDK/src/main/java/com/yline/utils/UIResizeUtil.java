@@ -81,8 +81,6 @@ public class UIResizeUtil
 	{
 		UIResizeUtil util = UIResizeHold.sInstance;
 		array.clear();
-		array.put(IS_WIDTH_ADAPTER, TRUE);
-		array.put(IS_HEIGHT_ADAPTER, FALSE);
 		return util;
 	}
 
@@ -207,9 +205,6 @@ public class UIResizeUtil
 				}
 			}
 
-			isWidthAdapter = array.get(IS_WIDTH_ADAPTER) == TRUE ? true : false;
-			isHeightAdapter = array.get(IS_HEIGHT_ADAPTER) == TRUE ? true : false;
-
 			apply(view, param, type);
 		}
 	}
@@ -221,6 +216,12 @@ public class UIResizeUtil
 		{
 			switch (array.keyAt(i))
 			{
+				case IS_WIDTH_ADAPTER:
+					isWidthAdapter = array.get(IS_WIDTH_ADAPTER) == TRUE ? true : false;
+					break;
+				case IS_HEIGHT_ADAPTER:
+					isHeightAdapter = array.get(IS_HEIGHT_ADAPTER) == TRUE ? true : false;
+					break;
 				case WIDTH:
 					setWidth(param, array.get(WIDTH));
 					break;
