@@ -1,4 +1,4 @@
-package com.yline.common;
+package com.yline.view.common;
 
 import android.app.Activity;
 import android.support.v4.util.SparseArrayCompat;
@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yline.callback.IViewHolderCallback;
+
 /**
  * @author yline 2017/3/19 -- 3:03
  * @version 1.0.0
  */
-public class ViewHolder
+public class ViewHolder implements IViewHolderCallback<View>
 {
 	private SparseArrayCompat<View> sArray;
 
@@ -28,13 +30,7 @@ public class ViewHolder
 		this.sArray = new SparseArrayCompat<>();
 	}
 
-	/**
-	 * 获取到相应的资源
-	 *
-	 * @param viewId 子布局id
-	 * @param <T>    View的子类
-	 * @return View的子类
-	 */
+	@Override
 	public <T extends View> T get(int viewId)
 	{
 		if (sArray.get(viewId) == null)
@@ -45,49 +41,28 @@ public class ViewHolder
 		return (T) sArray.get(viewId);
 	}
 
-	/**
-	 * 获取当前的View
-	 *
-	 * @return
-	 */
+	@Override
 	public View getItemView()
 	{
 		return this.sView;
 	}
 
-	/**
-	 * 获取 文本内容
-	 *
-	 * @param viewId
-	 * @return
-	 */
+	@Override
 	public String getText(int viewId)
 	{
 		TextView textView = this.get(viewId);
 		return textView.getText().toString();
 	}
 
-	/**
-	 * 要求是TextView;   这样的方法就可以多写几个,然后就可以作死的连缀了
-	 *
-	 * @param viewId  资源
-	 * @param content 内容
-	 * @return 当前ViewHolder
-	 */
+	@Override
 	public TextView setText(int viewId, String content)
 	{
 		TextView textView = this.get(viewId);
 		textView.setText(content);
 		return textView;
 	}
-	
-	/**
-	 * 要求是ImageView;
-	 *
-	 * @param viewId 资源id
-	 * @param resId  图片背景id
-	 * @return 当前ViewHolder
-	 */
+
+	@Override
 	public ImageView setImageBackgroundResource(int viewId, int resId)
 	{
 		ImageView imageView = this.get(viewId);
@@ -95,12 +70,15 @@ public class ViewHolder
 		return imageView;
 	}
 
-	/**
-	 * 设置监听事件
-	 *
-	 * @param viewId
-	 * @param listener
-	 */
+	@Override
+	public ImageView setImageResource(int viewId, int resId)
+	{
+		ImageView imageView = this.get(viewId);
+		imageView.setImageResource(resId);
+		return imageView;
+	}
+
+	@Override
 	public void setOnClickListener(int viewId, View.OnClickListener listener)
 	{
 		this.get(viewId).setOnClickListener(listener);

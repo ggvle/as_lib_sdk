@@ -1,39 +1,55 @@
-package com.yline.common;
+package com.yline.view.common;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
+import com.yline.callback.IDataAdapterCallback;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * T - 数据类型
- *
- * @author YLine
- *         2016年8月1日 下午11:16:12
+ * @author yline 2017/3/19 -- 3:05
+ * @version 1.0.0
  */
-public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommonAdapterCallback<T>
+public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements IDataAdapterCallback<T>
 {
-	protected Context sContext;
-
 	protected List<T> sList;
 
-	public CommonListAdapter(Context context)
+	public CommonRecyclerAdapter()
 	{
-		this.sContext = context;
 		this.sList = new ArrayList<>();
 	}
 
 	@Override
-	public int getCount()
+	public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	{
+		return new RecyclerViewHolder(LayoutInflater.from(parent.getContext()).inflate(getItemRes(), parent, false));
+	}
+
+	@Override
+	public abstract void onBindViewHolder(RecyclerViewHolder viewHolder, int position);
+
+	/**
+	 * @return item 资源文件
+	 */
+	public abstract int getItemRes();
+
+	@Override
+	public int getItemCount()
 	{
 		return sList.size();
 	}
 
+	/**
+	 * 返回某项数据
+	 *
+	 * @param position 位置
+	 * @return 某项数据
+	 */
 	@Override
 	public T getItem(int position)
 	{
@@ -45,50 +61,15 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	}
 
 	@Override
-	public long getItemId(int position)
+	public List<T> getDataList()
 	{
-		return position;
+		return Collections.unmodifiableList(sList);
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
+	public void setDataList(List<T> list)
 	{
-		ViewHolder holder = null;
-		if (convertView == null)
-		{
-			convertView = LayoutInflater.from(sContext).inflate(getItemRes(position), parent, false);
-			holder = new ViewHolder(convertView);
-			convertView.setTag(holder);
-		}
-		else
-		{
-			holder = (ViewHolder) convertView.getTag();
-		}
-
-		onBindViewHolder(parent, holder, position);
-
-		return convertView;
-	}
-
-	/**
-	 * @param position 当前的位置
-	 * @return item 资源文件
-	 */
-	protected abstract int getItemRes(int position);
-
-	/**
-	 * 对内容设置
-	 *
-	 * @param parent     副控件(一般不用)
-	 * @param viewHolder ViewHolder
-	 * @param position   当前item位置
-	 */
-	protected abstract void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, int position);
-
-	@Override
-	public void setDataList(List<T> tList)
-	{
-		this.sList = tList;
+		this.sList = list;
 		this.notifyDataSetChanged();
 	}
 
@@ -104,7 +85,7 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	public void add(int index, T element)
 	{
 		sList.add(index, element);
-		this.notifyDataSetChanged();
+		this.notifyItemInserted(index);
 	}
 
 	@Override
@@ -130,11 +111,9 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 	}
 
 	@Override
-	public T remove(int index)
+	public boolean isEmpty()
 	{
-		T t = sList.remove(index);
-		this.notifyDataSetChanged();
-		return t;
+		return false;
 	}
 
 	@Override
@@ -143,6 +122,14 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements ICommo
 		boolean result = sList.remove(object);
 		this.notifyDataSetChanged();
 		return result;
+	}
+
+	@Override
+	public T remove(int index)
+	{
+		T t = sList.remove(index);
+		this.notifyItemRemoved(index);
+		return t;
 	}
 
 	@Override

@@ -12,16 +12,13 @@ import android.widget.ListView;
 import com.demo.application.MainApplication;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseActivity;
-import com.yline.common.CommonListAdapter;
-import com.yline.common.ViewHolder;
 import com.yline.log.LogFileUtil;
+import com.yline.view.common.CommonListAdapter;
+import com.yline.view.common.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yline on 2016/9/22.
- */
 public class CommonListActivity extends BaseActivity
 {
 	private static final String TAG = "CommonListActivity";

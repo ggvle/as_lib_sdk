@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.common.CommonRecyclerAdapter;
-import com.yline.common.CommonRecyclerViewHolder;
+import com.yline.view.common.CommonRecyclerAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -101,7 +101,7 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 		}
 
 		@Override
-		public void onBindViewHolder(CommonRecyclerViewHolder viewHolder, int position)
+		public void onBindViewHolder(RecyclerViewHolder viewHolder, int position)
 		{
 			viewHolder.setText(R.id.tv_num, sList.get(position).getContent());
 		}

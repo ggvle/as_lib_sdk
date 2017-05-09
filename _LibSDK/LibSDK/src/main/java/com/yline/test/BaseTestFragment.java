@@ -13,10 +13,11 @@ import android.widget.TextView;
 
 import com.lib.sdk.R;
 import com.yline.base.BaseFragment;
+import com.yline.callback.ITestCallback;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 
-public abstract class BaseTestFragment extends BaseFragment
+public abstract class BaseTestFragment extends BaseFragment implements ITestCallback
 {
 	protected LinearLayout linearLayout;
 
@@ -34,10 +35,9 @@ public abstract class BaseTestFragment extends BaseFragment
 		super.onViewCreated(view, savedInstanceState);
 		testStart(view, savedInstanceState);
 	}
-
-	protected abstract void testStart(View view, Bundle savedInstanceState);
-
-	protected Button addButton(String content, View.OnClickListener listener)
+	
+	@Override
+	public Button addButton(String content, View.OnClickListener listener)
 	{
 		Button button = new Button(getContext());
 		button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -48,7 +48,8 @@ public abstract class BaseTestFragment extends BaseFragment
 		return button;
 	}
 
-	protected EditText addEditText(String hintContent)
+	@Override
+	public EditText addEditText(String hintContent)
 	{
 		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -57,7 +58,8 @@ public abstract class BaseTestFragment extends BaseFragment
 		return editText;
 	}
 
-	protected EditText addEditText(String hintContent, String content)
+	@Override
+	public EditText addEditText(String hintContent, String content)
 	{
 		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -67,7 +69,8 @@ public abstract class BaseTestFragment extends BaseFragment
 		return editText;
 	}
 
-	protected EditText addEditNumber(String hintContent)
+	@Override
+	public EditText addEditNumber(String hintContent)
 	{
 		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -77,7 +80,8 @@ public abstract class BaseTestFragment extends BaseFragment
 		return editText;
 	}
 
-	protected EditText addEditNumber(String hintContent, String content)
+	@Override
+	public EditText addEditNumber(String hintContent, String content)
 	{
 		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -88,7 +92,8 @@ public abstract class BaseTestFragment extends BaseFragment
 		return editText;
 	}
 
-	protected ImageView addImageView(int width, int height)
+	@Override
+	public ImageView addImageView(int width, int height)
 	{
 		ImageView imageView = new ImageView(this.getContext());
 		imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(UIScreenUtil.dp2px(getContext(), width), UIScreenUtil.dp2px(getContext(), height)));
@@ -96,7 +101,8 @@ public abstract class BaseTestFragment extends BaseFragment
 		return imageView;
 	}
 
-	protected TextView addTextView(String initContent)
+	@Override
+	public TextView addTextView(String initContent)
 	{
 		TextView textView = new TextView(this.getContext());
 		textView.setLayoutParams(new android.view.ViewGroup.LayoutParams(-1, -2));

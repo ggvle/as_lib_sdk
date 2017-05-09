@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.demo.fragment.FileFragment;
+import com.demo.fragment.ExpandFragment;
 import com.demo.fragment.FunctionFragment;
 import com.demo.fragment.UtilFragment;
 import com.lib.sdk.demo.R;
@@ -18,14 +18,7 @@ import java.util.List;
 
 public class MainActivity extends BaseAppCompatActivity
 {
-	/**
-	 * 用于请求权限
-	 */
-	public static final int REQUEST_CODE_PERMISSION = 1025;
-
-	public static final String TAG_HANDLE_PERMISSION = "Deny permissions : ";
-
-	private static final String[] PAGER_TITLE = {"储存功能", "拓展功能", "工具类"};
+	private static final String[] PAGER_TITLE = {"拓展功能", "日志+入口类", "工具类"};
 
 	private List<BaseFragment> fragmentList = new ArrayList<>();
 
@@ -35,7 +28,7 @@ public class MainActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		fragmentList.add(new FileFragment());
+		fragmentList.add(new ExpandFragment());
 		fragmentList.add(new FunctionFragment());
 		fragmentList.add(new UtilFragment());
 

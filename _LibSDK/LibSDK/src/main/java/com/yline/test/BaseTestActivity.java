@@ -12,10 +12,11 @@ import android.widget.TextView;
 
 import com.lib.sdk.R;
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.callback.ITestCallback;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 
-public abstract class BaseTestActivity extends BaseAppCompatActivity
+public abstract class BaseTestActivity extends BaseAppCompatActivity implements ITestCallback
 {
 	protected LinearLayout linearLayout;
 
@@ -26,12 +27,11 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_test_base);
 		linearLayout = (LinearLayout) findViewById(R.id.ll_base_content);
 
-		testStart(savedInstanceState);
+		testStart(this.getWindow().getDecorView(), savedInstanceState);
 	}
 
-	protected abstract void testStart(Bundle savedInstanceState);
-
-	protected void addButton(String content, View.OnClickListener listener)
+	@Override
+	public Button addButton(String content, View.OnClickListener listener)
 	{
 		Button button = new Button(this);
 		button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -39,9 +39,11 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		button.setText(content);
 		button.setOnClickListener(listener);
 		linearLayout.addView(button);
+		return button;
 	}
 
-	protected EditText addEditText(String hintContent)
+	@Override
+	public EditText addEditText(String hintContent)
 	{
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -50,7 +52,8 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		return editText;
 	}
 
-	protected EditText addEditText(String hintContent, String content)
+	@Override
+	public EditText addEditText(String hintContent, String content)
 	{
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -60,7 +63,8 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		return editText;
 	}
 
-	protected EditText addEditNumber(String hintContent)
+	@Override
+	public EditText addEditNumber(String hintContent)
 	{
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -70,7 +74,8 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		return editText;
 	}
 
-	protected EditText addEditNumber(String hintContent, String content)
+	@Override
+	public EditText addEditNumber(String hintContent, String content)
 	{
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -81,7 +86,8 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		return editText;
 	}
 
-	protected ImageView addImageView(int width, int height)
+	@Override
+	public ImageView addImageView(int width, int height)
 	{
 		ImageView imageView = new ImageView(this);
 		imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(UIScreenUtil.dp2px(this, width), UIScreenUtil.dp2px(this, height)));
@@ -89,7 +95,8 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity
 		return imageView;
 	}
 
-	protected TextView addTextView(String initContent)
+	@Override
+	public TextView addTextView(String initContent)
 	{
 		TextView textView = new TextView(this);
 		textView.setLayoutParams(new android.view.ViewGroup.LayoutParams(-1, -2));

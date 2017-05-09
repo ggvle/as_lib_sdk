@@ -5,18 +5,17 @@ import android.view.View;
 
 import com.demo.activity.LeakCanaryActivity;
 import com.demo.application.MainApplication;
-import com.demo.common.CommonListActivity;
-import com.demo.common.CommonRecyclerActivity;
+import com.yline.application.SDKManager;
 import com.yline.log.LogFileUtil;
 import com.yline.test.BaseTestFragment;
 
 public class FunctionFragment extends BaseTestFragment
 {
 	@Override
-	protected void testStart(View view, Bundle savedInstanceState)
+	public void testStart(View view, Bundle savedInstanceState)
 	{
 		// 测试 LeakCanaryActivity(不能放入LibSDK中,否则失效)
-		addButton("leakCanary Activity", new View.OnClickListener()
+		addButton("LeakCanary Activity", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
@@ -26,39 +25,22 @@ public class FunctionFragment extends BaseTestFragment
 			}
 		});
 
-		final Runnable runnable = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				for (int i = 0; i < 100000000; i++)
-				{
-					if (i % 10000000 == 0)
-					{
-						LogFileUtil.v("TestThread i = " + i);
-					}
-				}
-			}
-		};
-
-		// CommonListActivity
-		addButton("CommonListAdapter", new View.OnClickListener()
+		addButton("SDKManager", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v(MainApplication.TAG, "btn_common_list_activity");
-				CommonListActivity.actionStart(getContext());
+				LogFileUtil.v(MainApplication.TAG, "btn_baseApplication");
+				SDKManager.toast("测试，toast");
 			}
 		});
 
-		addButton("CommonRecyclerAdapter", new View.OnClickListener()
+		addButton("CrashHandler", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v(MainApplication.TAG, "btn_common_recycler_activity");
-				CommonRecyclerActivity.actionStart(getContext());
+				throw new ArithmeticException("crashHandler test");
 			}
 		});
 	}

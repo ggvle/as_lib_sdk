@@ -1,4 +1,4 @@
-package com.yline.common;
+package com.yline.view.common;
 
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
@@ -6,23 +6,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
+import com.yline.callback.IViewHolderCallback;
+
+public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IViewHolderCallback<View>
 {
 	private SparseArrayCompat<View> sArray;
 
-	public CommonRecyclerViewHolder(View itemView)
+	public RecyclerViewHolder(View itemView)
 	{
 		super(itemView);
 		sArray = new SparseArrayCompat<>();
 	}
 
-	/**
-	 * 获取到相应的资源
-	 *
-	 * @param viewId 子布局id
-	 * @param <T>    View的子类
-	 * @return 子布局
-	 */
+	@Override
 	public <T extends View> T get(int viewId)
 	{
 		if (sArray.get(viewId) == null)
@@ -33,16 +29,26 @@ public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 		return (T) sArray.get(viewId);
 	}
 
-	/**
-	 * 获取当前ViewHolder的View
-	 *
-	 * @return
-	 */
+	@Override
 	public View getItemView()
 	{
 		return this.itemView;
 	}
 
+	@Override
+	public String getText(int viewId)
+	{
+		TextView textView = this.get(viewId);
+		return textView.getText().toString();
+	}
+
+	@Override
+	public void setOnClickListener(int viewId, View.OnClickListener listener)
+	{
+		this.get(viewId).setOnClickListener(listener);
+	}
+
+	@Override
 	public TextView setText(int viewId, String content)
 	{
 		TextView textView = this.get(viewId);
@@ -50,17 +56,19 @@ public class CommonRecyclerViewHolder extends RecyclerView.ViewHolder
 		return textView;
 	}
 
-	/**
-	 * 要求是ImageView;
-	 *
-	 * @param viewId 资源id
-	 * @param resId  图片背景id
-	 * @return 返回当前类
-	 */
-	public ImageView setImageViewBackground(int viewId, int resId)
+	@Override
+	public ImageView setImageBackgroundResource(int viewId, int resId)
 	{
 		ImageView imageView = this.get(viewId);
 		imageView.setBackgroundResource(resId);
+		return imageView;
+	}
+
+	@Override
+	public ImageView setImageResource(int viewId, int resId)
+	{
+		ImageView imageView = this.get(viewId);
+		imageView.setImageResource(resId);
 		return imageView;
 	}
 }
