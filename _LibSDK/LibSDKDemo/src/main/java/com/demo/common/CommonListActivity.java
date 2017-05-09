@@ -3,21 +3,14 @@ package com.demo.common;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ListView;
 
-import com.demo.application.MainApplication;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseActivity;
-import com.yline.log.LogFileUtil;
+import com.yline.view.apply.SimpleListAdapter;
 import com.yline.view.common.CommonListAdapter;
-import com.yline.view.common.ViewHolder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class CommonListActivity extends BaseActivity
 {
@@ -25,9 +18,9 @@ public class CommonListActivity extends BaseActivity
 
 	private ListView lvDemo;
 
-	private ListAdapter listAdapter;
+	private CommonListAdapter listAdapter;
 
-	private String[] tempArray = {"yline", "f21", "fatenliyer", "yui", "joe"};
+	private String[] tempArray = {"yline", "f21", "fatenliyer", "yui", "joe", "yline", "f21", "fatenliyer", "yui", "joe", "yline", "f21", "fatenliyer", "yui", "joe"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -37,99 +30,10 @@ public class CommonListActivity extends BaseActivity
 
 		lvDemo = (ListView) findViewById(R.id.lv_demo);
 
-		listAdapter = new ListAdapter(CommonListActivity.this);
+		listAdapter = new SimpleListAdapter(this);
 		lvDemo.setAdapter(listAdapter);
 
-		final EditText etId = (EditText) findViewById(R.id.et_update_id);
-
-		findViewById(R.id.btn_update).setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				LogFileUtil.v(TAG, "btn_update");
-				List<DemoBean> tempList = new ArrayList<DemoBean>();
-
-				String idStr = etId.getText().toString().trim();
-				listAdapter.clear();
-
-				if (!TextUtils.isEmpty(idStr))
-				{
-					int number = Integer.parseInt(idStr);
-
-					for (int i = 0; i < number; i++)
-					{
-						tempList.add(new DemoBean(i, tempArray[i % tempArray.length]));
-					}
-
-					listAdapter.addAll(tempList);
-				}
-				else
-				{
-					MainApplication.toast("the number is null");
-				}
-			}
-		});
-	}
-
-	private class DemoBean
-	{
-		/**
-		 * id
-		 */
-		private int id;
-
-		/**
-		 * name
-		 */
-		private String name;
-
-		public DemoBean(int id, String name)
-		{
-			this.id = id;
-			this.name = name;
-		}
-
-		public int getId()
-		{
-			return id;
-		}
-
-		public void setId(int id)
-		{
-			this.id = id;
-		}
-
-		public String getName()
-		{
-			return name;
-		}
-
-		public void setName(String name)
-		{
-			this.name = name;
-		}
-	}
-
-	private class ListAdapter extends CommonListAdapter<DemoBean>
-	{
-		public ListAdapter(Context context)
-		{
-			super(context);
-		}
-
-		@Override
-		protected int getItemRes(int position)
-		{
-			return R.layout.item_common_list;
-		}
-
-		@Override
-		protected void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, int position)
-		{
-			viewHolder.setText(R.id.tv_id, sList.get(position).getId() + "");
-			viewHolder.setText(R.id.tv_name, sList.get(position).getName());
-		}
+		listAdapter.setDataList(Arrays.asList(tempArray));
 	}
 
 	/**

@@ -67,9 +67,9 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	}
 
 	@Override
-	public void setDataList(List<T> list)
+	public void setDataList(List<T> tList)
 	{
-		this.sList = list;
+		this.sList = new ArrayList<>(tList);
 		this.notifyDataSetChanged();
 	}
 
