@@ -1,6 +1,6 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lib.sdk.demo">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.lib.sdk.demo">
 
     <application
         android:name="com.demo.application.MainApplication"
@@ -17,9 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.demo.common.CommonListActivity"></activity>
-        <activity android:name="com.demo.activity.LeakCanaryActivity"></activity>
-        <activity android:name="com.demo.common.CommonRecyclerActivity"></activity>
+        <activity android:name="com.demo.apply.SimpleListActivity"/>
+        <activity android:name="com.demo.activity.LeakCanaryActivity"/>
+        <activity android:name="com.demo.apply.SimpleRecyclerActivity"/>
+        <activity android:name="com.demo.apply.SimpleGridDecorationActivity">
+        </activity>
+        <activity android:name="com.demo.apply.SimpleLinearDecorationActivity">
+        </activity>
+        <activity android:name="com.demo.apply.SimpleFloatLinearDecorationActivity">
+        </activity>
     </application>
 
 </manifest>

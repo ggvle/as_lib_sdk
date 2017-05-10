@@ -1,4 +1,4 @@
-package com.demo.common;
+package com.demo.apply;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.apply.SimpleRecycleAdapter;
-import com.yline.view.common.CommonRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CommonRecyclerActivity extends BaseAppCompatActivity
+public class SimpleRecyclerActivity extends BaseAppCompatActivity
 {
 	private Random random;
 
@@ -23,13 +22,13 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 
 	private List<String> data;
 
-	private CommonRecyclerAdapter homeAdapter;
+	private SimpleRecycleAdapter homeAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_common_recycler);
+		setContentView(R.layout.activity_simple_recycler);
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler);
 		recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -59,6 +58,6 @@ public class CommonRecyclerActivity extends BaseAppCompatActivity
 	 */
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, CommonRecyclerActivity.class));
+		context.startActivity(new Intent(context, SimpleRecyclerActivity.class));
 	}
 }

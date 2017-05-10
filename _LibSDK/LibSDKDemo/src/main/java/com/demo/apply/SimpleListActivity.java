@@ -1,4 +1,4 @@
-package com.demo.common;
+package com.demo.apply;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,17 +8,16 @@ import android.widget.ListView;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseActivity;
 import com.yline.view.apply.SimpleListAdapter;
-import com.yline.view.common.CommonListAdapter;
 
 import java.util.Arrays;
 
-public class CommonListActivity extends BaseActivity
+public class SimpleListActivity extends BaseActivity
 {
-	private static final String TAG = "CommonListActivity";
+	private static final String TAG = "SimpleListActivity";
 
 	private ListView lvDemo;
 
-	private CommonListAdapter listAdapter;
+	private SimpleListAdapter listAdapter;
 
 	private String[] tempArray = {"yline", "f21", "fatenliyer", "yui", "joe", "yline", "f21", "fatenliyer", "yui", "joe", "yline", "f21", "fatenliyer", "yui", "joe"};
 
@@ -26,7 +25,7 @@ public class CommonListActivity extends BaseActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_common_list);
+		setContentView(R.layout.activity_simple_list);
 
 		lvDemo = (ListView) findViewById(R.id.lv_demo);
 
@@ -43,6 +42,6 @@ public class CommonListActivity extends BaseActivity
 	 */
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, CommonListActivity.class));
+		context.startActivity(new Intent(context, SimpleListActivity.class));
 	}
 }
