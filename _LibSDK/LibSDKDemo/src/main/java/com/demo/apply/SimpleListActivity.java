@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseActivity;
-import com.yline.view.apply.SimpleListAdapter;
+import com.yline.viewapply.SimpleListAdapter;
 
 import java.util.Arrays;
 

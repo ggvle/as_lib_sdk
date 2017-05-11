@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.apply.SimpleFloatItemDecoration;
-import com.yline.view.apply.SimpleHeadFootRecyclerAdapter;
+import com.yline.viewapply.SimpleFloatItemDecoration;
+import com.yline.viewapply.SimpleHeadFootRecyclerAdapter;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,6 +80,7 @@ public class SimpleFloatLinearDecorationActivity extends BaseAppCompatActivity
 		viewD.setBackgroundColor(Color.RED);
 		recyclerAdapter.addFootView(viewD);
 
+		recyclerAdapter.addAll(Arrays.asList("yline", "Simple", "English", "fatenliyer", "sin", "cos", "baby", "piano", "tree", "sky", "the world"));
 		recyclerAdapter.addAll(Arrays.asList("yline", "Simple", "English", "fatenliyer", "sin", "cos", "baby", "piano", "tree", "sky", "the world"));
 		Map<Integer, String> map = new HashMap<>();
 		map.put(0, "A");

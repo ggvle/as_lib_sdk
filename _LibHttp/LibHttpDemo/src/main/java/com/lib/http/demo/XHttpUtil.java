@@ -1,14 +1,14 @@
 package com.lib.http.demo;
 
-import com.lib.http.XHttpAdapter;
 import com.lib.http.demo.bean.VNewsMultiplexBean;
 import com.lib.http.demo.bean.VNewsSingleBean;
 import com.lib.http.demo.bean.WNewsMultiplexBean;
-import com.lib.http.helper.HttpCacheAndNetClient;
-import com.lib.http.helper.HttpOnlyNetClient;
-import com.lib.http.helper.XTextHttp;
-import com.lib.http.interceptor.CacheAndNetInterceptor;
-import com.lib.http.interceptor.OnCacheResponseCallback;
+import com.yline.http.XHttpAdapter;
+import com.yline.http.helper.HttpCacheAndNetClient;
+import com.yline.http.helper.HttpOnlyNetClient;
+import com.yline.http.helper.XTextHttp;
+import com.yline.http.interceptor.CacheAndNetInterceptor;
+import com.yline.http.interceptor.OnCacheResponseCallback;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

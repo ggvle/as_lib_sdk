@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.apply.SimpleGridItemDecoration;
-import com.yline.view.apply.SimpleHeadFootRecyclerAdapter;
+import com.yline.viewapply.SimpleGridItemDecoration;
+import com.yline.viewapply.SimpleHeadFootRecyclerAdapter;
 
 import java.util.Arrays;
 

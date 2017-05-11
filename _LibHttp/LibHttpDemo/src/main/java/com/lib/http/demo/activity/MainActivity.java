@@ -3,12 +3,12 @@ package com.lib.http.demo.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.lib.http.XHttpAdapter;
 import com.lib.http.demo.XHttpUtil;
 import com.lib.http.demo.bean.VNewsMultiplexBean;
 import com.lib.http.demo.bean.VNewsSingleBean;
 import com.lib.http.demo.bean.WNewsMultiplexBean;
-import com.lib.http.interceptor.OnCacheResponseCallback;
+import com.yline.http.XHttpAdapter;
+import com.yline.http.interceptor.OnCacheResponseCallback;
 import com.yline.log.LogFileUtil;
 import com.yline.test.BaseTestActivity;
 
@@ -70,7 +70,14 @@ public class MainActivity extends BaseTestActivity
 					@Override
 					public void onCacheResponse(Response cacheResponse) throws IOException
 					{
-						LogFileUtil.v(cacheResponse.body().string().toString());
+						if (null != cacheResponse)
+						{
+							LogFileUtil.v(cacheResponse.body().string().toString());
+						}
+						else
+						{
+							LogFileUtil.v("cacheResponse is null");
+						}
 					}
 				});
 			}

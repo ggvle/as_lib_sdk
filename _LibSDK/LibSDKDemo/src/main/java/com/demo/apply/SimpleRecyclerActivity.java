@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.apply.SimpleRecycleAdapter;
+import com.yline.viewapply.SimpleRecycleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

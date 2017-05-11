@@ -2,9 +2,9 @@ package com.lib.http.demo.activity;
 
 import android.app.Application;
 
-import com.lib.http.XHttpConfig;
 import com.yline.application.SDKConfig;
 import com.yline.application.SDKManager;
+import com.yline.http.XHttpConfig;
 
 public class IApplication extends Application
 {
