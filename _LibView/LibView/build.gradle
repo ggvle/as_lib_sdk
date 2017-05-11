@@ -5,10 +5,13 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -23,25 +26,25 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
 }
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'libsdk'
+    bintrayName = 'libview'
 
     publishedGroupId = 'com.yline.lib'
-    libraryName = 'LibSDK'
-    artifact = 'LibSDK'
+    libraryName = 'LibView'
+    artifact = 'LibView'
 
-    libraryDescription = 'provider log,util,base,common and ect'
+    libraryDescription = '提供使用较多的公共View类'
 
     siteUrl = 'https://github.com/yline/as_lib_place '
     gitUrl = 'https://github.com/yline/as_lib_place.git'
 
-    libraryVersion = '1.3.1'
+    libraryVersion = '1.0.0'
 
     developerId = 'yline'
     developerName = 'yline'

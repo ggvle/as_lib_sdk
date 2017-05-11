@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.demo.fragment.ExpandFragment;
 import com.demo.fragment.FunctionFragment;
 import com.demo.fragment.UtilFragment;
 import com.lib.sdk.demo.R;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends BaseAppCompatActivity
 {
-	private static final String[] PAGER_TITLE = {"拓展功能", "日志+入口类", "工具类"};
+	private static final String[] PAGER_TITLE = {"日志+入口类", "工具类"};
 
 	private List<BaseFragment> fragmentList = new ArrayList<>();
 
@@ -28,7 +27,6 @@ public class MainActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		fragmentList.add(new ExpandFragment());
 		fragmentList.add(new FunctionFragment());
 		fragmentList.add(new UtilFragment());
 

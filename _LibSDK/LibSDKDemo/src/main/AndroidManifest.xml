@@ -17,15 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.demo.apply.SimpleListActivity"/>
-        <activity android:name="com.demo.activity.LeakCanaryActivity"/>
-        <activity android:name="com.demo.apply.SimpleRecyclerActivity"/>
-        <activity android:name="com.demo.apply.SimpleGridDecorationActivity">
-        </activity>
-        <activity android:name="com.demo.apply.SimpleLinearDecorationActivity">
-        </activity>
-        <activity android:name="com.demo.apply.SimpleFloatLinearDecorationActivity">
-        </activity>
+
     </application>
 
 </manifest>

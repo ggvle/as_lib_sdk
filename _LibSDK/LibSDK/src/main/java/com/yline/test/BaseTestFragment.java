@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.lib.sdk.R;
 import com.yline.base.BaseFragment;
-import com.yline.callback.ITestCallback;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 
