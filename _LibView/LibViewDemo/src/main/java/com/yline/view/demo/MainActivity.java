@@ -50,14 +50,5 @@ public class MainActivity extends BaseTestActivity
 				SimpleLinearDecorationActivity.actionStart(MainActivity.this);
 			}
 		});
-
-		addButton("SimpleFloatItemDecoration", new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				SimpleFloatLinearDecorationActivity.actionStart(MainActivity.this);
-			}
-		});
 	}
 }

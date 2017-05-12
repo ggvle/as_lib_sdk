@@ -22,8 +22,6 @@
         </activity>
         <activity android:name="com.yline.view.demo.SimpleLinearDecorationActivity">
         </activity>
-        <activity android:name="com.yline.view.demo.SimpleFloatLinearDecorationActivity">
-        </activity>
     </application>
 
 </manifest>
