@@ -132,5 +132,13 @@ public interface IDataAdapterCallback<E>
 	 * @param e     新数据
 	 */
 	void update(int index, E e);
+
+	/**
+	 * 更新批量数据
+	 *
+	 * @param index
+	 * @param collection
+	 */
+	void updateAll(int index, Collection<?> collection);
 }
 

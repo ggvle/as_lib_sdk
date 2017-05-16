@@ -192,4 +192,16 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 		sList.add(index, t);
 		this.notifyDataSetChanged();
 	}
+
+	@Override
+	public void updateAll(int index, Collection collection)
+	{
+		for (int i = 0; i < collection.size(); i++)
+		{
+			sList.remove(index + i);
+		}
+		sList.addAll(collection);
+
+		this.notifyDataSetChanged();
+	}
 }

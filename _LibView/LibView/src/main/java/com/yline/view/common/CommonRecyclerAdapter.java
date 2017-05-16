@@ -170,4 +170,16 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		sList.add(index, t);
 		this.notifyItemChanged(index);
 	}
+
+	@Override
+	public void updateAll(int index, Collection collection)
+	{
+		for (int i = 0; i < collection.size(); i++)
+		{
+			sList.remove(index + i);
+		}
+		sList.addAll(collection);
+
+		this.notifyItemRangeChanged(index, collection.size());
+	}
 }
