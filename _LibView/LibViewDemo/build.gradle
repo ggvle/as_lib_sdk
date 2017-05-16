@@ -28,4 +28,5 @@ dependencies {
     compile 'com.yline.lib:LibSDK:1.3.1'
     testCompile 'junit:junit:4.12'
     compile project(':LibView')
+    compile 'com.android.support:design:25.1.1'
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <!--RecyclerView 本身不支持 divider-->
@@ -10,6 +10,13 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_decoration">
+        android:layout_above="@+id/tab_click">
     </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    </android.support.design.widget.TabLayout>
+</RelativeLayout>

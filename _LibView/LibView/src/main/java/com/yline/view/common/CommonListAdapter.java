@@ -125,11 +125,13 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 	}
 
 	@Override
-	public void clear()
+	public boolean addAll(int index, Collection<? extends T> collection)
 	{
-		sList.clear();
+		boolean result = sList.addAll(index, collection);
 		this.notifyDataSetChanged();
+		return result;
 	}
+
 
 	@Override
 	public boolean contains(Object object)
@@ -174,5 +176,20 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 	{
 		boolean result = sList.containsAll(collection);
 		return result;
+	}
+
+	@Override
+	public void clear()
+	{
+		sList.clear();
+		this.notifyDataSetChanged();
+	}
+
+	@Override
+	public void update(int index, T t)
+	{
+		sList.remove(index);
+		sList.add(index, t);
+		this.notifyDataSetChanged();
 	}
 }

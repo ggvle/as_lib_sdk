@@ -27,6 +27,36 @@ public interface IDataAdapterCallback<E>
 	E getItem(int position);
 
 	/**
+	 * 判断是否包含某一项数据
+	 *
+	 * @param object
+	 * @return
+	 */
+	boolean contains(Object object);
+
+	/**
+	 * 判断是否包含某一批数据
+	 *
+	 * @param collection
+	 * @return
+	 */
+	boolean containsAll(Collection<?> collection);
+
+	/**
+	 * 判断 数据列表是否有数据
+	 *
+	 * @return
+	 */
+	boolean isEmpty();
+
+	/**
+	 * 获取数据量大小
+	 *
+	 * @return
+	 */
+	int size();
+
+	/**
 	 * 放置，全部的数据
 	 *
 	 * @param list
@@ -58,32 +88,13 @@ public interface IDataAdapterCallback<E>
 	boolean addAll(Collection<? extends E> collection);
 
 	/**
-	 * 清空数据
-	 */
-	void clear();
-
-	/**
-	 * 判断是否包含某一项数据
+	 * 在指定位置，添加批量的数据
 	 *
-	 * @param object
+	 * @param index
+	 * @param c
 	 * @return
 	 */
-	boolean contains(Object object);
-
-	/**
-	 * 判断是否包含某一批数据
-	 *
-	 * @param collection
-	 * @return
-	 */
-	boolean containsAll(Collection<?> collection);
-
-	/**
-	 * 判断 数据列表是否有数据
-	 *
-	 * @return
-	 */
-	boolean isEmpty();
+	boolean addAll(int index, Collection<? extends E> c);
 
 	/**
 	 * 移除某一个位置上，的数据
@@ -110,9 +121,16 @@ public interface IDataAdapterCallback<E>
 	boolean removeAll(Collection<?> collection);
 
 	/**
-	 * 获取数据量大小
-	 *
-	 * @return
+	 * 清空数据
 	 */
-	int size();
+	void clear();
+
+	/**
+	 * 更新数据
+	 *
+	 * @param index
+	 * @param e     新数据
+	 */
+	void update(int index, E e);
 }
+

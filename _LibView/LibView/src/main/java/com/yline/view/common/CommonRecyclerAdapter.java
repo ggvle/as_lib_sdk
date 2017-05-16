@@ -37,7 +37,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	 * @return item 资源文件
 	 */
 	public abstract int getItemRes();
-
+	
 	@Override
 	public int getItemCount()
 	{
@@ -77,7 +77,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	public boolean add(T object)
 	{
 		boolean result = sList.add(object);
-		this.notifyDataSetChanged();
+		this.notifyItemInserted(sList.size() - 1);
 		return result;
 	}
 
@@ -92,15 +92,16 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	public boolean addAll(Collection collection)
 	{
 		boolean result = sList.addAll(collection);
-		this.notifyDataSetChanged();
+		this.notifyItemRangeInserted(sList.size() - 1, collection.size());
 		return result;
 	}
 
 	@Override
-	public void clear()
+	public boolean addAll(int index, Collection<? extends T> collection)
 	{
-		sList.clear();
-		this.notifyDataSetChanged();
+		boolean result = sList.addAll(index, collection);
+		this.notifyItemRangeInserted(index, collection.size());
+		return result;
 	}
 
 	@Override
@@ -108,6 +109,20 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	{
 		boolean result = sList.contains(object);
 		return result;
+	}
+
+	@Override
+	public boolean containsAll(Collection collection)
+	{
+		boolean result = sList.containsAll(collection);
+		return result;
+	}
+
+	@Override
+	public int size()
+	{
+		int size = sList.size();
+		return size;
 	}
 
 	@Override
@@ -120,7 +135,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	public boolean remove(Object object)
 	{
 		boolean result = sList.remove(object);
-		this.notifyDataSetChanged();
+		this.notifyItemRemoved(sList.size());
 		return result;
 	}
 
@@ -133,24 +148,26 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	}
 
 	@Override
-	public int size()
-	{
-		int size = sList.size();
-		return size;
-	}
-
-	@Override
 	public boolean removeAll(Collection collection)
 	{
+		int length = sList.size();
 		boolean result = sList.removeAll(collection);
-		this.notifyDataSetChanged();
+		this.notifyItemRangeRemoved(length, collection.size());
 		return result;
 	}
 
 	@Override
-	public boolean containsAll(Collection collection)
+	public void clear()
 	{
-		boolean result = sList.containsAll(collection);
-		return result;
+		sList.clear();
+		this.notifyDataSetChanged();
+	}
+
+	@Override
+	public void update(int index, T t)
+	{
+		sList.remove(index);
+		sList.add(index, t);
+		this.notifyItemChanged(index);
 	}
 }
