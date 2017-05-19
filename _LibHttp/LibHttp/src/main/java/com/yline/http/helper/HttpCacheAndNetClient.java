@@ -14,7 +14,7 @@ public class HttpCacheAndNetClient
 	{
 		if (null == httpClient)
 		{
-			synchronized (HttpNetThanCacheClient.class)
+			synchronized (HttpCacheAndNetClient.class)
 			{
 				if (null == httpClient)
 				{

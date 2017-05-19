@@ -54,7 +54,7 @@ public interface IDataAdapterCallback<E>
 	 *
 	 * @return
 	 */
-	int size();
+	int dataSize();
 
 	/**
 	 * 放置，全部的数据
@@ -77,7 +77,7 @@ public interface IDataAdapterCallback<E>
 	 * @param index
 	 * @param element
 	 */
-	void add(int index, E element);
+	boolean add(int index, E element);
 
 	/**
 	 * 在数据末尾，添加批量的数据
@@ -105,20 +105,20 @@ public interface IDataAdapterCallback<E>
 	E remove(int index);
 
 	/**
-	 * 移除，某一条数据
+	 * 移除，某一项数据内容
 	 *
-	 * @param object
+	 * @param e
 	 * @return
 	 */
-	boolean remove(Object object);
+	boolean remove(E e);
 
 	/**
-	 * 移除，某一批数据
+	 * 移除，某几项数据内容
 	 *
 	 * @param collection
 	 * @return
 	 */
-	boolean removeAll(Collection<?> collection);
+	boolean removeAll(Collection<? extends E> collection);
 
 	/**
 	 * 清空数据
@@ -126,19 +126,21 @@ public interface IDataAdapterCallback<E>
 	void clear();
 
 	/**
-	 * 更新数据
+	 * 更新某一项数据
 	 *
 	 * @param index
 	 * @param e     新数据
+	 * @return true if update success
 	 */
-	void update(int index, E e);
+	boolean update(int index, E e);
 
 	/**
-	 * 更新批量数据
+	 * 更新某几项数据
 	 *
 	 * @param index
-	 * @param collection
+	 * @param arrays
+	 * @return true if update success
 	 */
-	void updateAll(int index, Collection<?> collection);
+	boolean update(int index[], E[] arrays);
 }
 

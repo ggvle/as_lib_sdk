@@ -1,6 +1,7 @@
 package com.yline.http.helper;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.cache.CacheManager;
 import com.yline.http.util.LogUtil;
@@ -240,9 +241,16 @@ public class XTextHttp<Result>
 		// 响应是否 Gson 解析
 		if (isResponseParse())
 		{
-			// 解析
-			Result result = new Gson().fromJson(jsonResult, clazz);
-			handleSuccess(result);
+			// 解析(直接抛出 解析异常，从而保证程序不挂掉)
+			try
+			{
+				Result result = new Gson().fromJson(jsonResult, clazz);
+				handleSuccess(result);
+			} catch (JsonParseException e)
+			{
+				LogUtil.e("Http JsonParseException", e);
+				handleFailure(e);
+			}
 		}
 		else
 		{

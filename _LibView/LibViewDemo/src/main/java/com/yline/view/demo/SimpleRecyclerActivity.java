@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.view.apply.SimpleRecycleAdapter;
+import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,8 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 
 	private Random random = new Random();
 
+	private GridLayoutManager gridLayoutManager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -32,9 +36,12 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 		setContentView(R.layout.activity_simple_recycler);
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler);
-		recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
-		homeAdapter = new SimpleRecycleAdapter();
+		gridLayoutManager = new GridLayoutManager(this, 3);
+		gridLayoutManager.setSpanCount(3);
+		recyclerView.setLayoutManager(gridLayoutManager);
+
+		homeAdapter = new DefineRecyclerAdapter();
 		recyclerView.setAdapter(homeAdapter);
 
 		initData();
@@ -63,20 +70,34 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 						homeAdapter.remove(0);
 						break;
 					case 5:
-						String object = homeAdapter.getItem(homeAdapter.size() - 1);
-						homeAdapter.remove(object);
+						if (homeAdapter.dataSize() > 1)
+						{
+							String object = homeAdapter.getItem(homeAdapter.dataSize() - 1);
+							homeAdapter.remove(object);
+						}
 						break;
 					case 6:
-						String objectA = homeAdapter.getItem(homeAdapter.size() - 1);
-						String objectB = homeAdapter.getItem(homeAdapter.size() - 2);
-						String objectC = homeAdapter.getItem(homeAdapter.size() - 3);
-						homeAdapter.removeAll(Arrays.asList(objectA, objectB, objectC));
+						if (homeAdapter.dataSize() > 3)
+						{
+							String objectA = homeAdapter.getItem(homeAdapter.dataSize() - 1);
+							String objectB = homeAdapter.getItem(homeAdapter.dataSize() - 2);
+							String objectC = homeAdapter.getItem(homeAdapter.dataSize() - 3);
+							homeAdapter.removeAll(Arrays.asList(objectA, objectB, objectC));
+						}
 						break;
 					case 7:
 						homeAdapter.clear();
+						gridLayoutManager.setSpanCount(1);
 						break;
 					case 8:
 						homeAdapter.update(0, "update-" + random.nextInt(50));
+						break;
+					case 9:
+						homeAdapter.update(new int[]{0, 1, 2}, new String[]{"update-" + random.nextInt(50), "update-" + random.nextInt(50), "update-" + random.nextInt(50)});
+						break;
+					case 10:
+						initData();
+						gridLayoutManager.setSpanCount(3);
 						break;
 				}
 			}
@@ -102,6 +123,10 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 		tabLayout.addTab(tabLayout.newTab().setText("末尾-n"));
 		tabLayout.addTab(tabLayout.newTab().setText("清除所有"));
 		tabLayout.addTab(tabLayout.newTab().setText("首位更新"));
+		tabLayout.addTab(tabLayout.newTab().setText("前三位更新"));
+
+		tabLayout.addTab(tabLayout.newTab().setText("重置初始化"));
+
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 		tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 	}
@@ -111,10 +136,11 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 		data = new ArrayList<>();
 		for (int i = 0; i < 22; i++)
 		{
-			data.add((200 + random.nextInt(100)) + "");
+			String temp = 200 + random.nextInt(5) + "";
+			data.add(temp);
 		}
 
-		homeAdapter.addAll(data);
+		homeAdapter.setDataList(data);
 	}
 
 	/**
@@ -125,5 +151,29 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 	public static void actionStart(Context context)
 	{
 		context.startActivity(new Intent(context, SimpleRecyclerActivity.class));
+	}
+
+	private class DefineRecyclerAdapter extends SimpleRecycleAdapter
+	{
+		@Override
+		public int getEmptyItemRes()
+		{
+			return R.layout.activity_simple_recycler_empty;
+		}
+
+		@Override
+		public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
+		{
+			// super.setEmptyViewContent(viewHolder, position);
+
+			viewHolder.setOnClickListener(R.id.btn_empty_recycler, new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					finish();
+				}
+			});
+		}
 	}
 }

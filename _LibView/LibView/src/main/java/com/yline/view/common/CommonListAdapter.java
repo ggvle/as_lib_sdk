@@ -104,21 +104,38 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 	@Override
 	public boolean add(T object)
 	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
 		boolean result = sList.add(object);
 		this.notifyDataSetChanged();
 		return result;
 	}
 
 	@Override
-	public void add(int index, T element)
+	public boolean add(int index, T element)
 	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
 		sList.add(index, element);
 		this.notifyDataSetChanged();
+
+		return true;
 	}
 
 	@Override
 	public boolean addAll(Collection collection)
 	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
 		boolean result = sList.addAll(collection);
 		this.notifyDataSetChanged();
 		return result;
@@ -157,7 +174,7 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 	}
 
 	@Override
-	public int size()
+	public int dataSize()
 	{
 		int size = sList.size();
 		return size;
@@ -186,22 +203,35 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 	}
 
 	@Override
-	public void update(int index, T t)
+	public boolean update(int index, T t)
 	{
+		if (1 > sList.size())
+		{
+			return false;
+		}
+
 		sList.remove(index);
 		sList.add(index, t);
 		this.notifyDataSetChanged();
+
+		return true;
 	}
 
 	@Override
-	public void updateAll(int index, Collection collection)
+	public boolean update(int[] index, T[] arrays)
 	{
-		for (int i = 0; i < collection.size(); i++)
+		if (index.length != arrays.length)
 		{
-			sList.remove(index + i);
+			return false;
 		}
-		sList.addAll(collection);
 
+		for (int i = 0; i < index.length; i++)
+		{
+			sList.remove(index[i]);
+			sList.add(arrays[i]);
+		}
 		this.notifyDataSetChanged();
+
+		return true;
 	}
 }

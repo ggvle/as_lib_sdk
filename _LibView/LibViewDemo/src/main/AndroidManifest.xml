@@ -16,11 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.yline.view.demo.SimpleListActivity"/>
-        <activity android:name="com.yline.view.demo.SimpleRecyclerActivity"/>
-        <activity android:name="com.yline.view.demo.SimpleGridDecorationActivity">
+        <activity android:name=".SimpleListActivity"/>
+        <activity android:name=".SimpleRecyclerActivity"/>
+        <activity android:name=".SimpleGridDecorationActivity">
         </activity>
-        <activity android:name="com.yline.view.demo.SimpleLinearDecorationActivity">
+        <activity android:name=".SimpleLinearDecorationActivity">
+        </activity>
+        <activity android:name=".HeadFootRecyclerActivity">
         </activity>
     </application>
 

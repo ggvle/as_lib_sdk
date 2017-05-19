@@ -7,6 +7,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * 添加头部和底部的Recycle
  *
@@ -58,32 +63,31 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 		}
 		else if (isFooterViewPos(position))
 		{
-			return footViewArray.keyAt(position - getHeadersCount() - sList.size());
+			return footViewArray.keyAt(position - getHeadersCount() - super.getItemCount());
 		}
 		return super.getItemViewType(position - getHeadersCount());
 	}
 
 	@Override
-	public void onBindViewHolder(final RecyclerViewHolder holder, final int position)
+	public void onBindViewHolder(RecyclerViewHolder holder, int position, List<Object> payloads)
 	{
 		if (isHeaderViewPos(position))
 		{
 			return;
 		}
+
 		if (isFooterViewPos(position))
 		{
 			return;
 		}
 
-		setViewContent(holder, position - getHeadersCount());
+		super.onBindViewHolder(holder, position - getHeadersCount(), payloads);
 	}
-
-	protected abstract void setViewContent(RecyclerViewHolder viewHolder, int position);
 
 	@Override
 	public int getItemCount()
 	{
-		return getHeadersCount() + getFootersCount() + sList.size();
+		return getHeadersCount() + getFootersCount() + super.getItemCount();
 	}
 
 	/**
@@ -155,7 +159,7 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 
 	private boolean isFooterViewPos(int position)
 	{
-		return position >= getHeadersCount() + sList.size();
+		return position >= getHeadersCount() + super.getItemCount();
 	}
 
 	public void addHeadView(View view)
@@ -176,5 +180,142 @@ public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T
 	public int getFootersCount()
 	{
 		return footViewArray.size();
+	}
+
+	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 数据更新，会因为head、foot的原因导致不能使用 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
+
+	@Override
+	public boolean add(T object)
+	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
+		boolean result = sList.add(object);
+		this.notifyItemInserted(getHeadersCount() + sList.size() - 1);
+		return result;
+	}
+
+	@Override
+	public boolean add(int index, T element)
+	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
+		sList.add(index, element);
+		this.notifyItemInserted(getHeadersCount() + index);
+
+		return true;
+	}
+
+	@Override
+	public boolean addAll(Collection collection)
+	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
+		boolean result = sList.addAll(collection);
+		this.notifyItemRangeInserted(getHeadersCount() + sList.size() - 1, collection.size());
+		return result;
+	}
+
+	@Override
+	public boolean addAll(int index, Collection<? extends T> collection)
+	{
+		if (sList.size() == 0)
+		{
+			return false;
+		}
+
+		boolean result = sList.addAll(index, collection);
+		this.notifyItemRangeInserted(getHeadersCount() + index, collection.size());
+		return result;
+	}
+
+	@Override
+	public T remove(int index)
+	{
+		if (sList.size() > index)
+		{
+			T t = sList.remove(index);
+			this.notifyItemRemoved(getHeadersCount() + index);
+
+			return t;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean remove(T t)
+	{
+		List<Integer> objectList = new ArrayList<>();
+		for (int i = sList.size() - 1; i >= 0; i--)
+		{
+			if (null != t && sList.get(i).equals(t))
+			{
+				objectList.add(i);
+			}
+		}
+
+		boolean result = sList.removeAll(Arrays.asList(t));
+		if (result)
+		{
+			for (Integer integer : objectList)
+			{
+				this.notifyItemRemoved(getHeadersCount() + integer);
+			}
+		}
+
+		return result;
+	}
+
+	@Override
+	public boolean removeAll(Collection<? extends T> collection)
+	{
+		int length = sList.size();
+		if (null == collection || collection.size() > length)
+		{
+			return false;
+		}
+
+		List<Integer> objectList = new ArrayList<>();
+		for (int i = sList.size() - 1; i >= 0; i--)
+		{
+			if (collection.contains(sList.get(i)))
+			{
+				objectList.add(i);
+			}
+		}
+
+		boolean result = sList.removeAll(collection);
+		if (result)
+		{
+			for (Integer integer : objectList)
+			{
+				this.notifyItemRemoved(getHeadersCount() + integer);
+			}
+		}
+
+		return result;
+	}
+
+	@Override
+	public boolean update(int index, T t)
+	{
+		if (1 > sList.size())
+		{
+			return false;
+		}
+
+		sList.remove(index);
+		sList.add(index, t);
+		this.notifyItemChanged(getHeadersCount() + index);
+
+		return true;
 	}
 }

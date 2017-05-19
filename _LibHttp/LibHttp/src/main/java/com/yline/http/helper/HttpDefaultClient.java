@@ -12,7 +12,7 @@ public class HttpDefaultClient
 	{
 		if (null == httpClient)
 		{
-			synchronized (HttpNetThanCacheClient.class)
+			synchronized (HttpDefaultClient.class)
 			{
 				if (null == httpClient)
 				{

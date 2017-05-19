@@ -50,5 +50,14 @@ public class MainActivity extends BaseTestActivity
 				SimpleLinearDecorationActivity.actionStart(MainActivity.this);
 			}
 		});
+
+		addButton("HeadFootRecyclerActivity", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				HeadFootRecyclerActivity.actionStart(MainActivity.this);
+			}
+		});
 	}
 }
