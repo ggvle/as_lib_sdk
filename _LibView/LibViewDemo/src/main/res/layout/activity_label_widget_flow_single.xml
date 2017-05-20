@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Click -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@android:color/holo_red_light"
+        android:text="Click"/>
+
+    <com.yline.widget.label.LabelView
+        android:id="@+id/label_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:background="@drawable/widget_label_item_bg_layout"
+                android:duplicateParentState="true"
+                android:text="Breath And Life"
+                android:textColor="@drawable/widget_label_item_text_color"
+                android:textSize="13sp"/>
+        </LinearLayout>
+    </com.yline.widget.label.LabelView>
+</LinearLayout>
