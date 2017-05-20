@@ -1,4 +1,4 @@
-package com.yline.view.demo;
+package com.yline.view.apply;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.view.apply.SimpleRecycleAdapter;
 import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.demo.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.yline.view.demo;
+package com.yline.view.apply;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.yline.base.BaseActivity;
-import com.yline.view.apply.SimpleListAdapter;
+import com.yline.view.demo.R;
 
 import java.util.Arrays;
 
 public class SimpleListActivity extends BaseActivity
 {
-	private static final String TAG = "SimpleListActivity";
-
 	private ListView lvDemo;
 
 	private SimpleListAdapter listAdapter;
@@ -24,10 +22,10 @@ public class SimpleListActivity extends BaseActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_simple_list);
+		setContentView(R.layout.global_list);
 
-		lvDemo = (ListView) findViewById(R.id.lv_demo);
-
+		lvDemo = (ListView) findViewById(R.id.list_view);
+		
 		listAdapter = new SimpleListAdapter(this);
 		lvDemo.setAdapter(listAdapter);
 

@@ -9,21 +9,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.yline.inner.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SimpleListActivity"/>
-        <activity android:name=".SimpleRecyclerActivity"/>
-        <activity android:name=".SimpleGridDecorationActivity">
+        <activity android:name="com.yline.view.apply.SimpleGridDecorationActivity"/>
+        <activity android:name="com.yline.view.apply.SimpleLinearDecorationActivity"/>
+        <activity android:name="com.yline.view.apply.SimpleListActivity">
         </activity>
-        <activity android:name=".SimpleLinearDecorationActivity">
+        <activity android:name="com.yline.view.apply.SimpleRecyclerActivity">
         </activity>
-        <activity android:name=".HeadFootRecyclerActivity">
+        <activity android:name="com.yline.view.apply.SimpleHeadFootRecyclerActivity">
         </activity>
     </application>
-
 </manifest>

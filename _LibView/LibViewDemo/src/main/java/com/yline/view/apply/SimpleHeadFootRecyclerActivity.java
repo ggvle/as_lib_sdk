@@ -1,4 +1,4 @@
-package com.yline.view.demo;
+package com.yline.view.apply;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.utils.UIScreenUtil;
-import com.yline.view.apply.SimpleGridItemDecoration;
-import com.yline.view.apply.SimpleHeadFootRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
+import com.yline.view.demo.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class HeadFootRecyclerActivity extends BaseAppCompatActivity
+public class SimpleHeadFootRecyclerActivity extends BaseAppCompatActivity
 {
 	private SimpleHeadFootAdapter simpleAdapter;
 
@@ -181,7 +180,7 @@ public class HeadFootRecyclerActivity extends BaseAppCompatActivity
 
 	public static void actionStart(Context context)
 	{
-		context.startActivity(new Intent(context, HeadFootRecyclerActivity.class));
+		context.startActivity(new Intent(context, SimpleHeadFootRecyclerActivity.class));
 	}
 
 	private class SimpleHeadFootAdapter extends SimpleHeadFootRecyclerAdapter
