@@ -31,7 +31,7 @@ public class MainViewFragment extends BaseFragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
-		return inflater.inflate(R.layout.fragment_main_view, container, false);
+		return inflater.inflate(R.layout.inner_fragment_main_view, container, false);
 	}
 
 	@Override

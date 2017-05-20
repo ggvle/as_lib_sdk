@@ -33,7 +33,7 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_simple_recycler);
+		setContentView(R.layout.global_recycler);
 
 		recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
@@ -46,7 +46,7 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 
 		initData();
 
-		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_click);
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_recycler);
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
 		{
 			@Override
@@ -158,7 +158,7 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 		@Override
 		public int getEmptyItemRes()
 		{
-			return R.layout.activity_simple_recycler_empty;
+			return R.layout.global_recycler_empty;
 		}
 
 		@Override

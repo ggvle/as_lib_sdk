@@ -10,11 +10,11 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tab_click">
+        android:layout_above="@+id/tab_recycler">
     </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/tab_click"
+        android:id="@+id/tab_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">

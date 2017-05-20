@@ -32,7 +32,7 @@ public class SimpleHeadFootRecyclerActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_simple_recycler);
+		setContentView(R.layout.global_recycler);
 
 		initView();
 		initData();
@@ -81,7 +81,7 @@ public class SimpleHeadFootRecyclerActivity extends BaseAppCompatActivity
 		footViewB.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_bright));
 		simpleAdapter.addFootView(footViewB);
 
-		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_click);
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_recycler);
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
 		{
 			@Override
@@ -188,7 +188,7 @@ public class SimpleHeadFootRecyclerActivity extends BaseAppCompatActivity
 		@Override
 		public int getEmptyItemRes()
 		{
-			return R.layout.activity_simple_recycler_empty;
+			return R.layout.global_recycler_empty;
 		}
 
 		@Override

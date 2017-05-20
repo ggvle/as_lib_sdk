@@ -23,9 +23,9 @@ public class SimpleLinearDecorationActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_simple_decoration);
+		setContentView(R.layout.global_recycler);
 		
-		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_decoration);
+		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.addItemDecoration(new SimpleLinearItemDecoration(this)
 		{
