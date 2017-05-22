@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yline.base.BaseFragment;
+import com.yline.view.apply.ViewApplyFragment;
+import com.yline.view.custom.ViewCustomFragment;
 import com.yline.view.demo.R;
 
 import java.util.ArrayList;

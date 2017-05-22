@@ -1,13 +1,9 @@
-package com.yline.inner;
+package com.yline.widget.label;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.yline.test.BaseTestFragment;
-import com.yline.widget.label.WidgetFlowAble3Activity;
-import com.yline.widget.label.WidgetFlowAbleActivity;
-import com.yline.widget.label.WidgetFlowActivity;
-import com.yline.widget.label.WidgetFlowSingleActivity;
 
 public class WidgetLabelFragment extends BaseTestFragment
 {

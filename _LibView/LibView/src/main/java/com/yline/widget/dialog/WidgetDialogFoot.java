@@ -176,6 +176,7 @@ public class WidgetDialogFoot
 
 	public void show(OnSelectedListener onSelectedListener, DialogInterface.OnDismissListener dismissListener)
 	{
+		this.onSelectedListener = onSelectedListener;
 		if (null != dismissListener)
 		{
 			dialog.setOnDismissListener(dismissListener);
@@ -185,6 +186,7 @@ public class WidgetDialogFoot
 
 	public void show(OnSelectedListener onSelectedListener, DialogInterface.OnDismissListener dismissListener, DialogInterface.OnShowListener showListener)
 	{
+		this.onSelectedListener = onSelectedListener;
 		if (null != dismissListener)
 		{
 			dialog.setOnDismissListener(dismissListener);
@@ -203,7 +205,7 @@ public class WidgetDialogFoot
 
 	public interface OnSelectedListener
 	{
-		public void onCancelSelected(DialogInterface dialog);
+		void onCancelSelected(DialogInterface dialog);
 
 		/**
 		 * This method will be invoked when the dialog is dismissed.
@@ -211,7 +213,7 @@ public class WidgetDialogFoot
 		 * @param dialog The dialog that was dismissed will be passed into the
 		 *               method.
 		 */
-		public void onOptionSelected(DialogInterface dialog, int position, String content);
+		void onOptionSelected(DialogInterface dialog, int position, String content);
 	}
 
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */

@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 
 import com.yline.base.BaseFragment;
 import com.yline.view.demo.R;
+import com.yline.widget.ad.WidgetADFragment;
+import com.yline.widget.dialog.WidgetDialogFragment;
+import com.yline.widget.label.WidgetLabelFragment;
+import com.yline.widget.menu.WidgetMenuFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +52,12 @@ public class MainWidgetFragment extends BaseFragment
 		fragmentList.add(WidgetADFragment.newInstance());
 		titleList.add("AD 广告");
 
+		fragmentList.add(WidgetDialogFragment.newInstance());
+		titleList.add("Dialog 弹框");
+
+		fragmentList.add(WidgetMenuFragment.newInstance());
+		titleList.add("Menu 菜单");
+
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_widget);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager_widget);
 
@@ -72,5 +82,7 @@ public class MainWidgetFragment extends BaseFragment
 			}
 		});
 		tabLayout.setupWithViewPager(viewPager);
+
+		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 	}
 }

@@ -1,10 +1,9 @@
-package com.yline.inner;
+package com.yline.widget.ad;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.yline.test.BaseTestFragment;
-import com.yline.widget.ad.WidgetADActivity;
 
 public class WidgetADFragment extends BaseTestFragment
 {

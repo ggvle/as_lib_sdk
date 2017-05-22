@@ -1,14 +1,9 @@
-package com.yline.inner;
+package com.yline.view.custom;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.yline.test.BaseTestFragment;
-import com.yline.view.custom.ProgressCircleActivity;
-import com.yline.view.custom.SuperSwipeCustomActivity;
-import com.yline.view.custom.SuperSwipeSimpleActivity;
-import com.yline.view.custom.ViewCircleActivity;
-import com.yline.view.custom.ViewKeyClearEditTextActivity;
 
 public class ViewCustomFragment extends BaseTestFragment
 {

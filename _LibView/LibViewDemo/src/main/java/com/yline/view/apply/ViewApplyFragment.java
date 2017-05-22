@@ -1,4 +1,4 @@
-package com.yline.inner;
+package com.yline.view.apply;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,11 +6,6 @@ import android.view.View;
 import com.yline.application.BaseApplication;
 import com.yline.log.LogFileUtil;
 import com.yline.test.BaseTestFragment;
-import com.yline.view.apply.SimpleGridDecorationActivity;
-import com.yline.view.apply.SimpleHeadFootRecyclerActivity;
-import com.yline.view.apply.SimpleLinearDecorationActivity;
-import com.yline.view.apply.SimpleListActivity;
-import com.yline.view.apply.SimpleRecyclerActivity;
 
 public class ViewApplyFragment extends BaseTestFragment
 {

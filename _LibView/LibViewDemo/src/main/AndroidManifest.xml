@@ -48,6 +48,10 @@
         </activity>
         <activity android:name="com.yline.view.custom.SuperSwipeCustomActivity">
         </activity>
+        <activity android:name="com.yline.widget.menu.DropMenuActivity">
+        </activity>
+        <activity android:name="com.yline.widget.menu.SecondMenuActivity">
+        </activity>
     </application>
 
 </manifest>
