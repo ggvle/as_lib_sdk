@@ -1,4 +1,4 @@
-package com.yline.view.custom.wiperefresh;
+package com.yline.view.custom.swiperefresh;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
