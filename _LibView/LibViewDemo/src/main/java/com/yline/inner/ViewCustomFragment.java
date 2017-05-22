@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.yline.test.BaseTestFragment;
 import com.yline.view.custom.ProgressCircleActivity;
+import com.yline.view.custom.SuperSwipeCustomActivity;
 import com.yline.view.custom.SuperSwipeSimpleActivity;
 import com.yline.view.custom.ViewCircleActivity;
 import com.yline.view.custom.ViewKeyClearEditTextActivity;
@@ -37,7 +38,7 @@ public class ViewCustomFragment extends BaseTestFragment
 				ViewKeyClearEditTextActivity.actionStart(getContext());
 			}
 		});
-		
+
 		addButton("ViewCircleProgressBar", new View.OnClickListener()
 		{
 			@Override
@@ -53,6 +54,15 @@ public class ViewCustomFragment extends BaseTestFragment
 			public void onClick(View v)
 			{
 				SuperSwipeSimpleActivity.actionStart(getContext());
+			}
+		});
+
+		addButton("SuperSwipeRefreshLayout Custom", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				SuperSwipeCustomActivity.actionStart(getContext());
 			}
 		});
 	}
