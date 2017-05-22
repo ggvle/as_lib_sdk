@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.yline.view.demo">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:name="com.yline.application.BaseApplication"
         android:allowBackup="true"
@@ -33,6 +35,8 @@
         <activity android:name="com.yline.widget.label.WidgetFlowSingleActivity">
         </activity>
         <activity android:name="com.yline.widget.label.WidgetFlowAble3Activity">
+        </activity>
+        <activity android:name="com.yline.widget.ad.WidgetADActivity">
         </activity>
     </application>
 

@@ -36,9 +36,9 @@ public class FlowLayout extends ViewGroup
 	public FlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
-		gravity = ta.getInt(R.styleable.WidgetLabelLayout_label_gravity, LabelGravity.LEFT.value);
-		maxCountEachLine = ta.getInt(R.styleable.WidgetLabelLayout_label_max_count_each_line, -1);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ViewLabelLayout);
+		gravity = ta.getInt(R.styleable.ViewLabelLayout_label_gravity, LabelGravity.LEFT.value);
+		maxCountEachLine = ta.getInt(R.styleable.ViewLabelLayout_label_max_count_each_line, -1);
 		ta.recycle();
 	}
 

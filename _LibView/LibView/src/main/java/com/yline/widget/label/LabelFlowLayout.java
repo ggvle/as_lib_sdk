@@ -36,9 +36,9 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 	public LabelFlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WidgetLabelLayout);
-		mSelectedMax = ta.getInt(R.styleable.WidgetLabelLayout_label_max_select, Integer.MAX_VALUE);
-		mSelectedMin = ta.getInt(R.styleable.WidgetLabelLayout_label_min_select, -1);
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ViewLabelLayout);
+		mSelectedMax = ta.getInt(R.styleable.ViewLabelLayout_label_max_select, Integer.MAX_VALUE);
+		mSelectedMin = ta.getInt(R.styleable.ViewLabelLayout_label_min_select, -1);
 		ta.recycle();
 
 		setClickable(true);

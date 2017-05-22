@@ -45,6 +45,9 @@ public class MainWidgetFragment extends BaseFragment
 		fragmentList.add(WidgetLabelFragment.newInstance());
 		titleList.add("Label");
 
+		fragmentList.add(WidgetADFragment.newInstance());
+		titleList.add("AD 广告");
+
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_widget);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager_widget);
 
