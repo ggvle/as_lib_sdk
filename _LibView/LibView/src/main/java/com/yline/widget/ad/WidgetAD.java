@@ -412,7 +412,7 @@ public class WidgetAD
 
 	protected int getPointResource()
 	{
-		return R.drawable.widget_ad_point;
+		return R.drawable.view_global_selector_oval_white_gray;
 	}
 
 	protected int getLayoutResource()

@@ -312,6 +312,4 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 		}
 		super.onRestoreInstanceState(state);
 	}
-
-
 }

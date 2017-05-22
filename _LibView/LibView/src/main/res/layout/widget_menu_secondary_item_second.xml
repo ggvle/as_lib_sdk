@@ -25,7 +25,7 @@
         android:layout_marginRight="30dp"
         android:layout_weight="1"
         android:button="@null"
-        android:background="@drawable/widget_item_secondary_second_selected"
+        android:background="@drawable/view_global_drawable_selected"
         android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false"/>

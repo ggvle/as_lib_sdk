@@ -44,6 +44,9 @@ public class MainViewFragment extends BaseFragment
 
 		fragmentList.add(ViewApplyFragment.newInstance());
 		titleList.add("Apply");
+		
+		fragmentList.add(ViewCustomFragment.newInstance());
+		titleList.add("Custom");
 
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_view);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager_view);

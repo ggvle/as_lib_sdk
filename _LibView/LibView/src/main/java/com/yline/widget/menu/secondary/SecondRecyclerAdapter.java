@@ -175,12 +175,12 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	@DrawableRes
 	protected int getItemDrawableSelected()
 	{
-		return R.drawable.widget_item_secondary_second_selected;
+		return R.drawable.view_global_drawable_selected;
 	}
 
 	@DrawableRes
 	protected int getItemDrawableUnselected()
 	{
-		return R.drawable.widget_item_secondary_second_unselected;
+		return R.drawable.view_global_drawable_unselected;
 	}
 }

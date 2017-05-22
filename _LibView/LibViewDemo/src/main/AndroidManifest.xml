@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.yline.view.demo">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.yline.application.BaseApplication"
@@ -37,6 +37,8 @@
         <activity android:name="com.yline.widget.label.WidgetFlowAble3Activity">
         </activity>
         <activity android:name="com.yline.widget.ad.WidgetADActivity">
+        </activity>
+        <activity android:name="com.yline.view.custom.ViewCircleActivity">
         </activity>
     </application>
 

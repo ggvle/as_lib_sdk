@@ -44,7 +44,7 @@ public class SimpleLinearDecorationActivity extends BaseAppCompatActivity
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_blue_normal;
+				return R.drawable.recycler_divider_blue_normal;
 			}
 		});
 

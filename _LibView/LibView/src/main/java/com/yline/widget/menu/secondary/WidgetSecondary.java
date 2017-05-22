@@ -342,13 +342,13 @@ public class WidgetSecondary
 	@DrawableRes
 	protected int getSecondDrawableSelected()
 	{
-		return R.drawable.widget_item_secondary_second_selected;
+		return R.drawable.view_global_drawable_selected;
 	}
 
 	@DrawableRes
 	protected int getSecondDrawableUnselected()
 	{
-		return R.drawable.widget_item_secondary_second_unselected;
+		return R.drawable.view_global_drawable_unselected;
 	}
 
 	protected String getResultTitle(String first, List<String> second)

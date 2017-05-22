@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <!-- Click -->
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,10 +27,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:background="@drawable/widget_label_item_bg_layout"
+                android:background="@drawable/view_global_selector_stroke_redgray_radiu_all"
                 android:duplicateParentState="true"
                 android:text="Breath And Life"
-                android:textColor="@drawable/widget_label_item_text_color"
+                android:textColor="@drawable/view_global_text_red_gray"
                 android:textSize="13sp"/>
         </LinearLayout>
     </com.yline.widget.label.LabelView>

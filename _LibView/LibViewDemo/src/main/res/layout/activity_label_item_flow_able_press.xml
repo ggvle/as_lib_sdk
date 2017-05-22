@@ -11,9 +11,9 @@
         android:id="@+id/tv_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/widget_label_item_bg_layout_press"
+        android:background="@drawable/label_item_bg_layout_press"
         android:duplicateParentState="true"
-        android:textColor="@drawable/widget_label_item_text_color">
+        android:textColor="@drawable/view_global_text_red_gray">
     </TextView>
 </LinearLayout>
 

@@ -44,7 +44,7 @@ public class SimpleGridDecorationActivity extends BaseAppCompatActivity
 			@Override
 			protected int getDivideResourceId()
 			{
-				return R.drawable.widget_recycler_divider_black_normal;
+				return R.drawable.recycler_divider_black_normal;
 			}
 		});
 		recyclerAdapter = new SimpleHeadFootRecyclerAdapter();
