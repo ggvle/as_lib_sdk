@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.test.SimpleHeadFootRecyclerAdapter;
 import com.yline.utils.UIScreenUtil;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.view.demo.R;

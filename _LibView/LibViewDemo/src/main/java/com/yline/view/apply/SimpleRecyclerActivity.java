@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.yline.base.BaseAppCompatActivity;
+import com.yline.test.SimpleRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 import com.yline.view.demo.R;
 
@@ -23,7 +24,7 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 
 	private List<String> data;
 
-	private SimpleRecycleAdapter homeAdapter;
+	private SimpleRecyclerAdapter homeAdapter;
 
 	private Random random = new Random();
 
@@ -153,7 +154,7 @@ public class SimpleRecyclerActivity extends BaseAppCompatActivity
 		context.startActivity(new Intent(context, SimpleRecyclerActivity.class));
 	}
 
-	private class DefineRecyclerAdapter extends SimpleRecycleAdapter
+	private class DefineRecyclerAdapter extends SimpleRecyclerAdapter
 	{
 		@Override
 		public int getEmptyItemRes()

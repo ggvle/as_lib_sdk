@@ -11,16 +11,16 @@ import android.view.View;
 
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.inner.InnerConstant;
-import com.yline.view.apply.SimpleHeadFootRecyclerAdapter;
+import com.yline.test.SimpleHeadFootRecyclerAdapter;
 import com.yline.view.custom.swiperefresh.SimpleSwipeRefreshAdapter;
-import com.yline.view.custom.swiperefresh.SuperSwipeRefreshLayout;
+import com.yline.view.custom.swiperefresh.ViewSwipeRefreshLayout;
 import com.yline.view.demo.R;
 
 import java.util.Random;
 
 public class SuperSwipeCustomActivity extends BaseAppCompatActivity
 {
-	private SuperSwipeRefreshLayout swipeRefreshLayout;
+	private ViewSwipeRefreshLayout swipeRefreshLayout;
 	
 	private RecyclerView recyclerView;
 	
@@ -32,7 +32,7 @@ public class SuperSwipeCustomActivity extends BaseAppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_super_swipe);
 		
-		swipeRefreshLayout = (SuperSwipeRefreshLayout) findViewById(R.id.super_swipe_refresh);
+		swipeRefreshLayout = (ViewSwipeRefreshLayout) findViewById(R.id.super_swipe_refresh);
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_super_swipe);
 		recyclerAdapter = new SimpleHeadFootRecyclerAdapter();
 
@@ -90,7 +90,7 @@ public class SuperSwipeCustomActivity extends BaseAppCompatActivity
 
 		// 支持自定义（view）
 		swipeRefreshLayout.setLoadAdapter(null);
-		swipeRefreshLayout.setOnLoadListener(new SuperSwipeRefreshLayout.OnSwipeListener()
+		swipeRefreshLayout.setOnLoadListener(new ViewSwipeRefreshLayout.OnSwipeListener()
 		{
 			@Override
 			public void onAnimate()

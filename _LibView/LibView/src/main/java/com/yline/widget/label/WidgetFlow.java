@@ -146,6 +146,6 @@ public class WidgetFlow
 	/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 提供重写的方法 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
 	protected int getItemResourceId()
 	{
-		return R.layout.widget_label_item_flow;
+		return R.layout.lib_view_label_item_flow;
 	}
 }

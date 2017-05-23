@@ -15,6 +15,6 @@
         android:id="@+id/view_key_clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/view_global_stroke_red_radius_all"
-        android:padding="@dimen/view_space_large"/>
+        android:background="@drawable/lib_view_shape_radiusall_stroke_red"
+        android:padding="@dimen/lib_view_space_large"/>
 </RelativeLayout>

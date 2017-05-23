@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.yline.view.callback.IViewHolderCallback;
 
 /**
+ * 资源文件 帮助类 ViewHolder
+ *
  * @author yline 2017/3/19 -- 3:03
  * @version 1.0.0
  */

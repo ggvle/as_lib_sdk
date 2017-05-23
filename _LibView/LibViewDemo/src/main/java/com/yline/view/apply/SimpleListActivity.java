@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.yline.base.BaseActivity;
 import com.yline.inner.InnerConstant;
+import com.yline.test.SimpleListAdapter;
 import com.yline.view.demo.R;
 
 public class SimpleListActivity extends BaseActivity

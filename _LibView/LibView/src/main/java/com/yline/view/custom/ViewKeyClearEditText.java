@@ -16,6 +16,12 @@ import android.view.View;
 
 import com.yline.view.R;
 
+/**
+ * 输入框 支持 一键删除
+ *
+ * @author yline 2017/5/23 -- 10:48
+ * @version 1.0.0
+ */
 public class ViewKeyClearEditText extends AppCompatEditText implements View.OnFocusChangeListener, TextWatcher
 {
 	// 一键删除的按钮
@@ -139,11 +145,10 @@ public class ViewKeyClearEditText extends AppCompatEditText implements View.OnFo
 	@Override
 	public void afterTextChanged(Editable s)
 	{
-
 	}
 
 	protected int getKeyClearDrawable()
 	{
-		return R.drawable.view_et_key_clear;
+		return android.R.drawable.ic_delete;
 	}
 }

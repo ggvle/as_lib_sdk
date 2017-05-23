@@ -52,12 +52,12 @@ public class WidgetDialogFragment extends BaseTestFragment
 			}
 		});
 
-		addButton("WidgetDialogIos", new View.OnClickListener()
+		addButton("WidgetDialogCenter", new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				WidgetDialogIos widgetDialogIos = new WidgetDialogIos(getContext());
+				WidgetDialogCenter widgetDialogIos = new WidgetDialogCenter(getContext());
 				widgetDialogIos.show();
 			}
 		});

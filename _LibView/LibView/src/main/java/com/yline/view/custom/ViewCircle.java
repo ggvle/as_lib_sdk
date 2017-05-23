@@ -18,6 +18,12 @@ import android.widget.ImageView;
 
 import com.yline.view.R;
 
+/**
+ * 圆形视图
+ *
+ * @author yline 2017/5/23 -- 10:37
+ * @version 1.0.0
+ */
 public class ViewCircle extends ImageView
 {
 	private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

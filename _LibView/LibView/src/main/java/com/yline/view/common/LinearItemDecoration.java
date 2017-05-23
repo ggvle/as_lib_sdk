@@ -10,6 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**
+ * 公共的 LinearItemDecoration
+ *
+ * @author yline 2017/5/23 -- 10:31
+ * @version 1.0.0
+ */
 public abstract class LinearItemDecoration extends RecyclerView.ItemDecoration
 {
 	private static final int[] ATTRS = new int[]{android.R.attr.listDivider};

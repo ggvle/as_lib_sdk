@@ -13,6 +13,12 @@ import com.yline.view.R;
 
 import java.util.Deque;
 
+/**
+ * 流动布局，支持子布局可点击
+ *
+ * @author yline 2017/5/23 -- 10:50
+ * @version 1.0.0
+ */
 public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSetChangedListener, LabelAdapter.OnSelectedChangeListener
 {
 	private static final String TAG = "TagFlowLayout";

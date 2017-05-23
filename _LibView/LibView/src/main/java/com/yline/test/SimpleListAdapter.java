@@ -1,4 +1,4 @@
-package com.yline.view.apply;
+package com.yline.test;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -7,9 +7,9 @@ import com.yline.view.common.CommonListAdapter;
 import com.yline.view.common.ViewHolder;
 
 /**
- * 简单的ListAdapter案例
+ * 使用默认布局，简单的List列表
  *
- * @author yline 2017/5/9 -- 16:06
+ * @author yline 2017/5/23 -- 10:16
  * @version 1.0.0
  */
 public class SimpleListAdapter extends CommonListAdapter<String>
@@ -18,13 +18,13 @@ public class SimpleListAdapter extends CommonListAdapter<String>
 	{
 		super(context);
 	}
-
+	
 	@Override
 	protected int getItemRes(int position)
 	{
 		return android.R.layout.simple_list_item_1;
 	}
-
+	
 	@Override
 	protected void onBindViewHolder(ViewGroup parent, ViewHolder viewHolder, int position)
 	{

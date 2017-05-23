@@ -8,6 +8,12 @@ import android.widget.TextView;
 
 import com.yline.view.callback.IViewHolderCallback;
 
+/**
+ * RecyclerViewHolder 公共的
+ *
+ * @author yline 2017/5/23 -- 10:33
+ * @version 1.0.0
+ */
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IViewHolderCallback<View>
 {
 	private SparseArrayCompat<View> sArray;

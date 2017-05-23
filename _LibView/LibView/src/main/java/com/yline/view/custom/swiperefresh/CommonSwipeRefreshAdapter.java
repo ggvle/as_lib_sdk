@@ -5,15 +5,18 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 /**
- * SuperSwipeRefreshLayout
+ * SuperSwipeRefreshLayout 添加 刷新布局 适配器
  * 1，下拉刷新
  * 2，上拉加载
+ *
+ * @author yline 2017/5/23 -- 10:36
+ * @version 1.0.0
  */
-public abstract class BaseSwipeRefreshAdapter
+public abstract class CommonSwipeRefreshAdapter
 {
 	protected Context sContext;
 
-	public BaseSwipeRefreshAdapter(Context context)
+	public CommonSwipeRefreshAdapter(Context context)
 	{
 		this.sContext = context;
 	}
@@ -61,9 +64,9 @@ public abstract class BaseSwipeRefreshAdapter
 	}
 
 	/* ---------------------------------------- 被SuperSwipeRefreshLayout调用;一般不重写 ---------------------------------------------------- */
-	private SuperSwipeRefreshLayout.OnSwipeListener refreshListener;
+	private ViewSwipeRefreshLayout.OnSwipeListener refreshListener;
 
-	void setSwipeAnimatingListener(SuperSwipeRefreshLayout.OnSwipeListener refreshListener)
+	void setSwipeAnimatingListener(ViewSwipeRefreshLayout.OnSwipeListener refreshListener)
 	{
 		this.refreshListener = refreshListener;
 	}

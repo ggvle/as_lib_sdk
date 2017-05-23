@@ -17,6 +17,12 @@ import android.widget.ImageView;
 
 import com.yline.view.R;
 
+/**
+ * SwipeRefreshLayout 动态加载布局 环形
+ *
+ * @author yline 2017/5/23 -- 10:34
+ * @version 1.0.0
+ */
 public class ViewCircleProgressBar extends ImageView
 {
 	private static final int shadow_color = 0x1E000000;

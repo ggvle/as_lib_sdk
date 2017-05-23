@@ -412,12 +412,12 @@ public class WidgetAD
 
 	protected int getPointResource()
 	{
-		return R.drawable.view_global_selector_oval_white_gray;
+		return R.drawable.lib_view_selector_oval_whitegray;
 	}
 
 	protected int getLayoutResource()
 	{
-		return R.layout.widget_ad;
+		return R.layout.lib_view_ad;
 	}
 
 	private enum UserTouchState

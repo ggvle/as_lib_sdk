@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 二级列表中，第一个列表的，adapter
+ *
+ * @author yline 2017/5/23 -- 10:50
+ * @version 1.0.0
+ */
 public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 {
 	private int oldPosition = -1;
@@ -159,7 +165,7 @@ public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 	@LayoutRes
 	protected int getItemResource()
 	{
-		return R.layout.widget_menu_secondary_item_first;
+		return R.layout.lib_view_menu_secondary_item_first;
 	}
 
 	@ColorInt

@@ -11,9 +11,9 @@
         android:id="@+id/tv_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/view_global_selector_stroke_redgray_radiu_all"
+        android:background="@drawable/lib_view_selector_radiuall_stroke_redgray"
         android:duplicateParentState="true"
-        android:textColor="@drawable/view_global_text_red_gray">
+        android:textColor="@drawable/lib_view_selector_text_redgray">
     </TextView>
 </LinearLayout>
 

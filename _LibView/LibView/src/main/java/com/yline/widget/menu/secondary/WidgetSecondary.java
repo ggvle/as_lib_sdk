@@ -266,7 +266,7 @@ public class WidgetSecondary
 	/* ---------------------------------------------------- 从这里开始设置参数；这些参数都是可以被重写的 ---------------------------------------------------- */
 	protected int getWidgetResourceId()
 	{
-		return R.layout.widget_menu_secondary;
+		return R.layout.lib_view_menu_secondary;
 	}
 
 	protected String getFirstHeadItemContent()
@@ -277,7 +277,7 @@ public class WidgetSecondary
 	@LayoutRes
 	protected int getFirstItemResource()
 	{
-		return R.layout.widget_menu_secondary_item_first;
+		return R.layout.lib_view_menu_secondary_item_first;
 	}
 
 	@ColorInt
@@ -312,7 +312,7 @@ public class WidgetSecondary
 	@LayoutRes
 	protected int getSecondItemResource()
 	{
-		return R.layout.widget_menu_secondary_item_second;
+		return R.layout.lib_view_menu_secondary_item_second;
 	}
 
 	@ColorInt
@@ -342,13 +342,13 @@ public class WidgetSecondary
 	@DrawableRes
 	protected int getSecondDrawableSelected()
 	{
-		return R.drawable.view_global_drawable_selected;
+		return R.drawable.lib_view_drawable_selected;
 	}
 
 	@DrawableRes
 	protected int getSecondDrawableUnselected()
 	{
-		return R.drawable.view_global_drawable_unselected;
+		return R.drawable.lib_view_drawable_unselected;
 	}
 
 	protected String getResultTitle(String first, List<String> second)

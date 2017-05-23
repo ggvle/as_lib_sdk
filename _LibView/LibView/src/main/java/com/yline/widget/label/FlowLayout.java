@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 流动布局
  * 缕过了逻辑
  *
  * @author yline 2017/4/28 -- 13:52

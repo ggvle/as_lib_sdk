@@ -219,7 +219,7 @@ public class WidgetDialogFoot
 	/* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 重写 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 	protected int getResourceId()
 	{
-		return R.layout.widget_dialog_foot_radius;
+		return R.layout.lib_view_dialog_foot;
 	}
 
 	protected int getDialogStyle()

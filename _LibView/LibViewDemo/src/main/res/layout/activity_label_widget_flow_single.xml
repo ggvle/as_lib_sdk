@@ -27,10 +27,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:background="@drawable/view_global_selector_stroke_redgray_radiu_all"
+                android:background="@drawable/lib_view_selector_radiuall_stroke_redgray"
                 android:duplicateParentState="true"
                 android:text="Breath And Life"
-                android:textColor="@drawable/view_global_text_red_gray"
+                android:textColor="@drawable/lib_view_selector_text_redgray"
                 android:textSize="13sp"/>
         </LinearLayout>
     </com.yline.widget.label.LabelView>

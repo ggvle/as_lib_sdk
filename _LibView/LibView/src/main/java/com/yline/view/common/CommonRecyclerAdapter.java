@@ -13,9 +13,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 数据为空时，不支持添加数据，只能摄入数据
+ * RecyclerView 公共的 Adapter
  *
- * @author yline 2017/3/19 -- 3:05
+ * @author yline 2017/5/23 -- 10:28
  * @version 1.0.0
  */
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements IDataAdapterCallback<T>
@@ -23,7 +23,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	private static final int EmptyType = -11111;
 	
 	protected List<T> sList;
-
+	
 	public CommonRecyclerAdapter()
 	{
 		this.sList = new ArrayList<>();
@@ -51,7 +51,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 			super.onBindViewHolder(holder, position, payloads);
 		}
 	}
-
+	
 	/**
 	 * 数据为空时，显示内容
 	 *
@@ -60,7 +60,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	 */
 	public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
 	{
-		viewHolder.setText(android.R.id.text1, "Recycler is null");
+		// TODO: 2017/5/23  
 	}
 	
 	@Override
@@ -87,7 +87,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 	{
 		return android.R.layout.simple_list_item_1;
 	}
-
+	
 	@Override
 	public int getItemCount()
 	{
@@ -134,7 +134,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		{
 			return false;
 		}
-
+		
 		boolean result = sList.add(object);
 		this.notifyItemInserted(sList.size() - 1);
 		return result;
@@ -147,10 +147,10 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		{
 			return false;
 		}
-
+		
 		sList.add(index, element);
 		this.notifyItemInserted(index);
-
+		
 		return true;
 	}
 	
@@ -161,7 +161,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		{
 			return false;
 		}
-
+		
 		boolean result = sList.addAll(collection);
 		this.notifyItemRangeInserted(sList.size() - 1, collection.size());
 		return result;
@@ -174,7 +174,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		{
 			return false;
 		}
-
+		
 		boolean result = sList.addAll(index, collection);
 		this.notifyItemRangeInserted(index, collection.size());
 		return result;
@@ -219,7 +219,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		}
 		return null;
 	}
-
+	
 	@Override
 	public boolean remove(T t)
 	{
@@ -231,7 +231,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 				objectList.add(i);
 			}
 		}
-
+		
 		boolean result = sList.removeAll(Arrays.asList(t));
 		if (result)
 		{
@@ -240,7 +240,7 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 				this.notifyItemRemoved(integer);
 			}
 		}
-
+		
 		return result;
 	}
 	
@@ -288,11 +288,11 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		{
 			return false;
 		}
-
+		
 		sList.remove(index);
 		sList.add(index, t);
 		this.notifyItemChanged(index);
-
+		
 		return true;
 	}
 	
@@ -303,12 +303,12 @@ public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter<Recy
 		{
 			return false;
 		}
-
+		
 		for (int i = 0; i < arrays.length; i++)
 		{
 			update(index[i], arrays[i]);
 		}
-
+		
 		return true;
 	}
 }

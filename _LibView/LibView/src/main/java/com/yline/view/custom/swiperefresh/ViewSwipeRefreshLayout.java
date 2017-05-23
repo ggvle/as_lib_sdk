@@ -41,7 +41,7 @@ import static android.view.View.MeasureSpec.EXACTLY;
  * @version 1.0.0
  */
 @SuppressLint("ClickableViewAccessibility")
-public class SuperSwipeRefreshLayout extends ViewGroup
+public class ViewSwipeRefreshLayout extends ViewGroup
 {
 	private static final String LOG_TAG = "CustomSwipe";
 
@@ -59,7 +59,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	private View childTarget;
 
 	/* 下拉刷新[有新建,就代表有默认值] */
-	private BaseSwipeRefreshAdapter headRefreshAdapter;
+	private CommonSwipeRefreshAdapter headRefreshAdapter;
 
 	private HeadViewContainer headViewContainer; // 头部
 
@@ -74,7 +74,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	private boolean isHeadOriginalOffsetCalculated = false; // 顶部初始化距离是否计算过了
 
 	/* 上拉加载[有新建,就代表有默认值] */
-	private BaseSwipeRefreshAdapter footLoadAdapter;
+	private CommonSwipeRefreshAdapter footLoadAdapter;
 
 	private boolean isFootLoading = false; // 是否正在上拉加载
 
@@ -128,12 +128,12 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 
 	private final DecelerateInterpolator decelerateInterpolator;
 
-	public SuperSwipeRefreshLayout(Context context)
+	public ViewSwipeRefreshLayout(Context context)
 	{
 		this(context, null);
 	}
 
-	public SuperSwipeRefreshLayout(Context context, AttributeSet attrs)
+	public ViewSwipeRefreshLayout(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 
@@ -255,7 +255,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	 *
 	 * @param headRefreshAdapter
 	 */
-	public void setRefreshAdapter(BaseSwipeRefreshAdapter headRefreshAdapter)
+	public void setRefreshAdapter(CommonSwipeRefreshAdapter headRefreshAdapter)
 	{
 		this.headRefreshAdapter = headRefreshAdapter;
 		if (null != headRefreshAdapter)
@@ -306,7 +306,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup
 	 *
 	 * @param footLoadAdapter
 	 */
-	public void setLoadAdapter(BaseSwipeRefreshAdapter footLoadAdapter)
+	public void setLoadAdapter(CommonSwipeRefreshAdapter footLoadAdapter)
 	{
 		this.footLoadAdapter = footLoadAdapter;
 

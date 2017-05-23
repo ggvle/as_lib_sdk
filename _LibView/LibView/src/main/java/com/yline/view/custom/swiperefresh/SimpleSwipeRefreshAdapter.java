@@ -8,12 +8,12 @@ import com.yline.view.R;
 import com.yline.view.custom.progress.ViewCircleProgressBar;
 
 /**
- * 默认的Adapter;
+ * SuperSwipeRefreshLayout 默认的Adapter;
  *
  * @author yline 2017/3/17 -- 18:12
  * @version 1.0.0
  */
-public class SimpleSwipeRefreshAdapter extends BaseSwipeRefreshAdapter
+public class SimpleSwipeRefreshAdapter extends CommonSwipeRefreshAdapter
 {
 	private ViewCircleProgressBar circleProgressBar;
 
@@ -53,7 +53,7 @@ public class SimpleSwipeRefreshAdapter extends BaseSwipeRefreshAdapter
 	@Override
 	protected View getView(Context context)
 	{
-		View view = LayoutInflater.from(context).inflate(R.layout.widget_super_swipe_default, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.lib_view_super_swipe_progress, null);
 		circleProgressBar = (ViewCircleProgressBar) view.findViewById(R.id.widget_progress_bar);
 		return view;
 	}

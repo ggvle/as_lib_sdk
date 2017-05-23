@@ -12,6 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+/**
+ * 公众的 GridItemDecoration
+ *
+ * @author yline 2017/5/23 -- 10:30
+ * @version 1.0.0
+ */
 public abstract class GridItemDecoration extends RecyclerView.ItemDecoration
 {
 	private static final int[] ATTRS = new int[]{android.R.attr.listDivider};

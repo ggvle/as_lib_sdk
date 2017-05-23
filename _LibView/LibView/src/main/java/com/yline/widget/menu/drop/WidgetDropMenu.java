@@ -286,7 +286,7 @@ public class WidgetDropMenu
 
 	protected int getItemResourceId()
 	{
-		return R.layout.widget_menu_drop;
+		return R.layout.lib_view_menu_drop;
 	}
 }
 

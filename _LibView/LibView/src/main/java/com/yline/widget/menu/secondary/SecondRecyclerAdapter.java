@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 二级列表中，第二个列表的，adapter
+ *
+ * @author yline 2017/5/23 -- 10:50
+ * @version 1.0.0
+ */
 public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 {
 	private boolean[] isSelected;
@@ -145,7 +151,7 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	@LayoutRes
 	protected int getItemResource()
 	{
-		return R.layout.widget_menu_secondary_item_second;
+		return R.layout.lib_view_menu_secondary_item_second;
 	}
 
 	@ColorInt
@@ -175,12 +181,12 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 	@DrawableRes
 	protected int getItemDrawableSelected()
 	{
-		return R.drawable.view_global_drawable_selected;
+		return R.drawable.lib_view_drawable_selected;
 	}
 
 	@DrawableRes
 	protected int getItemDrawableUnselected()
 	{
-		return R.drawable.view_global_drawable_unselected;
+		return R.drawable.lib_view_drawable_unselected;
 	}
 }

@@ -9,13 +9,19 @@ import android.widget.TextView;
 
 import com.yline.view.R;
 
-public class WidgetDialogIos
+/**
+ * 中间出现弹框,仿IOS
+ *
+ * @author yline 2017/5/23 -- 10:49
+ * @version 1.0.0
+ */
+public class WidgetDialogCenter
 {
 	private View parentView;
 
 	private Dialog dialog;
 
-	public WidgetDialogIos(Context context)
+	public WidgetDialogCenter(Context context)
 	{
 		parentView = LayoutInflater.from(context).inflate(getLayoutResourceId(), null);
 
@@ -154,7 +160,7 @@ public class WidgetDialogIos
 
 		private String negativeText = "取消";
 
-		private int backgroundResourceId = R.drawable.widget_dialog_ios_bg;
+		private int backgroundResourceId = R.drawable.lib_view_shape_radiusall;
 
 		private View.OnClickListener positiveListener = null;
 
@@ -252,6 +258,6 @@ public class WidgetDialogIos
 	 */
 	protected int getLayoutResourceId()
 	{
-		return R.layout.widget_dialog_ios;
+		return R.layout.lib_view_dialog_center;
 	}
 }

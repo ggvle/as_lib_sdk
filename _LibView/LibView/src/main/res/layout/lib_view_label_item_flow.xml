@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/view_space_little"
-    android:paddingRight="@dimen/view_space_normal"
-    android:paddingTop="@dimen/view_space_little">
+    android:paddingBottom="@dimen/lib_view_space_little"
+    android:paddingRight="@dimen/lib_view_space_normal"
+    android:paddingTop="@dimen/lib_view_space_little">
 
     <TextView
         android:id="@+id/tv_widget_label_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/view_global_stroke_red_radius_all"
+        android:background="@drawable/lib_view_shape_radiusall_stroke_red"
         android:duplicateParentState="true"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="@dimen/view_text_size_medium">
+        android:textSize="@dimen/lib_view_text_size_medium">
     </TextView>
 </LinearLayout>
 

@@ -14,10 +14,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * T - 数据类型
+ * ListView 公共的 Adapter
  *
- * @author YLine
- *         2016年8月1日 下午11:16:12
+ * @author yline 2017/5/23 -- 10:27
+ * @version 1.0.0
  */
 public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataAdapterCallback<T>
 {

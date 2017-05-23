@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 添加头部和底部的Recycle
  *
- * @author yline 2017/5/10 -- 9:34
+ * @author yline 2017/5/23 -- 10:31
  * @version 1.0.0
  */
 public abstract class HeadFootRecyclerAdapter<T> extends CommonRecyclerAdapter<T>

@@ -28,7 +28,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
 /**
- * Fancy progress indicator for Material theme.
+ * SwipeRefreshLayout 动态加载布局 环形
+ *
+ * @author yline 2017/5/23 -- 10:35
+ * @version 1.0.0
  */
 public class ViewMaterialProgressDrawable extends Drawable implements Animatable
 {
