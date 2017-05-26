@@ -68,12 +68,12 @@ public class WidgetFlowAble
 
 	public int getSelectedMaxCount()
 	{
-		return labelFlowLayout.getSelectedMax();
+		return flowAbleAdapter.getMaxSelectNumber();
 	}
 
 	public int getSelectedMinCount()
 	{
-		return labelFlowLayout.getSelectedMin();
+		return flowAbleAdapter.getMinSelectNumber();
 	}
 
 	/**
@@ -98,12 +98,45 @@ public class WidgetFlowAble
 
 	public void setMaxSelectCount(int maxCount)
 	{
-		labelFlowLayout.setMaxSelectCount(maxCount);
+		flowAbleAdapter.setMaxSelectNumber(maxCount);
 	}
 
 	public void setMinSelectCount(int minCount)
 	{
-		labelFlowLayout.setMinSelectCount(minCount);
+		flowAbleAdapter.setMinSelectNumber(minCount);
+	}
+
+	public void toggleSpecialState(int currentPosition, int specialPosition)
+	{
+		toggleSpecialState(currentPosition == specialPosition, specialPosition);
+	}
+
+	public void toggleSpecialState(boolean isSpecialClicked, int specialPosition)
+	{
+		boolean specialSelected = flowAbleAdapter.isSelectedContain(specialPosition);
+		if (isSpecialClicked)
+		{
+			if (specialSelected)
+			{
+				int length = flowAbleAdapter.getDataSize();
+				for (int i = 0; i < length; i++)
+				{
+					if (i != specialPosition)
+					{
+						flowAbleAdapter.removeInnerSelectedPosition(i);
+					}
+				}
+
+				flowAbleAdapter.notifySelectedChange();
+			}
+		}
+		else
+		{
+			if (specialSelected)
+			{
+				flowAbleAdapter.removeSelectedPosition(specialPosition);
+			}
+		}
 	}
 
 	public void setDataList(List<String> data)

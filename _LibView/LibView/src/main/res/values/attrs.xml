@@ -2,8 +2,6 @@
 <resources>
     <!--view label layout-->
     <declare-styleable name="ViewLabelLayout">
-        <attr name="label_max_select" format="integer"></attr>
-        <attr name="label_min_select" format="integer"></attr>
         <attr name="label_max_count_each_line" format="integer"></attr>
         <attr name="label_gravity">
             <enum name="left" value="-1"/>

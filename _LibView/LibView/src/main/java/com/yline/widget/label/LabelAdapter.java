@@ -33,6 +33,10 @@ public abstract class LabelAdapter<T>
 	/* ------------------------------------ selected Data ------------------------------------- */
 	private Deque<Integer> selectDeque;
 
+	private int maxSelectNumber = Integer.MAX_VALUE;
+
+	private int minSelectNumber = -1;
+
 	public void addSelectedPosition(int position)
 	{
 		if (!selectDeque.contains(position))
@@ -84,6 +88,17 @@ public abstract class LabelAdapter<T>
 	}
 
 	/**
+	 * 选择项中，是否包含该项
+	 *
+	 * @param position
+	 * @return
+	 */
+	public boolean isSelectedContain(int position)
+	{
+		return selectDeque.contains(position);
+	}
+
+	/**
 	 * 不能给对象,太危险
 	 *
 	 * @return
@@ -101,6 +116,26 @@ public abstract class LabelAdapter<T>
 	public int getSelectedSize()
 	{
 		return null == selectDeque ? 0 : selectDeque.size();
+	}
+
+	public int getMaxSelectNumber()
+	{
+		return maxSelectNumber;
+	}
+
+	public void setMaxSelectNumber(int maxSelectNumber)
+	{
+		this.maxSelectNumber = maxSelectNumber;
+	}
+
+	public int getMinSelectNumber()
+	{
+		return minSelectNumber;
+	}
+
+	public void setMinSelectNumber(int minSelectNumber)
+	{
+		this.minSelectNumber = minSelectNumber;
 	}
 
 	/* ------------------------------------ total Data ------------------------------------- */
@@ -180,7 +215,6 @@ public abstract class LabelAdapter<T>
 	{
 		if (null != selectedChangeListener)
 		{
-
 			selectedChangeListener.onSelectedChanged();
 		}
 	}
@@ -208,9 +242,9 @@ public abstract class LabelAdapter<T>
 		}
 	}
 
-	public interface OnLabelSelectListener<T>
+	public interface OnLabelSelectListener
 	{
-		void onLabelSelected(Deque<T> selectedDeque);
+		void onLabelSelected(Deque<Integer> selectedDeque);
 	}
 
 	private OnLabelClickListener labelClickListener;

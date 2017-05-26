@@ -1,15 +1,12 @@
 package com.yline.widget.label;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-
-import com.yline.view.R;
 
 import java.util.Deque;
 
@@ -25,10 +22,6 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 
 	private LabelAdapter labelAdapter;
 
-	private int mSelectedMax = Integer.MAX_VALUE; // -1为不限制数量
-
-	private int mSelectedMin = -1; // -1为不限制下限
-
 	public LabelFlowLayout(Context context)
 	{
 		this(context, null);
@@ -42,42 +35,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 	public LabelFlowLayout(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ViewLabelLayout);
-		mSelectedMax = ta.getInt(R.styleable.ViewLabelLayout_label_max_select, Integer.MAX_VALUE);
-		mSelectedMin = ta.getInt(R.styleable.ViewLabelLayout_label_min_select, -1);
-		ta.recycle();
-
 		setClickable(true);
-	}
-
-	public int getSelectedMin()
-	{
-		return mSelectedMin;
-	}
-
-	public int getSelectedMax()
-	{
-		return mSelectedMax;
-	}
-
-	/**
-	 * 只支持,初始化的时候,设置
-	 *
-	 * @param maxCount
-	 */
-	public void setMaxSelectCount(int maxCount)
-	{
-		this.mSelectedMax = maxCount;
-	}
-
-	/**
-	 * 只支持,初始化的时候,设置
-	 *
-	 * @param minCount
-	 */
-	public void setMinSelectCount(int minCount)
-	{
-		this.mSelectedMin = minCount;
 	}
 
 	public void setAdapter(LabelAdapter adapter)
@@ -155,17 +113,32 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 			Deque<Integer> deque = labelAdapter.getSelectedList();
 			int sCount = labelAdapter.getDataSize();
 
+			int selectedNumber = 0;
 			for (int i = 0; i < sCount; i++)
 			{
-				if (deque.contains(i) && labelAdapter.getSelectedSize() <= mSelectedMax)
+				LabelView labelView = (LabelView) getChildAt(i);
+				if (deque.contains(i) && selectedNumber < labelAdapter.getMaxSelectNumber())
 				{
-					LabelView labelView = (LabelView) getChildAt(i);
-					doSelectState(labelView, true);
+					selectedNumber++;
+					if (labelView.isChecked())
+					{
+						// do nothing
+					}
+					else
+					{
+						doSelectState(labelView, true);
+					}
 				}
 				else
 				{
-					LabelView labelView = (LabelView) getChildAt(i);
-					doSelectState(labelView, false);
+					if (labelView.isChecked())
+					{
+						doSelectState(labelView, false);
+					}
+					else
+					{
+						// do nothing
+					}
 				}
 			}
 
@@ -205,12 +178,18 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 		}
 	}
 
+	/**
+	 * 按钮按下时，数据更新
+	 *
+	 * @param child
+	 * @param position
+	 */
 	private void doSelect(LabelView child, int position)
 	{
 		if (!child.isChecked())
 		{
 			// 处理max_select=1的情况
-			if (labelAdapter.getSelectedSize() >= mSelectedMax)
+			if (labelAdapter.getSelectedSize() >= labelAdapter.getMaxSelectNumber())
 			{
 				Integer preIndex = labelAdapter.getSelectedFirst();
 				LabelView pre = (LabelView) getChildAt(preIndex);
@@ -232,7 +211,7 @@ public class LabelFlowLayout extends FlowLayout implements LabelAdapter.OnDataSe
 		else
 		{
 			// 小于最小值,则跳过
-			if (mSelectedMin >= labelAdapter.getSelectedSize())
+			if (labelAdapter.getMinSelectNumber() >= labelAdapter.getSelectedSize())
 			{
 				return;
 			}
