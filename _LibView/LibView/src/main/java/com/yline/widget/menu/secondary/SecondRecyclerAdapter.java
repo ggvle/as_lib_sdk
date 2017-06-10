@@ -1,11 +1,7 @@
 package com.yline.widget.menu.secondary;
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
 
 import com.yline.view.R;
 import com.yline.view.common.CommonRecyclerAdapter;
@@ -25,32 +21,58 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 {
 	private boolean[] isSelected;
 
-	private String secondInsertStr;
+	private OnSecondListClickListener onSecondListClickListener;
 
-	public SecondRecyclerAdapter(String insertStr)
+	public void setOnSecondListClickListener(OnSecondListClickListener onSecondListClickListener)
 	{
-		this.secondInsertStr = insertStr;
+		this.onSecondListClickListener = onSecondListClickListener;
 	}
 
-	/**
-	 * 初始化数据，并设置默认选择项
-	 *
-	 * @param selectedList
-	 */
-	public void initSelect(List<String> selectedList)
+	@Override
+	public void setDataList(List<String> strings)
 	{
-		isSelected = new boolean[getItemCount()];
-		Arrays.fill(isSelected, false);
+		super.setDataList(strings);
+		isSelected = new boolean[strings.size()];
+	}
 
-		if (null != selectedList)
+	public void setSelectPositionList(List<Integer> positionList)
+	{
+		for (int position : positionList)
 		{
-			for (int i = 0; i < sList.size(); i++)
+			if (position < sList.size() && position > -1)
 			{
-				if (selectedList.contains(sList.get(i)))
-				{
-					isSelected[i] = true;
-				}
+				isSelected[position] = true;
+				notifyItemChanged(position);
 			}
+		}
+	}
+
+
+	public boolean isSelected(int position)
+	{
+		if (position < sList.size())
+		{
+			return isSelected[position];
+		}
+		return false;
+	}
+
+	public void setSelectPosition(int position, boolean isSelect)
+	{
+		if (position < sList.size() && position > -1)
+		{
+			isSelected[position] = isSelect;
+			notifyItemChanged(position);
+		}
+	}
+
+	public void setSelectPositionAndCancelAll(int position)
+	{
+		if (position < sList.size() && position > -1)
+		{
+			Arrays.fill(isSelected, false);
+			isSelected[position] = true;
+			notifyDataSetChanged();
 		}
 	}
 
@@ -90,62 +112,22 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 			@Override
 			public void onClick(View v)
 			{
-				if (!TextUtils.isEmpty(secondInsertStr))
+				isSelected[position] = !isSelected[position];
+				notifyItemChanged(position);
+
+				if (null != onSecondListClickListener)
 				{
-					if (position == 0)
-					{
-						if (isSelected[0] == false)
-						{
-							Arrays.fill(isSelected, false);
-							isSelected[0] = true;
-							updateItemState(viewHolder, true);
-							notifyDataSetChanged();
-						}
-					}
-					else
-					{
-						if (isSelected[0] == true)
-						{
-							isSelected[0] = false;
-							notifyItemChanged(0);
-						}
-						isSelected[position] = !isSelected[position];
-						updateItemState(viewHolder, isSelected[position]);
-					}
-				}
-				else
-				{
-					isSelected[position] = !isSelected[position];
-					updateItemState(viewHolder, isSelected[position]);
+					onSecondListClickListener.onSecondClick(viewHolder, sList.get(position), position, isSelected[position]);
 				}
 			}
 		});
 
-		updateItemState(viewHolder, isSelected[position]);
+		updateItemState(viewHolder, position);
 	}
 
-	/**
-	 * 更新条目状态
-	 *
-	 * @param viewHolder
-	 * @param select
-	 */
-	private void updateItemState(RecyclerViewHolder viewHolder, boolean select)
+	private void updateItemState(RecyclerViewHolder viewHolder, int position)
 	{
-		if (select)
-		{
-			viewHolder.getItemView().setBackgroundColor(getColorBgSelected());
-			TextView textView = viewHolder.get(R.id.tv_item_second);
-			textView.setTextColor(getColorTextSelected());
-			viewHolder.get(R.id.checkbox_item_second).setBackgroundResource(getItemDrawableSelected());
-		}
-		else
-		{
-			viewHolder.getItemView().setBackgroundColor(getColorBgUnselected());
-			TextView textView = viewHolder.get(R.id.tv_item_second);
-			textView.setTextColor(getColorTextUnselected());
-			viewHolder.get(R.id.checkbox_item_second).setBackgroundResource(getItemDrawableUnselected());
-		}
+		viewHolder.getItemView().setSelected(isSelected[position]);
 	}
 
 	@LayoutRes
@@ -154,39 +136,16 @@ public class SecondRecyclerAdapter extends CommonRecyclerAdapter<String>
 		return R.layout.lib_view_menu_secondary_item_second;
 	}
 
-	@ColorInt
-	protected int getColorBgSelected()
+	public interface OnSecondListClickListener
 	{
-		return 0x00000000;
-	}
-
-	@ColorInt
-	protected int getColorBgUnselected()
-	{
-		return 0x00000000;
-	}
-
-	@ColorInt
-	protected int getColorTextSelected()
-	{
-		return 0xffff2742;
-	}
-
-	@ColorInt
-	protected int getColorTextUnselected()
-	{
-		return 0xff666666;
-	}
-
-	@DrawableRes
-	protected int getItemDrawableSelected()
-	{
-		return R.drawable.lib_view_drawable_selected;
-	}
-
-	@DrawableRes
-	protected int getItemDrawableUnselected()
-	{
-		return R.drawable.lib_view_drawable_unselected;
+		/**
+		 * 列表被点击时，响应
+		 *
+		 * @param viewHolder
+		 * @param str
+		 * @param position
+		 * @param isSelected
+		 */
+		void onSecondClick(RecyclerViewHolder viewHolder, String str, int position, boolean isSelected);
 	}
 }

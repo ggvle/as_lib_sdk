@@ -1,13 +1,9 @@
 package com.yline.widget.menu.secondary;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +14,6 @@ import com.yline.view.common.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 二级列表
@@ -29,14 +24,8 @@ import java.util.Map;
  */
 public class WidgetSecondary
 {
-	public static final String DefaultFirst = "不限";
-
-	public static final String DefaultTitle = "地区";
-
 	protected Context sContext;
-
-	protected Map<String, List<String>> dataMap;
-
+	
 	protected FirstRecyclerAdapter firstListAdapter;
 
 	protected SecondRecyclerAdapter secondListAdapter;
@@ -66,116 +55,48 @@ public class WidgetSecondary
 		// 2
 		RecyclerView secondRecyclerView = (RecyclerView) parentView.findViewById(R.id.recycler_widget_second);
 		secondRecyclerView.setLayoutManager(new LinearLayoutManager(sContext));
-		secondListAdapter = new SecondRecyclerAdapter(getSecondHeadItemContent())
+		secondListAdapter = new SecondRecyclerAdapter()
 		{
 			@Override
 			protected int getItemResource()
 			{
 				return getSecondItemResource();
 			}
-
-			@Override
-			protected int getColorBgSelected()
-			{
-				return getSecondColorBgSelected();
-			}
-
-			@Override
-			protected int getColorBgUnselected()
-			{
-				return getSecondColorBgUnselected();
-			}
-
-			@Override
-			protected int getColorTextSelected()
-			{
-				return getSecondColorTextSelected();
-			}
-
-			@Override
-			protected int getColorTextUnselected()
-			{
-				return getSecondColorTextUnselected();
-			}
-
-			@DrawableRes
-			protected int getItemDrawableSelected()
-			{
-				return getSecondDrawableSelected();
-			}
-
-			@DrawableRes
-			protected int getItemDrawableUnselected()
-			{
-				return getSecondDrawableUnselected();
-			}
-
-			@Override
-			public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
-			{
-			}
 		};
 		secondRecyclerView.setAdapter(secondListAdapter);
+		secondListAdapter.setOnSecondListClickListener(new SecondRecyclerAdapter.OnSecondListClickListener()
+		{
+			@Override
+			public void onSecondClick(RecyclerViewHolder viewHolder, String str, int position, boolean isSelected)
+			{
+				if (null != onSecondaryCallback)
+				{
+					onSecondaryCallback.onSecondSelected(str, position, isSelected);
+				}
+			}
+		});
 
 		// 1
 		RecyclerView firstRecyclerView = (RecyclerView) parentView.findViewById(R.id.recycler_widget_first);
 		firstRecyclerView.setLayoutManager(new LinearLayoutManager(sContext));
-		firstListAdapter = new FirstRecyclerAdapter(secondListAdapter)
+		firstListAdapter = new FirstRecyclerAdapter()
 		{
 			@Override
 			protected int getItemResource()
 			{
 				return getFirstItemResource();
 			}
-
-			@Override
-			protected int getColorBgSelected()
-			{
-				return getFirstColorBgSelected();
-			}
-
-			@Override
-			protected int getColorBgUnselected()
-			{
-				return getFirstColorBgUnselected();
-			}
-
-			@Override
-			protected int getColorTextSelected()
-			{
-				return getFirstColorTextSelected();
-			}
-
-			@Override
-			protected int getColorTextUnselected()
-			{
-				return getFirstColorTextUnselected();
-			}
-
-			@Override
-			public void onBindEmptyViewHolder(RecyclerViewHolder viewHolder, int position)
-			{
-			}
 		};
 		firstRecyclerView.setAdapter(firstListAdapter);
-
-		firstListAdapter.setOnFirstItemClickListener(new FirstRecyclerAdapter.OnFirstItemClickListener()
+		firstListAdapter.setOnFirstListClickListener(new FirstRecyclerAdapter.OnFirstListClickListener()
 		{
 			@Override
-			public List<String> onFirstItemClick(String content, int position)
+			public void onFirstClick(RecyclerViewHolder viewHolder, String str, int position)
 			{
-				List<String> secondTotalList = dataMap.get(content);
-				if (null != secondTotalList)
+				if (null != onSecondaryCallback)
 				{
-					List<String> result = new ArrayList<>(secondTotalList);
-
-					if (!TextUtils.isEmpty(getSecondHeadItemContent()))
-					{
-						result.add(0, getSecondHeadItemContent());
-					}
-					return result;
+					onSecondaryCallback.onFirstSelected(str, position);
 				}
-				return null;
 			}
 		});
 
@@ -189,12 +110,11 @@ public class WidgetSecondary
 				if (null != onSecondaryCallback)
 				{
 					List<String> secondResultList = secondListAdapter.getSelectedList();
-					onSecondaryCallback.onSecondarySelected(firstListAdapter.getSelectedString(), secondResultList,
-							getResultTitle(firstListAdapter.getSelectedString(), secondResultList));
+					onSecondaryCallback.onSelectedConfirm(firstListAdapter.getSelectedString(), secondResultList);
 				}
 			}
 		});
-
+		
 		return parentView;
 	}
 
@@ -203,64 +123,103 @@ public class WidgetSecondary
 		this.onSecondaryCallback = onSecondaryCallback;
 	}
 
-	public void setDataMap(Map<String, List<String>> dataMap)
+	/**
+	 * @param firstList 第一列表所有值
+	 */
+	public void setData(List<String> firstList)
 	{
-		setDataMap(dataMap, null, null);
+		if (null == firstList)
+		{
+			return;
+		}
+
+		firstListAdapter.setDataList(firstList);
+	}
+
+	public boolean isSecondSelect(int position)
+	{
+		return secondListAdapter.isSelected(position);
+	}
+
+	public void setSecondSelect(int position, boolean isSelect)
+	{
+		secondListAdapter.setSelectPosition(position, isSelect);
+	}
+
+	public void setSecondSelectOnly(int position)
+	{
+		secondListAdapter.setSelectPositionAndCancelAll(position);
+	}
+
+	public void updateSecondList(List<String> strings)
+	{
+		secondListAdapter.setDataList(strings);
 	}
 
 	/**
-	 * @param map                数据集
+	 * @param firstList          第一列表所有值
 	 * @param firstSelectedValue 第一列表，默认的初始值
+	 * @param secondList         在第一列表默认值下，第二列表的所有值
 	 * @param secondSelectedList 第二列表，默认的初始值
 	 */
-	public void setDataMap(Map<String, List<String>> map, String firstSelectedValue, List<String> secondSelectedList)
+	public void setData(List<String> firstList, String firstSelectedValue, List<String> secondList, List<String> secondSelectedList)
 	{
-		this.dataMap = map;
-
-		List<String> firstTotalList = new ArrayList<>();
-		for (String string : map.keySet())
+		if (null == firstList)
 		{
-			firstTotalList.add(string);
+			return;
 		}
 
-		if (!TextUtils.isEmpty(getFirstHeadItemContent()))
-		{
-			firstTotalList.add(0, getFirstHeadItemContent());
-		}
-		firstListAdapter.setDataList(firstTotalList);
+		firstListAdapter.setDataList(firstList);
 
-		if (!TextUtils.isEmpty(firstSelectedValue))
+		int firstValuePosition = firstList.indexOf(firstSelectedValue);
+		if (firstValuePosition != -1)
 		{
-			List<String> secondTotalList = new ArrayList<>(map.get(firstSelectedValue));
-			if (null != secondTotalList)
+			firstListAdapter.setSelectPosition(firstValuePosition);
+			secondListAdapter.setDataList(secondList);
+
+			List<Integer> secondPositionList = new ArrayList<>();
+			for (String str : secondSelectedList)
 			{
-				if (!TextUtils.isEmpty(getSecondHeadItemContent()))
+				int secondValuePosition = secondList.indexOf(str);
+				if (secondValuePosition != -1)
 				{
-					secondTotalList.add(0, getSecondHeadItemContent());
+					secondPositionList.add(secondValuePosition);
 				}
-				firstListAdapter.initSelect(firstSelectedValue, secondTotalList, secondSelectedList);
 			}
-			else
+
+			if (secondPositionList.size() > 0)
 			{
-				firstListAdapter.initSelect(firstSelectedValue, null, null);
+				secondListAdapter.setSelectPositionList(secondPositionList);
 			}
-		}
-		else
-		{
-			firstListAdapter.initSelect(firstSelectedValue, null, null);
 		}
 	}
 
 	public interface OnSecondaryCallback
 	{
 		/**
-		 * 选择之后，的回调
+		 * 第一列表，单个选择
 		 *
-		 * @param first  第一列数据
-		 * @param second 第二列数据
-		 * @param title  应该显示的标题
+		 * @param firstName
+		 * @param position
 		 */
-		void onSecondarySelected(String first, List<String> second, String title);
+		void onFirstSelected(String firstName, int position);
+
+		/**
+		 * 第二列表，单个选择
+		 *
+		 * @param secondName
+		 * @param position
+		 * @param isSelected
+		 */
+		void onSecondSelected(String secondName, int position, boolean isSelected);
+
+		/**
+		 * 第二列表，多个选择后，确定
+		 *
+		 * @param firstName
+		 * @param secondList
+		 */
+		void onSelectedConfirm(String firstName, List<String> secondList);
 	}
 
 	/* ---------------------------------------------------- 从这里开始设置参数；这些参数都是可以被重写的 ---------------------------------------------------- */
@@ -269,110 +228,15 @@ public class WidgetSecondary
 		return R.layout.lib_view_menu_secondary;
 	}
 
-	protected String getFirstHeadItemContent()
-	{
-		return DefaultFirst;
-	}
-
 	@LayoutRes
 	protected int getFirstItemResource()
 	{
 		return R.layout.lib_view_menu_secondary_item_first;
 	}
 
-	@ColorInt
-	protected int getFirstColorBgSelected()
-	{
-		return 0xfff2f2f2;
-	}
-
-	@ColorInt
-	protected int getFirstColorBgUnselected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.white);
-	}
-
-	@ColorInt
-	protected int getFirstColorTextSelected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.holo_red_light);
-	}
-
-	@ColorInt
-	protected int getFirstColorTextUnselected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.tab_indicator_text);
-	}
-
-	protected String getSecondHeadItemContent()
-	{
-		return DefaultFirst;
-	}
-
 	@LayoutRes
 	protected int getSecondItemResource()
 	{
 		return R.layout.lib_view_menu_secondary_item_second;
-	}
-
-	@ColorInt
-	protected int getSecondColorBgSelected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.transparent);
-	}
-
-	@ColorInt
-	protected int getSecondColorBgUnselected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.transparent);
-	}
-
-	@ColorInt
-	protected int getSecondColorTextSelected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.holo_red_light);
-	}
-
-	@ColorInt
-	protected int getSecondColorTextUnselected()
-	{
-		return ContextCompat.getColor(sContext, android.R.color.tab_indicator_text);
-	}
-
-	@DrawableRes
-	protected int getSecondDrawableSelected()
-	{
-		return R.drawable.lib_view_drawable_selected;
-	}
-
-	@DrawableRes
-	protected int getSecondDrawableUnselected()
-	{
-		return R.drawable.lib_view_drawable_unselected;
-	}
-
-	protected String getResultTitle(String first, List<String> second)
-	{
-		if (TextUtils.isEmpty(first) || first.equals(getSecondHeadItemContent()))
-		{
-			return DefaultTitle;
-		}
-
-		if (null == second || second.size() == 0)
-		{
-			return first;
-		}
-		else if (second.size() == 1)
-		{
-			if (second.get(0).equals(getSecondHeadItemContent()))
-			{
-				return first;
-			}
-			return second.get(0);
-		}
-		else
-		{
-			return String.format("%s(%d)", first, second.size());
-		}
 	}
 }

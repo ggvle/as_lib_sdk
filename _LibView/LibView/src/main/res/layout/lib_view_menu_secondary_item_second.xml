@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/lib_view_selector_drawable_bluewhite">
 
     <TextView
         android:id="@+id/tv_item_second"
@@ -12,7 +13,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
-        android:textColor="#666666"
+        android:textColor="@drawable/lib_view_selector_color_redblack"
         android:textSize="18dp"/>
 
     <CheckBox
@@ -24,9 +25,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="30dp"
         android:layout_weight="1"
+        android:background="@drawable/lib_view_selector_drawable_onoff"
         android:button="@null"
-        android:background="@drawable/lib_view_drawable_selected"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:clickable="false"/>
 </RelativeLayout>

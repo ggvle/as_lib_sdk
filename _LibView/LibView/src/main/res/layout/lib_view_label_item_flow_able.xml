@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/lib_view_selector_radiuall_stroke_redgray"
         android:duplicateParentState="true"
-        android:textColor="@drawable/lib_view_selector_text_redgray">
+        android:textColor="@drawable/lib_view_selector_color_redgray">
     </TextView>
 </LinearLayout>
 

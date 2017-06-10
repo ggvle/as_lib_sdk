@@ -30,7 +30,7 @@
                 android:background="@drawable/lib_view_selector_radiuall_stroke_redgray"
                 android:duplicateParentState="true"
                 android:text="Breath And Life"
-                android:textColor="@drawable/lib_view_selector_text_redgray"
+                android:textColor="@drawable/lib_view_selector_color_redgray"
                 android:textSize="13sp"/>
         </LinearLayout>
     </com.yline.widget.label.LabelView>

@@ -9,9 +9,10 @@
         android:id="@+id/tv_item_first"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/lib_view_selector_drawable_bluewhite"
         android:gravity="center"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="#666666"
+        android:textColor="@drawable/lib_view_selector_color_redblack"
         android:textSize="18dp"/>
 </LinearLayout>

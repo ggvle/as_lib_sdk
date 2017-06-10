@@ -1,18 +1,12 @@
 package com.yline.widget.menu.secondary;
 
-import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.yline.view.R;
 import com.yline.view.common.CommonRecyclerAdapter;
 import com.yline.view.common.RecyclerViewHolder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,52 +17,32 @@ import java.util.List;
  */
 public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 {
-	private int oldPosition = -1;
-
 	private boolean[] isSelected;
 
-	private SecondRecyclerAdapter secondAdapter;
+	private int oldPosition = -1;
 
-	public FirstRecyclerAdapter(SecondRecyclerAdapter secondAdapter)
+	private OnFirstListClickListener onFirstListClickListener;
+
+	public void setOnFirstListClickListener(OnFirstListClickListener onFirstListClickListener)
 	{
-		this.secondAdapter = secondAdapter;
+		this.onFirstListClickListener = onFirstListClickListener;
 	}
 
 	@Override
-	public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	public void setDataList(List<String> strings)
 	{
-		return super.onCreateViewHolder(parent, viewType);
+		super.setDataList(strings);
+		isSelected = new boolean[strings.size()];
+		oldPosition = -1;
 	}
 
-	/**
-	 * 初始化选择项
-	 *
-	 * @param firstSelectedStr   第一列已选择项
-	 * @param secondTotalList    第二列所有项
-	 * @param secondSelectedList 第二列已选择项
-	 */
-	public void initSelect(String firstSelectedStr, List<String> secondTotalList, List<String> secondSelectedList)
+	public void setSelectPosition(int position)
 	{
-		isSelected = new boolean[getItemCount()];
-		Arrays.fill(isSelected, false);
-		if (!TextUtils.isEmpty(firstSelectedStr))
+		if (position < sList.size() && position >= 0)
 		{
-			for (int i = 0; i < sList.size(); i++)
-			{
-				if (firstSelectedStr.equals(sList.get(i)))
-				{
-					oldPosition = i;
-					isSelected[i] = true;
-					break;
-				}
-			}
-
-			if (null != secondTotalList)
-			{
-				List<String> tempSecondList = new ArrayList<>(secondTotalList);
-				secondAdapter.setDataList(tempSecondList);
-				secondAdapter.initSelect(secondSelectedList);
-			}
+			oldPosition = position;
+			isSelected[position] = true;
+			notifyItemChanged(position);
 		}
 	}
 
@@ -93,73 +67,48 @@ public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 	@Override
 	public void onBindViewHolder(final RecyclerViewHolder viewHolder, final int position)
 	{
-		final TextView textView = viewHolder.get(R.id.tv_item_first);
-		textView.setText(sList.get(position));
-		if (isSelected[position])
-		{
-			textView.setBackgroundColor(getColorBgSelected());
-			textView.setTextColor(getColorTextSelected());
-		}
-		else
-		{
-			textView.setBackgroundColor(getColorBgUnselected());
-			textView.setTextColor(getColorTextUnselected());
-		}
-
-		textView.setOnClickListener(new View.OnClickListener()
+		viewHolder.setText(R.id.tv_item_first, sList.get(position));
+		viewHolder.setOnClickListener(R.id.tv_item_first, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				if (oldPosition != position)
+				if (oldPosition == position)
 				{
-					// 点击事件
-					if (null != onFirstItemClickListener)
+					// do nothing
+				}
+				else
+				{
+					if (oldPosition == -1)
 					{
-						List<String> tempSelectList = onFirstItemClickListener.onFirstItemClick(sList.get(position), position);
-						if (null != tempSelectList)
-						{
-							List<String> selectList = new ArrayList<>(tempSelectList);
-							secondAdapter.setDataList(selectList);
-							secondAdapter.initSelect(null);
-						}
-						else
-						{
-							secondAdapter.clear();
-							secondAdapter.initSelect(null);
-						}
+						isSelected[position] = true;
+						oldPosition = position;
+						notifyItemChanged(position);
 					}
-
-					// 更新状态
-					isSelected[position] = true;
-					if (-1 != oldPosition)
+					else
 					{
 						isSelected[oldPosition] = false;
 						notifyItemChanged(oldPosition);
+
+						isSelected[position] = true;
+						oldPosition = position;
+						notifyItemChanged(position);
 					}
-					textView.setBackgroundColor(getColorBgSelected());
-					textView.setTextColor(getColorTextSelected());
-					oldPosition = position;
+
+					if (null != onFirstListClickListener)
+					{
+						onFirstListClickListener.onFirstClick(viewHolder, sList.get(position), position);
+					}
 				}
 			}
 		});
+
+		updateItemState(viewHolder, position);
 	}
 
-	private OnFirstItemClickListener onFirstItemClickListener;
-
-	public void setOnFirstItemClickListener(OnFirstItemClickListener onFirstItemClickListener)
+	private void updateItemState(RecyclerViewHolder viewHolder, int position)
 	{
-		this.onFirstItemClickListener = onFirstItemClickListener;
-	}
-
-	public interface OnFirstItemClickListener
-	{
-		/**
-		 * @param content  选择的内容
-		 * @param position 选择的位置
-		 * @return 第二列展现的值
-		 */
-		List<String> onFirstItemClick(String content, int position);
+		viewHolder.getItemView().setSelected(isSelected[position]);
 	}
 
 	@LayoutRes
@@ -168,27 +117,15 @@ public class FirstRecyclerAdapter extends CommonRecyclerAdapter<String>
 		return R.layout.lib_view_menu_secondary_item_first;
 	}
 
-	@ColorInt
-	protected int getColorBgSelected()
+	public interface OnFirstListClickListener
 	{
-		return 0xfff2f2f2;
-	}
-
-	@ColorInt
-	protected int getColorBgUnselected()
-	{
-		return 0xffffffff;
-	}
-
-	@ColorInt
-	protected int getColorTextSelected()
-	{
-		return 0xffff2742;
-	}
-
-	@ColorInt
-	protected int getColorTextUnselected()
-	{
-		return 0xff666666;
+		/**
+		 * 列表被点击时，响应
+		 *
+		 * @param viewHolder
+		 * @param str
+		 * @param position
+		 */
+		void onFirstClick(RecyclerViewHolder viewHolder, String str, int position);
 	}
 }
