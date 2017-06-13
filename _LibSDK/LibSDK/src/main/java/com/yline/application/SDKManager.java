@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lib.sdk.R;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
+import com.yline.sdk.R;
 import com.yline.utils.LogUtil;
 
 import java.util.ArrayList;

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    package="com.lib.sdk"
-    android:versionCode="3"
-    android:versionName="1.2017.04.07"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yline.sdk">
 
     <application
         android:allowBackup="true"

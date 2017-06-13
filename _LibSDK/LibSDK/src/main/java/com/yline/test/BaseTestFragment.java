@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lib.sdk.R;
 import com.yline.base.BaseFragment;
+import com.yline.sdk.R;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 

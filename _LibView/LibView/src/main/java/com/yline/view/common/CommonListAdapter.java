@@ -97,8 +97,11 @@ public abstract class CommonListAdapter<T> extends BaseAdapter implements IDataA
 	@Override
 	public void setDataList(List<T> tList)
 	{
-		this.sList = new ArrayList<>(tList);
-		this.notifyDataSetChanged();
+		if (null != tList)
+		{
+			this.sList = new ArrayList<>(tList);
+			this.notifyDataSetChanged();
+		}
 	}
 
 	@Override
