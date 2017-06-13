@@ -10,6 +10,16 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LibView" />
             <option value="$PROJECT_DIR$/LibViewDemo" />
+            <option value="$PROJECT_DIR$/LibViewDialog" />
+            <option value="$PROJECT_DIR$/LibViewDialogDemo" />
+            <option value="$PROJECT_DIR$/LibViewLayout" />
+            <option value="$PROJECT_DIR$/LibViewLayoutDemo" />
+            <option value="$PROJECT_DIR$/LibViewRecycler" />
+            <option value="$PROJECT_DIR$/LibViewRecyclerDemo" />
+            <option value="$PROJECT_DIR$/LibViewText" />
+            <option value="$PROJECT_DIR$/LibViewTextDemo" />
+            <option value="$PROJECT_DIR$/LibViewView" />
+            <option value="$PROJECT_DIR$/LibViewViewDemo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
