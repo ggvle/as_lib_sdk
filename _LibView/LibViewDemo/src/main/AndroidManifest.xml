@@ -18,14 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.yline.view.apply.SimpleGridDecorationActivity"/>
-        <activity android:name="com.yline.view.apply.SimpleLinearDecorationActivity"/>
-        <activity android:name="com.yline.view.apply.SimpleListActivity">
-        </activity>
-        <activity android:name="com.yline.view.apply.SimpleRecyclerActivity">
-        </activity>
-        <activity android:name="com.yline.view.apply.SimpleHeadFootRecyclerActivity">
-        </activity>
         <activity android:name="com.yline.widget.label.WidgetFlowActivity">
         </activity>
         <activity android:name="com.yline.inner.InnerShowActivity">
@@ -42,15 +34,7 @@
         </activity>
         <activity android:name="com.yline.view.custom.ViewKeyClearEditTextActivity">
         </activity>
-        <activity android:name="com.yline.view.custom.ProgressCircleActivity">
-        </activity>
-        <activity android:name="com.yline.view.custom.SuperSwipeSimpleActivity">
-        </activity>
-        <activity android:name="com.yline.view.custom.SuperSwipeCustomActivity">
-        </activity>
         <activity android:name="com.yline.widget.menu.DropMenuActivity">
-        </activity>
-        <activity android:name="com.yline.widget.menu.SecondMenuActivity">
         </activity>
     </application>
 

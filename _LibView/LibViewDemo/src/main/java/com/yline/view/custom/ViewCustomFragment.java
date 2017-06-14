@@ -33,32 +33,5 @@ public class ViewCustomFragment extends BaseTestFragment
 				ViewKeyClearEditTextActivity.actionStart(getContext());
 			}
 		});
-
-		addButton("ViewCircleProgressBar", new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				ProgressCircleActivity.actionStart(getContext());
-			}
-		});
-
-		addButton("SuperSwipeRefreshLayout Simple", new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				SuperSwipeSimpleActivity.actionStart(getContext());
-			}
-		});
-
-		addButton("SuperSwipeRefreshLayout Custom", new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				SuperSwipeCustomActivity.actionStart(getContext());
-			}
-		});
 	}
 }

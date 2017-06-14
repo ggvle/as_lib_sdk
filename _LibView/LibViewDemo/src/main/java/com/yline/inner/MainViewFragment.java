@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yline.base.BaseFragment;
-import com.yline.view.apply.ViewApplyFragment;
 import com.yline.view.custom.ViewCustomFragment;
 import com.yline.view.demo.R;
 
@@ -44,9 +43,6 @@ public class MainViewFragment extends BaseFragment
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(ViewApplyFragment.newInstance());
-		titleList.add("Apply");
-		
 		fragmentList.add(ViewCustomFragment.newInstance());
 		titleList.add("Custom");
 

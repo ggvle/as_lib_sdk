@@ -6,8 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/LibViewDemo/LibViewDemo.iml" filepath="$PROJECT_DIR$/LibViewDemo/LibViewDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibViewLayout/LibViewLayout.iml" filepath="$PROJECT_DIR$/LibViewLayout/LibViewLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibViewLayoutDemo/LibViewLayoutDemo.iml" filepath="$PROJECT_DIR$/LibViewLayoutDemo/LibViewLayoutDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LibViewRecycler/LibViewRecycler.iml" filepath="$PROJECT_DIR$/LibViewRecycler/LibViewRecycler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LibViewRecyclerDemo/LibViewRecyclerDemo.iml" filepath="$PROJECT_DIR$/LibViewRecyclerDemo/LibViewRecyclerDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibViewText/LibViewText.iml" filepath="$PROJECT_DIR$/LibViewText/LibViewText.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibViewTextDemo/LibViewTextDemo.iml" filepath="$PROJECT_DIR$/LibViewTextDemo/LibViewTextDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibViewView/LibViewView.iml" filepath="$PROJECT_DIR$/LibViewView/LibViewView.iml" />

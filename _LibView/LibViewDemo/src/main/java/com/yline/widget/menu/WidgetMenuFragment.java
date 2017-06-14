@@ -18,14 +18,7 @@ public class WidgetMenuFragment extends BaseTestFragment
 	@Override
 	public void testStart(View view, Bundle savedInstanceState)
 	{
-		addButton("Secondary 二级列表", new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				SecondMenuActivity.actionStart(getContext());
-			}
-		});
+
 
 		addButton("DropMenu 下拉列表", new View.OnClickListener()
 		{
