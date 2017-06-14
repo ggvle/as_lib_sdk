@@ -18,17 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.yline.widget.label.WidgetFlowActivity">
-        </activity>
         <activity android:name="com.yline.inner.InnerShowActivity">
-        </activity>
-        <activity android:name="com.yline.widget.label.WidgetFlowAbleActivity">
-        </activity>
-        <activity android:name="com.yline.widget.label.WidgetFlowSingleActivity">
-        </activity>
-        <activity android:name="com.yline.widget.label.WidgetFlowAble3Activity">
-        </activity>
-        <activity android:name="com.yline.widget.ad.WidgetADActivity">
         </activity>
         <activity android:name="com.yline.view.custom.ViewCircleActivity">
         </activity>

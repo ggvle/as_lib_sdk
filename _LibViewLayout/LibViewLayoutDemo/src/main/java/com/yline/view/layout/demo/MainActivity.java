@@ -1,4 +1,4 @@
-package com.yline.inner;
+package com.yline.view.layout.demo;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,7 +8,8 @@ import android.support.v4.view.ViewPager;
 
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
-import com.yline.view.demo.R;
+import com.yline.view.layout.demo.ad.WidgetADFragment;
+import com.yline.view.layout.demo.label.WidgetLabelFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +20,19 @@ public class MainActivity extends BaseAppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.inner_activity_main);
+		setContentView(R.layout.activity_main);
 
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
 
-		fragmentList.add(MainViewFragment.newInstance());
-		titleList.add("View");
+		fragmentList.add(WidgetLabelFragment.newInstance());
+		titleList.add("Label");
 
-		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_main);
-		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_main);
+		fragmentList.add(WidgetADFragment.newInstance());
+		titleList.add("AD 广告");
+
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 
 		viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager())
 		{

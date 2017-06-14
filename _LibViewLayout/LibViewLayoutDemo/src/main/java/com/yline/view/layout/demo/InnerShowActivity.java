@@ -1,4 +1,4 @@
-package com.yline.inner;
+package com.yline.view.layout.demo;
 
 import android.content.Context;
 import android.content.Intent;
