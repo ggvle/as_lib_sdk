@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.yline.base.BaseFragment;
 import com.yline.view.demo.R;
 import com.yline.widget.ad.WidgetADFragment;
-import com.yline.widget.dialog.WidgetDialogFragment;
 import com.yline.widget.label.WidgetLabelFragment;
 import com.yline.widget.menu.WidgetMenuFragment;
 
@@ -51,10 +50,7 @@ public class MainWidgetFragment extends BaseFragment
 
 		fragmentList.add(WidgetADFragment.newInstance());
 		titleList.add("AD 广告");
-
-		fragmentList.add(WidgetDialogFragment.newInstance());
-		titleList.add("Dialog 弹框");
-
+		
 		fragmentList.add(WidgetMenuFragment.newInstance());
 		titleList.add("Menu 菜单");
 

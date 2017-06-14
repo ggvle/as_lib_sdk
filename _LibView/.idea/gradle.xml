@@ -10,8 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LibView" />
             <option value="$PROJECT_DIR$/LibViewDemo" />
-            <option value="$PROJECT_DIR$/LibViewDialog" />
-            <option value="$PROJECT_DIR$/LibViewDialogDemo" />
             <option value="$PROJECT_DIR$/LibViewLayout" />
             <option value="$PROJECT_DIR$/LibViewLayoutDemo" />
             <option value="$PROJECT_DIR$/LibViewRecycler" />
