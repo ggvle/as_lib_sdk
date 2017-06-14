@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.yline.view.layout">
+          package="com.yline.view.view">
 
     <application
         android:allowBackup="true"

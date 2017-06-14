@@ -1,1 +1,1 @@
-include ':LibViewDemo', ':LibView', ':LibViewText', ':LibViewTextDemo', ':LibViewView', ':LibViewViewDemo'
+include ':LibViewDemo', ':LibView'

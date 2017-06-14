@@ -4,10 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LibView/LibView.iml" filepath="$PROJECT_DIR$/LibView/LibView.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibViewDemo/LibViewDemo.iml" filepath="$PROJECT_DIR$/LibViewDemo/LibViewDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LibViewText/LibViewText.iml" filepath="$PROJECT_DIR$/LibViewText/LibViewText.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LibViewTextDemo/LibViewTextDemo.iml" filepath="$PROJECT_DIR$/LibViewTextDemo/LibViewTextDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LibViewView/LibViewView.iml" filepath="$PROJECT_DIR$/LibViewView/LibViewView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LibViewViewDemo/LibViewViewDemo.iml" filepath="$PROJECT_DIR$/LibViewViewDemo/LibViewViewDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/_LibView.iml" filepath="$PROJECT_DIR$/_LibView.iml" />
     </modules>
   </component>

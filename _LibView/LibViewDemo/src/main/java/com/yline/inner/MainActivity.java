@@ -26,7 +26,7 @@ public class MainActivity extends BaseAppCompatActivity
 
 		fragmentList.add(MainViewFragment.newInstance());
 		titleList.add("View");
-
+		
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_main);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager_main);
 

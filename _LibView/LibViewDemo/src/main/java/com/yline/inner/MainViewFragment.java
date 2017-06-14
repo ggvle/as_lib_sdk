@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yline.base.BaseFragment;
-import com.yline.view.custom.ViewCustomFragment;
 import com.yline.view.demo.R;
 
 import java.util.ArrayList;
@@ -42,9 +41,6 @@ public class MainViewFragment extends BaseFragment
 
 		final List<BaseFragment> fragmentList = new ArrayList<>();
 		final List<String> titleList = new ArrayList<>();
-
-		fragmentList.add(ViewCustomFragment.newInstance());
-		titleList.add("Custom");
 
 		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_view);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager_view);
