@@ -1,18 +1,19 @@
-package com.yline.widget.menu.drop;
+package com.yline.view.pop;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.yline.util.LibViewUtil;
-import com.yline.view.R;
+import com.yline.view.dialog.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -231,7 +232,7 @@ public class WidgetDropMenu
 	{
 		if (0 == maxContentHeight)
 		{
-			this.maxContentHeight = LibViewUtil.getScreenHeight(sContext) - LibViewUtil.getStatusHeight(sContext) - sTabLayout.getBottom();
+			this.maxContentHeight = getScreenHeight(sContext) - getStatusHeight(sContext) - sTabLayout.getBottom();
 		}
 
 		if (null != popupWindow)
@@ -278,6 +279,30 @@ public class WidgetDropMenu
 		this.contentViewList = list;
 	}
 
+	private int getScreenHeight(Context context)
+	{
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics outMetrics = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(outMetrics);
+		return outMetrics.heightPixels;
+	}
+
+	private int getStatusHeight(Context context)
+	{
+		int statusHeight = -1;
+		try
+		{
+			Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+			Object object = clazz.newInstance();
+			int height = Integer.parseInt(clazz.getField("status_bar_height").get(object).toString());
+			statusHeight = context.getResources().getDimensionPixelSize(height);
+		} catch (Exception e)
+		{
+			Log.e("TAG", "ScreenUtil -> getStatusHeight Exception", e);
+		}
+		return statusHeight;
+	}
+
 	// 接下来为设置参数
 	public int getMaskColor()
 	{
@@ -286,7 +311,7 @@ public class WidgetDropMenu
 
 	protected int getItemResourceId()
 	{
-		return R.layout.lib_view_menu_drop;
+		return R.layout.lib_view_dialog_menu_drop;
 	}
 }
 

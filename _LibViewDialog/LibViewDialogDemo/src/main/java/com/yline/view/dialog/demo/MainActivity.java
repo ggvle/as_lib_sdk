@@ -10,6 +10,7 @@ import com.yline.test.BaseTestActivity;
 import com.yline.view.dialog.InnerConstant;
 import com.yline.view.dialog.WidgetDialogCenter;
 import com.yline.view.dialog.WidgetDialogFoot;
+import com.yline.view.dialog.pop.DropMenuActivity;
 
 public class MainActivity extends BaseTestActivity
 {
@@ -55,6 +56,15 @@ public class MainActivity extends BaseTestActivity
 			{
 				WidgetDialogCenter widgetDialogIos = new WidgetDialogCenter(MainActivity.this);
 				widgetDialogIos.show();
+			}
+		});
+
+		addButton("下拉菜单", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				DropMenuActivity.actionStart(MainActivity.this);
 			}
 		});
 	}

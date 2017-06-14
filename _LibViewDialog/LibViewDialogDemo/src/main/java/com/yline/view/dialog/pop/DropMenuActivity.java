@@ -1,4 +1,4 @@
-package com.yline.widget.menu;
+package com.yline.view.dialog.pop;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yline.base.BaseAppCompatActivity;
-import com.yline.inner.InnerConstant;
-import com.yline.view.demo.R;
-import com.yline.widget.menu.drop.WidgetDropMenu;
+import com.yline.view.dialog.InnerConstant;
+import com.yline.view.dialog.demo.R;
+import com.yline.view.pop.WidgetDropMenu;
 
 import java.util.ArrayList;
 import java.util.List;
