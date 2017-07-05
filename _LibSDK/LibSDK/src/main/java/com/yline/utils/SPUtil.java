@@ -59,7 +59,7 @@ public class SPUtil
 		// instanceof 用来 指出对象是否是特定类的一个实例
 		if (null == object)
 		{
-			editor.putString(key, "null");
+			editor.putString(key, "");
 		}
 		else if (object instanceof String)
 		{

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v4.util.SparseArrayCompat;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.yline.view.recycler.callback.IViewHolderCallback;
@@ -84,5 +85,13 @@ public class ViewHolder implements IViewHolderCallback<View>
 	public void setOnClickListener(int viewId, View.OnClickListener listener)
 	{
 		this.get(viewId).setOnClickListener(listener);
+	}
+
+	@Override
+	public ProgressBar setProgress(int viewId, int progress)
+	{
+		ProgressBar progressBar = this.get(viewId);
+		progressBar.setProgress(progress);
+		return progressBar;
 	}
 }

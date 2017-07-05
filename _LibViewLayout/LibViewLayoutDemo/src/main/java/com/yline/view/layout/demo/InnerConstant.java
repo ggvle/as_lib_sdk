@@ -13,9 +13,7 @@ public class InnerConstant
 
 	public static List<String> getMvList()
 	{
-		return Arrays.asList("绅士", "春风十里不如你", "骄傲的少年", "美人鱼", "当我找到了你", "超人不会飞", "原点", "Mine Mine", "Faded", "从前的我",
-				"刚刚好", "可惜没如果", "渺小", "摄影艺术", "不完美女孩", "You Belong With Me", "Begin again", "Blank Space", "一个人", "修炼爱情",
-				"Try Everything", "大雨将至", "大雨将至", "白日梦想家", "小幸运", "山河故人");
+		return Arrays.asList("绅士", "春风十里不如你", "骄傲的少年", "美人鱼", "当我找到了你", "超人不会飞", "原点", "Mine Mine", "Faded", "从前的我", "刚刚好", "可惜没如果", "渺小", "摄影艺术", "不完美女孩", "You Belong With Me", "Begin again", "Blank Space", "一个人", "修炼爱情", "Try Everything", "大雨将至", "大雨将至", "白日梦想家", "小幸运", "山河故人");
 	}
 
 	public static List<String> getMvList(int number)
@@ -33,8 +31,7 @@ public class InnerConstant
 
 	public static List<String> getSingerList()
 	{
-		return Arrays.asList("Avril", "Taylor Swift", "周杰伦", "周笔畅", "孙燕姿", "张杰", "张靓颖", "徐良", "曾轶可", "本兮", "李宇春", "林俊杰", "梁静茹", "汪苏泷"
-				, "王力宏", "许嵩", "阿悄");
+		return Arrays.asList("Avril", "Taylor Swift", "周杰伦", "周笔畅", "孙燕姿", "张杰", "张靓颖", "徐良", "曾轶可", "本兮", "李宇春", "林俊杰", "梁静茹", "汪苏泷", "王力宏", "许嵩", "阿悄");
 	}
 
 	public static Map<String, List<String>> getAreaMap()
@@ -70,12 +67,17 @@ public class InnerConstant
 		return result;
 	}
 
-	public static String getRandom()
+	public static String getRandomStr()
 	{
 		return "random-" + random.nextInt(100);
 	}
 
-	public static String getRandom(int max)
+	public static int getRandom(int number)
+	{
+		return random.nextInt(number);
+	}
+
+	public static String getRandomStr(int max)
 	{
 		return "random-" + random.nextInt(max);
 	}
@@ -90,6 +92,16 @@ public class InnerConstant
 	{
 		int position = random.nextInt(13);
 		return getUrlSquare(position);
+	}
+
+	public static List<String> getUrlRecList(int number)
+	{
+		List<String> resultList = new ArrayList<>();
+		for (int i = 0; i < number; i++)
+		{
+			resultList.add(getUrlRec(i % 6));
+		}
+		return resultList;
 	}
 
 	private static String getUrlRec(int position)

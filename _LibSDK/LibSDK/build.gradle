@@ -31,7 +31,7 @@ dependencies {
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'libsdk'
-
+    
     publishedGroupId = 'com.yline.lib'
     libraryName = 'LibSDK'
     artifact = 'LibSDK'
@@ -41,7 +41,7 @@ ext {
     siteUrl = 'https://github.com/yline/as_lib_place '
     gitUrl = 'https://github.com/yline/as_lib_place.git'
 
-    libraryVersion = '2.0.0'
+    libraryVersion = '2.0.1'
 
     developerId = 'yline'
     developerName = 'yline'

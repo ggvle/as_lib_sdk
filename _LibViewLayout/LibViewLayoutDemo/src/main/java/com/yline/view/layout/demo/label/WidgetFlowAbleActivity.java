@@ -71,7 +71,7 @@ public class WidgetFlowAbleActivity extends BaseAppCompatActivity
 				switch (tab.getPosition())
 				{
 					case 0:
-						widgetFlowAble.addData(InnerConstant.getRandom());
+						widgetFlowAble.addData(InnerConstant.getRandomStr());
 						break;
 					case 1:
 						int length = widgetFlowAble.getDataSize();

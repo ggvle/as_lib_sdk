@@ -53,6 +53,29 @@ public class MainActivity extends BaseTestActivity
 			}
 		});
 
+		XHttpUtil.doGet(new XHttpAdapter<VNewsSingleBean>()
+		{
+			@Override
+			public void onSuccess(VNewsSingleBean vNewsSingleBean)
+			{
+
+			}
+		}, new OnCacheResponseCallback()
+		{
+			@Override
+			public void onCacheResponse(Response cacheResponse) throws IOException
+			{
+				if (null != cacheResponse)
+				{
+					LogFileUtil.v(cacheResponse.body().string().toString());
+				}
+				else
+				{
+					LogFileUtil.v("cacheResponse is null");
+				}
+			}
+		});
+
 		addButton("Get CacheAndNetInterceptor", new View.OnClickListener()
 		{
 			@Override

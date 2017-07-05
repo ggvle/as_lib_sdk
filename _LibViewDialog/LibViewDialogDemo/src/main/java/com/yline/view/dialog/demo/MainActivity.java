@@ -10,6 +10,7 @@ import com.yline.test.BaseTestActivity;
 import com.yline.view.dialog.InnerConstant;
 import com.yline.view.dialog.WidgetDialogCenter;
 import com.yline.view.dialog.WidgetDialogFoot;
+import com.yline.view.dialog.pop.DeleteMenuActivity;
 import com.yline.view.dialog.pop.DropMenuActivity;
 
 public class MainActivity extends BaseTestActivity
@@ -65,6 +66,15 @@ public class MainActivity extends BaseTestActivity
 			public void onClick(View v)
 			{
 				DropMenuActivity.actionStart(MainActivity.this);
+			}
+		});
+
+		addButton("长按删除", new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				DeleteMenuActivity.actionStart(MainActivity.this);
 			}
 		});
 	}

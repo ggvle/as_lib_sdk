@@ -2,6 +2,7 @@ package com.yline.view.recycler.callback;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
@@ -70,4 +71,13 @@ public interface IViewHolderCallback<T>
 	 * @return
 	 */
 	ImageView setImageResource(int viewId, int resId);
+
+	/**
+	 * 给 ProgressBar 设置进度
+	 *
+	 * @param viewId   view 的 id
+	 * @param progress 进度
+	 * @return
+	 */
+	ProgressBar setProgress(int viewId, int progress);
 }

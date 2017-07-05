@@ -206,8 +206,7 @@ public class WidgetAD
 		{
 			position = isRecycle() ? position % count : position;
 
-			ImageView imageView = new ImageView(sContext);
-			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			ImageView imageView = (ImageView) LayoutInflater.from(sContext).inflate(getImageResource(), null);
 			if (null != listener)
 			{
 				listener.onPageInstance(imageView, position);
@@ -413,6 +412,11 @@ public class WidgetAD
 	protected int getPointResource()
 	{
 		return R.drawable.lib_view_layout_selector_oval_solid_whitegray;
+	}
+
+	protected int getImageResource()
+	{
+		return R.layout.lib_view_image_ad;
 	}
 
 	protected int getLayoutResource()

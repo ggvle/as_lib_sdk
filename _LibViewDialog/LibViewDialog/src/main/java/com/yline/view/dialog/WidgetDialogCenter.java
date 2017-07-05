@@ -97,7 +97,7 @@ public class WidgetDialogCenter
 			{
 				if (null != builder.getNegativeListener())
 				{
-					negativeButton.setOnClickListener(builder.getNegativeListener());
+					builder.getNegativeListener().onClick(v);
 					dialog.dismiss();
 				}
 				else
@@ -160,9 +160,9 @@ public class WidgetDialogCenter
 
 		private int backgroundResourceId = R.drawable.lib_view_dialog_shape_radiusall_solid_white;
 
-		private View.OnClickListener positiveListener = null;
+		private View.OnClickListener onPositiveListener = null;
 
-		private View.OnClickListener negativeListener = null;
+		private View.OnClickListener onNegativeListener = null;
 
 		private boolean isCanceledOnTouchOutside = false; // 默认 不打开
 
@@ -218,22 +218,22 @@ public class WidgetDialogCenter
 
 		public View.OnClickListener getPositiveListener()
 		{
-			return positiveListener;
+			return onPositiveListener;
 		}
 
-		public void setPositiveListener(View.OnClickListener positiveListener)
+		public void setOnPositiveListener(View.OnClickListener positiveListener)
 		{
-			this.positiveListener = positiveListener;
+			this.onPositiveListener = positiveListener;
 		}
 
 		public View.OnClickListener getNegativeListener()
 		{
-			return negativeListener;
+			return onNegativeListener;
 		}
 
-		public void setNegativeListener(View.OnClickListener negativeListener)
+		public void setOnNegativeListener(View.OnClickListener negativeListener)
 		{
-			this.negativeListener = negativeListener;
+			this.onNegativeListener = negativeListener;
 		}
 
 		public boolean isCanceledOnTouchOutside()

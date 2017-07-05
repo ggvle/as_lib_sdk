@@ -4,6 +4,7 @@ import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.yline.view.recycler.callback.IViewHolderCallback;
@@ -76,5 +77,13 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IView
 		ImageView imageView = this.get(viewId);
 		imageView.setImageResource(resId);
 		return imageView;
+	}
+	
+	@Override
+	public ProgressBar setProgress(int viewId, int progress)
+	{
+		ProgressBar progressBar = this.get(viewId);
+		progressBar.setProgress(progress);
+		return progressBar;
 	}
 }
