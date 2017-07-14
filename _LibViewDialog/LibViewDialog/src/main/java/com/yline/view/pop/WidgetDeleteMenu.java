@@ -17,7 +17,8 @@ import com.yline.view.dialog.R;
 import java.util.List;
 
 /**
- * 长按删除，弹框
+ * 长按删除，弹框;
+ * 弹框位置，未完善
  *
  * @author yline 2017/7/4 -- 16:41
  * @version 1.0.0

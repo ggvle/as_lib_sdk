@@ -1,13 +1,9 @@
 package com.yline.http.helper;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 import com.yline.http.XHttpAdapter;
 import com.yline.http.cache.CacheManager;
 import com.yline.http.util.LogUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Map;
@@ -32,19 +28,14 @@ public class XTextHttp<Result>
 
 	public static final int REQUEST_GET = 1;
 
-	private static final int REQUEST_SUCCESS_CODE = 0;
+	private XHttpHelper httpHelper;
 
-	private HttpHandler httpHandler;
-
-	private XHttpAdapter<Result> xHttpAdapter;
+	private boolean isDebug;
 
 	public XTextHttp(XHttpAdapter adapter)
 	{
-		this.xHttpAdapter = adapter;
-		if (isResponseHandler())
-		{
-			httpHandler = HttpHandler.build();
-		}
+		this.isDebug = adapter.isDebug();
+		this.httpHelper = new XHttpHelper(adapter, isResponseHandler());
 	}
 
 	/**
@@ -68,13 +59,13 @@ public class XTextHttp<Result>
 			@Override
 			public void onFailure(Call call, final IOException e)
 			{
-				handleFailure(e);
+				httpHelper.handleFailure(e);
 			}
 
 			@Override
 			public void onResponse(Call call, Response response) throws IOException
 			{
-				handleResponse(response, clazz);
+				handleResponse(httpHelper, response, clazz);
 			}
 		});
 	}
@@ -99,13 +90,13 @@ public class XTextHttp<Result>
 			@Override
 			public void onFailure(Call call, final IOException e)
 			{
-				handleFailure(e);
+				httpHelper.handleFailure(e);
 			}
 
 			@Override
 			public void onResponse(Call call, Response response) throws IOException
 			{
-				handleResponse(response, clazz);
+				handleResponse(httpHelper, response, clazz);
 			}
 		});
 	}
@@ -131,7 +122,7 @@ public class XTextHttp<Result>
 		if (REQUEST_POST == requestType)
 		{
 			String postHttpUrl = getRequestUrlBase() + actionUrl;
-			if (xHttpAdapter.isDebug())
+			if (isDebug)
 			{
 				LogUtil.v("Request post Url " + postHttpUrl);
 			}
@@ -142,7 +133,7 @@ public class XTextHttp<Result>
 		else if (REQUEST_GET == requestType)
 		{
 			String getHttpUrl = String.format("%s%s?%s", getRequestUrlBase(), actionUrl, getGetParamUrl(getMap));
-			if (xHttpAdapter.isDebug())
+			if (isDebug)
 			{
 				LogUtil.v("Request get Url " + getHttpUrl);
 			}
@@ -196,7 +187,7 @@ public class XTextHttp<Result>
 			jsonBody = new Gson().toJson(object);
 		}
 
-		if (xHttpAdapter.isDebug())
+		if (isDebug)
 		{
 			LogUtil.v("post requestBody jsonBody = " + jsonBody);
 		}
@@ -204,118 +195,19 @@ public class XTextHttp<Result>
 	}
 
 	/* --------------------------- 处理返回参数 --------------------------- */
-	private void handleResponse(Response response, Class<Result> clazz) throws IOException
+	protected void handleResponse(XHttpHelper httpHelper, Response response, Class<Result> clazz) throws IOException
 	{
 		String jsonResult = response.body().string();
 
 		// 入口日志
-		if (xHttpAdapter.isDebug())
+		if (isDebug)
 		{
 			LogUtil.v("response" + (null == jsonResult ? "null" : jsonResult.toString()));
 		}
 
-		// 进行code处理一次
-		if (isResponseCodeHandler())
-		{
-			try
-			{
-				JSONObject jsonObject = new JSONObject(jsonResult);
-
-				int code = jsonObject.getInt("code");
-				if (getResponseDefaultCode() == code)
-				{
-					jsonResult = jsonObject.getString("data");
-				}
-				else
-				{
-					handleFailureCode(code);
-					return;
-				}
-			} catch (JSONException ex)
-			{
-				handleFailure(ex);
-				return;
-			}
-		}
-
-		// 响应是否 Gson 解析
-		if (isResponseParse())
-		{
-			// 解析(直接抛出 解析异常，从而保证程序不挂掉)
-			try
-			{
-				Result result = new Gson().fromJson(jsonResult, clazz);
-				handleSuccess(result);
-			} catch (JsonParseException e)
-			{
-				LogUtil.e("Http JsonParseException", e);
-				handleFailure(e);
-			}
-		}
-		else
-		{
-			handleSuccess((Result) jsonResult);
-		}
+		httpHelper.handleSuccess(jsonResult, isResponseCodeHandler(), isResponseParse() ? clazz : null);
 	}
-
-	private void handleSuccess(final Result result)
-	{
-		if (isResponseHandler())
-		{
-			httpHandler.post(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					xHttpAdapter.onSuccess(result);
-				}
-			});
-		}
-		else
-		{
-			xHttpAdapter.onSuccess(result);
-		}
-	}
-
-	private void handleFailureCode(final int code)
-	{
-		if (isResponseHandler())
-		{
-			httpHandler.post(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					xHttpAdapter.onFailureCode(code);
-				}
-			});
-		}
-		else
-		{
-			xHttpAdapter.onFailureCode(code);
-		}
-	}
-
-	private void handleFailure(final Exception ex)
-	{
-		// 是否需要 Handler 处理一次
-		if (isResponseHandler())
-		{
-			httpHandler.post(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					xHttpAdapter.onFailure(ex);
-				}
-			});
-		}
-		else
-		{
-			xHttpAdapter.onFailure(ex);
-		}
-	}
-
+	
 	/**
 	 * 默认 单例方式获取 HttpNetThanCacheClient
 	 *
@@ -384,15 +276,5 @@ public class XTextHttp<Result>
 	protected boolean isResponseParse()
 	{
 		return true;
-	}
-
-	/**
-	 * 默认正确的Code
-	 *
-	 * @return
-	 */
-	protected int getResponseDefaultCode()
-	{
-		return REQUEST_SUCCESS_CODE;
 	}
 }

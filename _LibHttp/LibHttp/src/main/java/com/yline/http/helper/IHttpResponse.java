@@ -9,18 +9,13 @@ package com.yline.http.helper;
 public interface IHttpResponse<T>
 {
 	/**
-	 * 请求成功
+	 * 获取到网络数据，直接回调
 	 *
-	 * @param t 返回类型
+	 * @param jsonData 最开始的Json数据
+	 * @param isHandle 是否 进行默认处理
+	 * @param clazz    如果处理，那么对应的json类是什么；若不处理，则为null
 	 */
-	void onSuccess(T t);
-
-	/**
-	 * 返回错误码;只有在code的情况下,才有返回
-	 *
-	 * @param code 错误类型
-	 */
-	void onFailureCode(int code);
+	void onSuccess(String jsonData, boolean isHandle, Class<T> clazz) throws Exception;
 
 	/**
 	 * 网络错误

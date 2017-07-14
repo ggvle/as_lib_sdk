@@ -39,7 +39,7 @@ public class DeleteMenuActivity extends BaseAppCompatActivity
 			public void onBindViewHolder(final RecyclerViewHolder viewHolder, int position)
 			{
 				super.onBindViewHolder(viewHolder, position);
-
+				
 				WidgetDeleteMenu widgetDeleteMenu = new WidgetDeleteMenu(DeleteMenuActivity.this);
 				widgetDeleteMenu.setOnWidgetListener(new WidgetDeleteMenu.OnWidgetListener()
 				{
@@ -48,7 +48,7 @@ public class DeleteMenuActivity extends BaseAppCompatActivity
 					{
 						LogFileUtil.v("popupWindow onDismiss");
 					}
-					
+
 					@Override
 					public void onOptionSelected(View view, int position, String content)
 					{
