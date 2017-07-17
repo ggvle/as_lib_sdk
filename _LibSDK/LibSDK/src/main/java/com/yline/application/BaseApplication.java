@@ -72,7 +72,6 @@ public class BaseApplication extends Application
 		return SDKManager.getApplication();
 	}
 
-
 	public static void addActivity(Activity activity)
 	{
 		SDKManager.addActivity(activity);

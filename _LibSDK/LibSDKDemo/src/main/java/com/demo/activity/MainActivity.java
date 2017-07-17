@@ -11,6 +11,7 @@ import com.demo.fragment.UtilFragment;
 import com.lib.sdk.demo.R;
 import com.yline.base.BaseAppCompatActivity;
 import com.yline.base.BaseFragment;
+import com.yline.log.LogFileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class MainActivity extends BaseAppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		LogFileUtil.v("content");
 
 		fragmentList.add(new FunctionFragment());
 		fragmentList.add(new UtilFragment());
