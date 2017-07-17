@@ -15,7 +15,7 @@
 
 技术交流群：[547839514](https://jq.qq.com/?_wv=1027&k=4B0yi1n)  
 个人邮箱：[957339173@qq.com](https://jq.qq.com/?_wv=1027&k=4B0yi1n)  
-我的微博：[csdn.com/yline](http://blog.csdn.net/u014803950)  
+个人博客：[csdn.com/yline](http://blog.csdn.net/u014803950)  
 
 ## 依赖
 * Gradle：
@@ -103,7 +103,7 @@ SDKManager.getHandler().postDelayed(new Runnable()
 ## 混淆
 `LibSDK`是完全可以混淆的，只是打印的日志相对应的定位内容也会被混淆掉
 
-## 版本
+## 版本    
 ###Version 2.0.2
 > 个人使用已经较为稳定的版本  
 > 提供常用工具类、控件基类、测试基类、入口基类以及异常日志处理机制    
