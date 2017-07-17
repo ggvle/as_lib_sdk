@@ -38,8 +38,8 @@ ext {
 
     libraryDescription = 'provider log,util,base,common and ect'
 
-    siteUrl = 'https://github.com/yline/as_lib_place '
-    gitUrl = 'https://github.com/yline/as_lib_place.git'
+    siteUrl = 'https://github.com/yline/as_lib_sdk'
+    gitUrl = 'https://github.com/yline/as_lib_sdk.git'
 
     libraryVersion = '2.0.2'
 
