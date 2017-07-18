@@ -72,21 +72,96 @@ public class TestConstant
 
 	private static Random random = new Random();
 
-	public static List<String> getList(int size)
+	public static List<String> getListOne(int size)
 	{
 		List<String> result = new ArrayList<>();
 
+		int cacheLength = oneStr.length;
 		for (int i = 0; i < size; i++)
 		{
-			result.add(getStringByRandom());
+			result.add(oneStr[i % cacheLength]);
 		}
 
 		return result;
 	}
 
-	public static List<String> getListEnglish()
+	public static List<String> getListTwo(int size)
 	{
-		return Arrays.asList(englishStr);
+		List<String> result = new ArrayList<>();
+
+		int cacheLength = twoStr.length;
+		for (int i = 0; i < size; i++)
+		{
+			result.add(twoStr[i % cacheLength]);
+		}
+
+		return result;
+	}
+
+	public static List<String> getListThree(int size)
+	{
+		List<String> result = new ArrayList<>();
+
+		int cacheLength = threeStr.length;
+		for (int i = 0; i < size; i++)
+		{
+			result.add(threeStr[i % cacheLength]);
+		}
+
+		return result;
+	}
+
+	public static List<String> getListFour(int size)
+	{
+		List<String> result = new ArrayList<>();
+
+		int cacheLength = fourStr.length;
+		for (int i = 0; i < size; i++)
+		{
+			result.add(fourStr[i % cacheLength]);
+		}
+
+		return result;
+	}
+
+
+	public static List<String> getListFive(int size)
+	{
+		List<String> result = new ArrayList<>();
+
+		int cacheLength = fiveStr.length;
+		for (int i = 0; i < size; i++)
+		{
+			result.add(fiveStr[i % cacheLength]);
+		}
+
+		return result;
+	}
+
+	public static List<String> getListSix(int size)
+	{
+		List<String> result = new ArrayList<>();
+
+		int cacheLength = sixStr.length;
+		for (int i = 0; i < size; i++)
+		{
+			result.add(sixStr[i % cacheLength]);
+		}
+
+		return result;
+	}
+
+	public static List<String> getListSeven(int size)
+	{
+		List<String> result = new ArrayList<>();
+
+		int cacheLength = sevenStr.length;
+		for (int i = 0; i < size; i++)
+		{
+			result.add(sevenStr[i % cacheLength]);
+		}
+
+		return result;
 	}
 
 	public static List<String> getListEnglish(int size)
@@ -97,6 +172,18 @@ public class TestConstant
 		for (int i = 0; i < size; i++)
 		{
 			result.add(englishStr[i % cacheLength]);
+		}
+
+		return result;
+	}
+
+	public static List<String> getListRandom(int size)
+	{
+		List<String> result = new ArrayList<>();
+
+		for (int i = 0; i < size; i++)
+		{
+			result.add(getStringByRandom());
 		}
 
 		return result;
@@ -121,22 +208,46 @@ public class TestConstant
 		return provinceMap;
 	}
 
+	public static int getIntRandom()
+	{
+		return random.nextInt();
+	}
+
+	public static int getIntRandom(int max)
+	{
+		return random.nextInt(max);
+	}
+
+	/**
+	 * @return "random-" + int
+	 */
 	public static String getStringRandom()
 	{
 		return "random-" + random.nextInt();
 	}
 
+	/**
+	 * @param max int 的最大值
+	 * @return "random-" + int
+	 */
 	public static String getStringRandom(int max)
 	{
 		return "random-" + random.nextInt(max);
 	}
 
+	/**
+	 * @return 字符串
+	 */
 	private static String getStringByRandom()
 	{
 		return getStringByRandom(getStringArrayByRandom());
 	}
 
-	private static String getStringByRandom(String[] aimStringArray)
+	/**
+	 * @param aimStringArray 目标数组
+	 * @return 其中某一个字符串
+	 */
+	public static String getStringByRandom(String[] aimStringArray)
 	{
 		int number = random.nextInt(12);
 		if (aimStringArray.length < 12)
@@ -146,7 +257,12 @@ public class TestConstant
 		return aimStringArray[number];
 	}
 
-	private static String[] getStringArrayByRandom()
+	/**
+	 * 从自带的 几个字符串数组 随机出一个 字符串数组
+	 *
+	 * @return 字符串数组
+	 */
+	public static String[] getStringArrayByRandom()
 	{
 		int number = random.nextInt(8);
 		switch (number)

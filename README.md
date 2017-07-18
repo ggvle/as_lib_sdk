@@ -19,13 +19,13 @@
 
 ## 依赖
 * Gradle：
-```compile 'com.yline.lib:LibSDK:2.0.2'```
+```compile 'com.yline.lib:LibSDK:2.0.3'```
 * Maven:
 ```
     <dependency>
        <groupId>com.yline.lib</groupId>
        <artifactId>LibSDK</artifactId>
-       <version>2.0.2</version>
+       <version>2.0.3</version>
        <type>pom</type>
     </dependency>
 ```
@@ -104,7 +104,7 @@ SDKManager.getHandler().postDelayed(new Runnable()
 `LibSDK`是完全可以混淆的，只是打印的日志相对应的定位内容也会被混淆掉
 
 ## 版本    
-###Version 2.0.2
+###Version 2.0.3
 > 个人使用已经较为稳定的版本  
 > 提供常用工具类、控件基类、测试基类、入口基类以及异常日志处理机制    
 > 本地记录日志功能
