@@ -69,6 +69,7 @@ SDKManager.getHandler().postDelayed(new Runnable()
 * 日志过滤`xxx-`
 * 仅打印到屏幕`LogUtil.v("content");`
 * 打印到屏幕并且本地记录下`LogFileUtil.v("content");`
+* 签名，混淆之后，日志自带的定位信息将会消失，具体为：包名(?)、行数(-1)、类名(a)、方法名(b);
 
 例如：
 
@@ -104,7 +105,7 @@ SDKManager.getHandler().postDelayed(new Runnable()
 `LibSDK`是完全可以混淆的，只是打印的日志相对应的定位内容也会被混淆掉
 
 ## 版本    
-###Version 2.0.3
+### Version 2.0.3
 > 个人使用已经较为稳定的版本  
 > 提供常用工具类、控件基类、测试基类、入口基类以及异常日志处理机制    
 > 本地记录日志功能
