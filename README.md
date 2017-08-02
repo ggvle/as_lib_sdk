@@ -13,7 +13,7 @@
 * test基类，并存放一些测试常量
 * 常用Util集合
 
-技术交流群：[547839514](https://jq.qq.com/?_wv=1027&k=4B0yi1n)  
+技术交流群：[644213963](https://jq.qq.com/?_wv=1027&k=4ETdgdJ)
 个人邮箱：[957339173@qq.com](https://jq.qq.com/?_wv=1027&k=4B0yi1n)  
 个人博客：[csdn.com/yline](http://blog.csdn.net/u014803950)  
 
