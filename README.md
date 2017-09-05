@@ -110,6 +110,7 @@ SDKManager.getHandler().postDelayed(new Runnable()
 > 提供常用工具类、控件基类、测试基类、入口基类以及异常日志处理机制    
 > 本地记录日志功能
 
-
+### Version 2.0.4
+> 修改6.0以上版本，Test基类对应的方法字体为大写的问题
 
 

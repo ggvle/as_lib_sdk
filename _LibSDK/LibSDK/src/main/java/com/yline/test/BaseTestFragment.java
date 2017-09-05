@@ -19,7 +19,7 @@ import com.yline.utils.UIScreenUtil;
 public abstract class BaseTestFragment extends BaseFragment implements ITestCallback
 {
 	protected LinearLayout linearLayout;
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -27,7 +27,7 @@ public abstract class BaseTestFragment extends BaseFragment implements ITestCall
 		this.linearLayout = (LinearLayout) view.findViewById(R.id.ll_base_content);
 		return view;
 	}
-
+	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState)
 	{
@@ -42,21 +42,23 @@ public abstract class BaseTestFragment extends BaseFragment implements ITestCall
 		button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		UIResizeUtil.build().setBottomMargin(20).commit(button);
 		button.setText(content);
+		button.setAllCaps(false);
 		button.setOnClickListener(listener);
 		linearLayout.addView(button);
 		return button;
 	}
-
+	
 	@Override
 	public EditText addEditText(String hintContent)
 	{
 		EditText editText = new EditText(getContext());
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
+		editText.setAllCaps(false);
 		linearLayout.addView(editText);
 		return editText;
 	}
-
+	
 	@Override
 	public EditText addEditText(String hintContent, String content)
 	{
@@ -64,10 +66,11 @@ public abstract class BaseTestFragment extends BaseFragment implements ITestCall
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
 		editText.setText(content);
+		editText.setAllCaps(false);
 		linearLayout.addView(editText);
 		return editText;
 	}
-
+	
 	@Override
 	public EditText addEditNumber(String hintContent)
 	{
@@ -75,10 +78,11 @@ public abstract class BaseTestFragment extends BaseFragment implements ITestCall
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
 		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+		editText.setAllCaps(false);
 		linearLayout.addView(editText);
 		return editText;
 	}
-
+	
 	@Override
 	public EditText addEditNumber(String hintContent, String content)
 	{
@@ -87,10 +91,11 @@ public abstract class BaseTestFragment extends BaseFragment implements ITestCall
 		editText.setHint(hintContent);
 		editText.setText(content);
 		editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+		editText.setAllCaps(false);
 		linearLayout.addView(editText);
 		return editText;
 	}
-
+	
 	@Override
 	public ImageView addImageView(int width, int height)
 	{
@@ -99,13 +104,14 @@ public abstract class BaseTestFragment extends BaseFragment implements ITestCall
 		this.linearLayout.addView(imageView);
 		return imageView;
 	}
-
+	
 	@Override
 	public TextView addTextView(String initContent)
 	{
 		TextView textView = new TextView(this.getContext());
 		textView.setLayoutParams(new android.view.ViewGroup.LayoutParams(-1, -2));
 		textView.setHint(initContent);
+		textView.setAllCaps(false);
 		this.linearLayout.addView(textView);
 		return textView;
 	}

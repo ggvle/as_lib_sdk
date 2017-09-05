@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -41,7 +41,7 @@ ext {
     siteUrl = 'https://github.com/yline/as_lib_sdk'
     gitUrl = 'https://github.com/yline/as_lib_sdk.git'
 
-    libraryVersion = '2.0.3'
+    libraryVersion = '2.0.4'
 
     developerId = 'yline'
     developerName = 'yline'
