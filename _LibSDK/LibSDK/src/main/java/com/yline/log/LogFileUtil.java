@@ -18,77 +18,63 @@ import java.util.Locale;
  */
 public final class LogFileUtil
 {
-	private static final String TAG = "LogUtil";
-	
+	/**
+	 * log trace 抛出的位置,两层,即:使用该工具的子类的位置
+	 */
+	public static final int LOG_LOCATION_PARENT = 3;
+	private static final String TAG = "LogFile";
 	/**
 	 * LogFileUtil 错误日志tag
 	 */
 	private static final String TAG_ERROR = "LogFileUtil error -> ";
-	
 	/**
 	 * 写入文件编号,默认
 	 */
 	private static final int START_COUNT = 0;
-	
 	/**
 	 * 写入文件最大编号
 	 */
 	private static final int MAX_COUNT = 10;
-	
 	/**
 	 * 写入文件,每个文件大小2M
 	 */
 	private static final int MAX_SIZE_OF_TXT = 2 * 1024 * 1024;
 	
+	// 信息格式
 	/**
 	 * 写入文件,路径下保存的文件名称
 	 */
 	private static final String LOG_FILE_TXT_NAME = "_log.txt";
-	
-	// 信息格式
-	
 	/**
 	 * 默认自带前缀
 	 */
 	private static final String TAG_DEFAULT = "xxx->";
-	
 	/**
 	 * tag 定位  默认格式
 	 */
 	private static final String TAG_DEFAULT_LOCATION = TAG_DEFAULT + "%s.%s(L:%d): ";
-	
 	/**
 	 * msg 默认格式
 	 */
 	private static final String MSG_DEFAULT = "%s -> %s";
-	
 	/**
 	 * tag 文件默认格式<日期,级别>
 	 */
 	private static final String TAG_FILE_DEFAULT = TAG_DEFAULT + "%s: %s/";
-	
 	/**
 	 * tag 文件定位默认格式
 	 */
 	private static final String TAG_FILE_DEFAULT_LOCATION = TAG_DEFAULT + "%s: %s/%s.%s(L:%d): ";
 	
+	// 找到位置
 	/**
 	 * msg 文件定位默认格式
 	 */
 	private static final String MSG_FILE_DEFAULT = "%s %s -> %s";
-	
-	// 找到位置
-	
 	/**
 	 * log trace 抛出的位置,两层,即:使用该工具的当前位置,作为默认
 	 */
 	private static final int LOG_LOCATION_NOW = 2;
-	
-	/**
-	 * log trace 抛出的位置,两层,即:使用该工具的子类的位置
-	 */
-	public static final int LOG_LOCATION_PARENT = 3;
-	
 	// 安全级别
 	private static final String V = "V";
 	
