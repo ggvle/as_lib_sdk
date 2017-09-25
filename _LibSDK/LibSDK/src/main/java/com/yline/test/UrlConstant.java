@@ -10,7 +10,7 @@ public class UrlConstant {
     public static final String Png_64_64_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/64_64_png/%s.png";
 
     // 128_128_png
-    public static final int Png_128_128_Max = 1;
+    public static final int Png_128_128_Max = 3;
     public static final String Png_128_128_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/128_128_png/%s.png";
 
     // 256_256_png
@@ -22,7 +22,7 @@ public class UrlConstant {
     public static final String Jpg_300_150_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/300_150_jpg/%s.jpg";
 
     // 420_300_png
-    public static final int Png_420_300_Max = 1;
+    public static final int Png_420_300_Max = 3;
     public static final String Png_420_300_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/420_300_png/%s.png";
 
     // 420_420_jpg
@@ -33,13 +33,21 @@ public class UrlConstant {
     public static final int Jpg_480_640_Max = 7;
     public static final String Jpg_480_640_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/480_640_jpg/%s.jpg";
 
+    // 500_750_jpg
+    public static final int Jpg_500_750_Max = 5;
+    public static final String Jpg_500_750_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/500_750_jpg/%s.jpg";
+
     // 640_480_jpg
-    public static final int Jpg_640_480_Max = 1;
+    public static final int Jpg_640_480_Max = 3;
     public static final String Jpg_640_480_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/640_480_jpg/%s.jpg";
 
-    // 640_1366_jpg
-    public static final int Jpg_640_1366_Max = 1;
-    public static final String Jpg_640_1366_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/640_1366_jpg/%s.jpg";
+    // 640_960_jpg
+    public static final int Jpg_640_960_Max = 5;
+    public static final String Jpg_640_960_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/640_960_jpg/%s.jpg";
+
+    // 640_1120_jpg
+    public static final int Jpg_640_1120_Max = 4;
+    public static final String Jpg_640_1120_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/640_1120_jpg/%s.jpg";
 
     // 960_640_jpg
     public static final int Jpg_960_640_Max = 8;
@@ -54,24 +62,24 @@ public class UrlConstant {
     public static final String Jpg_1366_768_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/1366_768_jpg/%s.jpg";
 
     // 1440_900_jpg
-    public static final int Jpg_1440_900_Max = 1;
+    public static final int Jpg_1440_900_Max = 2;
     public static final String Jpg_1440_900_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/1440_900_jpg/%s.jpg";
 
     // 1920_1280_jpg
     public static final int Jpg_1920_1280_Max = 9;
     public static final String Jpg_1920_1280_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/1920_1280_jpg/%s.jpg";
 
+    // dynamic webp
+    public static final int Webp_Dynamic_Max = 1;
+    public static final String Webp_Dynamic_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/dynamic_webp/%s.webp";
+
     // gif
-    public static final int Gif_Max = 3;
+    public static final int Gif_Max = 4;
     public static final String Gif_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/gif/%s.gif";
 
     // static webp
     public static final int Webp_Static_Max = 2;
     public static final String Webp_Static_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/static_webp/%s.webp";
-
-    // dynamic webp
-    public static final int Webp_Dynamic_Max = 1;
-    public static final String Webp_Dynamic_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/dynamic_webp/%s.webp";
 
     public static Random random = new Random();
 
@@ -104,12 +112,20 @@ public class UrlConstant {
         return get(Jpg_480_640_format, Jpg_480_640_Max, position);
     }
 
+    public static String getJpg_500_750(int position) {
+        return get(Jpg_500_750_format, Jpg_500_750_Max, position);
+    }
+
     public static String getJpg_640_480(int position) {
         return get(Jpg_640_480_format, Jpg_640_480_Max, position);
     }
 
-    public static String getJpg_640_1366(int position) {
-        return get(Jpg_640_1366_format, Jpg_640_1366_Max, position);
+    public static String getJpg_640_960(int position) {
+        return get(Jpg_640_960_format, Jpg_640_960_Max, position);
+    }
+
+    public static String getJpg_640_1120(int position) {
+        return get(Jpg_640_1120_format, Jpg_640_1120_Max, position);
     }
 
     public static String getJpg_960_640(int position) {
@@ -147,19 +163,33 @@ public class UrlConstant {
     // 长方形
     public static String getUrlRec() {
         final int position = random.nextInt(Integer.MAX_VALUE);
-        final int caseIndex = position % 3;
+        final int caseIndex = position % 11;
 
         switch (caseIndex) {
             case 0:
-                return getJpg_640_1366(position);
+                return getJpg_300_150(position);
             case 1:
-                return getJpg_960_640(position);
+                return getPng_420_300(position);
+            case 2:
+                return getJpg_480_640(position);
             case 3:
-                return getJpn_1440_900(position);
+                return getJpg_500_750(position);
             case 4:
+                return getJpg_640_480(position);
+            case 5:
+                return getJpg_640_960(position);
+            case 6:
+                return getJpg_640_1120(position);
+            case 7:
+                return getJpg_960_640(position);
+            case 8:
+                return getJpg_1366_768(position);
+            case 9:
+                return getJpn_1440_900(position);
+            case 10:
                 return getJpn_1920_1280(position);
             default:
-                return getJpg_640_1366(position);
+                return getJpg_300_150(position);
         }
     }
 
@@ -175,6 +205,8 @@ public class UrlConstant {
                 return getPng_128_128(position);
             case 2:
                 return getPng_256_256(position);
+            case 3:
+                return getJpg_420_420(position);
             case 4:
                 return getPng_1024_1024(position);
             default:
@@ -185,7 +217,7 @@ public class UrlConstant {
     // 随机产生一个
     public static String getUrl() {
         final int position = random.nextInt(Integer.MAX_VALUE);
-        final int caseIndex = position % 15;
+        final int caseIndex = position % 16;
 
         switch (caseIndex) {
             case 0:
@@ -194,27 +226,31 @@ public class UrlConstant {
                 return getPng_128_128(position);
             case 2:
                 return getPng_256_256(position);
-            case 4:
+            case 3:
                 return getJpg_300_150(position);
-            case 5:
+            case 4:
                 return getPng_420_300(position);
-            case 6:
+            case 5:
                 return getJpg_420_420(position);
-            case 7:
+            case 6:
                 return getJpg_480_640(position);
+            case 7:
+                return getJpg_500_750(position);
             case 8:
                 return getJpg_640_480(position);
             case 9:
-                return getJpg_640_1366(position);
+                return getJpg_640_960(position);
             case 10:
-                return getJpg_960_640(position);
+                return getJpg_640_1120(position);
             case 11:
-                return getPng_1024_1024(position);
+                return getJpg_960_640(position);
             case 12:
-                return getJpg_1366_768(position);
+                return getPng_1024_1024(position);
             case 13:
-                return getJpn_1440_900(position);
+                return getJpg_1366_768(position);
             case 14:
+                return getJpn_1440_900(position);
+            case 15:
                 return getJpn_1920_1280(position);
             default:
                 return getPng_64_64(position);
@@ -257,19 +293,29 @@ public class UrlConstant {
         return getJpg_480_640(position);
     }
 
+    public static String getJpg_500_750() {
+        int position = random.nextInt(Integer.MAX_VALUE);
+        return getJpg_500_750(position);
+    }
+
     public static String getJpg_640_480() {
         int position = random.nextInt(Integer.MAX_VALUE);
         return getJpg_640_480(position);
     }
 
+    public static String getJpg_640_960() {
+        int position = random.nextInt(Integer.MAX_VALUE);
+        return getJpg_640_960(position);
+    }
+
+    public static String getJpg_640_1120() {
+        int position = random.nextInt(Integer.MAX_VALUE);
+        return getJpg_640_1120(position);
+    }
+
     public static String getJpg_960_640() {
         int position = random.nextInt(Integer.MAX_VALUE);
         return getJpg_960_640(position);
-    }
-
-    public static String getJpg_640_1366() {
-        int position = random.nextInt(Integer.MAX_VALUE);
-        return getJpg_640_1366(position);
     }
 
     public static String getPng_1024_1024() {
