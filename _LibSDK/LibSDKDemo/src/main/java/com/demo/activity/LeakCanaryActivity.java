@@ -3,8 +3,10 @@ package com.demo.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
 import com.lib.sdk.demo.R;
@@ -15,6 +17,13 @@ import com.yline.base.BaseAppCompatActivity;
  */
 public class LeakCanaryActivity extends BaseAppCompatActivity
 {
+	public static void actionStart(Context context)
+	{
+		Intent intent = new Intent();
+		intent.setClass(context, LeakCanaryActivity.class);
+		context.startActivity(intent);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -31,6 +40,7 @@ public class LeakCanaryActivity extends BaseAppCompatActivity
 		});
 	}
 
+	@RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
 	private void startAsyncTask()
 	{
 		// This async task is an anonymous class and therefore has a hidden reference to the outer
@@ -46,12 +56,5 @@ public class LeakCanaryActivity extends BaseAppCompatActivity
 				return null;
 			}
 		}.execute();
-	}
-
-	public static void actionStart(Context context)
-	{
-		Intent intent = new Intent();
-		intent.setClass(context, LeakCanaryActivity.class);
-		context.startActivity(intent);
 	}
 }
