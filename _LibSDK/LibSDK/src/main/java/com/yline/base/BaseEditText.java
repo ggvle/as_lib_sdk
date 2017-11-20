@@ -7,35 +7,29 @@ import android.widget.EditText;
 import com.yline.application.BaseApplication;
 import com.yline.log.LogFileUtil;
 
-public class BaseEditText extends EditText
-{
-	public BaseEditText(Context context)
-	{
-		this(context, null);
-	}
+public class BaseEditText extends EditText {
+    public BaseEditText(Context context) {
+        this(context, null);
+    }
 
-	public BaseEditText(Context context, AttributeSet attrs)
-	{
-		this(context, attrs, 0);
-	}
+    public BaseEditText(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
 
-	public BaseEditText(Context context, AttributeSet attrs, int defStyleAttr)
-	{
-		super(context, attrs, defStyleAttr);
-		BaseApplication.addViewForRecord(this);
-	}
+    public BaseEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        BaseApplication.addViewForRecord(this);
+    }
 
-	@Override
-	protected void onFinishInflate()
-	{
-		super.onFinishInflate();
-		LogFileUtil.m("finishInflate:" + getClass().getSimpleName());
-	}
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        LogFileUtil.m("finishInflate:" + getClass().getSimpleName());
+    }
 
-	@Override
-	protected void onDetachedFromWindow()
-	{
-		super.onDetachedFromWindow();
-		BaseApplication.removeViewForRecord(this);
-	}
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        BaseApplication.removeViewForRecord(this);
+    }
 }

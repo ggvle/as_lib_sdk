@@ -7,35 +7,29 @@ import android.view.View;
 import com.yline.application.BaseApplication;
 import com.yline.log.LogFileUtil;
 
-public class BaseView extends View
-{
-	public BaseView(Context context)
-	{
-		this(context, null);
-	}
+public class BaseView extends View {
+    public BaseView(Context context) {
+        this(context, null);
+    }
 
-	public BaseView(Context context, AttributeSet attrs)
-	{
-		this(context, attrs, 0);
-	}
+    public BaseView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
 
-	public BaseView(Context context, AttributeSet attrs, int defStyleAttr)
-	{
-		super(context, attrs, defStyleAttr);
-		BaseApplication.addViewForRecord(this);
-	}
+    public BaseView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        BaseApplication.addViewForRecord(this);
+    }
 
-	@Override
-	protected void onFinishInflate()
-	{
-		super.onFinishInflate();
-		LogFileUtil.m("finishInflate:" + getClass().getSimpleName());
-	}
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        LogFileUtil.m("finishInflate:" + getClass().getSimpleName());
+    }
 
-	@Override
-	protected void onDetachedFromWindow()
-	{
-		super.onDetachedFromWindow();
-		BaseApplication.removeViewForRecord(this);
-	}
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        BaseApplication.removeViewForRecord(this);
+    }
 }

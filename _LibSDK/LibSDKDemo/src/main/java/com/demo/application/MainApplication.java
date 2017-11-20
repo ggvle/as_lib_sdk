@@ -9,42 +9,36 @@ import com.squareup.leakcanary.LeakCanary;
 import com.yline.application.BaseApplication;
 import com.yline.application.SDKConfig;
 
-public class MainApplication extends BaseApplication
-{
-	@Override
-	public void onCreate()
-	{
-		super.onCreate();
+public class MainApplication extends BaseApplication {
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-		MultiDex.install(this);
-		initLeakCanary(this);
-	}
-	
-	private void initLeakCanary(Application application)
-	{
-		if (LeakCanary.isInAnalyzerProcess(this))
-		{
-			return;
-		}
+        MultiDex.install(this);
+        initLeakCanary(this);
+    }
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
-		{
-			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder() //
-					.detectAll() //
-					.penaltyLog() //
-					.penaltyDeath() //
-					.build());
-		}
+    private void initLeakCanary(Application application) {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
 
-		LeakCanary.install(application);
-	}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder() //
+                    .detectAll() //
+                    .penaltyLog() //
+                    .penaltyDeath() //
+                    .build());
+        }
 
-	@Override
-	public SDKConfig initConfig()
-	{
-		SDKConfig sdkConfig = new SDKConfig();
-		sdkConfig.setSDKLog(true);
-		sdkConfig.setUtilLogBySystem(true);
-		return sdkConfig;
-	}
+        LeakCanary.install(application);
+    }
+
+    @Override
+    public SDKConfig initConfig() {
+        SDKConfig sdkConfig = new SDKConfig();
+        sdkConfig.setSDKLog(true);
+        sdkConfig.setUtilLogBySystem(true);
+        return sdkConfig;
+    }
 }

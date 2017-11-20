@@ -10,19 +10,16 @@ import com.yline.application.BaseApplication;
  *
  * @author YLine 2016-5-25 - 上午7:32:43
  */
-public class BaseFragment extends Fragment
-{
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		BaseApplication.addFragmentForRecord(this);
-	}
+public class BaseFragment extends Fragment {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BaseApplication.addFragmentForRecord(this);
+    }
 
-	@Override
-	public void onDestroy()
-	{
-		super.onDestroy();
-		BaseApplication.removeFragmentForRecord(this);
-	}
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        BaseApplication.removeFragmentForRecord(this);
+    }
 }
