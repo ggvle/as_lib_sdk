@@ -1,6 +1,7 @@
 package com.yline.log;
 
 import android.content.Context;
+import android.os.Process;
 import android.text.TextUtils;
 
 import com.yline.application.SDKConfig;
@@ -20,7 +21,7 @@ public final class LogFileUtil {
     /**
      * log trace 抛出的位置,两层,即:使用该工具的子类的位置
      */
-    public static final int LOG_LOCATION_PARENT = 3;
+    public static final int LOG_LOCATION_PARENT = 4;
 
     private static final String TAG = "LogFile";
     /**
@@ -46,7 +47,7 @@ public final class LogFileUtil {
     /**
      * log trace 抛出的位置,两层,即:使用该工具的当前位置,作为默认
      */
-    private static final int LOG_LOCATION_NOW = 2;
+    private static final int LOG_LOCATION_NOW = 3;
     /**
      * 写入文件,路径下保存的文件名称
      */
@@ -61,9 +62,9 @@ public final class LogFileUtil {
 
     // 总格式
     private static final String FORMAT = "%s.xxx->%s%s -> %s"; // 时间.xxx->定位 tag -> content
-    private static final String FORMAT_TAG_TYPE = "%s:%s/"; // 时间 + type内容
+    private static final String FORMAT_TAG_TYPE = "%s(%s):%s/"; // 时间 + type内容
     private static final String FORMAT_TAG_LOCATION = "%s.%s(L:%d):"; // 类名、方法名、行数
-    private static final String FORMAT_TAG_MSG = "%s -> %s"; // tag、content
+    private static final String FORMAT_TAG_MSG = "xxx->%s->%s"; // tag、content
 
     /**
      * 写入文件,文件夹,路径
@@ -272,7 +273,7 @@ public final class LogFileUtil {
         if (TextUtils.isEmpty(type)) {
             type = E;
         }
-        return String.format(FORMAT_TAG_TYPE, time, type);
+        return String.format(FORMAT_TAG_TYPE, time, Process.myTid(), type);
     }
 
     private static String generateTagLocation(int location) {
