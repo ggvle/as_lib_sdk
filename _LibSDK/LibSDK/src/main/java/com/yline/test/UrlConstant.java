@@ -81,6 +81,10 @@ public class UrlConstant {
     public static final int Webp_Static_Max = 2;
     public static final String Webp_Static_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/static_webp/%s.webp";
 
+    // static webp
+    public static final int Super_Big_Max = 6;
+    public static final String Super_Big_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/super_big_jpg/%s.jpg";
+
     public static Random random = new Random();
 
     // 分文件夹
@@ -158,6 +162,10 @@ public class UrlConstant {
 
     public static String getWebp_Dynamic(int position) {
         return get(Webp_Dynamic_format, Webp_Dynamic_Max, position);
+    }
+
+    public static String getSuper_Big(int position) {
+        return get(Super_Big_format, Super_Big_Max, position);
     }
 
     // 长方形
@@ -351,6 +359,11 @@ public class UrlConstant {
     public static String getWebp_Dynamic() {
         int position = random.nextInt(Integer.MAX_VALUE);
         return get(Webp_Dynamic_format, Webp_Dynamic_Max, position);
+    }
+
+    public static String getSuper_Big() {
+        int position = random.nextInt(Integer.MAX_VALUE);
+        return get(Super_Big_format, Super_Big_Max, position);
     }
 
     // 基本方法
