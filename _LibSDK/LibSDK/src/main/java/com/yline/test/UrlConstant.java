@@ -13,6 +13,10 @@ public class UrlConstant {
     public static final int Png_128_128_Max = 3;
     public static final String Png_128_128_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/128_128_png/%s.png";
 
+    // 200_200_jpg
+    public static final int Jpg_200_200_Max = 71;
+    public static final String Jpg_200_200_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/200_200_jpg/%s.jpg";
+
     // 256_256_png
     public static final int Png_256_256_Max = 1;
     public static final String Png_256_256_format = "https://raw.githubusercontent.com/yline/as_lib_sdk/master/pic/256_256_png/%s.png";
@@ -94,6 +98,10 @@ public class UrlConstant {
 
     public static String getPng_128_128(int position) {
         return get(Png_128_128_format, Png_128_128_Max, position);
+    }
+
+    public static String getJpg_200_200(int position) {
+        return get(Jpg_200_200_format, Jpg_200_200_Max, position);
     }
 
     public static String getPng_256_256(int position) {
@@ -212,13 +220,15 @@ public class UrlConstant {
             case 1:
                 return getPng_128_128(position);
             case 2:
-                return getPng_256_256(position);
+                return getJpg_200_200(position);
             case 3:
-                return getJpg_420_420(position);
+                return getPng_256_256(position);
             case 4:
+                return getJpg_420_420(position);
+            case 5:
                 return getPng_1024_1024(position);
             default:
-                return getPng_64_64(position);
+                return getJpg_200_200(position);
         }
     }
 
@@ -233,35 +243,37 @@ public class UrlConstant {
             case 1:
                 return getPng_128_128(position);
             case 2:
-                return getPng_256_256(position);
+                return getJpg_200_200(position);
             case 3:
-                return getJpg_300_150(position);
+                return getPng_256_256(position);
             case 4:
-                return getPng_420_300(position);
+                return getJpg_300_150(position);
             case 5:
-                return getJpg_420_420(position);
+                return getPng_420_300(position);
             case 6:
-                return getJpg_480_640(position);
+                return getJpg_420_420(position);
             case 7:
-                return getJpg_500_750(position);
+                return getJpg_480_640(position);
             case 8:
-                return getJpg_640_480(position);
+                return getJpg_500_750(position);
             case 9:
-                return getJpg_640_960(position);
+                return getJpg_640_480(position);
             case 10:
-                return getJpg_640_1120(position);
+                return getJpg_640_960(position);
             case 11:
-                return getJpg_960_640(position);
+                return getJpg_640_1120(position);
             case 12:
-                return getPng_1024_1024(position);
+                return getJpg_960_640(position);
             case 13:
-                return getJpg_1366_768(position);
+                return getPng_1024_1024(position);
             case 14:
-                return getJpn_1440_900(position);
+                return getJpg_1366_768(position);
             case 15:
+                return getJpn_1440_900(position);
+            case 16:
                 return getJpn_1920_1280(position);
             default:
-                return getPng_64_64(position);
+                return getJpg_200_200(position);
         }
     }
 
@@ -274,6 +286,11 @@ public class UrlConstant {
     public static String getPng_128_128() {
         int position = random.nextInt(Integer.MAX_VALUE);
         return getPng_128_128(position);
+    }
+
+    public static String getJpg_200_200() {
+        int position = random.nextInt(Integer.MAX_VALUE);
+        return getJpg_200_200(position);
     }
 
     public static String getPng_256_256() {
@@ -364,6 +381,10 @@ public class UrlConstant {
     public static String getSuper_Big() {
         int position = random.nextInt(Integer.MAX_VALUE);
         return get(Super_Big_format, Super_Big_Max, position);
+    }
+
+    public static String getAvatar() {
+        return getJpg_200_200();
     }
 
     // 基本方法

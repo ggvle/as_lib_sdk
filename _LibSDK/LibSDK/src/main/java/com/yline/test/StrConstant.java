@@ -159,24 +159,9 @@ public class StrConstant {
     }
 
     /**
-     * @return "random-" + int
-     */
-    public static String getStringRandom() {
-        return "random-" + random.nextInt();
-    }
-
-    /**
-     * @param max int 的最大值
-     * @return "random-" + int
-     */
-    public static String getStringRandom(int max) {
-        return "random-" + random.nextInt(max);
-    }
-
-    /**
      * @return 字符串
      */
-    private static String getStringByRandom() {
+    public static String getStringByRandom() {
         return getStringByRandom(getStringArrayByRandom());
     }
 
