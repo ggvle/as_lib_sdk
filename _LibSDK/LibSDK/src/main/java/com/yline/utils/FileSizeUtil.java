@@ -1,21 +1,80 @@
 package com.yline.utils;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.os.StatFs;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
+/**
+ * 获取文件大小
+ *
+ * @author yline 2018/1/31 -- 15:31
+ * @version 1.0.0
+ */
 public class FileSizeUtil {
     private static final int ERROR_SIZE = -1;
 
     private static final int SUFFIX_TYPE_B = 1;// 获取文件大小单位为B的double值
-
     private static final int SUFFIX_TYPE_KB = 2;// 获取文件大小单位为KB的double值
-
     private static final int SUFFIX_TYPE_MB = 3;// 获取文件大小单位为MB的double值
-
     private static final int SUFFIX_TYPE_GB = 4;// 获取文件大小单位为GB的double值
+
+    /**
+     * 获取SD卡，所有的容量，单位byte
+     *
+     * @param topPath FileUtil.getPathTop();
+     * @return 0 if SDcard cannot be use
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static long getFileBlockSize(String topPath) {
+        if (FileUtil.isSDCardEnable()) {
+            StatFs stat = new StatFs(topPath);
+
+            long blockSize;
+            long blockCount;
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                blockSize = stat.getBlockSizeLong();
+                blockCount = stat.getBlockCountLong() - 4;
+            } else {
+                blockSize = stat.getBlockSize();
+                blockCount = stat.getBlockCount() - 4;
+            }
+
+            return blockCount * blockSize;
+        }
+        return 0;
+    }
+
+    /**
+     * 获取SD卡，剩余的容量，单位byte
+     *
+     * @param topPath FileUtil.getPathTop();
+     * @return 0 if SDCard cannot be use
+     */
+    public static long getFileAvailableSize(String topPath) {
+        if (FileUtil.isSDCardEnable()) {
+            StatFs stat = new StatFs(topPath);
+
+            long blockSize = 0;
+            long availableBlocks = 0;
+            // 版本判断
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                blockSize = stat.getBlockSizeLong();
+                availableBlocks = stat.getAvailableBlocksLong() - 4;
+            } else {
+                blockSize = stat.getBlockSize();
+                availableBlocks = stat.getAvailableBlocks() - 4;
+            }
+
+            return availableBlocks * blockSize;
+        }
+        return 0;
+    }
 
     /**
      * 格式化大小

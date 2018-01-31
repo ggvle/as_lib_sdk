@@ -26,8 +26,6 @@ public class FileUtil {
     private static final String HIDDEN_PREFIX = ".";
     /**
      * File and folder comparator. TODO Expose sorting option method
-     *
-     * @author paulburke
      */
     private static Comparator<File> sComparator = new Comparator<File>() {
         @Override
@@ -38,19 +36,20 @@ public class FileUtil {
         }
     };
     private static FileFilter sFileFilter = new FileFilter() {
+        @Override
         public boolean accept(File file) {
             return file.isFile();
         }
     };
     private static FileFilter sDirFilter = new FileFilter() {
+        @Override
         public boolean accept(File file) {
             return file.isDirectory();
         }
     };
+
     /**
      * File (not directories) filter.
-     *
-     * @author paulburke
      */
     private static FileFilter sFilePointFilter = new FileFilter() {
         @Override
@@ -62,8 +61,6 @@ public class FileUtil {
     };
     /**
      * Folder (directories) filter.
-     *
-     * @author paulburke
      */
     private static FileFilter sDirPointFilter = new FileFilter() {
         @Override
@@ -74,13 +71,26 @@ public class FileUtil {
         }
     };
 
+    public static boolean isSDCardEnable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+    }
+
+    /**
+     * 获取系统存储路径
+     *
+     * @return /System/
+     */
+    public static String getPathRoot() {
+        return Environment.getRootDirectory().getAbsolutePath() + File.separator;
+    }
+
     /**
      * 获取内置sd卡最上层路径
      *
      * @return /storage/emulated/0/ or null
      */
     public static String getPathTop() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+        if (isSDCardEnable()) {
             return Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
         } else {
             return null;
@@ -93,7 +103,7 @@ public class FileUtil {
      * @return /storage/emulated/0/ or null
      */
     public static File getFileTop() {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+        if (isSDCardEnable()) {
             return Environment.getExternalStorageDirectory();
         } else {
             return null;
@@ -107,7 +117,7 @@ public class FileUtil {
      * @return /storage/emulated/0/ or null
      */
     public static File getFileTop(String fileName) {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+        if (isSDCardEnable()) {
             return Environment.getExternalStoragePublicDirectory(fileName);
         } else {
             return null;
@@ -122,7 +132,7 @@ public class FileUtil {
      * @return /storage/emulated/0/ or null
      */
     public static File getFileTop(String dirName, String fileName) {
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+        if (isSDCardEnable()) {
             File dir = Environment.getExternalStoragePublicDirectory(dirName);
             return FileUtil.create(dir, fileName);
         } else {
