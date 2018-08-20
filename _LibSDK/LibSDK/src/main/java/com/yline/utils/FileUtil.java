@@ -206,10 +206,28 @@ public class FileUtil {
 	 * @return file or null
 	 */
 	public static File create(String dirPath, String fileName) {
-		File dirFile = createDir(dirPath);
-		
-		if (null == dirFile || TextUtils.isEmpty(fileName)) {
+		if (TextUtils.isEmpty(dirPath) || TextUtils.isEmpty(fileName)){
 			return null;
+		}
+		
+		return create(new File(dirPath), fileName);
+	}
+	
+	/**
+	 * android.permission.WRITE_EXTERNAL_STORAGE
+	 * 构建一个文件,真实的创建
+	 *
+	 * @param dirFile  文件的目录 such as /storage/emulated/0/Yline/Log/
+	 * @param fileName 文件名     such as log.txt
+	 * @return file or null
+	 */
+	public static File create(File dirFile, String fileName) {
+		if (null == dirFile || TextUtils.isEmpty(fileName)){
+			return null;
+		}
+		
+		if (!dirFile.exists() || dirFile.isFile()){
+			dirFile.mkdirs();
 		}
 		
 		File file = new File(dirFile, fileName);
