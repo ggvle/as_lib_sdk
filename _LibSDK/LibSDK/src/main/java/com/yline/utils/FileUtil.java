@@ -133,7 +133,8 @@ public class FileUtil {
 	public static File getFileTop(String dirName, String fileName) {
 		if (isSDCardEnable()) {
 			File dirFile = Environment.getExternalStoragePublicDirectory(dirName);
-			return FileUtil.create(dirFile, fileName);
+			String dirPath = (null == dirFile ? null : dirFile.getAbsolutePath());
+			return FileUtil.create(dirPath, fileName);
 		} else {
 			return null;
 		}
@@ -156,7 +157,8 @@ public class FileUtil {
 	 */
 	public static File getFileExternal(Context context, String dirName, String fileName) {
 		File dirFile = context.getExternalFilesDir(dirName);
-		return FileUtil.create(dirFile, fileName);
+		String dirPath = (null == dirFile ? null : dirFile.getAbsolutePath());
+		return FileUtil.create(dirPath, fileName);
 	}
 	
 	/**
@@ -199,19 +201,18 @@ public class FileUtil {
 	 * android.permission.WRITE_EXTERNAL_STORAGE
 	 * 构建一个文件,真实的创建
 	 *
-	 * @param dir  文件的目录
-	 * @param name 文件名     such as log.txt
+	 * @param dirPath  文件的目录 such as /storage/emulated/0/Yline/Log/
+	 * @param fileName 文件名     such as log.txt
 	 * @return file or null
 	 */
-	public static File create(File dir, String name) {
-		if (null == dir || TextUtils.isEmpty(name)) {
+	public static File create(String dirPath, String fileName) {
+		File dirFile = createDir(dirPath);
+		
+		if (null == dirFile || TextUtils.isEmpty(fileName)) {
 			return null;
 		}
 		
-		// 检查目录是否存在，不存在，则创建
-		dir = createDir(dir);
-		
-		File file = new File(dir, name);
+		File file = new File(dirFile, fileName);
 		if (!file.exists()) {
 			try {
 				if (file.createNewFile()) {
@@ -232,26 +233,15 @@ public class FileUtil {
 	 * android.permission.WRITE_EXTERNAL_STORAGE
 	 * 创建一个文件夹
 	 *
-	 * @param path such as /storage/emulated/0/Yline/Log/
+	 * @param dirPath such as /storage/emulated/0/Yline/Log/
 	 * @return file or null
 	 */
-	public static File createDir(String path) {
-		File pathFile = new File(path);
-		return createDir(pathFile);
-	}
-	
-	/**
-	 * android.permission.WRITE_EXTERNAL_STORAGE
-	 * 创建一个文件夹
-	 *
-	 * @param dirFile 路径文件
-	 * @return file or null
-	 */
-	public static File createDir(File dirFile) {
-		if (null == dirFile) {
+	public static File createDir(String dirPath) {
+		if (TextUtils.isEmpty(dirPath)) {
 			return null;
 		}
 		
+		File dirFile = new File(dirPath);
 		if (!dirFile.exists()) {
 			if (!dirFile.mkdirs()) {
 				return null;
