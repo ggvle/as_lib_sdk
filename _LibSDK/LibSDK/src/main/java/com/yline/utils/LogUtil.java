@@ -31,11 +31,11 @@ public final class LogUtil {
     /**
      * tag 默认格式
      */
-    private static final String TAG_DEFAULT = "xxx->";
+    private static final String TAG = "xxx->";
     /**
      * tag 定位  默认格式
      */
-    private static final String TAG_DEFAULT_LOCATION = TAG_DEFAULT + "%s.%s(L:%d): ";
+    private static final String TAG_DEFAULT_LOCATION = TAG + "%s.%s(L:%d): ";
     /**
      * msg 默认格式
      */
@@ -48,7 +48,6 @@ public final class LogUtil {
      * log 开关
      */
     private static boolean isUtilLog;
-
     /**
      * log 是否定位
      */
@@ -57,22 +56,6 @@ public final class LogUtil {
     public static void init(SDKConfig sdkConfig) {
         isUtilLog = sdkConfig.isUtilLog();
         isUtilLogLocation = sdkConfig.isUtilLogLocation();
-    }
-
-    private static String generateTag(int location) {
-        if (isUtilLogLocation) {
-            StackTraceElement caller = new Throwable().getStackTrace()[location];
-            String clazzName = caller.getClassName();
-            clazzName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
-
-            return String.format(Locale.CHINA,
-                    TAG_DEFAULT_LOCATION,
-                    clazzName,
-                    caller.getMethodName(),
-                    caller.getLineNumber());
-        } else {
-            return TAG_DEFAULT;
-        }
     }
 
     /**
@@ -97,25 +80,6 @@ public final class LogUtil {
     /**
      * @param content 内容
      */
-    public static void d(String content) {
-        if (isUtilLog) {
-            android.util.Log.d(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
-        }
-    }
-
-    /**
-     * @param content  内容
-     * @param location 定位位置
-     */
-    public static void d(String content, int location) {
-        if (isUtilLog) {
-            android.util.Log.d(generateTag(location), String.format(MSG_DEFAULT, content));
-        }
-    }
-
-    /**
-     * @param content 内容
-     */
     public static void i(String content) {
         if (isUtilLog) {
             android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
@@ -129,46 +93,6 @@ public final class LogUtil {
     public static void i(String content, int location) {
         if (isUtilLog) {
             android.util.Log.i(generateTag(location), String.format(MSG_DEFAULT, content));
-        }
-    }
-
-    /**
-     * @param content 内容
-     * @param tr      错误信息
-     */
-    public static void i(String content, Throwable tr) {
-        if (isUtilLog) {
-            android.util.Log.i(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content), tr);
-        }
-    }
-
-    /**
-     * @param content  内容
-     * @param location 定位位置
-     * @param tr       错误信息
-     */
-    public static void i(String content, int location, Throwable tr) {
-        if (isUtilLog) {
-            android.util.Log.i(generateTag(location), String.format(MSG_DEFAULT, content), tr);
-        }
-    }
-
-    /**
-     * @param content 内容
-     */
-    public static void w(String content) {
-        if (isUtilLog) {
-            android.util.Log.w(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, content));
-        }
-    }
-
-    /**
-     * @param content  内容
-     * @param location 定位位置
-     */
-    public static void w(String content, int location) {
-        if (isUtilLog) {
-            android.util.Log.w(generateTag(location), String.format(MSG_DEFAULT, content));
         }
     }
 
@@ -211,4 +135,20 @@ public final class LogUtil {
             android.util.Log.e(generateTag(location), String.format(MSG_DEFAULT, content), tr);
         }
     }
+	
+	private static String generateTag(int location) {
+		if (isUtilLogLocation) {
+			StackTraceElement caller = new Throwable().getStackTrace()[location];
+			String clazzName = caller.getClassName();
+			clazzName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
+			
+			return String.format(Locale.CHINA,
+					TAG_DEFAULT_LOCATION,
+					clazzName,
+					caller.getMethodName(),
+					caller.getLineNumber());
+		} else {
+			return TAG;
+		}
+	}
 }

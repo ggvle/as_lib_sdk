@@ -13,7 +13,7 @@ import android.widget.EditText;
 public class KeyBoardUtil {
 
     public KeyBoardUtil() {
-        /** 实例化失败 */
+        /* 实例化失败 */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
@@ -34,8 +34,10 @@ public class KeyBoardUtil {
      */
     public static void openKeyboard(Context context, EditText mEditText) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        if (null != imm) {
+	        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
+	        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        }
     }
 
     /**
@@ -46,7 +48,9 @@ public class KeyBoardUtil {
      */
     public static void closeKeyboard(Context context, EditText mEditText) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+	    if (null != imm) {
+		    imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+	    }
     }
 
     /**
@@ -58,7 +62,7 @@ public class KeyBoardUtil {
     public static boolean closeKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         View topView = activity.getWindow().peekDecorView();
-        if (null != topView) {
+        if (null != topView && null != imm) {
             return imm.hideSoftInputFromWindow(topView.getWindowToken(), 0);
         }
         return false;

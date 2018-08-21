@@ -17,8 +17,6 @@ import android.view.View;
  * @author YLine 2016-5-25 - 上午7:32:23
  */
 public class BaseApplication extends Application {
-    public static final String TAG = SDKManager.TAG;
-
     /**
      * 更改资源的时候,才需要做一步操作,引用不需要
      * 原子操作
@@ -95,15 +93,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        SDKManager.init(this, initConfig());
-    }
-
-    /**
-     * 进行一些基础配置,要求上级必须配置的信息
-     *
-     * @return 配置数据
-     */
-    public SDKConfig initConfig() {
-        return new SDKConfig();
+        SDKManager.init(this, null);
     }
 }

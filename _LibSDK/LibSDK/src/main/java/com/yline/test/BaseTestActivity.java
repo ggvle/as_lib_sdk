@@ -15,13 +15,11 @@ import com.yline.sdk.R;
 import com.yline.utils.UIResizeUtil;
 import com.yline.utils.UIScreenUtil;
 
-public abstract class BaseTestActivity extends BaseAppCompatActivity implements ITestCallback
-{
+public abstract class BaseTestActivity extends BaseAppCompatActivity implements ITestCallback {
 	protected LinearLayout linearLayout;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_test_base);
 		linearLayout = (LinearLayout) findViewById(R.id.ll_base_content);
@@ -30,8 +28,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public Button addButton(String content, View.OnClickListener listener)
-	{
+	public Button addButton(String content, View.OnClickListener listener) {
 		Button button = new Button(this);
 		button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		UIResizeUtil.build().setBottomMargin(20).commit(button);
@@ -43,8 +40,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public EditText addEditText(String hintContent)
-	{
+	public EditText addEditText(String hintContent) {
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
@@ -54,8 +50,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public EditText addEditText(String hintContent, String content)
-	{
+	public EditText addEditText(String hintContent, String content) {
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
@@ -66,8 +61,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public EditText addEditNumber(String hintContent)
-	{
+	public EditText addEditNumber(String hintContent) {
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
@@ -78,8 +72,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public EditText addEditNumber(String hintContent, String content)
-	{
+	public EditText addEditNumber(String hintContent, String content) {
 		EditText editText = new EditText(this);
 		editText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		editText.setHint(hintContent);
@@ -91,8 +84,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public ImageView addImageView(int width, int height)
-	{
+	public ImageView addImageView(int width, int height) {
 		ImageView imageView = new ImageView(this);
 		imageView.setLayoutParams(new android.view.ViewGroup.LayoutParams(UIScreenUtil.dp2px(this, width), UIScreenUtil.dp2px(this, height)));
 		this.linearLayout.addView(imageView);
@@ -100,8 +92,7 @@ public abstract class BaseTestActivity extends BaseAppCompatActivity implements 
 	}
 	
 	@Override
-	public TextView addTextView(String initContent)
-	{
+	public TextView addTextView(String initContent) {
 		TextView textView = new TextView(this);
 		textView.setLayoutParams(new android.view.ViewGroup.LayoutParams(-1, -2));
 		textView.setHint(initContent);

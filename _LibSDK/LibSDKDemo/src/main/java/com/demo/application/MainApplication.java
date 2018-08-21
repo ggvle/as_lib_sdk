@@ -23,22 +23,6 @@ public class MainApplication extends BaseApplication {
             return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder() //
-                    .detectAll() //
-                    .penaltyLog() //
-                    .penaltyDeath() //
-                    .build());
-        }
-
         LeakCanary.install(application);
-    }
-
-    @Override
-    public SDKConfig initConfig() {
-        SDKConfig sdkConfig = new SDKConfig();
-        sdkConfig.setSDKLog(true);
-        sdkConfig.setUtilLogBySystem(true);
-        return sdkConfig;
     }
 }

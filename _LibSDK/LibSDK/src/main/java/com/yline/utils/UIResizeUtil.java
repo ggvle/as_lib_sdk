@@ -1,6 +1,7 @@
 package com.yline.utils;
 
 import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -59,7 +60,7 @@ public class UIResizeUtil {
     private static final int designWidth = 720; // 设计图宽度
 
     private static final int designHeight = 1080; // 设计图高度
-    private static SparseArray<Integer> array = new SparseArray<>();
+    private static SparseIntArray array = new SparseIntArray();
     private int appWidth = 0; // 宽度适配
     private int appHeight = 0;    // 高度适配
     private boolean isWidthAdapter;
@@ -67,8 +68,6 @@ public class UIResizeUtil {
     private boolean isHeightAdapter;
 
     private UIResizeUtil() {
-        /** 实例化失败 */
-        // throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     public static UIResizeUtil build() {
@@ -315,7 +314,7 @@ public class UIResizeUtil {
     public int getAppWidth() {
         if (appWidth == 0) {
             appWidth = UIScreenUtil.getAbsoluteScreenWidth(BaseApplication.getApplication());
-            LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppWidth width = " + appWidth);
+            LogFileUtil.m( "UIResizeUtils -> getAppWidth width = " + appWidth);
         }
         return appWidth;
     }
@@ -323,7 +322,7 @@ public class UIResizeUtil {
     public int getAppHeight() {
         if (0 == appHeight) {
             appHeight = UIScreenUtil.getAbsoluteScreenHeight(BaseApplication.getApplication());
-            LogFileUtil.i(BaseApplication.TAG, "UIResizeUtils -> getAppHeight height = " + appHeight);
+            LogFileUtil.m("UIResizeUtils -> getAppHeight height = " + appHeight);
         }
         return appHeight;
     }

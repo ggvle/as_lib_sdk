@@ -39,7 +39,7 @@ ext {
     siteUrl = 'https://github.com/yline/as_lib_sdk'
     gitUrl = 'https://github.com/yline/as_lib_sdk.git'
 
-    libraryVersion = '2.2.2'
+    libraryVersion = '2.3.0'
 
     developerId = 'yline'
     developerName = 'yline'
@@ -48,7 +48,7 @@ ext {
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
-}
+} 
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

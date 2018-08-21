@@ -113,16 +113,8 @@ public class UtilFragment extends BaseTestFragment {
         LogUtil.v("test -> v");
         LogUtil.v("test -> v", LogUtil.LOG_LOCATION_PARENT);
 
-        LogUtil.d("test -> d");
-        LogUtil.d("test -> d", LogUtil.LOG_LOCATION_PARENT);
-
         LogUtil.i("test -> i");
         LogUtil.i("test -> i", LogUtil.LOG_LOCATION_PARENT);
-        LogUtil.i("test -> i", new Exception("test -> i -> Exception"));
-        LogUtil.i("test -> i", LogUtil.LOG_LOCATION_PARENT, new Exception("test -> i -> Exception"));
-
-        LogUtil.w("test -> w");
-        LogUtil.w("test -> w", LogUtil.LOG_LOCATION_PARENT);
 
         LogUtil.e("test -> e");
         LogUtil.e("test -> e", LogUtil.LOG_LOCATION_PARENT);
@@ -132,27 +124,6 @@ public class UtilFragment extends BaseTestFragment {
 
     private void testFileUtil() {
         LogUtil.v(TAG + " -> FileUtil.getPath() = " + FileUtil.getPathTop());
-
-        String path = String.format("%s/%s", LogFileUtil.getLogDirPath(), "Utils");
-        File fileDir = FileUtil.createDir(path);
-        LogUtil.d(TAG + " -> createFileDir success, path = " + path);
-
-        File file = FileUtil.create(fileDir, "log.txt");
-        LogUtil.i(TAG + " -> createFile success");
-
-        // 太多了,就会黑屏,因为大量占用了文件资源
-        for (int i = 0; i < 1024; i++) {
-            FileUtil.write(file, "content i = " + i);
-        }
-
-        int size = (int) FileSizeUtil.getFileSize(file);
-        LogUtil.w(TAG + " -> getFileSize size = " + size);
-
-        boolean renameResult = FileUtil.rename(fileDir, "log.txt", "log1.txt");
-        LogUtil.w(TAG + " -> renameFile renameResult = " + renameResult);
-
-        boolean deleteResult = FileUtil.delete(fileDir, "log.txt");
-        LogUtil.e(TAG + " -> deleteFile deleteResult = " + deleteResult);
 
         String pathRoot = FileUtil.getPathRoot();
         LogUtil.v(TAG + " -> pathRoot = " + pathRoot);
@@ -170,20 +141,10 @@ public class UtilFragment extends BaseTestFragment {
         LogFileUtil.v(TAG, "v");
         LogFileUtil.v(TAG, "v", LogFileUtil.LOG_LOCATION_PARENT);
 
-        LogFileUtil.d(TAG, "d");
-        LogFileUtil.d(TAG, "d", LogFileUtil.LOG_LOCATION_PARENT);
-
         LogFileUtil.i(TAG, "i");
         LogFileUtil.i(TAG, "i", LogFileUtil.LOG_LOCATION_PARENT);
-        LogFileUtil.i(TAG, "i", new Exception("i -> Exception"));
-        LogFileUtil.i(TAG, "i", LogFileUtil.LOG_LOCATION_PARENT, new Exception("i -> Exception"));
-
-        LogFileUtil.w(TAG, "w");
-        LogFileUtil.w(TAG, "w", LogFileUtil.LOG_LOCATION_PARENT);
 
         LogFileUtil.e(TAG, "e");
         LogFileUtil.e(TAG, "e", LogFileUtil.LOG_LOCATION_PARENT);
-        LogFileUtil.e(TAG, "e", new Exception("e -> Exception"));
-        LogFileUtil.e(TAG, "e", LogFileUtil.LOG_LOCATION_PARENT, new Exception("e -> Exception"));
     }
 }

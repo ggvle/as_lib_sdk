@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class IOUtil {
     public IOUtil() {
-        /** 实例化失败 */
+        /* 实例化失败 */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 

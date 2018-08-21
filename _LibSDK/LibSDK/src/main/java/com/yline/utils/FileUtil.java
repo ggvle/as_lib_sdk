@@ -112,7 +112,7 @@ public class FileUtil {
 	/**
 	 * 获取内置sd卡, 最上层路径
 	 *
-	 * @param fileName
+	 * @param fileName 文件名 such as "yline.txt"
 	 * @return /storage/emulated/0/ or null
 	 */
 	public static File getFileTop(String fileName) {
@@ -126,8 +126,8 @@ public class FileUtil {
 	/**
 	 * 获取内置sd卡, 最上层路径
 	 *
-	 * @param dirName
-	 * @param fileName
+	 * @param dirName  文件夹名称 such as "yline"
+	 * @param fileName 文件名 such as "yline.txt"
 	 * @return /storage/emulated/0/ or null
 	 */
 	public static File getFileTop(String dirName, String fileName) {
@@ -141,8 +141,8 @@ public class FileUtil {
 	}
 	
 	/**
-	 * @param context
-	 * @param dirName
+	 * @param context 上下文
+	 * @param dirName 文件夹名称 such as "yline"
 	 * @return /storage/emulated/0/Android/data/包名/files/ + dirName
 	 */
 	public static File getFileExternalDir(Context context, String dirName) {
@@ -150,9 +150,9 @@ public class FileUtil {
 	}
 	
 	/**
-	 * @param context
-	 * @param dirName
-	 * @param fileName
+	 * @param context  上下文
+	 * @param dirName  文件夹名称 such as "yline"
+	 * @param fileName 文件名 such as "yline.txt"
 	 * @return /storage/emulated/0/Android/data/包名/files/ + dirName/ + fileName
 	 */
 	public static File getFileExternal(Context context, String dirName, String fileName) {
@@ -162,7 +162,7 @@ public class FileUtil {
 	}
 	
 	/**
-	 * @param context
+	 * @param context 上下文
 	 * @return /storage/emulated/0/Android/data/包名/cache
 	 */
 	public static File getFileExternalCacheDir(Context context) {
@@ -170,7 +170,7 @@ public class FileUtil {
 	}
 	
 	/**
-	 * @param context
+	 * @param context 上下文
 	 * @return /data/data/包名/files
 	 */
 	public static File getFileInner(Context context) {
@@ -178,7 +178,7 @@ public class FileUtil {
 	}
 	
 	/**
-	 * @param context
+	 * @param context 上下文
 	 * @return /data/data/包名/cache
 	 */
 	public static File getFileInnerCache(Context context) {
@@ -188,10 +188,10 @@ public class FileUtil {
 	/**
 	 * 读取 Assets 中的 Stream文件
 	 *
-	 * @param context
-	 * @param fileName
-	 * @return
-	 * @throws IOException
+	 * @param context  上下文
+	 * @param fileName 文件名 such as "yline"
+	 * @return 文件流
+	 * @throws IOException 打开文件I/O异常
 	 */
 	public static InputStream getStreamAssets(Context context, String fileName) throws IOException {
 		return context.getAssets().open(fileName);
@@ -206,7 +206,7 @@ public class FileUtil {
 	 * @return file or null
 	 */
 	public static File create(String dirPath, String fileName) {
-		if (TextUtils.isEmpty(dirPath) || TextUtils.isEmpty(fileName)){
+		if (TextUtils.isEmpty(dirPath) || TextUtils.isEmpty(fileName)) {
 			return null;
 		}
 		
@@ -222,11 +222,11 @@ public class FileUtil {
 	 * @return file or null
 	 */
 	public static File create(File dirFile, String fileName) {
-		if (null == dirFile || TextUtils.isEmpty(fileName)){
+		if (null == dirFile || TextUtils.isEmpty(fileName)) {
 			return null;
 		}
 		
-		if (!dirFile.exists() || dirFile.isFile()){
+		if (!dirFile.exists() || dirFile.isFile()) {
 			dirFile.mkdirs();
 		}
 		
@@ -375,8 +375,8 @@ public class FileUtil {
 	 * uri 路径 转成 文件路径
 	 * 测试结果: 跳转图片ok; 跳转文件管理es ok; 跳转系统缩略图 failed
 	 *
-	 * @param context
-	 * @param uri
+	 * @param context 上下文
+	 * @param uri     文件路径
 	 * @return
 	 */
 	public static String uri2File(final Context context, final Uri uri) {

@@ -12,7 +12,7 @@ import java.util.Calendar;
 public class TimeStampUtil {
 
     public TimeStampUtil() {
-        /** 实例化失败 */
+        /* 实例化失败 */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
@@ -43,7 +43,7 @@ public class TimeStampUtil {
      * @return true(超时)
      */
     public static boolean isStampTimeOut(long oldTime, long limitTime) {
-        return getDiffStamp(oldTime) > limitTime ? true : false;
+        return getDiffStamp(oldTime) > limitTime;
     }
 
     /**
@@ -56,8 +56,7 @@ public class TimeStampUtil {
     public static String getTimeStandard(long time) {
         java.util.Date date = new java.util.Date(time);
         java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateStr = simpleDateFormat.format(date);
-        return dateStr;
+	    return simpleDateFormat.format(date);
     }
 
     /**

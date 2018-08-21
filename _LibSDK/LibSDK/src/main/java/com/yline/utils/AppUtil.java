@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import com.yline.application.BaseApplication;
 import com.yline.log.LogFileUtil;
 
 /**
@@ -16,7 +15,7 @@ import com.yline.log.LogFileUtil;
 public class AppUtil {
 
     public AppUtil() {
-        /** 实例化失败 */
+        /* 实例化失败 */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
@@ -33,7 +32,7 @@ public class AppUtil {
             int labelRes = packageInfo.applicationInfo.labelRes;
             return context.getResources().getString(labelRes);
         } catch (NameNotFoundException e) {
-            LogFileUtil.e(BaseApplication.TAG, "AppUtils -> getAppName NameNotFoundException");
+            LogFileUtil.e( "AppUtils -> getAppName NameNotFoundException");
         }
         return null;
     }
@@ -50,7 +49,7 @@ public class AppUtil {
             PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
             return packageInfo.versionName;
         } catch (NameNotFoundException e) {
-            LogFileUtil.e(BaseApplication.TAG, "AppUtils -> getVersionName NameNotFoundException");
+            LogFileUtil.e( "AppUtils -> getVersionName NameNotFoundException");
         }
         return null;
     }

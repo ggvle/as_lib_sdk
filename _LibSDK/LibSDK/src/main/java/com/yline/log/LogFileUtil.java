@@ -22,8 +22,9 @@ public final class LogFileUtil {
      * log trace 抛出的位置,两层,即:使用该工具的子类的位置
      */
     public static final int LOG_LOCATION_PARENT = 4;
-
-    private static final String TAG = "LogFile";
+    
+	private static final String TAG = "LogFile"; // 文件夹名称
+    
     /**
      * LogFileUtil 错误日志tag
      */
@@ -42,7 +43,6 @@ public final class LogFileUtil {
      * 写入文件,每个文件大小2M
      */
     private static final int MAX_SIZE_OF_TXT = 2 * 1024 * 1024;
-
 
     /**
      * log trace 抛出的位置,两层,即:使用该工具的当前位置,作为默认
@@ -69,7 +69,7 @@ public final class LogFileUtil {
     /**
      * 写入文件,文件夹,路径
      */
-    private static String logDirPath;
+    private static File logDirFile;
     /**
      * SDK日志内容是否输出
      */
@@ -92,21 +92,12 @@ public final class LogFileUtil {
     private static boolean isUtilLogBySystem;
 
     public static void init(Context context, SDKConfig sdkConfig) {
-        logDirPath = context.getExternalFilesDir(TAG).getAbsolutePath();
+        logDirFile = context.getExternalFilesDir(TAG);
         isSDKLog = sdkConfig.isSDKLog();
         isUtilLog = sdkConfig.isUtilLog();
         isUtilLogToFile = sdkConfig.isUtilLogToFile();
         isUtilLogLocation = sdkConfig.isUtilLogLocation();
         isUtilLogBySystem = sdkConfig.isUtilLogBySystem();
-    }
-
-    /**
-     * 获取本地 打印日志地址
-     *
-     * @return 日志地址
-     */
-    public static String getLogDirPath() {
-        return logDirPath;
     }
 
     /**
@@ -116,23 +107,6 @@ public final class LogFileUtil {
      */
     public static void m(String content) {
         print(V, LOG_LOCATION_NOW, TAG, content);
-    }
-
-    /**
-     * @param tag     标签
-     * @param content 内容
-     */
-    public static void m(String tag, String content) {
-        print(V, LOG_LOCATION_NOW, tag, content);
-    }
-
-    /**
-     * @param tag     标签
-     * @param content 内容
-     * @param tr      错误信息
-     */
-    public static void m(String tag, String content, Throwable tr) {
-        print(V, LOG_LOCATION_NOW, tag, content + '\n' + android.util.Log.getStackTraceString(tr));
     }
 
     /**
@@ -165,23 +139,6 @@ public final class LogFileUtil {
      * @param tag     标签
      * @param content 内容
      */
-    public static void d(String tag, String content) {
-        print(D, LOG_LOCATION_NOW, tag, content);
-    }
-
-    /**
-     * @param tag      标签
-     * @param content  内容
-     * @param location 定位位置
-     */
-    public static void d(String tag, String content, int location) {
-        print(D, location, tag, content);
-    }
-
-    /**
-     * @param tag     标签
-     * @param content 内容
-     */
     public static void i(String tag, String content) {
         print(I, LOG_LOCATION_NOW, tag, content);
     }
@@ -195,42 +152,13 @@ public final class LogFileUtil {
         print(I, location, tag, content);
     }
 
-    /**
-     * @param tag     标签
-     * @param content 内容
-     * @param tr      错误信息
-     */
-    public static void i(String tag, String content, Throwable tr) {
-        print(I, LOG_LOCATION_NOW, tag, content + "\n" + android.util.Log.getStackTraceString(tr));
-    }
-
-    /**
-     * @param tag      标签
-     * @param content  内容
-     * @param location 定位位置
-     * @param tr       错误信息
-     */
-    public static void i(String tag, String content, int location, Throwable tr) {
-        print(I, location, tag, content + "\n" + android.util.Log.getStackTraceString(tr));
-    }
-
-    /**
-     * @param tag     标签
-     * @param content 内容
-     */
-    public static void w(String tag, String content) {
-        print(W, LOG_LOCATION_NOW, tag, content);
-    }
-
-    /**
-     * @param tag      标签
-     * @param content  内容
-     * @param location 定位位置
-     */
-    public static void w(String tag, String content, int location) {
-        print(W, location, tag, content);
-    }
-
+	/**
+	 * @param content 内容
+	 */
+	public static void e(String content) {
+		print(E, LOG_LOCATION_NOW, TAG, content);
+	}
+    
     /**
      * @param tag     标签
      * @param content 内容
@@ -255,16 +183,6 @@ public final class LogFileUtil {
      */
     public static void e(String tag, String content, Throwable tr) {
         print(E, LOG_LOCATION_NOW, tag, content + "\n" + android.util.Log.getStackTraceString(tr));
-    }
-
-    /**
-     * @param tag      标签
-     * @param content  内容
-     * @param location 定位位置
-     * @param tr       错误信息
-     */
-    public static void e(String tag, String content, int location, Throwable tr) {
-        print(E, location, tag, content + "\n" + android.util.Log.getStackTraceString(tr));
     }
 
     private static String generateTagTime(String type) {
@@ -330,19 +248,8 @@ public final class LogFileUtil {
      * @param content 日志内容
      */
     private synchronized static void writeLogToFile(String content) {
-        String path = logDirPath;
-        if (null == path) {
-            LogUtil.e(TAG_ERROR + "sdcard path is null");
-            return;
-        }
-
-        File dirFile = FileUtil.createDir(path + File.separator);
-        if (null == dirFile) {
-            LogUtil.e(TAG_ERROR + "sdcard dirFile create failed path = " + path + logDirPath);
-            return;
-        }
-
-        File file = FileUtil.create(dirFile, START_COUNT + LOG_FILE_TXT_NAME);
+        File dirFile = logDirFile;
+        File file = FileUtil.create(logDirFile, START_COUNT + LOG_FILE_TXT_NAME);
         if (null == file) {
             LogUtil.e(TAG_ERROR + "sdcard file create failed");
             return;
