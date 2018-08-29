@@ -25,7 +25,7 @@ public class BaseAppCompatActivity extends AppCompatActivity {
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		List<String> result = PermissionUtil.requestHandle(PermissionUtil.REQUEST_CODE_PERMISSION, requestCode, permissions, grantResults);
+		List<String> result = PermissionUtil.getPermissionGranted(PermissionUtil.REQUEST_CODE_PERMISSION, requestCode, permissions, grantResults);
 		LogFileUtil.v(PermissionUtil.TAG_HANDLE_PERMISSION, result.toString());
 	}
 	
