@@ -34,11 +34,11 @@ public class RSAUtils {
 	/* 加密算法RSA */
 	private static final String ALGORITHM = "RSA";
 	
-	/* 签名算法 */
-	private static final String SIGNATURE_ALGORITHM = "MD5withRSA";
-	
 	/* 秘钥长度(公钥和私钥) */
 	private static final int KEY_SIZE = 1024;
+	
+	/* 签名算法 */
+	private static final String SIGNATURE_ALGORITHM = "MD5withRSA";
 	
 	/* 算法/模式/补码方式 */
 	private static final String METHOD = "RSA/ECB/PKCS1Padding";
@@ -103,8 +103,20 @@ public class RSAUtils {
 		}
 		
 		byte[] privateKeyBytes = Base64.decode(privateKey, Base64.DEFAULT);
-		byte[] signBytes = sign(src.getBytes(), privateKeyBytes);
+		byte[] signBytes = signInner(src.getBytes(), privateKeyBytes, SIGNATURE_ALGORITHM);
 		return (null == signBytes ? null : Base64.encodeToString(signBytes, Base64.DEFAULT));
+	}
+	
+	/**
+	 * 使用私钥，对信息，生成数字签名
+	 *
+	 * @param sourceBytes     数据
+	 * @param privateKeyBytes 私钥
+	 * @param signAlgorithm   签名方式
+	 * @return 生成的数字签名
+	 */
+	private static byte[] sign(byte[] sourceBytes, byte[] privateKeyBytes, String signAlgorithm) {
+		return signInner(sourceBytes, privateKeyBytes, signAlgorithm);
 	}
 	
 	/**
@@ -122,7 +134,20 @@ public class RSAUtils {
 		
 		byte[] publicKeyBytes = Base64.decode(publicKey, Base64.DEFAULT);
 		byte[] signBytes = Base64.decode(sign, Base64.DEFAULT);
-		return verifySign(src.getBytes(), publicKeyBytes, signBytes);
+		return verifySignInner(src.getBytes(), publicKeyBytes, signBytes, SIGNATURE_ALGORITHM);
+	}
+	
+	/**
+	 * 校验数字签名
+	 *
+	 * @param source         数据
+	 * @param publicKeyBytes 公钥
+	 * @param signBytes      数字签名
+	 * @param signAlgorithm  签名方式
+	 * @return true(校验成功)，false(校验失败)
+	 */
+	private static boolean verifySign(byte[] source, byte[] publicKeyBytes, byte[] signBytes, String signAlgorithm) {
+		return verifySignInner(source, publicKeyBytes, signBytes, signAlgorithm);
 	}
 	
 	/**
@@ -138,8 +163,20 @@ public class RSAUtils {
 		}
 		
 		byte[] publicKeyBytes = Base64.decode(publicKey, Base64.DEFAULT);
-		byte[] encryptedBytes = encrypt(src.getBytes(), publicKeyBytes);
+		byte[] encryptedBytes = encryptInner(src.getBytes(), publicKeyBytes, METHOD);
 		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.DEFAULT));
+	}
+	
+	/**
+	 * 使用公钥进行 RSA加密
+	 *
+	 * @param sourceBytes    等待加密的原始数据
+	 * @param publicKeyBytes 公钥
+	 * @param method         加密方式
+	 * @return 加密后的数据
+	 */
+	private static byte[] encrypt(byte[] sourceBytes, byte[] publicKeyBytes, String method) {
+		return encryptInner(sourceBytes, publicKeyBytes, method);
 	}
 	
 	/**
@@ -156,9 +193,21 @@ public class RSAUtils {
 		
 		byte[] privateKeyBytes = Base64.decode(privateKey, Base64.DEFAULT);
 		byte[] baseBytes = Base64.decode(src.getBytes(), Base64.DEFAULT);
-		byte[] decryptedBytes = decrypt(baseBytes, privateKeyBytes);
+		byte[] decryptedBytes = decryptInner(baseBytes, privateKeyBytes, METHOD);
 		
 		return (null == decryptedBytes ? null : new String(decryptedBytes));
+	}
+	
+	/**
+	 * 使用私钥进行 RSA解密
+	 *
+	 * @param sourceBytes     原始数据，等待解密
+	 * @param privateKeyBytes 私钥
+	 * @param method          解密方式
+	 * @return 解密后的数据
+	 */
+	private static byte[] decrypt(byte[] sourceBytes, byte[] privateKeyBytes, String method) {
+		return decryptInner(sourceBytes, privateKeyBytes, method);
 	}
 	
 	/* ----------------------------------- 内部实现api ----------------------------------------- */
@@ -168,9 +217,10 @@ public class RSAUtils {
 	 *
 	 * @param sourceBytes     数据
 	 * @param privateKeyBytes 私钥
+	 * @param signAlgorithm   签名方式
 	 * @return 生成的数字签名
 	 */
-	private static byte[] sign(byte[] sourceBytes, byte[] privateKeyBytes) {
+	private static byte[] signInner(byte[] sourceBytes, byte[] privateKeyBytes, String signAlgorithm) {
 		if (null == sourceBytes || null == privateKeyBytes) {
 			return null;
 		}
@@ -180,7 +230,7 @@ public class RSAUtils {
 			PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
 			PrivateKey signPrivateKey = keyFactory.generatePrivate(encodedKeySpec);
 			
-			Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
+			Signature signature = Signature.getInstance(signAlgorithm);
 			signature.initSign(signPrivateKey);
 			signature.update(sourceBytes);
 			
@@ -197,9 +247,10 @@ public class RSAUtils {
 	 * @param source         数据
 	 * @param publicKeyBytes 公钥
 	 * @param signBytes      数字签名
+	 * @param signAlgorithm  签名方式
 	 * @return true(校验成功)，false(校验失败)
 	 */
-	private static boolean verifySign(byte[] source, byte[] publicKeyBytes, byte[] signBytes) {
+	private static boolean verifySignInner(byte[] source, byte[] publicKeyBytes, byte[] signBytes, String signAlgorithm) {
 		if (null == source || null == publicKeyBytes || null == signBytes) {
 			return false;
 		}
@@ -209,7 +260,7 @@ public class RSAUtils {
 			X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(publicKeyBytes);
 			PublicKey signPublicKey = keyFactory.generatePublic(encodedKeySpec);
 			
-			Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
+			Signature signature = Signature.getInstance(signAlgorithm);
 			signature.initVerify(signPublicKey);
 			signature.update(source);
 			
@@ -225,9 +276,10 @@ public class RSAUtils {
 	 *
 	 * @param sourceBytes    等待加密的原始数据
 	 * @param publicKeyBytes 公钥
+	 * @param method         加密方式
 	 * @return 加密后的数据
 	 */
-	private static byte[] encrypt(byte[] sourceBytes, byte[] publicKeyBytes) {
+	private static byte[] encryptInner(byte[] sourceBytes, byte[] publicKeyBytes, String method) {
 		if (null == sourceBytes || null == publicKeyBytes) {
 			return null;
 		}
@@ -238,7 +290,7 @@ public class RSAUtils {
 			X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(publicKeyBytes);
 			PublicKey newPublicKey = keyFactory.generatePublic(encodedKeySpec);
 			
-			Cipher cipher = Cipher.getInstance(METHOD);
+			Cipher cipher = Cipher.getInstance(method);
 			cipher.init(Cipher.ENCRYPT_MODE, newPublicKey);
 			
 			baoStream = new ByteArrayOutputStream();
@@ -277,9 +329,10 @@ public class RSAUtils {
 	 *
 	 * @param sourceBytes     原始数据，等待解密
 	 * @param privateKeyBytes 私钥
+	 * @param method          解密方式
 	 * @return 解密后的数据
 	 */
-	private static byte[] decrypt(byte[] sourceBytes, byte[] privateKeyBytes) {
+	private static byte[] decryptInner(byte[] sourceBytes, byte[] privateKeyBytes, String method) {
 		if (null == sourceBytes || null == privateKeyBytes) {
 			return null;
 		}
@@ -290,7 +343,7 @@ public class RSAUtils {
 			PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
 			PrivateKey newPrivateKey = keyFactory.generatePrivate(encodedKeySpec);
 			
-			Cipher cipher = Cipher.getInstance(METHOD);
+			Cipher cipher = Cipher.getInstance(method);
 			cipher.init(Cipher.DECRYPT_MODE, newPrivateKey);
 			
 			baoStream = new ByteArrayOutputStream();

@@ -41,39 +41,22 @@ public class DESUtils {
 			return null;
 		}
 		
-		LogUtil.v(Arrays.toString(sScr.getBytes()));
-		byte[] encryptBytes = encryptInner(sScr.getBytes(), sKey.getBytes()); // DES加密
-		LogUtil.v(Arrays.toString(encryptBytes));
+		byte[] encryptBytes = encryptInner(sScr.getBytes(), sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // DES加密
 		
 		return (null == encryptBytes ? null : Base64.encodeToString(encryptBytes, Base64.DEFAULT)); // base64转码并加密
 	}
 	
 	/**
-	 * AES 加密
+	 * DES 加密
 	 *
-	 * @param srcBytes 原始数据（待加密的数据）
-	 * @param keyBytes 秘钥，秘钥长度必须大于等于8
+	 * @param srcBytes      原始数据（待加密的数据）
+	 * @param keyBytes      秘钥，秘钥长度必须大于等于8
+	 * @param parameterSpec 偏移量
+	 * @param method        加密方式
 	 * @return 加密后的byte数组
 	 */
-	private static byte[] encryptInner(byte[] srcBytes, byte[] keyBytes) {
-		if (null == srcBytes || null == keyBytes) {
-			return null;
-		}
-		
-		try {
-			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
-			DESKeySpec desKeySpec = new DESKeySpec(keyBytes);
-			SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
-			
-			Cipher cipher = Cipher.getInstance(METHOD);
-			IvParameterSpec iv = new IvParameterSpec(PARAMETER_SPEC.getBytes());
-			cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
-			
-			return cipher.doFinal(srcBytes);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+	public static byte[] encrypt(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		return encryptInner(srcBytes, keyBytes, parameterSpec, method);
 	}
 	
 	/**
@@ -90,7 +73,7 @@ public class DESUtils {
 		
 		byte[] baseBytes = Base64.decode(sSrc, Base64.DEFAULT); // Base64转码并解密
 		LogUtil.v(Arrays.toString(baseBytes));
-		byte[] decryptBytes = decryptInner(baseBytes, sKey.getBytes()); // DES解密
+		byte[] decryptBytes = decryptInner(baseBytes, sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // DES解密
 		LogUtil.v(Arrays.toString(decryptBytes));
 		
 		return (null == decryptBytes ? null : new String(decryptBytes));
@@ -99,11 +82,58 @@ public class DESUtils {
 	/**
 	 * DES解密
 	 *
-	 * @param srcBytes 原始数据（待解密的数据）
-	 * @param keyBytes 秘钥
+	 * @param srcBytes      原始数据（待解密的数据）
+	 * @param keyBytes      秘钥
+	 * @param parameterSpec 偏移量
+	 * @param method        解密方式
 	 * @return 解密后的byte数组
 	 */
-	private static byte[] decryptInner(byte[] srcBytes, byte[] keyBytes) {
+	public static byte[] decrypt(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		return decryptInner(srcBytes, keyBytes, parameterSpec, method);
+	}
+	
+	/* -------------------------------- 内部实现 ----------------------------- */
+	
+	/**
+	 * DES 加密
+	 *
+	 * @param srcBytes      原始数据（待加密的数据）
+	 * @param keyBytes      秘钥，秘钥长度必须大于等于8
+	 * @param parameterSpec 偏移量
+	 * @param method        加密方式
+	 * @return 加密后的byte数组
+	 */
+	private static byte[] encryptInner(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		if (null == srcBytes || null == keyBytes || null == parameterSpec) {
+			return null;
+		}
+		
+		try {
+			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
+			DESKeySpec desKeySpec = new DESKeySpec(keyBytes);
+			SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
+			
+			Cipher cipher = Cipher.getInstance(method);
+			IvParameterSpec iv = new IvParameterSpec(parameterSpec);
+			cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
+			
+			return cipher.doFinal(srcBytes);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * DES解密
+	 *
+	 * @param srcBytes      原始数据（待解密的数据）
+	 * @param keyBytes      秘钥
+	 * @param parameterSpec 偏移量
+	 * @param method        解密方式
+	 * @return 解密后的byte数组
+	 */
+	private static byte[] decryptInner(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
 		if (null == srcBytes || null == keyBytes) {
 			return null;
 		}
@@ -113,8 +143,8 @@ public class DESUtils {
 			DESKeySpec desKeySpec = new DESKeySpec(keyBytes);
 			SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
 			
-			Cipher cipher = Cipher.getInstance(METHOD);
-			IvParameterSpec iv = new IvParameterSpec(PARAMETER_SPEC.getBytes());
+			Cipher cipher = Cipher.getInstance(method);
+			IvParameterSpec iv = new IvParameterSpec(parameterSpec);
 			cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
 			
 			return cipher.doFinal(srcBytes);
@@ -123,4 +153,5 @@ public class DESUtils {
 			return null;
 		}
 	}
+	
 }

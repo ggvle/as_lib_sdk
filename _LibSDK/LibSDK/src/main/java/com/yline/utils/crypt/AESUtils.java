@@ -2,7 +2,10 @@ package com.yline.utils.crypt;
 
 import android.util.Base64;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -35,34 +38,21 @@ public class AESUtils {
 			return null;
 		}
 		
-		byte[] encryptedBytes = encryptInner(sSrc.getBytes(), sKey.getBytes()); // AES加密
+		byte[] encryptedBytes = encryptInner(sSrc.getBytes(), sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // AES加密
 		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.DEFAULT)); // base64转码并加密
 	}
 	
 	/**
 	 * AES 加密
 	 *
-	 * @param srcBytes 原始数据（待加密的数据）
-	 * @param keyBytes 秘钥，要求16位
+	 * @param srcBytes      原始数据（待加密的数据）
+	 * @param keyBytes      秘钥，要求16位
+	 * @param parameterSpec 偏移量
+	 * @param method        加密方法
 	 * @return 加密后的byte数组
 	 */
-	private static byte[] encryptInner(byte[] srcBytes, byte[] keyBytes) {
-		if (null == srcBytes || null == keyBytes || keyBytes.length != 16) {
-			return null;
-		}
-		
-		try {
-			SecretKeySpec skeySpec = new SecretKeySpec(keyBytes, ALGORITHM);
-			
-			Cipher cipher = Cipher.getInstance(METHOD);
-			IvParameterSpec iv = new IvParameterSpec(PARAMETER_SPEC.getBytes());
-			cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
-			
-			return cipher.doFinal(srcBytes);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
+	public static byte[] encrypt(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		return encryptInner(srcBytes, keyBytes, parameterSpec, method);
 	}
 	
 	/**
@@ -78,26 +68,97 @@ public class AESUtils {
 		}
 		
 		byte[] baseBytes = Base64.decode(sSrc, Base64.DEFAULT); // base64转码并解密
-		byte[] decryptedBytes = decryptInner(baseBytes, sKey.getBytes()); // AES解密
+		byte[] decryptedBytes = decryptInner(baseBytes, sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // AES解密
 		return (null == decryptedBytes ? null : new String(decryptedBytes));
 	}
 	
 	/**
 	 * AES 解密
 	 *
-	 * @param srcBytes 原始数据（待解密的数据）
-	 * @param keyBytes 秘钥，要求16位
+	 * @param srcBytes      原始数据（待解密的数据）
+	 * @param keyBytes      秘钥，要求16位
+	 * @param parameterSpec 偏移量
+	 * @param method        解密方式
 	 * @return 解密后的byte数组
 	 */
-	private static byte[] decryptInner(byte[] srcBytes, byte[] keyBytes) {
-		if (null == srcBytes || null == keyBytes || keyBytes.length != 16) {
+	public static byte[] decrypt(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		return decryptInner(srcBytes, keyBytes, parameterSpec, method);
+	}
+	
+	/**
+	 * 随机生成一个 AES 字符串
+	 *
+	 * @param length 16 * 8
+	 * @return 字符流
+	 */
+	public static byte[] createAESKey(int length) {
+		return createAESKeyInner(length);
+	}
+	
+	/* ---------------------------- 内部实现 ---------------------------- */
+	
+	/**
+	 * 随机生成一个 AES 字符串
+	 *
+	 * @param length 16 * 8
+	 * @return 字符流
+	 */
+	private static byte[] createAESKeyInner(int length) {
+		try {
+			KeyGenerator generator = KeyGenerator.getInstance(ALGORITHM);
+			generator.init(length);
+			return generator.generateKey().getEncoded();
+		} catch (NoSuchAlgorithmException e) {
+			return "1234567887654321".getBytes();
+		}
+	}
+	
+	/**
+	 * AES 加密
+	 *
+	 * @param srcBytes      原始数据（待加密的数据）
+	 * @param keyBytes      秘钥，要求16位
+	 * @param parameterSpec 偏移量
+	 * @param method        加密方法
+	 * @return 加密后的byte数组
+	 */
+	private static byte[] encryptInner(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		if (null == srcBytes || null == keyBytes || keyBytes.length != 16 || null == parameterSpec) {
 			return null;
 		}
 		
 		try {
 			SecretKeySpec skeySpec = new SecretKeySpec(keyBytes, ALGORITHM);
-			Cipher cipher = Cipher.getInstance(METHOD);
-			IvParameterSpec iv = new IvParameterSpec(PARAMETER_SPEC.getBytes());
+			
+			Cipher cipher = Cipher.getInstance(method);
+			IvParameterSpec iv = new IvParameterSpec(parameterSpec);
+			cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+			
+			return cipher.doFinal(srcBytes);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * AES 解密
+	 *
+	 * @param srcBytes      原始数据（待解密的数据）
+	 * @param keyBytes      秘钥，要求16位
+	 * @param parameterSpec 偏移量
+	 * @param method        解密方式
+	 * @return 解密后的byte数组
+	 */
+	private static byte[] decryptInner(byte[] srcBytes, byte[] keyBytes, byte[] parameterSpec, String method) {
+		if (null == srcBytes || null == keyBytes || keyBytes.length != 16 || null == parameterSpec) {
+			return null;
+		}
+		
+		try {
+			SecretKeySpec skeySpec = new SecretKeySpec(keyBytes, ALGORITHM);
+			Cipher cipher = Cipher.getInstance(method);
+			IvParameterSpec iv = new IvParameterSpec(parameterSpec);
 			cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 			
 			return cipher.doFinal(srcBytes);
