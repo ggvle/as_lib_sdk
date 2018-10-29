@@ -72,7 +72,7 @@ public class RSAUtils {
 		}
 		
 		byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
-		return (null == privateKeyBytes ? null : Base64.encodeToString(privateKeyBytes, Base64.DEFAULT));
+		return (null == privateKeyBytes ? null : Base64.encodeToString(privateKeyBytes, Base64.NO_WRAP));
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class RSAUtils {
 		}
 		
 		byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
-		return (null == publicKeyBytes ? null : Base64.encodeToString(publicKeyBytes, Base64.DEFAULT));
+		return (null == publicKeyBytes ? null : Base64.encodeToString(publicKeyBytes, Base64.NO_WRAP));
 	}
 	
 	/**
@@ -102,9 +102,9 @@ public class RSAUtils {
 			return null;
 		}
 		
-		byte[] privateKeyBytes = Base64.decode(privateKey, Base64.DEFAULT);
+		byte[] privateKeyBytes = Base64.decode(privateKey, Base64.NO_WRAP);
 		byte[] signBytes = signInner(src.getBytes(), privateKeyBytes, SIGNATURE_ALGORITHM);
-		return (null == signBytes ? null : Base64.encodeToString(signBytes, Base64.DEFAULT));
+		return (null == signBytes ? null : Base64.encodeToString(signBytes, Base64.NO_WRAP));
 	}
 	
 	/**
@@ -132,8 +132,8 @@ public class RSAUtils {
 			return false;
 		}
 		
-		byte[] publicKeyBytes = Base64.decode(publicKey, Base64.DEFAULT);
-		byte[] signBytes = Base64.decode(sign, Base64.DEFAULT);
+		byte[] publicKeyBytes = Base64.decode(publicKey, Base64.NO_WRAP);
+		byte[] signBytes = Base64.decode(sign, Base64.NO_WRAP);
 		return verifySignInner(src.getBytes(), publicKeyBytes, signBytes, SIGNATURE_ALGORITHM);
 	}
 	
@@ -162,9 +162,9 @@ public class RSAUtils {
 			return null;
 		}
 		
-		byte[] publicKeyBytes = Base64.decode(publicKey, Base64.DEFAULT);
+		byte[] publicKeyBytes = Base64.decode(publicKey, Base64.NO_WRAP);
 		byte[] encryptedBytes = encryptInner(src.getBytes(), publicKeyBytes, METHOD);
-		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.DEFAULT));
+		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.NO_WRAP));
 	}
 	
 	/**
@@ -191,8 +191,8 @@ public class RSAUtils {
 			return null;
 		}
 		
-		byte[] privateKeyBytes = Base64.decode(privateKey, Base64.DEFAULT);
-		byte[] baseBytes = Base64.decode(src.getBytes(), Base64.DEFAULT);
+		byte[] privateKeyBytes = Base64.decode(privateKey, Base64.NO_WRAP);
+		byte[] baseBytes = Base64.decode(src.getBytes(), Base64.NO_WRAP);
 		byte[] decryptedBytes = decryptInner(baseBytes, privateKeyBytes, METHOD);
 		
 		return (null == decryptedBytes ? null : new String(decryptedBytes));

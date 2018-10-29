@@ -39,7 +39,7 @@ public class AESUtils {
 		}
 		
 		byte[] encryptedBytes = encryptInner(sSrc.getBytes(), sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // AES加密
-		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.DEFAULT)); // base64转码并加密
+		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.NO_WRAP)); // base64转码并加密
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class AESUtils {
 			return null;
 		}
 		
-		byte[] baseBytes = Base64.decode(sSrc, Base64.DEFAULT); // base64转码并解密
+		byte[] baseBytes = Base64.decode(sSrc, Base64.NO_WRAP); // base64转码并解密
 		byte[] decryptedBytes = decryptInner(baseBytes, sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // AES解密
 		return (null == decryptedBytes ? null : new String(decryptedBytes));
 	}

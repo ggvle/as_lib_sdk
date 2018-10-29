@@ -43,7 +43,7 @@ public class DESUtils {
 		
 		byte[] encryptBytes = encryptInner(sScr.getBytes(), sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // DES加密
 		
-		return (null == encryptBytes ? null : Base64.encodeToString(encryptBytes, Base64.DEFAULT)); // base64转码并加密
+		return (null == encryptBytes ? null : Base64.encodeToString(encryptBytes, Base64.NO_WRAP)); // base64转码并加密
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class DESUtils {
 			return null;
 		}
 		
-		byte[] baseBytes = Base64.decode(sSrc, Base64.DEFAULT); // Base64转码并解密
+		byte[] baseBytes = Base64.decode(sSrc, Base64.NO_WRAP); // Base64转码并解密
 		LogUtil.v(Arrays.toString(baseBytes));
 		byte[] decryptBytes = decryptInner(baseBytes, sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // DES解密
 		LogUtil.v(Arrays.toString(decryptBytes));
