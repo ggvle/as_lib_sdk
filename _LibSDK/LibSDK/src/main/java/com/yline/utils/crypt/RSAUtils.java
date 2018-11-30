@@ -115,7 +115,7 @@ public class RSAUtils {
 	 * @param signAlgorithm   签名方式
 	 * @return 生成的数字签名
 	 */
-	private static byte[] sign(byte[] sourceBytes, byte[] privateKeyBytes, String signAlgorithm) {
+	public static byte[] sign(byte[] sourceBytes, byte[] privateKeyBytes, String signAlgorithm) {
 		return signInner(sourceBytes, privateKeyBytes, signAlgorithm);
 	}
 	
@@ -146,7 +146,7 @@ public class RSAUtils {
 	 * @param signAlgorithm  签名方式
 	 * @return true(校验成功)，false(校验失败)
 	 */
-	private static boolean verifySign(byte[] source, byte[] publicKeyBytes, byte[] signBytes, String signAlgorithm) {
+	public static boolean verifySign(byte[] source, byte[] publicKeyBytes, byte[] signBytes, String signAlgorithm) {
 		return verifySignInner(source, publicKeyBytes, signBytes, signAlgorithm);
 	}
 	
@@ -175,7 +175,7 @@ public class RSAUtils {
 	 * @param method         加密方式
 	 * @return 加密后的数据
 	 */
-	private static byte[] encrypt(byte[] sourceBytes, byte[] publicKeyBytes, String method) {
+	public static byte[] encrypt(byte[] sourceBytes, byte[] publicKeyBytes, String method) {
 		return encryptInner(sourceBytes, publicKeyBytes, method);
 	}
 	
@@ -206,7 +206,7 @@ public class RSAUtils {
 	 * @param method          解密方式
 	 * @return 解密后的数据
 	 */
-	private static byte[] decrypt(byte[] sourceBytes, byte[] privateKeyBytes, String method) {
+	public static byte[] decrypt(byte[] sourceBytes, byte[] privateKeyBytes, String method) {
 		return decryptInner(sourceBytes, privateKeyBytes, method);
 	}
 	
