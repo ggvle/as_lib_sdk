@@ -1,9 +1,3 @@
-## 代码管理：[git_manager.xmind](https://github.com/yline/as_lib_sdk)
-> 就在该工程内，文件名为：git_manager.xmind  
-> 它记录了github上源码的结构，便于捋顺代码的关联
-如图：
-![git_manager](https://github.com/yline/as_lib_sdk/blob/master/xmind_show.jpg)
-
 ## LibSDK
 `LibSDK` 是一个Android开发基类库，提供一些基础功能；主要功能分为：
 
