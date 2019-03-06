@@ -189,7 +189,7 @@ public class UtilFragment extends BaseTestFragment {
 	}
 	
 	private void testMD5() {
-		String encryptA = MD5Utils.encrypt("yline");
+		String encryptA = MD5Utils.encrypt("yline".getBytes());
 		LogUtil.v("encryptA = " + encryptA);
 		
 		File fileB = FileUtil.getFileTop("xmind_show.jpg");
