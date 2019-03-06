@@ -30,7 +30,7 @@ public class MD5Utils {
 			MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
 			byte[] encodeBytes = digest.digest(value.getBytes("UTF-8"));
 			
-			return HexUtils.encodeHexStr(encodeBytes, false);
+			return HexUtils.encodeHex(encodeBytes, false);
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException neverHappened) {
 			return null;
 		}
@@ -54,7 +54,7 @@ public class MD5Utils {
 			digest.update(byteBuffer);
 			
 			byte[] encodeBytes = digest.digest();
-			return HexUtils.encodeHexStr(encodeBytes, false);
+			return HexUtils.encodeHex(encodeBytes, false);
 		} catch (IOException | NoSuchAlgorithmException neverHappened) {
 			return null;
 		} finally {

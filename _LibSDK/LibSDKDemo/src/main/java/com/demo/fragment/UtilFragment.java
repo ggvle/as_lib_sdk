@@ -183,7 +183,7 @@ public class UtilFragment extends BaseTestFragment {
 	}
 	
 	private void testHex() {
-		String hexString = HexUtils.encodeHexStr("yline".getBytes());
+		String hexString = HexUtils.encodeHex("yline".getBytes());
 		byte[] sourceBytes = HexUtils.decodeHex(hexString.toCharArray());
 		LogUtil.v(new String(sourceBytes));
 	}

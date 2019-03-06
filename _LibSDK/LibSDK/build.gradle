@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -18,12 +17,12 @@ android {
     }
 
     lintOptions {
-        abortOnError false // Lint 会检查项目中的语法错误
+        abortOnError true // Lint 会检查项目中的语法错误
     }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 }
 
 ext {
@@ -39,7 +38,7 @@ ext {
     siteUrl = 'https://github.com/yline/as_lib_sdk'
     gitUrl = 'https://github.com/yline/as_lib_sdk.git'
 
-    libraryVersion = '2.3.5'
+    libraryVersion = '2.3.6'
 
     developerId = 'yline'
     developerName = 'yline'
