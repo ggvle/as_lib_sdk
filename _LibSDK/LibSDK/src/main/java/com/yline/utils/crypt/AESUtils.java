@@ -41,6 +41,17 @@ public class AESUtils {
 		byte[] encryptedBytes = encryptInner(sSrc.getBytes(), sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // AES加密
 		return (null == encryptedBytes ? null : Base64.encodeToString(encryptedBytes, Base64.NO_WRAP)); // base64转码并加密
 	}
+
+	/**
+	 * AES 加密
+	 *
+	 * @param srcBytes      原始数据（待加密的数据）
+	 * @param keyBytes      秘钥，要求16位
+	 * @return 加密后的byte数组
+	 */
+	public static byte[] encrypt(byte[] srcBytes, byte[] keyBytes) {
+		return encryptInner(srcBytes, keyBytes, PARAMETER_SPEC.getBytes(), METHOD);
+	}
 	
 	/**
 	 * AES 加密
@@ -71,7 +82,18 @@ public class AESUtils {
 		byte[] decryptedBytes = decryptInner(baseBytes, sKey.getBytes(), PARAMETER_SPEC.getBytes(), METHOD); // AES解密
 		return (null == decryptedBytes ? null : new String(decryptedBytes));
 	}
-	
+
+	/**
+	 * AES 解密
+	 *
+	 * @param srcBytes 原始数据（待解密的数据）
+	 * @param keyBytes 秘钥，要求16位
+	 * @return 解密后的byte数组
+	 */
+	public static byte[] decrypt(byte[] srcBytes, byte[] keyBytes) {
+		return decryptInner(srcBytes, keyBytes, PARAMETER_SPEC.getBytes(), METHOD);
+	}
+
 	/**
 	 * AES 解密
 	 *
