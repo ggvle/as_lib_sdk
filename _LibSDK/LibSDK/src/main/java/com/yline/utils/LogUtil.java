@@ -47,11 +47,11 @@ public final class LogUtil {
     /**
      * log 开关
      */
-    private static boolean isUtilLog;
+    private static boolean isUtilLog = true;
     /**
      * log 是否定位
      */
-    private static boolean isUtilLogLocation;
+    private static boolean isUtilLogLocation = true;
 
     public static void init(SDKConfig sdkConfig) {
         isUtilLog = sdkConfig.isUtilLog();
