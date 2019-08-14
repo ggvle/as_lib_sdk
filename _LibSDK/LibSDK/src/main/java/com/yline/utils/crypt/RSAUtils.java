@@ -42,6 +42,9 @@ public class RSAUtils {
 	
 	/* 算法/模式/补码方式 */
 	private static final String METHOD = "RSA/ECB/PKCS1Padding";
+
+	/* 由于服务器和Android端，内部RSA引用内容不同，这种方式可以解决BadPaddingException问题 */
+	private static final String METHOD_NO_PADDING = "RSA/None/PKCS1Padding";
 	
 	/**
 	 * 耗时较长，测试约300ms左右
@@ -209,6 +212,28 @@ public class RSAUtils {
 	public static byte[] decrypt(byte[] sourceBytes, byte[] privateKeyBytes, String method) {
 		return decryptInner(sourceBytes, privateKeyBytes, method);
 	}
+
+	/**
+	 * 使用私钥进行RSA加密
+	 *
+	 * @param sourceBytes     等待加密的原始数据
+	 * @param privateKeyBytes 私钥
+	 * @return 加密后的数据
+	 */
+	public static byte[] encryptByPrivate(byte[] sourceBytes, byte[] privateKeyBytes) {
+		return encryptInnerByPrivate(sourceBytes, privateKeyBytes, METHOD_NO_PADDING);
+	}
+
+	/**
+	 * 使用公钥进行 RSA解密
+	 *
+	 * @param sourceBytes    原始数据，等待解密
+	 * @param publicKeyBytes 公钥
+	 * @return 解密后的数据
+	 */
+	public static byte[] decryptByPublic(byte[] sourceBytes, byte[] publicKeyBytes) {
+		return decryptInnerByPublic(sourceBytes, publicKeyBytes, METHOD_NO_PADDING);
+	}
 	
 	/* ----------------------------------- 内部实现api ----------------------------------------- */
 	
@@ -362,6 +387,111 @@ public class RSAUtils {
 				offset += tempLength;
 			}
 			
+			return baoStream.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (null != baoStream) {
+				try {
+					baoStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 使用私钥进行RSA加密
+	 *
+	 * @param sourceBytes     等待加密的原始数据
+	 * @param privateKeyBytes 私钥
+	 * @param method          加密方式
+	 * @return 加密后的数据
+	 */
+	private static byte[] encryptInnerByPrivate(byte[] sourceBytes, byte[] privateKeyBytes, String method) {
+		if (null == sourceBytes || null == privateKeyBytes) {
+			return null;
+		}
+
+		ByteArrayOutputStream baoStream = null;
+		try {
+			KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
+			PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+			PrivateKey newPrivateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
+
+			Cipher cipher = Cipher.getInstance(method);
+			cipher.init(Cipher.ENCRYPT_MODE, newPrivateKey);
+
+			baoStream = new ByteArrayOutputStream();
+			int tempLength, offset = 0, sourceLength = sourceBytes.length;
+			byte[] cacheBytes;
+
+			while (sourceLength > offset) {
+				if (sourceLength - offset >= MAX_ENCRYPT_BLOCK) {
+					tempLength = MAX_ENCRYPT_BLOCK;
+				} else {
+					tempLength = sourceLength - offset;
+				}
+
+				cacheBytes = cipher.doFinal(sourceBytes, offset, tempLength);
+				baoStream.write(cacheBytes, 0, cacheBytes.length);
+				offset += tempLength;
+			}
+
+			return baoStream.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (null != baoStream) {
+				try {
+					baoStream.close();
+				} catch (IOException e) {
+					//
+				}
+			}
+		}
+	}
+
+	/**
+	 * 使用公钥进行 RSA解密
+	 *
+	 * @param sourceBytes    原始数据，等待解密
+	 * @param publicKeyBytes 公钥
+	 * @return 解密后的数据
+	 */
+	private static byte[] decryptInnerByPublic(byte[] sourceBytes, byte[] publicKeyBytes, String method) {
+		if (null == sourceBytes || null == publicKeyBytes) {
+			return null;
+		}
+
+		ByteArrayOutputStream baoStream = null;
+		try {
+			KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
+			X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(publicKeyBytes);
+			PublicKey newPublicKey = keyFactory.generatePublic(encodedKeySpec);
+
+			Cipher cipher = Cipher.getInstance(method);
+			cipher.init(Cipher.DECRYPT_MODE, newPublicKey);
+
+			baoStream = new ByteArrayOutputStream();
+			int tempLength, offset = 0, sourceLength = sourceBytes.length;
+			byte[] cacheTemp;
+
+			while (sourceLength > offset) {
+				if (sourceLength - offset >= MAX_DECRYPT_BLOCK) {
+					tempLength = MAX_DECRYPT_BLOCK;
+				} else {
+					tempLength = sourceLength - offset;
+				}
+
+				cacheTemp = cipher.doFinal(sourceBytes, offset, tempLength);
+				baoStream.write(cacheTemp, 0, cacheTemp.length);
+				offset += tempLength;
+			}
+
 			return baoStream.toByteArray();
 		} catch (Exception e) {
 			e.printStackTrace();
