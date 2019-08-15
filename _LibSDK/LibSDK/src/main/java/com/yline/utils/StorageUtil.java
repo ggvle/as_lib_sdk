@@ -89,12 +89,12 @@ public class StorageUtil {
             e.printStackTrace();
         } finally {
             try {
-                if (null != fis) {
-                    fis.close();
-                }
-
                 if (null != bos) {
                     bos.close();
+                }
+
+                if (null != fis) {
+                    fis.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -145,12 +145,12 @@ public class StorageUtil {
             e.printStackTrace();
         } finally {
             try {
-                if (null != fos) {
-                    fos.close();
-                }
-
                 if (null != bos) {
                     bos.close();
+                }
+
+                if (null != fos) {
+                    fos.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
