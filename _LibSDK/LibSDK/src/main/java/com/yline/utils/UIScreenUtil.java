@@ -12,9 +12,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.yline.application.BaseApplication;
-import com.yline.log.LogFileUtil;
-
+import com.yline.log.LogUtil;
 import java.lang.reflect.InvocationTargetException;
 
 /**

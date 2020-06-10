@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import com.yline.application.SDKConfig;
 import com.yline.utils.FileSizeUtil;
 import com.yline.utils.FileUtil;
-import com.yline.utils.LogUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

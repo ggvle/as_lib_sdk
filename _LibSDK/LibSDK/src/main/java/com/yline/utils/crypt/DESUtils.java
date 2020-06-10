@@ -2,7 +2,7 @@ package com.yline.utils.crypt;
 
 import android.util.Base64;
 
-import com.yline.utils.LogUtil;
+import com.yline.log.LogUtil;
 
 import java.util.Arrays;
 

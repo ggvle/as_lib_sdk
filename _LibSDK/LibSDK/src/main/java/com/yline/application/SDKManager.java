@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.yline.log.CrashHandler;
 import com.yline.log.LogFileUtil;
 import com.yline.sdk.R;
-import com.yline.utils.LogUtil;
+import com.yline.log.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,7 +9,7 @@ import com.yline.test.BaseTestFragment;
 import com.yline.utils.FileSizeUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.IOUtil;
-import com.yline.utils.LogUtil;
+import com.yline.log.LogUtil;
 import com.yline.utils.SPUtil;
 import com.yline.utils.TimeConvertUtil;
 import com.yline.utils.crypt.AESUtils;

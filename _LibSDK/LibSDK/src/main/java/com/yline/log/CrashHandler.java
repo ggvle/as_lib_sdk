@@ -9,7 +9,6 @@ import android.os.Build;
 import com.yline.application.BaseApplication;
 import com.yline.application.SDKManager;
 import com.yline.utils.FileUtil;
-import com.yline.utils.LogUtil;
 
 import java.io.File;
 import java.io.PrintWriter;
