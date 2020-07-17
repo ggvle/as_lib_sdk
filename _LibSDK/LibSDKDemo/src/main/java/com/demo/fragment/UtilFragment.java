@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.yline.log.LogFileUtil;
-import com.yline.test.BaseTestFragment;
+import com.yline.test.BaseTestXFragment;
 import com.yline.utils.FileSizeUtil;
 import com.yline.utils.FileUtil;
 import com.yline.utils.IOUtil;
@@ -24,7 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyPair;
 
-public class UtilFragment extends BaseTestFragment {
+public class UtilFragment extends BaseTestXFragment {
 	private static final String TAG = "UtilFragment";
 	
 	@Override

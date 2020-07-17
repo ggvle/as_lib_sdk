@@ -16,7 +16,12 @@ import com.yline.sdk.R
 import com.yline.utils.UIResizeUtil
 import com.yline.utils.UIScreenUtil
 
-abstract class BaseTestFragment : BaseFragment(), ITestCallback {
+/**
+ *
+ * created on 2020-07-17 -- 16:08
+ * @author yline
+ */
+abstract class BaseTestXFragment : BaseFragment(), ITestCallback {
     protected lateinit var linearLayout: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -22,6 +22,9 @@ allprojects {
     }
 }
 
+// https://blog.csdn.net/u013279866/article/details/90231187    直接不让他生成 doc
+tasks.getByPath(":LibSDK:javadoc").enabled = false
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
