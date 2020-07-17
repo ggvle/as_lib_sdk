@@ -20,7 +20,7 @@ public class FunctionFragment extends BaseTestFragment
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v( "btn_leak_canary_activity");
+				LogFileUtil.INSTANCE.v( "btn_leak_canary_activity");
 				LeakCanaryActivity.actionStart(getContext());
 			}
 		});
@@ -30,8 +30,8 @@ public class FunctionFragment extends BaseTestFragment
 			@Override
 			public void onClick(View v)
 			{
-				LogFileUtil.v("btn_baseApplication");
-				SDKManager.toast("测试，toast");
+				LogFileUtil.INSTANCE.v("btn_baseApplication");
+				SDKManager.INSTANCE.toast("测试，toast");
 			}
 		});
 

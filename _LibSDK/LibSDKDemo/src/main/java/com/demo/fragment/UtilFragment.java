@@ -34,8 +34,8 @@ public class UtilFragment extends BaseTestFragment {
 			public void onClick(View v) {
 				long oldTime = 1490411992L * 1000;
 				
-				String result = TimeConvertUtil.stamp2FormatTime(oldTime);
-				LogFileUtil.v("result = " + result);
+				String result = TimeConvertUtil.INSTANCE.stamp2FormatTime(oldTime);
+				LogFileUtil.INSTANCE.v("result = " + result);
 			}
 		});
 		
@@ -71,12 +71,12 @@ public class UtilFragment extends BaseTestFragment {
 			@Override
 			public void onClick(View v) {
 				File dir = getContext().getExternalFilesDir("test");
-				File file = FileUtil.create(dir, "sample.txt");
+				File file = FileUtil.INSTANCE.create(dir, "sample.txt");
 				
 				try {
 					FileOutputStream fileOutputStream = new FileOutputStream(file, true);
-					IOUtil.write(System.currentTimeMillis() + ";汉字;;", fileOutputStream);
-					IOUtil.close(fileOutputStream);
+					IOUtil.INSTANCE.write(System.currentTimeMillis() + ";汉字;;", fileOutputStream);
+					IOUtil.INSTANCE.close(fileOutputStream);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -103,11 +103,11 @@ public class UtilFragment extends BaseTestFragment {
 			@Override
 			public void onClick(View v) {
 				String key = "1234567887654321";
-				String encrypt = AESUtils.encrypt("yline", key);
-				LogUtil.v("encrypt = " + encrypt);
+				String encrypt = AESUtils.INSTANCE.encrypt("yline", key);
+				LogUtil.INSTANCE.v("encrypt = " + encrypt);
 				
-				String decrypt = AESUtils.decrypt(encrypt, key);
-				LogUtil.v("decrypt = " + decrypt);
+				String decrypt = AESUtils.INSTANCE.decrypt(encrypt, key);
+				LogUtil.INSTANCE.v("decrypt = " + decrypt);
 			}
 		});
 		
@@ -115,11 +115,11 @@ public class UtilFragment extends BaseTestFragment {
 			@Override
 			public void onClick(View v) {
 				String key = "12345678";
-				String encrypt = DESUtils.encrypt("yline", key);
-				LogUtil.v("encrypt = " + encrypt);
+				String encrypt = DESUtils.INSTANCE.encrypt("yline", key);
+				LogUtil.INSTANCE.v("encrypt = " + encrypt);
 				
-				String decrypt = DESUtils.decrypt(encrypt, key);
-				LogUtil.v("decrypt = " + decrypt);
+				String decrypt = DESUtils.INSTANCE.decrypt(encrypt, key);
+				LogUtil.INSTANCE.v("decrypt = " + decrypt);
 			}
 		});
 		
@@ -135,133 +135,133 @@ public class UtilFragment extends BaseTestFragment {
 		long startTime = System.currentTimeMillis();
 		
 		// 生成密钥对
-		KeyPair keyPair = RSAUtils.createKeyPair();
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		KeyPair keyPair = RSAUtils.INSTANCE.createKeyPair();
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 		startTime = System.currentTimeMillis();
 		
 		// 私钥
-		String privateKey = RSAUtils.getPrivateKey(keyPair);
-		LogUtil.v("privateKey = " + privateKey);
+		String privateKey = RSAUtils.INSTANCE.getPrivateKey(keyPair);
+		LogUtil.INSTANCE.v("privateKey = " + privateKey);
 		
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 		startTime = System.currentTimeMillis();
 		
 		// 公钥
-		String publicKey = RSAUtils.getPublicKey(keyPair);
-		LogUtil.v("publicKey = " + publicKey);
+		String publicKey = RSAUtils.INSTANCE.getPublicKey(keyPair);
+		LogUtil.INSTANCE.v("publicKey = " + publicKey);
 		
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 		startTime = System.currentTimeMillis();
 		
 		// 加密
-		String encryptA = RSAUtils.encrypt("yline", publicKey);
-		LogUtil.v("encryptA = " + encryptA);
+		String encryptA = RSAUtils.INSTANCE.encrypt("yline", publicKey);
+		LogUtil.INSTANCE.v("encryptA = " + encryptA);
 		
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 		startTime = System.currentTimeMillis();
 		
 		// 解密
-		String decryptA = RSAUtils.decrypt(encryptA, privateKey);
-		LogUtil.v("decryptA = " + decryptA);
+		String decryptA = RSAUtils.INSTANCE.decrypt(encryptA, privateKey);
+		LogUtil.INSTANCE.v("decryptA = " + decryptA);
 		
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 		startTime = System.currentTimeMillis();
 		
 		final String SRC = "yline";
 		// 数字证书
-		String signA = RSAUtils.sign(SRC, privateKey);
-		LogUtil.v("signA = " + signA);
+		String signA = RSAUtils.INSTANCE.sign(SRC, privateKey);
+		LogUtil.INSTANCE.v("signA = " + signA);
 		
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 		startTime = System.currentTimeMillis();
 		
 		// 校验数字证书
-		boolean isRight = RSAUtils.verifySign(SRC, publicKey, signA);
-		LogUtil.v("isRight = " + isRight);
+		boolean isRight = RSAUtils.INSTANCE.verifySign(SRC, publicKey, signA);
+		LogUtil.INSTANCE.v("isRight = " + isRight);
 		
-		LogUtil.v("diffTime = " + (System.currentTimeMillis() - startTime));
+		LogUtil.INSTANCE.v("diffTime = " + (System.currentTimeMillis() - startTime));
 	}
 	
 	private void testHex() {
-		String hexString = HexUtils.encodeHex("yline".getBytes());
-		byte[] sourceBytes = HexUtils.decodeHex(hexString.toCharArray());
-		LogUtil.v(new String(sourceBytes));
+		String hexString = HexUtils.INSTANCE.encodeHex("yline".getBytes());
+		byte[] sourceBytes = HexUtils.INSTANCE.decodeHex(hexString.toCharArray());
+		LogUtil.INSTANCE.v(new String(sourceBytes));
 	}
 	
 	private void testMD5() {
-		String encryptA = MD5Utils.encrypt("yline".getBytes());
-		LogUtil.v("encryptA = " + encryptA);
+		String encryptA = MD5Utils.INSTANCE.encrypt("yline".getBytes());
+		LogUtil.INSTANCE.v("encryptA = " + encryptA);
 		
-		File fileB = FileUtil.getFileTop("xmind_show.jpg");
-		String encryptB = MD5Utils.encrypt(fileB);
-		LogUtil.v("encryptB = " + encryptB);
+		File fileB = FileUtil.INSTANCE.getFileTop("xmind_show.jpg");
+		String encryptB = MD5Utils.INSTANCE.encrypt(fileB);
+		LogUtil.INSTANCE.v("encryptB = " + encryptB);
 	}
 	
 	private void testSPUtil(Context context) {
-		SPUtil.put(context, "null", null);
-		String result = (String) SPUtil.get(context, "null", null);
-		LogFileUtil.v(TAG, "put -> value = " + result);
+		SPUtil.INSTANCE.put(context, "null", null);
+		String result = (String) SPUtil.INSTANCE.get(context, "null", null);
+		LogFileUtil.INSTANCE.v(TAG, "put -> value = " + result);
 		
 		// 增加两条数据
-		SPUtil.put(context, "username", "utilUsername");
-		SPUtil.put(context, "password", "utilPassword");
-		LogFileUtil.v(TAG, "put -> value - utilUsername");
-		LogFileUtil.v(TAG, "put -> value - utilPassword");
+		SPUtil.INSTANCE.put(context, "username", "utilUsername");
+		SPUtil.INSTANCE.put(context, "password", "utilPassword");
+		LogFileUtil.INSTANCE.v(TAG, "put -> value - utilUsername");
+		LogFileUtil.INSTANCE.v(TAG, "put -> value - utilPassword");
 		
 		// 更新两条数据
-		SPUtil.put(context, "username", "utilUpdateUsername");
-		SPUtil.put(context, "password", "utilUpdatePassword");
-		LogFileUtil.v(TAG, "put -> value - utilUpdateUsername");
-		LogFileUtil.v(TAG, "put -> value - utilUpdatePassword");
+		SPUtil.INSTANCE.put(context, "username", "utilUpdateUsername");
+		SPUtil.INSTANCE.put(context, "password", "utilUpdatePassword");
+		LogFileUtil.INSTANCE.v(TAG, "put -> value - utilUpdateUsername");
+		LogFileUtil.INSTANCE.v(TAG, "put -> value - utilUpdatePassword");
 		
 		// 删除一条数据
-		SPUtil.remove(context, "password");
-		LogFileUtil.v(TAG, "remove -> key - password");
+		SPUtil.INSTANCE.remove(context, "password");
+		LogFileUtil.INSTANCE.v(TAG, "remove -> key - password");
 		
 		// 获取两条数据
-		String username = (String) SPUtil.get(context, "username", "");
-		String password = (String) SPUtil.get(context, "password", "");
-		LogFileUtil.v(TAG, "get -> key - username");
-		LogFileUtil.v(TAG, "get -> key - password");
-		LogFileUtil.i(TAG, "usrname = " + username + ",password = " + password);
+		String username = (String) SPUtil.INSTANCE.get(context, "username", "");
+		String password = (String) SPUtil.INSTANCE.get(context, "password", "");
+		LogFileUtil.INSTANCE.v(TAG, "get -> key - username");
+		LogFileUtil.INSTANCE.v(TAG, "get -> key - password");
+		LogFileUtil.INSTANCE.i(TAG, "usrname = " + username + ",password = " + password);
 	}
 	
 	private void testLogUtil() {
-		LogUtil.v("test -> v");
-		LogUtil.v("test -> v", LogUtil.LOG_LOCATION_PARENT);
+		LogUtil.INSTANCE.v("test -> v");
+		LogUtil.INSTANCE.v("test -> v", LogUtil.INSTANCE.getLOG_LOCATION_PARENT());
 		
-		LogUtil.i("test -> i");
-		LogUtil.i("test -> i", LogUtil.LOG_LOCATION_PARENT);
+		LogUtil.INSTANCE.i("test -> i");
+		LogUtil.INSTANCE.i("test -> i", LogUtil.INSTANCE.getLOG_LOCATION_PARENT());
 		
-		LogUtil.e("test -> e");
-		LogUtil.e("test -> e", LogUtil.LOG_LOCATION_PARENT);
-		LogUtil.e("test -> e", new Exception("test -> e -> Exception"));
-		LogUtil.e("test -> e", LogUtil.LOG_LOCATION_PARENT, new Exception("test -> e -> Exception"));
+		LogUtil.INSTANCE.e("test -> e");
+		LogUtil.INSTANCE.e("test -> e", LogUtil.INSTANCE.getLOG_LOCATION_PARENT());
+		LogUtil.INSTANCE.e("test -> e", new Exception("test -> e -> Exception"));
+		LogUtil.INSTANCE.e("test -> e", LogUtil.INSTANCE.getLOG_LOCATION_PARENT(), new Exception("test -> e -> Exception"));
 	}
 	
 	private void testFileUtil() {
-		LogUtil.v(TAG + " -> FileUtil.getPath() = " + FileUtil.getPathTop());
+		LogUtil.INSTANCE.v(TAG + " -> FileUtil.getPath() = " + FileUtil.INSTANCE.getPathTop());
 		
-		String pathRoot = FileUtil.getPathRoot();
-		LogUtil.v(TAG + " -> pathRoot = " + pathRoot);
+		String pathRoot = FileUtil.INSTANCE.getPathRoot();
+		LogUtil.INSTANCE.v(TAG + " -> pathRoot = " + pathRoot);
 		
-		long blockSize = FileSizeUtil.getFileBlockSize(FileUtil.getPathTop());
-		long availableSize = FileSizeUtil.getFileAvailableSize(FileUtil.getPathTop());
-		LogUtil.v(TAG + " -> blockSize = " + blockSize + ", availableSize = " + availableSize);
-		LogUtil.v(TAG + " -> blockSize = " + FileSizeUtil.formatFileAutoSize(blockSize)
-				+ ", availableSize = " + FileSizeUtil.formatFileAutoSize(availableSize));
+		long blockSize = FileSizeUtil.INSTANCE.getFileBlockSize(FileUtil.INSTANCE.getPathTop());
+		long availableSize = FileSizeUtil.INSTANCE.getFileAvailableSize(FileUtil.INSTANCE.getPathTop());
+		LogUtil.INSTANCE.v(TAG + " -> blockSize = " + blockSize + ", availableSize = " + availableSize);
+		LogUtil.INSTANCE.v(TAG + " -> blockSize = " + FileSizeUtil.INSTANCE.formatFileAutoSize(blockSize)
+				+ ", availableSize = " + FileSizeUtil.INSTANCE.formatFileAutoSize(availableSize));
 	}
 	
 	private void testLogFileUtil() {
-		LogFileUtil.m("m");
+		LogFileUtil.INSTANCE.m("m");
 		
-		LogFileUtil.v(TAG, "v");
-		LogFileUtil.v(TAG, "v", LogFileUtil.LOG_LOCATION_PARENT);
+		LogFileUtil.INSTANCE.v(TAG, "v");
+		LogFileUtil.INSTANCE.v(TAG, "v", LogFileUtil.LOG_LOCATION_PARENT);
 		
-		LogFileUtil.i(TAG, "i");
-		LogFileUtil.i(TAG, "i", LogFileUtil.LOG_LOCATION_PARENT);
+		LogFileUtil.INSTANCE.i(TAG, "i");
+		LogFileUtil.INSTANCE.i(TAG, "i", LogFileUtil.LOG_LOCATION_PARENT);
 		
-		LogFileUtil.e(TAG, "e");
-		LogFileUtil.e(TAG, "e", LogFileUtil.LOG_LOCATION_PARENT);
+		LogFileUtil.INSTANCE.e(TAG, "e");
+		LogFileUtil.INSTANCE.e(TAG, "e", LogFileUtil.LOG_LOCATION_PARENT);
 	}
 }

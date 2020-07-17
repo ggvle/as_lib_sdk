@@ -1,13 +1,12 @@
 package com.demo.application;
 
 import android.app.Application;
-import android.os.Build;
-import android.os.StrictMode;
-import android.support.multidex.MultiDex;
 
-import com.squareup.leakcanary.LeakCanary;
+import androidx.multidex.MultiDex;
+
 import com.yline.application.BaseApplication;
-import com.yline.application.SDKConfig;
+
+import leakcanary.LeakCanary;
 
 public class MainApplication extends BaseApplication {
     @Override
@@ -19,10 +18,10 @@ public class MainApplication extends BaseApplication {
     }
 
     private void initLeakCanary(Application application) {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
+        /*if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
 
-        LeakCanary.install(application);
+        LeakCanary.install(application);*/
     }
 }
