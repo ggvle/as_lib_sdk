@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import com.yline.application.BaseApplication
 import com.yline.log.LogUtil
 
-class BaseFrameLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+open class BaseFrameLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
     init {
         BaseApplication.addViewForRecord(this)

@@ -13,7 +13,7 @@ import com.yline.utils.PermissionUtil
  *
  * @author YLine 2016-5-25 - 上午7:32:58
  */
-class BaseFragmentActivity : FragmentActivity() {
+open class BaseFragmentActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         BaseApplication.addActivity(this)
         super.onCreate(savedInstanceState)

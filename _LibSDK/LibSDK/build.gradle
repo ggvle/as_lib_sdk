@@ -42,7 +42,7 @@ ext {
     siteUrl = 'https://github.com/yline/as_lib_sdk'
     gitUrl = 'https://github.com/yline/as_lib_sdk.git'
 
-    libraryVersion = '3.0.0'
+    libraryVersion = '3.0.1'
 
     developerId = 'yline'
     developerName = 'yline'

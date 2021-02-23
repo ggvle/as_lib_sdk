@@ -6,7 +6,7 @@ import android.content.Intent
 
 import com.yline.log.LogUtil
 
-class BaseReceiver : BroadcastReceiver() {
+open class BaseReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         LogUtil.v("BaseReceiver -> " + this.javaClass.simpleName)
     }

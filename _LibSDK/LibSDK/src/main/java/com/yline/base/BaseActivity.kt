@@ -13,7 +13,7 @@ import com.yline.utils.PermissionUtil
  *
  * @author YLine 2016-5-25 -上午7:32:33
  */
-class BaseActivity : Activity() {
+open class BaseActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BaseApplication.addActivity(this)

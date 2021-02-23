@@ -5,7 +5,7 @@ import androidx.fragment.app.DialogFragment
 
 import com.yline.application.BaseApplication
 
-class BaseDialogFragment : DialogFragment() {
+open class BaseDialogFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BaseApplication.addFragmentForRecord(this)

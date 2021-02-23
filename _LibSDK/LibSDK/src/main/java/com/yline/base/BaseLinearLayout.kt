@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import com.yline.application.BaseApplication
 import com.yline.log.LogUtil
 
-class BaseLinearLayout @SuppressLint("NewApi")
+open class BaseLinearLayout @SuppressLint("NewApi")
 constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
 
     @JvmOverloads
