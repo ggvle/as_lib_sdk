@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 29
@@ -23,50 +24,28 @@ android {
     }
 }
 
+ext {
+    ANDROID_SDK_PATH = "/Users/yline/Library/Android/sdk/extras/android/m2repository"
+}
+
 dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.core:core-ktx:1.3.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'libsdk'
-
-    publishedGroupId = 'com.yline.lib'
-    libraryName = 'LibSDK'
-    artifact = 'LibSDK'
-
-    libraryDescription = 'provider log,util,base,common and ect'
-
-    siteUrl = 'https://github.com/yline/as_lib_sdk'
-    gitUrl = 'https://github.com/yline/as_lib_sdk.git'
-
-    libraryVersion = '3.0.1'
-
-    developerId = 'yline'
-    developerName = 'yline'
-    developerEmail = 'yline95739173@outlook.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
-apply from: "installv1.gradle"
-apply from: "bintrayv1.gradle"
-
-javadoc {
-    options {
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        //author true
-        version true
-        title 'A LibSDK Support For Android'   // 文档标题
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //本地Maven库的路径，这个路径可以随意安排放在哪里
+            repository(url: "file://" + project.ANDROID_SDK_PATH)
+            //包名
+            pom.groupId = 'mylibrary'
+            //项目名
+            pom.artifactId = 'lib'
+            //版本号
+            pom.version = '0.0.1'
+            //使用的时候就可以：implementation '包名:项目名:版本号'
+        }
     }
-}
-repositories {
-    mavenCentral()
 }
